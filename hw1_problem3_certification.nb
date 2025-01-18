@@ -1,0 +1,620 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     21529,        610]
+NotebookOptionsPosition[     17288,        543]
+NotebookOutlinePosition[     17680,        559]
+CellTagsIndexPosition[     17637,        556]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Puzzle Certification", "Title",
+ CellChangeTimes->{{3.9461666220094852`*^9, 
+  3.946166634360154*^9}},ExpressionUUID->"f4e3c762-2f86-462d-bbe8-\
+ffa840b324d0"],
+
+Cell["\<\
+This notebook provides some functions that are helpful in the puzzle \
+certification. This notebook is only designed for 3 basic propositions and 3 \
+clues at the moment.
+
+First, fill in this Truth Table with the values for your propositions.\
+\>", "Text",
+ CellChangeTimes->{{3.946166647689836*^9, 
+  3.946166697169936*^9}},ExpressionUUID->"f8c81883-4c67-48b9-8c73-\
+78e7d498a7f9"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{"Prepend", "[", 
+   RowBox[{
+    RowBox[{"Map", "[", 
+     RowBox[{
+      RowBox[{"Function", "[", 
+       RowBox[{"x", ",", 
+        RowBox[{"Join", "[", 
+         RowBox[{"x", ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"InputField", "[", "]"}], ",", 
+            RowBox[{"{", "numClues", "}"}]}], "]"}]}], "]"}]}], " ", "]"}], 
+      ",", 
+      RowBox[{"Tuples", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"True", ",", "False"}], "}"}], ",", "3"}], "]"}]}], "]"}], 
+    ",", 
+    RowBox[{"Join", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\"\<a\>\"", ",", "\"\<b\>\"", ",", "\"\<c\>\""}], "}"}], ",", 
+      " ", 
+      RowBox[{"{", 
+       RowBox[{"\"\<P\>\"", ",", "\"\<Q\>\"", ",", "\"\<R\>\""}], "}"}]}], 
+     "]"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.946166827397753*^9, 3.946167077941065*^9}},
+ CellLabel->
+  "In[282]:=",ExpressionUUID->"b0cca5ef-11df-4e72-be0a-4da31f43352e"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"a\"\>", "\<\"b\"\>", "\<\"c\"\>", "\<\"P\"\>", "\<\"Q\"\>", \
+"\<\"R\"\>"},
+    {"True", "True", "True", 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ]},
+    {"True", "True", "False", 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ]},
+    {"True", "False", "True", 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ]},
+    {"True", "False", "False", 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ]},
+    {"False", "True", "True", 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ]},
+    {"False", "True", "False", 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ]},
+    {"False", "False", "True", 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ]},
+    {"False", "False", "False", 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ], 
+     TagBox[
+      DynamicModuleBox[{Typeset`i$$ = Null}, 
+       InputFieldBox[Dynamic[Typeset`i$$]],
+       DynamicModuleValues:>{}],
+      InputField[
+       Setting[#]]& ]}
+   },
+   AutoDelete->False,
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{
+  3.946166904258615*^9, 3.9461669356551447`*^9, 3.94616701466546*^9, {
+   3.9461670506734877`*^9, 3.946167078706374*^9}},
+ CellLabel->
+  "Out[282]=",ExpressionUUID->"581f66a8-cd6e-47cf-90c6-e628474a27d5"]
+}, Open  ]],
+
+Cell["\<\
+Use your output to define propositions P,Q,R to be filled in below by using \
+the technique to produce a proposition from a table. Note that the current \
+definitions of P,Q,R don\[CloseCurlyQuote]t work and are just placeholders.\
+\>", "Text",
+ CellChangeTimes->{{3.94616709295604*^9, 3.9461671416723623`*^9}, {
+  3.946167581295176*^9, 
+  3.946167624975358*^9}},ExpressionUUID->"bbd80e50-657f-42de-a1d1-\
+8cbddb31a5a6"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.946167554088338*^9, 
+  3.9461675634567833`*^9}},ExpressionUUID->"214a08f1-633c-436d-a12c-\
+7b61f2bd9b14"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"P", "=", " ", 
+  RowBox[{"a", " ", "&&", "b"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Q", "=", " ", 
+  RowBox[{"a", "&&", "b"}]}], "\[IndentingNewLine]", 
+ RowBox[{"R", " ", "=", " ", 
+  RowBox[{"a", "&&", "b"}]}]}], "Input",
+ CellChangeTimes->{{3.946167108992797*^9, 3.946167113577857*^9}, {
+  3.9461671448066673`*^9, 3.9461671620463057`*^9}, {3.946167529637539*^9, 
+  3.9461676088450613`*^9}, {3.946167672143461*^9, 3.946167672940237*^9}},
+ CellLabel->
+  "In[299]:=",ExpressionUUID->"cc8f5b74-08ea-427c-b94f-5f32b2d17e25"],
+
+Cell[BoxData[
+ RowBox[{"a", "&&", "b"}]], "Output",
+ CellChangeTimes->{3.94616767358426*^9},
+ CellLabel->
+  "Out[299]=",ExpressionUUID->"d72c01bf-9b37-4eb2-bed9-1494f81f1282"],
+
+Cell[BoxData[
+ RowBox[{"a", "&&", "b"}]], "Output",
+ CellChangeTimes->{3.946167673584948*^9},
+ CellLabel->
+  "Out[300]=",ExpressionUUID->"27043c3e-55bb-4c8f-afc4-2c670accfc84"],
+
+Cell[BoxData[
+ RowBox[{"a", "&&", "b"}]], "Output",
+ CellChangeTimes->{3.946167673585436*^9},
+ CellLabel->
+  "Out[301]=",ExpressionUUID->"293dd7d9-2e21-4ff8-9f0a-ddba518b0bd0"]
+}, Open  ]],
+
+Cell["\<\
+Now we check that P,Q,R have the desired properties. First, if there is a \
+unique solution, then the satisfiability count is 1.
+\
+\>", "Text",
+ CellChangeTimes->{{3.946167177921711*^9, 
+  3.9461672368854*^9}},ExpressionUUID->"e01d0cca-d7f8-488d-abcf-d7726c0f5759"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SatisfiabilityCount", "[", 
+  RowBox[{
+   RowBox[{"P", "&&", "Q", "&&", "R"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.94616725284422*^9, {3.9461676366504183`*^9, 3.9461676384051037`*^9}},
+ CellLabel->
+  "In[302]:=",ExpressionUUID->"9761da36-026a-496e-8d77-9437183b8a94"],
+
+Cell[BoxData["2"], "Output",
+ CellChangeTimes->{
+  3.946167253462247*^9, {3.94616762965278*^9, 3.946167639082999*^9}, 
+   3.946167677116127*^9},
+ CellLabel->
+  "Out[302]=",ExpressionUUID->"54e5ae5d-60ab-4186-8288-23475070e843"]
+}, Open  ]],
+
+Cell["\<\
+Next, we check that no pair of clues solves the puzzle. Every pair should \
+have a higher satisfiability count than 1.
+\
+\>", "Text",
+ CellChangeTimes->{{3.9461672609062643`*^9, 
+  3.94616728582801*^9}},ExpressionUUID->"d5eb4cdd-4e71-4a7d-8d39-\
+ef588393bd63"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"SatisfiabilityCount", "[", 
+  RowBox[{
+   RowBox[{"P", "&&", "Q"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c"}], "}"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SatisfiabilityCount", "[", 
+  RowBox[{
+   RowBox[{"Q", "&&", "R"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c"}], "}"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SatisfiabilityCount", "[", 
+  RowBox[{
+   RowBox[{"P", "&&", "R"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c"}], "}"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.946167300959333*^9, 3.9461673262375307`*^9}, {
+  3.9461676890380373`*^9, 3.94616769841201*^9}},
+ CellLabel->
+  "In[303]:=",ExpressionUUID->"ea1a9471-cd3a-43c8-aba5-250a7d9d8420"],
+
+Cell[BoxData["2"], "Output",
+ CellChangeTimes->{3.946167326974286*^9, 3.9461677124111156`*^9},
+ CellLabel->
+  "Out[303]=",ExpressionUUID->"7c96b201-f1e1-40d9-b621-8a518155efda"],
+
+Cell[BoxData["2"], "Output",
+ CellChangeTimes->{3.946167326974286*^9, 3.9461677124116297`*^9},
+ CellLabel->
+  "Out[304]=",ExpressionUUID->"43eeed1d-e92a-4e1f-b139-7f9f12900d46"],
+
+Cell[BoxData["2"], "Output",
+ CellChangeTimes->{3.946167326974286*^9, 3.946167712412099*^9},
+ CellLabel->
+  "Out[305]=",ExpressionUUID->"e0750234-c2d8-4a57-af2a-87e4eaffbd1b"]
+}, Open  ]],
+
+Cell["\<\
+We need to check that every literal (a variable or its negation) and each \
+clue are satisfiable together. We should see a string of \
+\[OpenCurlyDoubleQuote]True\[CloseCurlyDoubleQuote] assertions, 16 in total.\
+\>", "Text",
+ CellChangeTimes->{{3.9461673358819447`*^9, 3.946167374242318*^9}, {
+  3.9461674684280567`*^9, 
+  3.946167483302993*^9}},ExpressionUUID->"21507572-abfc-46a1-b8c1-\
+671c92d3a7e1"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"LiteralList", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"a", ",", "b", ",", "c", ",", 
+    RowBox[{"!", "a"}], ",", 
+    RowBox[{"!", "b"}], ",", 
+    RowBox[{"!", "c"}]}], "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ClueList", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"P", ",", "Q", ",", "R"}], "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Do", "[", 
+  RowBox[{
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{"Print", "[", 
+      RowBox[{"SatisfiableQ", "[", 
+       RowBox[{
+        RowBox[{"ClueList", "[", 
+         RowBox[{"[", "clueIndex", "]"}], "]"}], " ", "&&", " ", 
+        RowBox[{"LiteralList", "[", 
+         RowBox[{"[", "literalIndex", "]"}], "]"}]}], "]"}], "]"}], ",", " ", 
+     
+     RowBox[{"{", 
+      RowBox[{"literalIndex", ",", " ", "1", ",", "6"}], "}"}]}], "]"}], ",", 
+   " ", 
+   RowBox[{"{", 
+    RowBox[{"clueIndex", ",", "1", ",", "3"}], "}"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.9461673910317707`*^9, 3.9461674590176477`*^9}},
+ CellLabel->
+  "In[306]:=",ExpressionUUID->"215d28c0-60f9-4ad9-bd37-92bea48cdb4c"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"a", ",", "b", ",", "c", ",", 
+   RowBox[{"!", "a"}], ",", 
+   RowBox[{"!", "b"}], ",", 
+   RowBox[{"!", "c"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.9461674601047573`*^9, 3.946167716253171*^9},
+ CellLabel->
+  "Out[306]=",ExpressionUUID->"1ccd802a-eb4a-4c3c-8dfd-00d7a4b1032f"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"a", "&&", "b"}], ",", 
+   RowBox[{"a", "&&", "b"}], ",", 
+   RowBox[{"a", "&&", "b"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.9461674601047573`*^9, 3.946167716254096*^9},
+ CellLabel->
+  "Out[307]=",ExpressionUUID->"6003c50f-b0f5-4cad-9c1e-a5074ee066df"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["True"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.946167716255341*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"51f8689b-492d-4364-979a-23848c339d33"],
+
+Cell[BoxData["True"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.946167716255986*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"3396a60c-342c-467f-b923-1ceb32288319"],
+
+Cell[BoxData["True"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.9461677162568893`*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"96927e40-9e42-457b-96c9-fd3d17bbe971"],
+
+Cell[BoxData["False"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.9461677162574368`*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"65a7a04b-80a8-4f1d-b745-837c5f81ee3b"],
+
+Cell[BoxData["False"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.946167716257965*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"63642d89-abb7-4081-b7d0-572629eadc4c"],
+
+Cell[BoxData["True"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.946167716258511*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"1a509eb9-d3b9-4d28-b22c-51584c77f962"],
+
+Cell[BoxData["True"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.946167716259041*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"cf52d6d1-fe48-405c-9088-4b2160be8468"],
+
+Cell[BoxData["True"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.9461677162595577`*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"6e66fc04-c08f-4657-bd43-08dd4d5e7994"],
+
+Cell[BoxData["True"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.946167716260097*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"50428bd0-6af9-4cc3-b984-a2645a64f0bd"],
+
+Cell[BoxData["False"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.9461677162606297`*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"02855fdf-a6de-49fa-aa0b-5684daf1ae40"],
+
+Cell[BoxData["False"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.9461677162611637`*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"f3f6afb3-839f-469d-a140-480ddb4770d0"],
+
+Cell[BoxData["True"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.946167716261812*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"a24c1285-fa94-4548-b510-ff877729b136"],
+
+Cell[BoxData["True"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.946167716262373*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"2e50f500-24f4-4d08-a4b2-e120b22b4a4c"],
+
+Cell[BoxData["True"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.9461677162629213`*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"c811611d-83ea-42e3-b28b-9034b5d4d8d8"],
+
+Cell[BoxData["True"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.9461677162634706`*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"5c03ee43-25f3-498c-8549-e8a7f3283d9e"],
+
+Cell[BoxData["False"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.9461677162660627`*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"c337342a-215d-4dd3-99ff-1ab8600298ab"],
+
+Cell[BoxData["False"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.9461677162667027`*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"983d9e36-201e-4eeb-8380-c2a43cb13f58"],
+
+Cell[BoxData["True"], "Print",
+ CellChangeTimes->{3.946167460114702*^9, 3.946167716267275*^9},
+ CellLabel->
+  "During evaluation of \
+In[306]:=",ExpressionUUID->"72acbee1-a0d3-428e-a4a7-2799ed18d674"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440, 701.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"2ba487c9-c236-4699-a6f2-9078f821a742"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 165, 3, 96, "Title",ExpressionUUID->"f4e3c762-2f86-462d-bbe8-ffa840b324d0"],
+Cell[744, 27, 392, 9, 77, "Text",ExpressionUUID->"f8c81883-4c67-48b9-8c73-78e7d498a7f9"],
+Cell[CellGroupData[{
+Cell[1161, 40, 1013, 30, 30, "Input",ExpressionUUID->"b0cca5ef-11df-4e72-be0a-4da31f43352e"],
+Cell[2177, 72, 4991, 164, 246, "Output",ExpressionUUID->"581f66a8-cd6e-47cf-90c6-e628474a27d5"]
+}, Open  ]],
+Cell[7183, 239, 430, 8, 33, "Text",ExpressionUUID->"bbd80e50-657f-42de-a1d1-8cbddb31a5a6"],
+Cell[7616, 249, 154, 3, 29, "Input",ExpressionUUID->"214a08f1-633c-436d-a12c-7b61f2bd9b14"],
+Cell[CellGroupData[{
+Cell[7795, 256, 547, 11, 69, "Input",ExpressionUUID->"cc8f5b74-08ea-427c-b94f-5f32b2d17e25"],
+Cell[8345, 269, 175, 4, 33, "Output",ExpressionUUID->"d72c01bf-9b37-4eb2-bed9-1494f81f1282"],
+Cell[8523, 275, 176, 4, 33, "Output",ExpressionUUID->"27043c3e-55bb-4c8f-afc4-2c670accfc84"],
+Cell[8702, 281, 176, 4, 33, "Output",ExpressionUUID->"293dd7d9-2e21-4ff8-9f0a-ddba518b0bd0"]
+}, Open  ]],
+Cell[8893, 288, 275, 6, 55, "Text",ExpressionUUID->"e01d0cca-d7f8-488d-abcf-d7726c0f5759"],
+Cell[CellGroupData[{
+Cell[9193, 298, 367, 9, 29, "Input",ExpressionUUID->"9761da36-026a-496e-8d77-9437183b8a94"],
+Cell[9563, 309, 227, 5, 33, "Output",ExpressionUUID->"54e5ae5d-60ab-4186-8288-23475070e843"]
+}, Open  ]],
+Cell[9805, 317, 270, 7, 55, "Text",ExpressionUUID->"d5eb4cdd-4e71-4a7d-8d39-ef588393bd63"],
+Cell[CellGroupData[{
+Cell[10100, 328, 748, 21, 69, "Input",ExpressionUUID->"ea1a9471-cd3a-43c8-aba5-250a7d9d8420"],
+Cell[10851, 351, 177, 3, 33, "Output",ExpressionUUID->"7c96b201-f1e1-40d9-b621-8a518155efda"],
+Cell[11031, 356, 177, 3, 33, "Output",ExpressionUUID->"43eeed1d-e92a-4e1f-b139-7f9f12900d46"],
+Cell[11211, 361, 175, 3, 33, "Output",ExpressionUUID->"e0750234-c2d8-4a57-af2a-87e4eaffbd1b"]
+}, Open  ]],
+Cell[11401, 367, 414, 8, 33, "Text",ExpressionUUID->"21507572-abfc-46a1-b8c1-671c92d3a7e1"],
+Cell[CellGroupData[{
+Cell[11840, 379, 1076, 29, 71, "Input",ExpressionUUID->"215d28c0-60f9-4ad9-bd37-92bea48cdb4c"],
+Cell[12919, 410, 319, 8, 33, "Output",ExpressionUUID->"1ccd802a-eb4a-4c3c-8dfd-00d7a4b1032f"],
+Cell[13241, 420, 307, 8, 33, "Output",ExpressionUUID->"6003c50f-b0f5-4cad-9c1e-a5074ee066df"],
+Cell[CellGroupData[{
+Cell[13573, 432, 200, 4, 23, "Print",ExpressionUUID->"51f8689b-492d-4364-979a-23848c339d33"],
+Cell[13776, 438, 200, 4, 23, "Print",ExpressionUUID->"3396a60c-342c-467f-b923-1ceb32288319"],
+Cell[13979, 444, 202, 4, 23, "Print",ExpressionUUID->"96927e40-9e42-457b-96c9-fd3d17bbe971"],
+Cell[14184, 450, 203, 4, 23, "Print",ExpressionUUID->"65a7a04b-80a8-4f1d-b745-837c5f81ee3b"],
+Cell[14390, 456, 201, 4, 23, "Print",ExpressionUUID->"63642d89-abb7-4081-b7d0-572629eadc4c"],
+Cell[14594, 462, 200, 4, 23, "Print",ExpressionUUID->"1a509eb9-d3b9-4d28-b22c-51584c77f962"],
+Cell[14797, 468, 200, 4, 23, "Print",ExpressionUUID->"cf52d6d1-fe48-405c-9088-4b2160be8468"],
+Cell[15000, 474, 202, 4, 23, "Print",ExpressionUUID->"6e66fc04-c08f-4657-bd43-08dd4d5e7994"],
+Cell[15205, 480, 200, 4, 23, "Print",ExpressionUUID->"50428bd0-6af9-4cc3-b984-a2645a64f0bd"],
+Cell[15408, 486, 203, 4, 23, "Print",ExpressionUUID->"02855fdf-a6de-49fa-aa0b-5684daf1ae40"],
+Cell[15614, 492, 203, 4, 23, "Print",ExpressionUUID->"f3f6afb3-839f-469d-a140-480ddb4770d0"],
+Cell[15820, 498, 200, 4, 23, "Print",ExpressionUUID->"a24c1285-fa94-4548-b510-ff877729b136"],
+Cell[16023, 504, 200, 4, 23, "Print",ExpressionUUID->"2e50f500-24f4-4d08-a4b2-e120b22b4a4c"],
+Cell[16226, 510, 202, 4, 23, "Print",ExpressionUUID->"c811611d-83ea-42e3-b28b-9034b5d4d8d8"],
+Cell[16431, 516, 202, 4, 23, "Print",ExpressionUUID->"5c03ee43-25f3-498c-8549-e8a7f3283d9e"],
+Cell[16636, 522, 203, 4, 23, "Print",ExpressionUUID->"c337342a-215d-4dd3-99ff-1ab8600298ab"],
+Cell[16842, 528, 203, 4, 23, "Print",ExpressionUUID->"983d9e36-201e-4eeb-8380-c2a43cb13f58"],
+Cell[17048, 534, 200, 4, 23, "Print",ExpressionUUID->"72acbee1-a0d3-428e-a4a7-2799ed18d674"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
