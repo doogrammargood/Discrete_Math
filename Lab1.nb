@@ -1,0 +1,1127 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     43688,       1119]
+NotebookOptionsPosition[     35696,        991]
+NotebookOutlinePosition[     36088,       1007]
+CellTagsIndexPosition[     36045,       1004]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Lab 1: Mathematica and Rewrite Rules", "Title",
+ CellChangeTimes->{{3.946401246049262*^9, 3.946401277236569*^9}, 
+   3.946401432282701*^9},ExpressionUUID->"fe0a63a3-0ccb-4e21-89c7-\
+f4c23ddc88f8"],
+
+Cell["\<\
+Mathematica is a fancy calculator. It is extremely powerful, and claims to be \
+able to answer any question accurately. In the wake of unreliable tools like \
+LLMs, I believe that it is essential that students learn reliable methods to \
+obtain answers to their questions. Mathematica is a \
+\[OpenCurlyDoubleQuote]computer algebra system,\[CloseCurlyDoubleQuote] \
+meaning that it mechanically performs the algebra we would otherwise need to \
+perform by hand. It does this through a system of re-write rules, which are \
+analogous to the logical equivalences of Table 1.5 in Zybooks. In this lab, \
+we will demonstrate the relationship between logical steps and rewrite rules \
+in Mathematica by implementing Table 1.5. Our resulting rewrite rules will \
+allow us to transform any proposition into Normal Form.\
+\>", "Text",
+ CellChangeTimes->{{3.9464012884275103`*^9, 
+  3.946401655306466*^9}},ExpressionUUID->"0241d6b0-8b80-441e-90f1-\
+c573f31de87b"],
+
+Cell[CellGroupData[{
+
+Cell["Mathematica Primer", "Subtitle",
+ CellChangeTimes->{{3.946401711469582*^9, 3.946401713871106*^9}, {
+  3.946401748582302*^9, 
+  3.946401782443713*^9}},ExpressionUUID->"71ac6fa4-d744-41d7-9485-\
+d59f1bc024fe"],
+
+Cell["\<\
+Mathematica is a functional programming language, meaning that we should \
+think of each thing that the code does as applying a function. Mathematica \
+prides itself on a simple syntax relying on just a few rules. Here is a short \
+description
+
+1.) Built-in Functions are capitalized.
+2.) Function application is square brackets, i.e. f[] calls the function f on \
+no arguments.
+3.) Lists are given by curly brackets {}
+4.) Indexing a list is achieved by double brackets {1,2,3}[[1]]=1 (indexing \
+starts at 1)
+5.) All Mathematica code can be written using the form above. For example, \
+\[OpenCurlyDoubleQuote]a=b\[CloseCurlyDoubleQuote] is shorthand for \
+\[OpenCurlyDoubleQuote]Set[a,b]\[CloseCurlyDoubleQuote] and \
+\[OpenCurlyDoubleQuote]a+b\[CloseCurlyDoubleQuote] is shorthand for \
+\[OpenCurlyDoubleQuote]Add[a,b].\[CloseCurlyDoubleQuote]
+
+Computation is achieved by applying a chain of functions. Ideally, these are \
+pure functions, but actually some functions have side effects. See this \
+Tutorial for a quick start: \
+https://www.wolfram.com/language/fast-introduction-for-math-students/en///
+This video does a great job of selling the software:
+https://www.youtube.com/watch?v=zJafYAN5RL\
+\>", "Text",
+ CellChangeTimes->{{3.946401804853022*^9, 3.9464019049246807`*^9}, {
+  3.94640195048359*^9, 3.946402061116337*^9}, {3.946402097352312*^9, 
+  3.9464021317564993`*^9}, {3.946402181792562*^9, 3.946402268402458*^9}, {
+  3.946402331163595*^9, 3.946402362400599*^9}, {3.946402573111081*^9, 
+  3.9464029245767803`*^9}},ExpressionUUID->"e06ef37e-2d29-4b66-9d4a-\
+62a90e890ae2"],
+
+Cell["\<\
+There are many great tutorials online. The problem is that Mathematica is \
+very powerful, so there are many ways to use it. In this tutorial, we use its \
+capacities to apply rewrite rules, as explained here:
+https://reference.wolfram.com/language/tutorial/\
+TransformationRulesAndDefinitions.html#18035\
+\>", "Text",
+ CellChangeTimes->{{3.946402370638545*^9, 3.9464024387629547`*^9}, {
+  3.946402471501668*^9, 
+  3.946402475577466*^9}},ExpressionUUID->"f2a6c6d4-b5bf-4376-b939-\
+ec7ebca91caf"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["An example of rewrite rules", "Subtitle",
+ CellChangeTimes->{{3.946402485424389*^9, 3.9464024904700603`*^9}, {
+  3.946402935413034*^9, 
+  3.9464029452863503`*^9}},ExpressionUUID->"abc2bb02-6882-4288-ba9e-\
+24340919caa1"],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s create a compound proposition, P that depends on two \
+basic propositions.\
+\>", "Text",
+ CellChangeTimes->{{3.946402953464123*^9, 3.946402958548565*^9}, {
+  3.946403016841221*^9, 3.9464030267398653`*^9}, {3.946403308334683*^9, 
+  3.9464033138605022`*^9}},ExpressionUUID->"14fcb2ed-2901-46a2-9f00-\
+ca2ac4cc33a9"],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", "P", "]"}]], "Input",
+ CellChangeTimes->{{3.946403316985113*^9, 3.946403319559395*^9}},
+ CellLabel->
+  "In[348]:=",ExpressionUUID->"f468ab21-d1b1-4dab-b713-cdcc81e6d733"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"P", "[", 
+   RowBox[{"p_", ",", "q_"}], "]"}], "=", " ", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"!", "p"}], ")"}], "&&", " ", 
+   RowBox[{"(", 
+    RowBox[{"!", "q"}], ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.946402964431778*^9, 3.9464030028275747`*^9}, 
+   3.946403064620502*^9},
+ CellLabel->
+  "In[349]:=",ExpressionUUID->"b5781d0d-f0a8-4fd4-be7a-df535f95bb66"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"!", "p"}], "&&", 
+  RowBox[{"!", "q"}]}]], "Output",
+ CellChangeTimes->{
+  3.9464030298253527`*^9, 3.94640306601337*^9, {3.946403301277807*^9, 
+   3.94640332621764*^9}},
+ CellLabel->
+  "Out[349]=",ExpressionUUID->"ef395ef2-211c-4c0b-baff-4b77ce180c1d"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.946403331695153*^9, 
+  3.9464033368037558`*^9}},ExpressionUUID->"7169c0b2-8f23-44ae-a02e-\
+77f78dd776f3"],
+
+Cell["\<\
+Next we apply De Morgan\[CloseCurlyQuote]s Rule as a rewrite rule. The / . \
+operator applies a rule. A rule is expressed as x->y, where we transform the \
+expression x into the expression y. So let\[CloseCurlyQuote]s write the rule \
+that corresponds to De Morgan\[CloseCurlyQuote]s Rule.\
+\>", "Text",
+ CellChangeTimes->{{3.946403370733101*^9, 3.9464033926501303`*^9}, {
+  3.946403519245126*^9, 3.946403533655829*^9}, {3.946403644825786*^9, 
+  3.946403675821423*^9}},ExpressionUUID->"dceffdc3-863a-40fb-972b-\
+54f0921642ae"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"P", "[", 
+   RowBox[{"p", ",", "q"}], "]"}], " ", "/.", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"!", "p"}], "&&", 
+    RowBox[{"!", "q"}]}], "->", 
+   RowBox[{"p", "||", "q"}]}]}]], "Input",
+ CellChangeTimes->{{3.946403396911446*^9, 3.946403479496277*^9}, {
+  3.946403536092083*^9, 3.9464035373435717`*^9}},
+ CellLabel->
+  "In[355]:=",ExpressionUUID->"21188078-e132-4f7a-a883-bdc758574e25"],
+
+Cell[BoxData[
+ RowBox[{"p", "||", "q"}]], "Output",
+ CellChangeTimes->{{3.9464034398649273`*^9, 3.9464034803637238`*^9}, 
+   3.946403626694867*^9},
+ CellLabel->
+  "Out[355]=",ExpressionUUID->"8292a79c-3481-4af3-8a0c-eea9fca8f59f"]
+}, Open  ]],
+
+Cell["\<\
+It worked! Or did it? What if we are not using the letters p and q to denote \
+the basic propositions?\
+\>", "Text",
+ CellChangeTimes->{{3.9464035430332603`*^9, 
+  3.946403578562175*^9}},ExpressionUUID->"4df226a8-3a1b-48f6-a187-\
+5c8a92da79ef"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"P", "[", 
+   RowBox[{"a", ",", "b"}], "]"}], " ", "/.", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"!", "p"}], "&&", 
+    RowBox[{"!", "q"}]}], "->", 
+   RowBox[{"p", "||", "q"}]}]}]], "Input",
+ CellChangeTimes->{{3.9464035848139563`*^9, 3.946403606327601*^9}},
+ CellLabel->
+  "In[356]:=",ExpressionUUID->"a2c903bb-a276-4b2b-8a60-8cfb98517aad"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"!", "a"}], "&&", 
+  RowBox[{"!", "b"}]}]], "Output",
+ CellChangeTimes->{{3.946403609733665*^9, 3.946403629275732*^9}},
+ CellLabel->
+  "Out[356]=",ExpressionUUID->"8b5ebde8-c3ce-44c3-af5c-06448181e26b"]
+}, Open  ]],
+
+Cell["\<\
+Our rule should not be sensitive to the names of the basic propositions. To \
+achieve this, we use Pattern Matching, as described in this tutorial: \
+https://reference.wolfram.com/language/guide/RulesAndPatterns.html.en
+The gist of it is that we use variables that end in underscores that can \
+\[OpenCurlyDoubleQuote]match\[CloseCurlyDoubleQuote] with any expression. The \
+matching value is then represented by the variable without the underscore.\
+\>", "Text",
+ CellChangeTimes->{{3.9464036180414467`*^9, 3.9464036392901297`*^9}, {
+  3.946403684872697*^9, 3.946403713680942*^9}, {3.946403776138199*^9, 
+  3.946403835459909*^9}},ExpressionUUID->"e6d7fc05-9458-40d6-80f1-\
+566fa8ed30d6"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"P", "[", 
+   RowBox[{"a", ",", "b"}], "]"}], " ", "/.", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"!", "p_"}], "&&", 
+    RowBox[{"!", "q_"}]}], "->", 
+   RowBox[{"p", "||", "q"}]}]}]], "Input",
+ CellChangeTimes->{{3.946403735524991*^9, 3.946403740084029*^9}},
+ CellLabel->
+  "In[357]:=",ExpressionUUID->"f72fa8d3-f249-451e-bd2e-40a59633c3e2"],
+
+Cell[BoxData[
+ RowBox[{"a", "||", "b"}]], "Output",
+ CellChangeTimes->{3.946403744925136*^9},
+ CellLabel->
+  "Out[357]=",ExpressionUUID->"3aab0707-9829-4bc7-aa51-95f3c5bf6c48"]
+}, Open  ]],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s check that p_ and q_ are allowed to match compound \
+propositions.\
+\>", "Text",
+ CellChangeTimes->{{3.9464037520815153`*^9, 3.946403769236368*^9}, {
+  3.94640384396721*^9, 
+  3.946403907253456*^9}},ExpressionUUID->"c083c0fd-0ebb-429b-a291-\
+e83b924a9f69"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"P", "[", 
+   RowBox[{
+    RowBox[{"z", "\[Implies]", "r"}], ",", "r"}], "]"}], " ", "/.", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"!", "p_"}], "&&", 
+    RowBox[{"!", "q_"}]}], "->", 
+   RowBox[{"p", "||", "q"}]}]}]], "Input",
+ CellChangeTimes->{{3.946403910306707*^9, 3.9464039453787127`*^9}, {
+  3.946403980867757*^9, 3.946403996004488*^9}},
+ CellLabel->
+  "In[365]:=",ExpressionUUID->"12cad58f-783b-45c9-8b34-60f975f181ab"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{"z", "\[Implies]", "r"}], ")"}], "||", "r"}]], "Output",
+ CellChangeTimes->{3.946404488575007*^9},
+ CellLabel->
+  "Out[365]=",ExpressionUUID->"a411e4ac-6553-40bf-8383-e07f12d49633"]
+}, Open  ]],
+
+Cell["Note that De Morgan\[CloseCurlyQuote]s Law was applied.", "Text",
+ CellChangeTimes->{{3.9464040097920837`*^9, 
+  3.9464040262662363`*^9}},ExpressionUUID->"8b641438-7239-4222-974a-\
+e60b9cb1d0f5"],
+
+Cell[CellGroupData[{
+
+Cell["Implementing Zybooks Table 1.5", "Subsection",
+ CellChangeTimes->{{3.946404032859913*^9, 
+  3.9464040398966827`*^9}},ExpressionUUID->"47ef2699-5f19-4b6b-8660-\
+6301447acf6a"],
+
+Cell["\<\
+Now that we have successfully implemented De Morgan\[CloseCurlyQuote]s Law, \
+we can do the same for every equivalence of Table 1.5 in Zybooks. We need to \
+decide which direction to apply the rule, since equivalences are \
+bidirectional. We also need to make sure that we avoid writing rules that \
+induce infinite loops. Our end goal is to create an automated method for \
+deciding whether two logical equivalences are logically equivalent. The \
+method is to use our rewrite rules to both sides, then we check if both sides \
+are identical.
+For each rule in Table 1.5, let\[CloseCurlyQuote]s check if Mathematica \
+identifies both logically equivalent expressions as being \
+\[OpenCurlyDoubleQuote]the same.\[CloseCurlyDoubleQuote] We only need to \
+implement the rules that are not already considered the same.\
+\>", "Text",
+ CellChangeTimes->{{3.946404045809589*^9, 3.946404233479897*^9}, 
+   3.946404635492782*^9, {3.9464047459585752`*^9, 3.9464047687617083`*^9}, {
+   3.946404805058435*^9, 3.946404849193618*^9}, {3.946404955821332*^9, 
+   3.946404956449472*^9}, {3.946405039837129*^9, 3.946405074400407*^9}, {
+   3.9464054487119837`*^9, 3.946405483935384*^9}, {3.94640585600067*^9, 
+   3.9464058622511272`*^9}},ExpressionUUID->"dcdf1e92-f797-4c20-b6d5-\
+052bcdb356a6"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"SameQ", "[", 
+  RowBox[{
+   RowBox[{"p", "||", "p"}], ",", "p"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SameQ", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"p", "||", "q"}], ")"}], "||", "r"}], ",", " ", 
+   RowBox[{"p", "||", 
+    RowBox[{"(", 
+     RowBox[{"q", "||", "r"}], ")"}]}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SameQ", "[", 
+  RowBox[{
+   RowBox[{"p", "||", "q"}], ",", " ", 
+   RowBox[{"q", "||", "p"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SameQ", "[", 
+  RowBox[{
+   RowBox[{"p", "||", 
+    RowBox[{"(", 
+     RowBox[{"q", "&&", "r"}], ")"}]}], ",", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"p", "||", "q"}], ")"}], "&&", 
+    RowBox[{"(", 
+     RowBox[{"p", "||", "r"}], ")"}]}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SameQ", "[", 
+  RowBox[{
+   RowBox[{"p", "||", "False"}], ",", "p"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SameQ", "[", 
+  RowBox[{
+   RowBox[{"p", "&&", " ", "False"}], ",", " ", "False"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SameQ", "[", 
+  RowBox[{
+   RowBox[{"!", 
+    RowBox[{"!", "p"}]}], ",", "p"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SameQ", "[", 
+  RowBox[{
+   RowBox[{"p", "&&", 
+    RowBox[{"!", "p"}]}], ",", "False"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SameQ", "[", 
+  RowBox[{
+   RowBox[{"!", "True"}], ",", "False"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SameQ", "[", 
+  RowBox[{
+   RowBox[{"!", 
+    RowBox[{"(", 
+     RowBox[{"p", "||", "q"}], ")"}]}], ",", 
+   RowBox[{
+    RowBox[{"!", "p"}], "&&", 
+    RowBox[{"!", "q"}]}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SameQ", "[", 
+  RowBox[{
+   RowBox[{"p", "||", 
+    RowBox[{"(", 
+     RowBox[{"p", "&&", "q"}], ")"}]}], ",", "p"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SameQ", "[", 
+  RowBox[{
+   RowBox[{"p", "\[Implies]", "q"}], ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"!", "p"}], ")"}], "||", "q"}]}], 
+  "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.946404648487221*^9, 3.9464046927928333`*^9}, {
+   3.9464047256808357`*^9, 3.946404733285355*^9}, {3.946404836869738*^9, 
+   3.946404882616238*^9}, {3.946404976045094*^9, 3.946404982834491*^9}, {
+   3.9464050809334993`*^9, 3.946405193083177*^9}, {3.9464052240894527`*^9, 
+   3.946405409985033*^9}, 3.946405468763609*^9, {3.946405500379169*^9, 
+   3.946405515726872*^9}, {3.94640556831645*^9, 3.946405715754106*^9}},
+ CellLabel->"",ExpressionUUID->"40f2093b-30e0-465f-8de4-7b0d93cbe1c1"],
+
+Cell[BoxData["False"], "Output",
+ CellChangeTimes->{{3.946404657383586*^9, 3.946404695727727*^9}, {
+   3.946404727655978*^9, 3.946404733926647*^9}, {3.946404838949122*^9, 
+   3.946404844200891*^9}, 3.9464048837248793`*^9, 3.9464049857276173`*^9, 
+   3.946405416289836*^9},
+ CellLabel->
+  "Out[381]=",ExpressionUUID->"0c2c9387-98d4-4e11-baa3-36c820de1c69"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.946404657383586*^9, 3.946404695727727*^9}, {
+   3.946404727655978*^9, 3.946404733926647*^9}, {3.946404838949122*^9, 
+   3.946404844200891*^9}, 3.9464048837248793`*^9, 3.9464049857276173`*^9, 
+   3.946405416293785*^9},
+ CellLabel->
+  "Out[382]=",ExpressionUUID->"71405abb-b9a9-440a-be75-0aba105e7b1f"],
+
+Cell[BoxData["False"], "Output",
+ CellChangeTimes->{{3.946404657383586*^9, 3.946404695727727*^9}, {
+   3.946404727655978*^9, 3.946404733926647*^9}, {3.946404838949122*^9, 
+   3.946404844200891*^9}, 3.9464048837248793`*^9, 3.9464049857276173`*^9, 
+   3.946405416296229*^9},
+ CellLabel->
+  "Out[383]=",ExpressionUUID->"9261c2a0-d924-4475-a68f-31a8b1b72c79"],
+
+Cell[BoxData["False"], "Output",
+ CellChangeTimes->{{3.946404657383586*^9, 3.946404695727727*^9}, {
+   3.946404727655978*^9, 3.946404733926647*^9}, {3.946404838949122*^9, 
+   3.946404844200891*^9}, 3.9464048837248793`*^9, 3.9464049857276173`*^9, 
+   3.94640541629817*^9},
+ CellLabel->
+  "Out[384]=",ExpressionUUID->"61477719-53af-49f7-b8b8-0a2c486eb1e9"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.946404657383586*^9, 3.946404695727727*^9}, {
+   3.946404727655978*^9, 3.946404733926647*^9}, {3.946404838949122*^9, 
+   3.946404844200891*^9}, 3.9464048837248793`*^9, 3.9464049857276173`*^9, 
+   3.946405416299921*^9},
+ CellLabel->
+  "Out[385]=",ExpressionUUID->"9a8f7cef-9e68-4742-9e41-b3da728759cf"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.946404657383586*^9, 3.946404695727727*^9}, {
+   3.946404727655978*^9, 3.946404733926647*^9}, {3.946404838949122*^9, 
+   3.946404844200891*^9}, 3.9464048837248793`*^9, 3.9464049857276173`*^9, 
+   3.946405416301717*^9},
+ CellLabel->
+  "Out[386]=",ExpressionUUID->"accdfdf5-50b3-4736-a32a-bdf57b5e62f3"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.946404657383586*^9, 3.946404695727727*^9}, {
+   3.946404727655978*^9, 3.946404733926647*^9}, {3.946404838949122*^9, 
+   3.946404844200891*^9}, 3.9464048837248793`*^9, 3.9464049857276173`*^9, 
+   3.946405416303523*^9},
+ CellLabel->
+  "Out[387]=",ExpressionUUID->"498e84b6-47c4-46d4-ae7e-a142778df4af"],
+
+Cell[BoxData["False"], "Output",
+ CellChangeTimes->{{3.946404657383586*^9, 3.946404695727727*^9}, {
+   3.946404727655978*^9, 3.946404733926647*^9}, {3.946404838949122*^9, 
+   3.946404844200891*^9}, 3.9464048837248793`*^9, 3.9464049857276173`*^9, 
+   3.94640541630538*^9},
+ CellLabel->
+  "Out[388]=",ExpressionUUID->"e527cfbe-e851-4d8a-82e6-34687297f4e4"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.946404657383586*^9, 3.946404695727727*^9}, {
+   3.946404727655978*^9, 3.946404733926647*^9}, {3.946404838949122*^9, 
+   3.946404844200891*^9}, 3.9464048837248793`*^9, 3.9464049857276173`*^9, 
+   3.946405416307363*^9},
+ CellLabel->
+  "Out[389]=",ExpressionUUID->"f8933ee3-34b4-430e-a53f-4fb0406c6158"],
+
+Cell[BoxData["False"], "Output",
+ CellChangeTimes->{{3.946404657383586*^9, 3.946404695727727*^9}, {
+   3.946404727655978*^9, 3.946404733926647*^9}, {3.946404838949122*^9, 
+   3.946404844200891*^9}, 3.9464048837248793`*^9, 3.9464049857276173`*^9, 
+   3.946405416309236*^9},
+ CellLabel->
+  "Out[390]=",ExpressionUUID->"62c7cd66-c997-4ca5-85fa-7e8ac7071dc2"],
+
+Cell[BoxData["False"], "Output",
+ CellChangeTimes->{{3.946404657383586*^9, 3.946404695727727*^9}, {
+   3.946404727655978*^9, 3.946404733926647*^9}, {3.946404838949122*^9, 
+   3.946404844200891*^9}, 3.9464048837248793`*^9, 3.9464049857276173`*^9, 
+   3.9464054163111753`*^9},
+ CellLabel->
+  "Out[391]=",ExpressionUUID->"a9728988-93e2-4449-a93e-0d86a72b5448"],
+
+Cell[BoxData["False"], "Output",
+ CellChangeTimes->{{3.946404657383586*^9, 3.946404695727727*^9}, {
+   3.946404727655978*^9, 3.946404733926647*^9}, {3.946404838949122*^9, 
+   3.946404844200891*^9}, 3.9464048837248793`*^9, 3.9464049857276173`*^9, 
+   3.946405416312796*^9},
+ CellLabel->
+  "Out[392]=",ExpressionUUID->"50495550-6173-46af-84e0-aa1c33b964c4"]
+}, Open  ]],
+
+Cell["\<\
+It seems that Mathematica already knows about associativity, True/False, and \
+double negation. Based on this, we can come up with a set of rules. The \
+idempotent rules are given below.
+\
+\>", "Text",
+ CellChangeTimes->{{3.946404992976244*^9, 3.946405009578629*^9}, {
+  3.946405896039454*^9, 3.946405971494039*^9}, {3.946407012447241*^9, 
+  3.946407017747223*^9}},ExpressionUUID->"ca492f79-5fbe-4bc6-b2d8-\
+3fb5d350666d"],
+
+Cell[BoxData[
+ RowBox[{"Rules", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"p_", "||", "p"}], "->", "p"}], ",", 
+    RowBox[{
+     RowBox[{"p_", "&&", "p"}], "->", "p"}]}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.9464049690623703`*^9, 3.946404970593998*^9}, {
+  3.946405976248137*^9, 
+  3.946406047709299*^9}},ExpressionUUID->"a6fbe09e-af3d-428c-b410-\
+58f013cc947f"],
+
+Cell["\<\
+We already have a problem implementing the commutativity rule. It can create \
+an infinite loop. If we apply it once, it\[CloseCurlyQuote]s fine.\
+\>", "Text",
+ CellChangeTimes->{{3.946406315320784*^9, 3.9464063513898*^9}, {
+  3.9464064374709873`*^9, 
+  3.9464064422874527`*^9}},ExpressionUUID->"fbdbd585-e236-432f-a055-\
+1189bd11949a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"p", " ", "||", " ", "q"}], " ", "/.", " ", 
+  RowBox[{
+   RowBox[{"p_", "||", "q_"}], "->", 
+   RowBox[{"q", "||", "p"}]}]}]], "Input",
+ CellChangeTimes->{{3.946406361293069*^9, 
+  3.94640643564373*^9}},ExpressionUUID->"7c9e3ca4-9077-48c0-ba3f-\
+b9fde531917b"],
+
+Cell["\<\
+But applying it repeatedly breaks things. So we use an ordering on the \
+expressions and only apply the rule when it puts the expressions p and q in \
+order. This is like ordering the variables alphabetically.\
+\>", "Text",
+ CellChangeTimes->{{3.9464064686599092`*^9, 3.946406473328397*^9}, {
+  3.946406904072294*^9, 
+  3.946406949820792*^9}},ExpressionUUID->"deb72a4d-4dab-40d5-bdd1-\
+9749f2059db0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Order", "[", 
+  RowBox[{"p", ",", "q"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Order", "[", 
+  RowBox[{
+   RowBox[{"p", "&&", "q"}], ",", "q"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Order", "[", 
+  RowBox[{"p", ",", "p"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.946406839105377*^9, 3.9464068406441927`*^9}, {
+  3.9464068808440847`*^9, 3.946406889031457*^9}, {3.9464069593992453`*^9, 
+  3.946406978676941*^9}, {3.9464088143858347`*^9, 
+  3.946408825970085*^9}},ExpressionUUID->"79855d25-dfb5-4195-9884-\
+0b85d325525f"],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{
+  3.94640684103541*^9, {3.9464068857358313`*^9, 3.9464068894974203`*^9}, 
+   3.946406979789433*^9},
+ CellLabel->
+  "Out[435]=",ExpressionUUID->"d0574666-524a-46be-bad4-50543a1675f1"],
+
+Cell[BoxData[
+ RowBox[{"-", "1"}]], "Output",
+ CellChangeTimes->{
+  3.94640684103541*^9, {3.9464068857358313`*^9, 3.9464068894974203`*^9}, 
+   3.94640697979035*^9},
+ CellLabel->
+  "Out[436]=",ExpressionUUID->"bd0a81d3-f9e6-4ab2-b466-f2dc21bc18e9"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"0", "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.946410467608492*^9, 
+  3.946410469830308*^9}},ExpressionUUID->"4d3fa813-b66d-49aa-97e6-\
+dd6af6e12c05"],
+
+Cell["\<\
+Then we can apply the commutative rule selectively, using the PatternTest: \
+https://reference.wolfram.com/language/ref/PatternTest.html. More \
+specifically, we need the /; operator, described here: \
+https://reference.wolfram.com/language/tutorial/Patterns.html#1615\
+\>", "Text",
+ CellChangeTimes->{{3.946406993910734*^9, 3.946406997360587*^9}, {
+   3.946407027628993*^9, 3.9464070326559553`*^9}, {3.94640735865333*^9, 
+   3.946407376677663*^9}, {3.946410334621162*^9, 3.94641035823139*^9}, 
+   3.9464109307813787`*^9},ExpressionUUID->"ada38697-010e-4bac-839e-\
+d0e5f75253df"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"outOfOrder", "[", 
+   RowBox[{"a_", ",", "b_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"Order", "[", 
+    RowBox[{"a", ",", "b"}], "]"}], "==", 
+   RowBox[{"-", "1"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"q", "||", "p"}], " ", "//.", 
+  RowBox[{
+   RowBox[{"(", " ", 
+    RowBox[{
+     RowBox[{"p_", "||", "q_"}], " ", "/;", " ", 
+     RowBox[{"outOfOrder", "[", 
+      RowBox[{"p", ",", "q"}], "]"}]}], ")"}], "->", 
+   RowBox[{"q", "||", "p"}]}]}]}], "Input",
+ CellChangeTimes->{{3.9464073796707363`*^9, 3.9464073888787603`*^9}, {
+   3.946407852741514*^9, 3.946407888673625*^9}, 3.9464090929350224`*^9, {
+   3.946409279047923*^9, 3.946409280170432*^9}, {3.9464096733732452`*^9, 
+   3.946409722665313*^9}, {3.9464103610195713`*^9, 3.946410401271418*^9}, {
+   3.946410473230332*^9, 3.9464105718371763`*^9}, {3.9464106639717627`*^9, 
+   3.9464108031627493`*^9}, {3.94641088171749*^9, 
+   3.946410911231433*^9}},ExpressionUUID->"ca67652b-f670-45d3-bddc-\
+e8cfa8e9c617"],
+
+Cell[BoxData[
+ RowBox[{"p", "||", "q"}]], "Output",
+ CellChangeTimes->{{3.946407886810577*^9, 3.946407889282873*^9}, {
+   3.9464090900664463`*^9, 3.946409093642805*^9}, {3.946409275021076*^9, 
+   3.946409283856155*^9}, {3.946409674136639*^9, 3.946409712197763*^9}, 
+   3.94641057297999*^9, {3.9464108720518627`*^9, 3.946410890637847*^9}},
+ CellLabel->
+  "Out[533]=",ExpressionUUID->"a7d025b4-4cba-4896-8fc8-e35886b55972"]
+}, Open  ]],
+
+Cell["\<\
+This might get complicated if there are more propositions, because p and q \
+might match with expressions.\
+\>", "Text",
+ CellChangeTimes->{{3.946410919484724*^9, 3.946410922739706*^9}, {
+  3.946410958903223*^9, 
+  3.946410990014962*^9}},ExpressionUUID->"94d87f30-7914-46f2-b650-\
+92b2c976ac46"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"p", "||", "q", "||", "r"}], "//.", 
+  RowBox[{
+   RowBox[{"(", " ", 
+    RowBox[{
+     RowBox[{"p_", "||", "q_"}], " ", "/;", " ", 
+     RowBox[{"outOfOrder", "[", 
+      RowBox[{"p", ",", "q"}], "]"}]}], ")"}], "->", 
+   RowBox[{"q", "||", "p"}]}]}]], "Input",
+ CellChangeTimes->{{3.94641099352492*^9, 3.9464110091942253`*^9}},
+ CellLabel->
+  "In[534]:=",ExpressionUUID->"774bebbf-0f5a-4cfb-a0f4-6de1ec9ccedf"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ReplaceRepeated", "rrlim", 
+   "\"Exiting after \\!\\(\\*RowBox[{\\\"p\\\", \\\"||\\\", \\\"q\\\", \\\"||\
+\\\", \\\"r\\\"}]\\) scanned \\!\\(\\*RowBox[{\\\"65536\\\"}]\\) times.\"", 2,
+    534, 49, 20619756665997842651, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.9464110099732037`*^9},
+ CellLabel->
+  "During evaluation of \
+In[534]:=",ExpressionUUID->"c694e49a-8a04-4101-89d1-891aed349b59"],
+
+Cell[BoxData[
+ RowBox[{"r", "||", "p", "||", "q"}]], "Output",
+ CellChangeTimes->{3.94641100997853*^9},
+ CellLabel->
+  "Out[534]=",ExpressionUUID->"19c79ff1-cc14-4a32-94cd-63a6a6a3908a"]
+}, Open  ]],
+
+Cell["\<\
+To see what went wrong, we can apply the single-replacement operator (/.) \
+repeatedly.\
+\>", "Text",
+ CellChangeTimes->{{3.946411024167272*^9, 
+  3.9464110470031233`*^9}},ExpressionUUID->"5fe32f7b-3852-467e-9f3a-\
+6a3c7f0ee459"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"p", "||", "q", "||", "r"}], "/.", 
+  RowBox[{
+   RowBox[{"(", " ", 
+    RowBox[{
+     RowBox[{"p_", "||", "q_"}], " ", "/;", " ", 
+     RowBox[{"outOfOrder", "[", 
+      RowBox[{"p", ",", "q"}], "]"}]}], ")"}], "->", 
+   RowBox[{"q", "||", "p"}]}]}]], "Input",
+ CellChangeTimes->{3.9464110547589607`*^9},
+ CellLabel->
+  "In[535]:=",ExpressionUUID->"ea9e026c-2925-4df2-8685-58be25673190"],
+
+Cell[BoxData[
+ RowBox[{"r", "||", "p", "||", "q"}]], "Output",
+ CellChangeTimes->{3.9464110577945547`*^9},
+ CellLabel->
+  "Out[535]=",ExpressionUUID->"73a8c876-cad2-41d2-ba3c-85ca640b2001"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"%", "/.", 
+  RowBox[{
+   RowBox[{"(", " ", 
+    RowBox[{
+     RowBox[{"p_", "||", "q_"}], " ", "/;", " ", 
+     RowBox[{"outOfOrder", "[", 
+      RowBox[{"p", ",", "q"}], "]"}]}], ")"}], "->", 
+   RowBox[{"q", "||", "p"}]}]}]], "Input",
+ CellChangeTimes->{{3.9464110597035437`*^9, 3.9464110704159603`*^9}},
+ CellLabel->
+  "In[536]:=",ExpressionUUID->"41f6bbac-99a8-4036-9384-b82cbd68d84c"],
+
+Cell[BoxData[
+ RowBox[{"q", "||", "r", "||", "p"}]], "Output",
+ CellChangeTimes->{3.946411072303771*^9},
+ CellLabel->
+  "Out[536]=",ExpressionUUID->"641aff01-9209-4e83-b611-e930e1dd8957"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"%", "/.", 
+  RowBox[{
+   RowBox[{"(", " ", 
+    RowBox[{
+     RowBox[{"p_", "||", "q_"}], " ", "/;", " ", 
+     RowBox[{"outOfOrder", "[", 
+      RowBox[{"p", ",", "q"}], "]"}]}], ")"}], "->", 
+   RowBox[{"q", "||", "p"}]}]}]], "Input",
+ CellChangeTimes->{{3.946411082262638*^9, 3.946411096072772*^9}},
+ CellLabel->
+  "In[537]:=",ExpressionUUID->"366e37ba-c692-49fa-8ae2-c370fb92024a"],
+
+Cell[BoxData[
+ RowBox[{"p", "||", "q", "||", "r"}]], "Output",
+ CellChangeTimes->{3.946411097127268*^9},
+ CellLabel->
+  "Out[537]=",ExpressionUUID->"2521ee57-77b5-437a-977c-8ee6e14b8be1"]
+}, Open  ]],
+
+Cell["\<\
+After 3 applications of the rule, we are back where we started. The issue is \
+that we are applying the rule to the outer \[OpenCurlyDoubleQuote]or\
+\[CloseCurlyDoubleQuote] of \[OpenCurlyDoubleQuote]p || (q||r)\
+\[CloseCurlyDoubleQuote]. So we really want to check that we only apply the \
+commutativity rule when p and q are literals (variables or their negations). \
+We can check if this is the case using the builtin Length function.\
+\>", "Text",
+ CellChangeTimes->{{3.94641110581068*^9, 3.946411121839896*^9}, {
+  3.9464111565274267`*^9, 3.946411278397092*^9}, {3.946411358193527*^9, 
+  3.946411406985413*^9}},ExpressionUUID->"a696fb48-9bdd-4e2a-8bae-\
+ce4c37d7b648"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"LiteralsOutOfOrder", "[", 
+   RowBox[{"a_", ",", "b_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Length", "[", "a", "]"}], "<", "3"}], "&&", 
+   RowBox[{
+    RowBox[{"Length", "[", "b", "]"}], "<", "3"}], "&&", 
+   RowBox[{
+    RowBox[{"Order", "[", 
+     RowBox[{"p", ",", "q"}], "]"}], "==", 
+    RowBox[{"-", "1"}]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"r", "||", "q", "||", "r"}], "//.", 
+  RowBox[{
+   RowBox[{"(", " ", 
+    RowBox[{
+     RowBox[{"p_", "||", "q_"}], " ", "/;", " ", 
+     RowBox[{"LiteralsoutOfOrder", "[", 
+      RowBox[{"p", ",", "q"}], "]"}]}], ")"}], "->", 
+   RowBox[{"q", "||", "p"}]}]}]}], "Input",
+ CellChangeTimes->{{3.946411290520255*^9, 3.9464113454521627`*^9}, {
+  3.946411415158642*^9, 3.946411477811667*^9}, {3.9464116736465273`*^9, 
+  3.94641168729906*^9}, {3.9464117337042513`*^9, 
+  3.946411747760013*^9}},ExpressionUUID->"9d4ae042-15cf-4d04-9620-\
+bfe8cfb1c928"],
+
+Cell[BoxData[
+ RowBox[{"r", "||", "q", "||", "r"}]], "Output",
+ CellChangeTimes->{{3.946411471394322*^9, 3.946411478321919*^9}, {
+  3.946411674396242*^9, 3.9464116881621437`*^9}},
+ CellLabel->
+  "Out[553]=",ExpressionUUID->"11ced47d-effe-4a01-8a3d-a61d5a784a56"]
+}, Open  ]],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s collect the rules that we have so far and see what \
+happens when we use them in a few cases.\
+\>", "Text",
+ CellChangeTimes->{{3.946411502108769*^9, 
+  3.946411514070446*^9}},ExpressionUUID->"d4f78c57-0bf7-4c18-b89f-\
+8dcd178c3d9f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Rules", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"p_", "||", "p"}], "->", "p"}], ",", 
+     RowBox[{"(*", "Idempotent", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p_", "&&", "p"}], "->", "p"}], ",", 
+     RowBox[{"(*", "Idempotent", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"!", 
+       RowBox[{"(", 
+        RowBox[{"p_", "||", "q_"}], ")"}]}], "->", 
+      RowBox[{
+       RowBox[{"!", "p"}], "&&", 
+       RowBox[{"!", "q"}]}]}], ",", " ", 
+     RowBox[{"(*", 
+      RowBox[{"De", " ", "Morgan"}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"!", 
+       RowBox[{"(", 
+        RowBox[{"p_", "&&", "q_"}], ")"}]}], "->", 
+      RowBox[{
+       RowBox[{"!", "p"}], "||", 
+       RowBox[{"!", "q"}]}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{"p_", "||", "q_"}], " ", "/;", " ", 
+        RowBox[{"LiteralsoutOfOrder", "[", 
+         RowBox[{"p", ",", "q"}], "]"}]}], ")"}], "->", 
+      RowBox[{"q", "||", "p"}]}], ",", 
+     RowBox[{"(*", "Commutative", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"(", " ", 
+       RowBox[{
+        RowBox[{"p_", "&&", "q_"}], " ", "/;", " ", 
+        RowBox[{"LiteralsoutOfOrder", "[", 
+         RowBox[{"p", ",", "q"}], "]"}]}], ")"}], "->", 
+      RowBox[{"q", "&&", "p"}]}], ",", 
+     RowBox[{"(*", "Commutative", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p_", "||", 
+       RowBox[{"(", 
+        RowBox[{"q_", "&&", "r_"}], ")"}]}], "->", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"p", "||", "q"}], ")"}], "&&", 
+       RowBox[{"(", 
+        RowBox[{"p", "||", "r"}], ")"}]}]}], ",", " ", 
+     RowBox[{"(*", 
+      RowBox[{"Distributive", " ", "Rules"}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p_", "&&", 
+       RowBox[{"!", "p"}]}], "->", "False"}], ",", " ", 
+     RowBox[{"(*", "Complement", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p_", " ", "||", " ", 
+       RowBox[{"!", "p"}]}], "->", "True"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"p_", "\[Implies]", "q_"}], "->", 
+      RowBox[{
+       RowBox[{"!", "p"}], "||", "q"}]}]}], "\[IndentingNewLine]", "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p", "||", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"q", "&&", 
+       RowBox[{"(", 
+        RowBox[{"True", "||", "r"}], ")"}]}], " ", ")"}], "&&", 
+     RowBox[{"!", "p"}]}], ")"}]}], "/.", "Rules"}]}], "Input",
+ CellChangeTimes->{{3.94641153456923*^9, 3.946411624722251*^9}, {
+  3.9464118601794987`*^9, 3.946411885011347*^9}, {3.946411943712069*^9, 
+  3.946412300034531*^9}, {3.946412374143425*^9, 3.946412399761655*^9}, {
+  3.946412727681367*^9, 3.94641274718017*^9}, {3.946412823436656*^9, 
+  3.946412902781583*^9}},
+ CellLabel->
+  "In[584]:=",ExpressionUUID->"2778d1c3-51f6-41d6-beb3-6bd16e7f2d72"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{"p", "||", "q"}], ")"}], "&&", 
+  RowBox[{"(", 
+   RowBox[{"p", "||", 
+    RowBox[{"!", "p"}]}], ")"}]}]], "Output",
+ CellChangeTimes->{
+  3.946411888715692*^9, {3.946412311805501*^9, 3.946412313910851*^9}, 
+   3.946412514165021*^9, {3.946412747862001*^9, 3.946412759548809*^9}, 
+   3.946412903711248*^9},
+ CellLabel->
+  "Out[585]=",ExpressionUUID->"8500cf65-e07c-4f02-970d-0028829fabca"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"p", "||", 
+   RowBox[{"!", "p"}]}], " ", "/.", "Rules"}]], "Input",
+ CellChangeTimes->{{3.946411797480344*^9, 3.946411807706975*^9}},
+ CellLabel->
+  "In[567]:=",ExpressionUUID->"05accdf1-5182-47f9-8615-5e43155a4117"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{3.94641181085739*^9, 3.946411891566457*^9, 
+  3.946412316641705*^9},
+ CellLabel->
+  "Out[567]=",ExpressionUUID->"09320700-8fd2-402d-9ce0-e1e1c36e9414"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Quiz Question:", "Subsection",
+ CellChangeTimes->{{3.9464120448266363`*^9, 3.946412054471341*^9}, {
+  3.946412326944667*^9, 
+  3.946412331768139*^9}},ExpressionUUID->"0d7ec42f-5853-4d93-9dd7-\
+dfb737a014a0"],
+
+Cell["\<\
+(15 points) Use the rules to see what this reduces to, and give a rigorous, \
+step-by-step proof by repeatedly applying the slash dot operator. Give \
+justifications for the first 3 steps.\
+\>", "Text",
+ CellChangeTimes->{{3.946412344709631*^9, 3.946412370329763*^9}, {
+  3.946412411226643*^9, 3.94641242328728*^9}, {3.946412914238656*^9, 
+  3.946412968393772*^9}, {3.946413074981182*^9, 
+  3.946413078391383*^9}},ExpressionUUID->"a00d7d9c-f1b7-4568-9f4a-\
+71d9264ae7c8"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{"p", "&&", "q"}], ")"}], "\[Implies]", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"!", "p"}], "&&", "q"}], ")"}], "\[Implies]", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"p", "&&", 
+        RowBox[{"!", "q"}]}], ")"}], "\[Implies]", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"!", "p"}], "&&", 
+        RowBox[{"!", "q"}]}], ")"}]}], ")"}]}], ")"}]}]], "Input",
+ CellChangeTimes->{{3.94641242474938*^9, 3.9464125059454937`*^9}, {
+  3.946412589077117*^9, 3.946412618062668*^9}, {3.946412909270577*^9, 
+  3.9464129450209923`*^9}, {3.946413016832082*^9, 
+  3.946413017906741*^9}},ExpressionUUID->"719c771a-d819-4429-bed1-\
+cb20af6290bf"],
+
+Cell["", "Text",
+ CellChangeTimes->{{3.9464130238708677`*^9, 
+  3.946413028034399*^9}},ExpressionUUID->"cf37b477-ff61-4427-b557-\
+e17a12bd6897"],
+
+Cell["\<\
+Bonus (5 points): Give an example where our rules don\[CloseCurlyQuote]t \
+fully reduce the expression.\
+\>", "Text",
+ CellChangeTimes->{{3.946413030285892*^9, 
+  3.946413084537386*^9}},ExpressionUUID->"eb077b5f-3708-4a8f-9095-\
+3109727e68de"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440, 701.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a179a5f4-1ef0-4807-8a38-16c355c17c6a"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 202, 3, 96, "Title",ExpressionUUID->"fe0a63a3-0ccb-4e21-89c7-f4c23ddc88f8"],
+Cell[781, 27, 964, 15, 99, "Text",ExpressionUUID->"0241d6b0-8b80-441e-90f1-c573f31de87b"],
+Cell[CellGroupData[{
+Cell[1770, 46, 213, 4, 52, "Subtitle",ExpressionUUID->"71ac6fa4-d744-41d7-9485-d59f1bc024fe"],
+Cell[1986, 52, 1595, 30, 296, "Text",ExpressionUUID->"e06ef37e-2d29-4b66-9d4a-62a90e890ae2"],
+Cell[3584, 84, 505, 10, 55, "Text",ExpressionUUID->"f2a6c6d4-b5bf-4376-b939-ec7ebca91caf"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4126, 99, 226, 4, 52, "Subtitle",ExpressionUUID->"abc2bb02-6882-4288-ba9e-24340919caa1"],
+Cell[4355, 105, 346, 7, 33, "Text",ExpressionUUID->"14fcb2ed-2901-46a2-9f00-ca2ac4cc33a9"],
+Cell[4704, 114, 207, 4, 29, "Input",ExpressionUUID->"f468ab21-d1b1-4dab-b713-cdcc81e6d733"],
+Cell[CellGroupData[{
+Cell[4936, 122, 402, 12, 29, "Input",ExpressionUUID->"b5781d0d-f0a8-4fd4-be7a-df535f95bb66"],
+Cell[5341, 136, 287, 8, 33, "Output",ExpressionUUID->"ef395ef2-211c-4c0b-baff-4b77ce180c1d"]
+}, Open  ]],
+Cell[5643, 147, 154, 3, 29, "Input",ExpressionUUID->"7169c0b2-8f23-44ae-a02e-77f78dd776f3"],
+Cell[5800, 152, 536, 9, 55, "Text",ExpressionUUID->"dceffdc3-863a-40fb-972b-54f0921642ae"],
+Cell[CellGroupData[{
+Cell[6361, 165, 426, 12, 29, "Input",ExpressionUUID->"21188078-e132-4f7a-a883-bdc758574e25"],
+Cell[6790, 179, 230, 5, 33, "Output",ExpressionUUID->"8292a79c-3481-4af3-8a0c-eea9fca8f59f"]
+}, Open  ]],
+Cell[7035, 187, 254, 6, 33, "Text",ExpressionUUID->"4df226a8-3a1b-48f6-a187-5c8a92da79ef"],
+Cell[CellGroupData[{
+Cell[7314, 197, 377, 11, 29, "Input",ExpressionUUID->"a2c903bb-a276-4b2b-8a60-8cfb98517aad"],
+Cell[7694, 210, 236, 6, 33, "Output",ExpressionUUID->"8b5ebde8-c3ce-44c3-af5c-06448181e26b"]
+}, Open  ]],
+Cell[7945, 219, 698, 11, 77, "Text",ExpressionUUID->"e6d7fc05-9458-40d6-80f1-566fa8ed30d6"],
+Cell[CellGroupData[{
+Cell[8668, 234, 377, 11, 29, "Input",ExpressionUUID->"f72fa8d3-f249-451e-bd2e-40a59633c3e2"],
+Cell[9048, 247, 176, 4, 33, "Output",ExpressionUUID->"3aab0707-9829-4bc7-aa51-95f3c5bf6c48"]
+}, Open  ]],
+Cell[9239, 254, 289, 7, 33, "Text",ExpressionUUID->"c083c0fd-0ebb-429b-a291-e83b924a9f69"],
+Cell[CellGroupData[{
+Cell[9553, 265, 462, 13, 29, "Input",ExpressionUUID->"12cad58f-783b-45c9-8b34-60f975f181ab"],
+Cell[10018, 280, 232, 6, 33, "Output",ExpressionUUID->"a411e4ac-6553-40bf-8383-e07f12d49633"]
+}, Open  ]],
+Cell[10265, 289, 201, 3, 33, "Text",ExpressionUUID->"8b641438-7239-4222-974a-e60b9cb1d0f5"],
+Cell[CellGroupData[{
+Cell[10491, 296, 180, 3, 53, "Subsection",ExpressionUUID->"47ef2699-5f19-4b6b-8660-6301447acf6a"],
+Cell[10674, 301, 1286, 20, 99, "Text",ExpressionUUID->"dcdf1e92-f797-4c20-b6d5-052bcdb356a6"],
+Cell[CellGroupData[{
+Cell[11985, 325, 2478, 71, 278, "Input",ExpressionUUID->"40f2093b-30e0-465f-8de4-7b0d93cbe1c1"],
+Cell[14466, 398, 355, 6, 33, "Output",ExpressionUUID->"0c2c9387-98d4-4e11-baa3-36c820de1c69"],
+Cell[14824, 406, 354, 6, 33, "Output",ExpressionUUID->"71405abb-b9a9-440a-be75-0aba105e7b1f"],
+Cell[15181, 414, 355, 6, 33, "Output",ExpressionUUID->"9261c2a0-d924-4475-a68f-31a8b1b72c79"],
+Cell[15539, 422, 354, 6, 33, "Output",ExpressionUUID->"61477719-53af-49f7-b8b8-0a2c486eb1e9"],
+Cell[15896, 430, 354, 6, 33, "Output",ExpressionUUID->"9a8f7cef-9e68-4742-9e41-b3da728759cf"],
+Cell[16253, 438, 354, 6, 33, "Output",ExpressionUUID->"accdfdf5-50b3-4736-a32a-bdf57b5e62f3"],
+Cell[16610, 446, 354, 6, 33, "Output",ExpressionUUID->"498e84b6-47c4-46d4-ae7e-a142778df4af"],
+Cell[16967, 454, 354, 6, 33, "Output",ExpressionUUID->"e527cfbe-e851-4d8a-82e6-34687297f4e4"],
+Cell[17324, 462, 354, 6, 33, "Output",ExpressionUUID->"f8933ee3-34b4-430e-a53f-4fb0406c6158"],
+Cell[17681, 470, 355, 6, 33, "Output",ExpressionUUID->"62c7cd66-c997-4ca5-85fa-7e8ac7071dc2"],
+Cell[18039, 478, 357, 6, 33, "Output",ExpressionUUID->"a9728988-93e2-4449-a93e-0d86a72b5448"],
+Cell[18399, 486, 355, 6, 33, "Output",ExpressionUUID->"50495550-6173-46af-84e0-aa1c33b964c4"]
+}, Open  ]],
+Cell[18769, 495, 432, 9, 55, "Text",ExpressionUUID->"ca492f79-5fbe-4bc6-b2d8-3fb5d350666d"],
+Cell[19204, 506, 395, 11, 29, "Input",ExpressionUUID->"a6fbe09e-af3d-428c-b410-58f013cc947f"],
+Cell[19602, 519, 346, 7, 33, "Text",ExpressionUUID->"fbdbd585-e236-432f-a055-1189bd11949a"],
+Cell[19951, 528, 295, 8, 29, "Input",ExpressionUUID->"7c9e3ca4-9077-48c0-ba3f-b9fde531917b"],
+Cell[20249, 538, 410, 8, 33, "Text",ExpressionUUID->"deb72a4d-4dab-40d5-bdd1-9749f2059db0"],
+Cell[CellGroupData[{
+Cell[20684, 550, 550, 12, 69, "Input",ExpressionUUID->"79855d25-dfb5-4195-9884-0b85d325525f"],
+Cell[21237, 564, 231, 5, 33, "Output",ExpressionUUID->"d0574666-524a-46be-bad4-50543a1675f1"],
+Cell[21471, 571, 247, 6, 33, "Output",ExpressionUUID->"bd0a81d3-f9e6-4ab2-b466-f2dc21bc18e9"]
+}, Open  ]],
+Cell[21733, 580, 188, 4, 49, "Input",ExpressionUUID->"4d3fa813-b66d-49aa-97e6-dd6af6e12c05"],
+Cell[21924, 586, 589, 10, 55, "Text",ExpressionUUID->"ada38697-010e-4bac-839e-d0e5f75253df"],
+Cell[CellGroupData[{
+Cell[22538, 600, 1013, 24, 51, "Input",ExpressionUUID->"ca67652b-f670-45d3-bddc-e8cfa8e9c617"],
+Cell[23554, 626, 421, 7, 33, "Output",ExpressionUUID->"a7d025b4-4cba-4896-8fc8-e35886b55972"]
+}, Open  ]],
+Cell[23990, 636, 305, 7, 33, "Text",ExpressionUUID->"94d87f30-7914-46f2-b650-92b2c976ac46"],
+Cell[CellGroupData[{
+Cell[24320, 647, 446, 12, 30, "Input",ExpressionUUID->"774bebbf-0f5a-4cfb-a0f4-6de1ec9ccedf"],
+Cell[24769, 661, 453, 10, 26, "Message",ExpressionUUID->"c694e49a-8a04-4101-89d1-891aed349b59"],
+Cell[25225, 673, 186, 4, 33, "Output",ExpressionUUID->"19c79ff1-cc14-4a32-94cd-63a6a6a3908a"]
+}, Open  ]],
+Cell[25426, 680, 239, 6, 33, "Text",ExpressionUUID->"5fe32f7b-3852-467e-9f3a-6a3c7f0ee459"],
+Cell[CellGroupData[{
+Cell[25690, 690, 422, 12, 30, "Input",ExpressionUUID->"ea9e026c-2925-4df2-8685-58be25673190"],
+Cell[26115, 704, 189, 4, 33, "Output",ExpressionUUID->"73a8c876-cad2-41d2-ba3c-85ca640b2001"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26341, 713, 413, 11, 30, "Input",ExpressionUUID->"41f6bbac-99a8-4036-9384-b82cbd68d84c"],
+Cell[26757, 726, 187, 4, 33, "Output",ExpressionUUID->"641aff01-9209-4e83-b611-e930e1dd8957"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26981, 735, 409, 11, 30, "Input",ExpressionUUID->"366e37ba-c692-49fa-8ae2-c370fb92024a"],
+Cell[27393, 748, 187, 4, 33, "Output",ExpressionUUID->"2521ee57-77b5-437a-977c-8ee6e14b8be1"]
+}, Open  ]],
+Cell[27595, 755, 683, 11, 55, "Text",ExpressionUUID->"a696fb48-9bdd-4e2a-8bae-ce4c37d7b648"],
+Cell[CellGroupData[{
+Cell[28303, 770, 961, 26, 51, "Input",ExpressionUUID->"9d4ae042-15cf-4d04-9620-bfe8cfb1c928"],
+Cell[29267, 798, 262, 5, 33, "Output",ExpressionUUID->"11ced47d-effe-4a01-8a3d-a61d5a784a56"]
+}, Open  ]],
+Cell[29544, 806, 266, 6, 33, "Text",ExpressionUUID->"d4f78c57-0bf7-4c18-b89f-8dcd178c3d9f"],
+Cell[CellGroupData[{
+Cell[29835, 816, 2981, 81, 260, "Input",ExpressionUUID->"2778d1c3-51f6-41d6-beb3-6bd16e7f2d72"],
+Cell[32819, 899, 439, 12, 33, "Output",ExpressionUUID->"8500cf65-e07c-4f02-970d-0028829fabca"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33295, 916, 251, 6, 29, "Input",ExpressionUUID->"05accdf1-5182-47f9-8615-5e43155a4117"],
+Cell[33549, 924, 202, 4, 33, "Output",ExpressionUUID->"09320700-8fd2-402d-9ce0-e1e1c36e9414"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33800, 934, 213, 4, 53, "Subsection",ExpressionUUID->"0d7ec42f-5853-4d93-9dd7-dfb737a014a0"],
+Cell[34016, 940, 481, 9, 33, "Text",ExpressionUUID->"a00d7d9c-f1b7-4568-9f4a-71d9264ae7c8"],
+Cell[34500, 951, 753, 22, 29, "Input",ExpressionUUID->"719c771a-d819-4429-bed1-cb20af6290bf"],
+Cell[35256, 975, 144, 3, 33, "Text",ExpressionUUID->"cf37b477-ff61-4427-b557-e17a12bd6897"],
+Cell[35403, 980, 253, 6, 33, "Text",ExpressionUUID->"eb077b5f-3708-4a8f-9095-3109727e68de"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
