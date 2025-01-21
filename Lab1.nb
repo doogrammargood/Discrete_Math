@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     43688,       1119]
-NotebookOptionsPosition[     35696,        991]
-NotebookOutlinePosition[     36088,       1007]
-CellTagsIndexPosition[     36045,       1004]
+NotebookDataLength[     43939,       1123]
+NotebookOptionsPosition[     35947,        995]
+NotebookOutlinePosition[     36339,       1011]
+CellTagsIndexPosition[     36296,       1008]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -874,11 +874,13 @@ Cell[BoxData[{
      RowBox[{"(*", "Complement", "*)"}], "\[IndentingNewLine]", 
      RowBox[{
       RowBox[{"p_", " ", "||", " ", 
-       RowBox[{"!", "p"}]}], "->", "True"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"!", "p"}]}], "->", "True"}], ",", " ", 
+     RowBox[{"(*", "Complement", "*)"}], "\[IndentingNewLine]", 
      RowBox[{
       RowBox[{"p_", "\[Implies]", "q_"}], "->", 
       RowBox[{
-       RowBox[{"!", "p"}], "||", "q"}]}]}], "\[IndentingNewLine]", "}"}]}], 
+       RowBox[{"!", "p"}], "||", "q"}]}]}], " ", 
+    RowBox[{"(*", "Conditional", "*)"}], "\[IndentingNewLine]", "}"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"p", "||", 
@@ -893,9 +895,9 @@ Cell[BoxData[{
   3.9464118601794987`*^9, 3.946411885011347*^9}, {3.946411943712069*^9, 
   3.946412300034531*^9}, {3.946412374143425*^9, 3.946412399761655*^9}, {
   3.946412727681367*^9, 3.94641274718017*^9}, {3.946412823436656*^9, 
-  3.946412902781583*^9}},
- CellLabel->
-  "In[584]:=",ExpressionUUID->"2778d1c3-51f6-41d6-beb3-6bd16e7f2d72"],
+  3.946412902781583*^9}, {3.946413162411586*^9, 
+  3.946413171432579*^9}},ExpressionUUID->"2778d1c3-51f6-41d6-beb3-\
+6bd16e7f2d72"],
 
 Cell[BoxData[
  RowBox[{
@@ -980,10 +982,12 @@ e17a12bd6897"],
 
 Cell["\<\
 Bonus (5 points): Give an example where our rules don\[CloseCurlyQuote]t \
-fully reduce the expression.\
+fully reduce the expression. Hint: There\[CloseCurlyQuote]s (still) something \
+weird about our commutative rule.\
 \>", "Text",
- CellChangeTimes->{{3.946413030285892*^9, 
-  3.946413084537386*^9}},ExpressionUUID->"eb077b5f-3708-4a8f-9095-\
+ CellChangeTimes->{{3.946413030285892*^9, 3.946413084537386*^9}, {
+  3.946413178061431*^9, 
+  3.946413195151567*^9}},ExpressionUUID->"eb077b5f-3708-4a8f-9095-\
 3109727e68de"]
 }, Open  ]]
 }, Open  ]]
@@ -1104,20 +1108,20 @@ Cell[29267, 798, 262, 5, 33, "Output",ExpressionUUID->"11ced47d-effe-4a01-8a3d-a
 }, Open  ]],
 Cell[29544, 806, 266, 6, 33, "Text",ExpressionUUID->"d4f78c57-0bf7-4c18-b89f-8dcd178c3d9f"],
 Cell[CellGroupData[{
-Cell[29835, 816, 2981, 81, 260, "Input",ExpressionUUID->"2778d1c3-51f6-41d6-beb3-6bd16e7f2d72"],
-Cell[32819, 899, 439, 12, 33, "Output",ExpressionUUID->"8500cf65-e07c-4f02-970d-0028829fabca"]
+Cell[29835, 816, 3098, 83, 260, "Input",ExpressionUUID->"2778d1c3-51f6-41d6-beb3-6bd16e7f2d72"],
+Cell[32936, 901, 439, 12, 33, "Output",ExpressionUUID->"8500cf65-e07c-4f02-970d-0028829fabca"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[33295, 916, 251, 6, 29, "Input",ExpressionUUID->"05accdf1-5182-47f9-8615-5e43155a4117"],
-Cell[33549, 924, 202, 4, 33, "Output",ExpressionUUID->"09320700-8fd2-402d-9ce0-e1e1c36e9414"]
+Cell[33412, 918, 251, 6, 29, "Input",ExpressionUUID->"05accdf1-5182-47f9-8615-5e43155a4117"],
+Cell[33666, 926, 202, 4, 33, "Output",ExpressionUUID->"09320700-8fd2-402d-9ce0-e1e1c36e9414"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[33800, 934, 213, 4, 53, "Subsection",ExpressionUUID->"0d7ec42f-5853-4d93-9dd7-dfb737a014a0"],
-Cell[34016, 940, 481, 9, 33, "Text",ExpressionUUID->"a00d7d9c-f1b7-4568-9f4a-71d9264ae7c8"],
-Cell[34500, 951, 753, 22, 29, "Input",ExpressionUUID->"719c771a-d819-4429-bed1-cb20af6290bf"],
-Cell[35256, 975, 144, 3, 33, "Text",ExpressionUUID->"cf37b477-ff61-4427-b557-e17a12bd6897"],
-Cell[35403, 980, 253, 6, 33, "Text",ExpressionUUID->"eb077b5f-3708-4a8f-9095-3109727e68de"]
+Cell[33917, 936, 213, 4, 53, "Subsection",ExpressionUUID->"0d7ec42f-5853-4d93-9dd7-dfb737a014a0"],
+Cell[34133, 942, 481, 9, 33, "Text",ExpressionUUID->"a00d7d9c-f1b7-4568-9f4a-71d9264ae7c8"],
+Cell[34617, 953, 753, 22, 29, "Input",ExpressionUUID->"719c771a-d819-4429-bed1-cb20af6290bf"],
+Cell[35373, 977, 144, 3, 33, "Text",ExpressionUUID->"cf37b477-ff61-4427-b557-e17a12bd6897"],
+Cell[35520, 982, 387, 8, 33, "Text",ExpressionUUID->"eb077b5f-3708-4a8f-9095-3109727e68de"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
