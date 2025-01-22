@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     51169,       1316]
-NotebookOptionsPosition[     41785,       1167]
-NotebookOutlinePosition[     42177,       1183]
-CellTagsIndexPosition[     42134,       1180]
+NotebookDataLength[     50928,       1310]
+NotebookOptionsPosition[     41638,       1162]
+NotebookOutlinePosition[     42030,       1178]
+CellTagsIndexPosition[     41987,       1175]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1022,11 +1022,6 @@ Cell[BoxData[
   3.946413017906741*^9}},ExpressionUUID->"719c771a-d819-4429-bed1-\
 cb20af6290bf"],
 
-Cell["", "Text",
- CellChangeTimes->{{3.9464130238708677`*^9, 
-  3.946413028034399*^9}},ExpressionUUID->"cf37b477-ff61-4427-b557-\
-e17a12bd6897"],
-
 Cell["\<\
 Bonus (5 points): Give an example where our rules don\[CloseCurlyQuote]t \
 fully reduce the expression. Hint: There\[CloseCurlyQuote]s (still) something \
@@ -1299,22 +1294,21 @@ Cell[CellGroupData[{
 Cell[35853, 983, 213, 4, 53, "Subsection",ExpressionUUID->"0d7ec42f-5853-4d93-9dd7-dfb737a014a0"],
 Cell[36069, 989, 481, 9, 33, "Text",ExpressionUUID->"a00d7d9c-f1b7-4568-9f4a-71d9264ae7c8"],
 Cell[36553, 1000, 753, 22, 29, "Input",ExpressionUUID->"719c771a-d819-4429-bed1-cb20af6290bf"],
-Cell[37309, 1024, 144, 3, 33, "Text",ExpressionUUID->"cf37b477-ff61-4427-b557-e17a12bd6897"],
-Cell[37456, 1029, 387, 8, 33, "Text",ExpressionUUID->"eb077b5f-3708-4a8f-9095-3109727e68de"]
+Cell[37309, 1024, 387, 8, 33, "Text",ExpressionUUID->"eb077b5f-3708-4a8f-9095-3109727e68de"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[37880, 1042, 168, 3, 53, "Subsection",ExpressionUUID->"b008845c-e89b-443b-8200-a343a5d37e9b"],
-Cell[38051, 1047, 238, 4, 33, "Text",ExpressionUUID->"2d726a38-199d-4bcf-98bd-5c7e017d7029"],
+Cell[37733, 1037, 168, 3, 53, "Subsection",ExpressionUUID->"b008845c-e89b-443b-8200-a343a5d37e9b"],
+Cell[37904, 1042, 238, 4, 33, "Text",ExpressionUUID->"2d726a38-199d-4bcf-98bd-5c7e017d7029"],
 Cell[CellGroupData[{
-Cell[38314, 1055, 1454, 45, 109, "Input",ExpressionUUID->"b55d91e0-ecd3-4ea5-80e4-5f3107d4f519"],
-Cell[39771, 1102, 314, 8, 33, "Output",ExpressionUUID->"38658bf8-617c-4a6d-83b8-d3ff24cb53ad"],
-Cell[40088, 1112, 282, 7, 33, "Output",ExpressionUUID->"d80b6332-203c-4459-80f4-93e695018e9f"],
-Cell[40373, 1121, 305, 8, 33, "Output",ExpressionUUID->"36acd3bf-04af-4f9c-af4e-fc96f7fc2ce4"],
-Cell[40681, 1131, 284, 7, 33, "Output",ExpressionUUID->"51d73dc8-e014-428b-bc32-cb6b639ec4ab"],
-Cell[40968, 1140, 282, 7, 33, "Output",ExpressionUUID->"ed9a9de6-91e7-4f87-9861-be3f055c5a04"],
-Cell[41253, 1149, 284, 7, 33, "Output",ExpressionUUID->"e9d70b99-2cbd-421c-806c-70dcfb8fdb01"]
+Cell[38167, 1050, 1454, 45, 109, "Input",ExpressionUUID->"b55d91e0-ecd3-4ea5-80e4-5f3107d4f519"],
+Cell[39624, 1097, 314, 8, 33, "Output",ExpressionUUID->"38658bf8-617c-4a6d-83b8-d3ff24cb53ad"],
+Cell[39941, 1107, 282, 7, 33, "Output",ExpressionUUID->"d80b6332-203c-4459-80f4-93e695018e9f"],
+Cell[40226, 1116, 305, 8, 33, "Output",ExpressionUUID->"36acd3bf-04af-4f9c-af4e-fc96f7fc2ce4"],
+Cell[40534, 1126, 284, 7, 33, "Output",ExpressionUUID->"51d73dc8-e014-428b-bc32-cb6b639ec4ab"],
+Cell[40821, 1135, 282, 7, 33, "Output",ExpressionUUID->"ed9a9de6-91e7-4f87-9861-be3f055c5a04"],
+Cell[41106, 1144, 284, 7, 33, "Output",ExpressionUUID->"e9d70b99-2cbd-421c-806c-70dcfb8fdb01"]
 }, Open  ]],
-Cell[41552, 1159, 193, 3, 33, "Text",ExpressionUUID->"9055c5a0-94a8-448c-9652-9b2be24197d1"]
+Cell[41405, 1154, 193, 3, 33, "Text",ExpressionUUID->"9055c5a0-94a8-448c-9652-9b2be24197d1"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
