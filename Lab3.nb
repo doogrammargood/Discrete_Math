@@ -1,0 +1,494 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     17320,        486]
+NotebookOptionsPosition[     16059,        455]
+NotebookOutlinePosition[     16474,        472]
+CellTagsIndexPosition[     16431,        469]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Lab 3: Proofs using Inference Rules", "Title",
+ CellChangeTimes->{{3.9473450706671753`*^9, 
+  3.947345079234057*^9}},ExpressionUUID->"2329cd06-ae2b-43e2-b053-\
+42a64ae730b8"],
+
+Cell["\<\
+Zybooks Table 3.8.1 introduces a list of inference rules that can be used to \
+prove things about propositions without resorting to drawing Truth tables. \
+These rules are entirely mechanical and are similar to the rewrite rules from \
+Table 1.5.1. The goal of this lab is to express the inference rules in \
+Mathematica in order to produce proofs automatically. This page explains how \
+it can be done: \
+https://mathematica.stackexchange.com/questions/298020/can-we-find-validity-\
+proofs-by-means-of-rules-of-inference-with-findequationalpr
+Basically, we express each inference rule as a function, then use these \
+functions to produce re-write rules. These re-write rules should take some of \
+the propositions and apply the inference rule, then append the result onto \
+the list.
+\
+\>", "Text",
+ CellChangeTimes->{{3.947345106760154*^9, 3.947345147632979*^9}, 
+   3.9473452105134897`*^9, {3.947345354147038*^9, 3.9473453574995327`*^9}, {
+   3.9473454542005043`*^9, 3.947345550731882*^9}, {3.947346389976944*^9, 
+   3.94734640030274*^9}, {3.9473465058590403`*^9, 3.947346566541183*^9}, {
+   3.947346598422565*^9, 3.94734661169277*^9}, {3.947353402213217*^9, 
+   3.9473534052182903`*^9}, {3.9473536006047373`*^9, 3.947353774240264*^9}, {
+   3.947353809511928*^9, 
+   3.947353812075705*^9}},ExpressionUUID->"c2e3f167-4ba9-4cdf-84c1-\
+628cab49c282"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"modusPonens", "[", 
+    RowBox[{"p_", ",", 
+     RowBox[{"p_", "\[Implies]", "q_"}]}], "]"}], ":=", " ", "q"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"modusTollens", "[", 
+    RowBox[{
+     RowBox[{"!", "q_"}], ",", 
+     RowBox[{"p_", "\[Implies]", "q_"}]}], "]"}], ":=", 
+   RowBox[{"!", "p"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"addition", "[", 
+     RowBox[{"p_", ",", "q_"}], "]"}], ":=", 
+    RowBox[{"p", "||", "q"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"This", " ", "one", " ", "is", " ", "tricky"}], ",", " ", 
+    RowBox[{"because", " ", 
+     RowBox[{"there", "'"}], "s", " ", "only", " ", "1", " ", "premise", " ", 
+     "and", " ", "because", " ", "q", " ", "may", " ", "not", " ", "be", " ", 
+     
+     RowBox[{"known", ".", " ", 
+      RowBox[{"Let", "'"}]}], "s", " ", "leave", " ", "it", " ", "out", " ", 
+     "for", " ", 
+     RowBox[{"now", "."}]}]}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"simplification", "[", 
+     RowBox[{
+      RowBox[{"p_", "&&", "q_"}], ",", 
+      RowBox[{"p_", "&&", "q_"}]}], "]"}], ":=", "p"}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Since", " ", "simplification", " ", "uses", " ", "only", " ", "1", " ", 
+     "premise"}], ",", " ", 
+    RowBox[{
+    "we", " ", "introduce", " ", "it", " ", "twice", " ", "to", " ", "keep", 
+     " ", "all", " ", "the", " ", "rules", " ", "having", " ", "2", " ", 
+     RowBox[{"premises", "."}]}]}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"conjunction", "[", 
+    RowBox[{"p_", ",", "q_"}], "]"}], ":=", 
+   RowBox[{"p", "&&", "q"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"hypotheticalSyllogism", "[", 
+    RowBox[{
+     RowBox[{"p_", "\[Implies]", "q_"}], ",", 
+     RowBox[{"q_", "\[Implies]", "r_"}]}], "]"}], ":=", 
+   RowBox[{"p", "\[Implies]", "r"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"disjunctiveSyllogism", "[", 
+    RowBox[{
+     RowBox[{"p_", "||", "q_"}], ",", 
+     RowBox[{"!", "p_"}]}], "]"}], ":=", "q"}], ";"}], "\[IndentingNewLine]", 
+
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"resolution", "[", 
+     RowBox[{
+      RowBox[{"p_", "||", "q_"}], ",", 
+      RowBox[{
+       RowBox[{"!", "p_"}], "||", "r_"}]}], "]"}], ":=", 
+    RowBox[{"q", "||", "r"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rules", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+    "modusPonens", ",", "modusTollens", ",", "simplification", ",", 
+     "conjunction", ",", "hypotheticalSyllogism", ",", "disjunctiveSyllogism",
+      ",", "resolution"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"patterns", " ", "=", 
+   RowBox[{"{", " ", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"p_", ",", 
+       RowBox[{"p_", "\[Implies]", "q_"}]}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"!", "q_"}], ",", 
+       RowBox[{"p_", "\[Implies]", "q_"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"p_", "&&", "q_"}], ",", 
+       RowBox[{"p_", "&&", "q_"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"p_", ",", "q_"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"p_", "\[Implies]", "q_"}], ",", 
+       RowBox[{"q_", "\[Implies]", "r_"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"p_", "||", "q_"}], ",", 
+       RowBox[{"!", "p_"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"p_", "||", "q_"}], ",", 
+       RowBox[{
+        RowBox[{"!", "p_"}], "||", "r_"}]}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"listOfRulesAndPatterns", " ", "=", " ", 
+  RowBox[{"Transpose", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"rules", ",", "patterns"}], "}"}], ",", "1"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"applyStep", "[", 
+     RowBox[{"knownList_", ",", "inferenceRule_", ",", "pattern_"}], "]"}], ":=",
+     " ", "\[IndentingNewLine]", 
+    RowBox[{"newConclusions", " ", "=", 
+     RowBox[{"Join", "[", 
+      RowBox[{"knownList", ",", 
+       RowBox[{"Select", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"inferenceRule", "@@", "#"}], "&"}], ")"}], "/@", " ", 
+          RowBox[{"Select", "[", 
+           RowBox[{
+            RowBox[{"Tuples", "[", 
+             RowBox[{"knownList", ",", "2"}], "]"}], ",", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"MatchQ", "[", 
+               RowBox[{"#", ",", "pattern"}], "]"}], " ", "&"}], ")"}]}], 
+           "]"}]}], ",", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"!", 
+            RowBox[{"MemberQ", "[", 
+             RowBox[{"knownList", ",", "#"}], "]"}]}], "&"}], ")"}]}], 
+        "]"}]}], "]"}]}]}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{"From", " ", "the", " ", "inside", " ", 
+    RowBox[{"out", ":", " ", 
+     RowBox[{
+     "We", " ", "look", " ", "at", " ", "every", " ", "pair", " ", "of", " ", 
+      "propositions", " ", "in", " ", "the", " ", 
+      RowBox[{"list", ".", " ", "Then"}], " ", "keep", " ", "only", " ", 
+      "the", " ", "pairs", " ", "that", " ", "we", " ", "can", " ", "apply", 
+      " ", "inferenceRule", " ", 
+      RowBox[{"to", ".", " ", "Then"}], " ", "apply", " ", "inferenceRule", 
+      " ", "to", " ", 
+      RowBox[{"each", ".", "\[IndentingNewLine]", "This"}], " ", "gives", " ",
+       "us", " ", "the", " ", "a", " ", "collection", " ", "of", " ", 
+      RowBox[{"conclusions", ".", "\[IndentingNewLine]", "\t", "Then"}], " ", 
+      "we", " ", "select", " ", "only", " ", "those", " ", "conclusions", " ",
+       "that", " ", "are", " ", "not", " ", "already", " ", "in", " ", 
+      RowBox[{"knownList", ".", "\[IndentingNewLine]", "\t\t", "Then"}], " ", 
+      "we", " ", "concatenate", " ", "these", " ", "selected", " ", 
+      "conclusions", " ", "to", " ", "knownList"}]}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"premises", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"r", "||", "w"}], "\[Implies]", "c"}], ",", 
+     RowBox[{"!", "c"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"conclusions", "=", "premises"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", "conclusions", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Do", "[", 
+   RowBox[{
+    RowBox[{"conclusions", "=", 
+     RowBox[{"applyStep", "[", 
+      RowBox[{"conclusions", ",", 
+       RowBox[{
+        RowBox[{"listOfRulesAndPatterns", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"listOfRulesAndPatterns", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", 
+      RowBox[{"Length", "[", "listOfRulesAndPatterns", "]"}]}], "}"}]}], 
+   "]"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{"conclusions", " ", "=", " ", 
+      RowBox[{"Print", "[", 
+       RowBox[{"conclusions", ",", 
+        RowBox[{
+         RowBox[{"listOfRulesAndPatterns", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"listOfRulesAndPatterns", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "listOfRulesAndPatterns", "]"}]}], "}"}]}], 
+    "]"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", "conclusions", "]"}], "\[IndentingNewLine]"}], "Input",\
+
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQB2IQ/UXk+a1fGW8dy4I+/QLRj9b++g+iGx6dZ/gNpJfk
+32YF0R+/sAqCaK35ht4g+kP8lUAQbbJEIApEt+yrjQPRK2bfTwLRYo6zU0D0
+vz3lOSB6bTtrEYj+eSuzHESnPeGpBdHz2hmawPKObP0g+tFeyQUg+k5F7yoQ
+vbSt9iiIvvzD5yaI3mRbcR9E/+IPfgSij59yegaiC69tfwU2z33iZxDtN7eA
++Q+QLjE24AHRnyT4pUC02IofCiA65dlSDRCtJ1xhChZXdnYD0VbZs33B+jY5
+rgfRaV/XbgHRMuwfj4Doprqa0yC69tXCWyD6lYLWAxC96v2+pyDagdP1HYgO
+n7bwI4j+8XHGNxCtdLXgP4gGAOmu2lg=
+  "],
+ CellLabel->
+  "In[342]:=",ExpressionUUID->"50affe40-a16d-440d-af3e-1e31c29eb327"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"modusPonens", ",", 
+     RowBox[{"{", 
+      RowBox[{"p_", ",", 
+       RowBox[{"p_", "\[Implies]", "q_"}]}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"modusTollens", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"!", "q_"}], ",", 
+       RowBox[{"p_", "\[Implies]", "q_"}]}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"simplification", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"p_", "&&", "q_"}], ",", 
+       RowBox[{"p_", "&&", "q_"}]}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"conjunction", ",", 
+     RowBox[{"{", 
+      RowBox[{"p_", ",", "q_"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"hypotheticalSyllogism", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"p_", "\[Implies]", "q_"}], ",", 
+       RowBox[{"q_", "\[Implies]", "r_"}]}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"disjunctiveSyllogism", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"p_", "||", "q_"}], ",", 
+       RowBox[{"!", "p_"}]}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"resolution", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"p_", "||", "q_"}], ",", 
+       RowBox[{
+        RowBox[{"!", "p_"}], "||", "r_"}]}], "}"}]}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{{3.9473540175610733`*^9, 3.947354050153964*^9}, {
+   3.9473542314919453`*^9, 3.947354254096014*^9}, {3.947355226310687*^9, 
+   3.9473552408275642`*^9}, {3.947355533537375*^9, 3.947355536954768*^9}, {
+   3.947355820072666*^9, 3.947355855685535*^9}, 3.94735637165696*^9, {
+   3.9473564545327177`*^9, 3.9473564863028517`*^9}, {3.947356611552767*^9, 
+   3.9473566150712957`*^9}, {3.9473567078621798`*^9, 
+   3.9473567250643272`*^9}, {3.94735762722204*^9, 3.947357643528879*^9}, 
+   3.9473579118484783`*^9, 3.947357955989893*^9, 3.94735800048105*^9, 
+   3.947358095088985*^9, 3.9473581577783327`*^9, 3.9473582053384027`*^9},
+ CellLabel->
+  "Out[352]=",ExpressionUUID->"265ddf50-7d3a-4bbf-9f1b-3de2b0267442"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"r", "||", "w"}], "\[Implies]", "c"}], ",", 
+   RowBox[{"!", "c"}]}], "}"}]], "Print",
+ CellChangeTimes->{3.9473579119934464`*^9, 3.947357955997883*^9, 
+  3.9473580004933577`*^9, 3.947358095105953*^9, 3.947358157787271*^9, 
+  3.947358205340774*^9},
+ CellLabel->
+  "During evaluation of \
+In[342]:=",ExpressionUUID->"335ae286-28de-4a57-bcd9-4427dce6d912"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"r", "||", "w"}], "\[Implies]", "c"}], ",", 
+   RowBox[{"!", "c"}], ",", 
+   RowBox[{"!", 
+    RowBox[{"(", 
+     RowBox[{"r", "||", "w"}], ")"}]}], ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"r", "||", "w"}], "\[Implies]", "c"}], ")"}], "&&", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"r", "||", "w"}], "\[Implies]", "c"}], ")"}]}], ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"r", "||", "w"}], "\[Implies]", "c"}], ")"}], "&&", 
+    RowBox[{"!", "c"}]}], ",", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"r", "||", "w"}], "\[Implies]", "c"}], ")"}], "&&", 
+    RowBox[{"!", 
+     RowBox[{"(", 
+      RowBox[{"r", "||", "w"}], ")"}]}]}], ",", 
+   RowBox[{
+    RowBox[{"!", "c"}], "&&", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"r", "||", "w"}], "\[Implies]", "c"}], ")"}]}], ",", 
+   RowBox[{
+    RowBox[{"!", "c"}], "&&", 
+    RowBox[{"!", "c"}]}], ",", 
+   RowBox[{
+    RowBox[{"!", "c"}], "&&", 
+    RowBox[{"!", 
+     RowBox[{"(", 
+      RowBox[{"r", "||", "w"}], ")"}]}]}], ",", 
+   RowBox[{
+    RowBox[{"!", 
+     RowBox[{"(", 
+      RowBox[{"r", "||", "w"}], ")"}]}], "&&", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"r", "||", "w"}], "\[Implies]", "c"}], ")"}]}], ",", 
+   RowBox[{
+    RowBox[{"!", 
+     RowBox[{"(", 
+      RowBox[{"r", "||", "w"}], ")"}]}], "&&", 
+    RowBox[{"!", "c"}]}], ",", 
+   RowBox[{
+    RowBox[{"!", 
+     RowBox[{"(", 
+      RowBox[{"r", "||", "w"}], ")"}]}], "&&", 
+    RowBox[{"!", 
+     RowBox[{"(", 
+      RowBox[{"r", "||", "w"}], ")"}]}]}]}], "}"}]], "Print",
+ CellChangeTimes->{3.9473579119934464`*^9, 3.947357955997883*^9, 
+  3.9473580004933577`*^9, 3.947358095105953*^9, 3.947358157787271*^9, 
+  3.947358205342723*^9},
+ CellLabel->
+  "During evaluation of \
+In[342]:=",ExpressionUUID->"7a0b1056-9c4a-498b-aba8-140dbabb720d"]
+}, Open  ]]
+}, Open  ]],
+
+Cell["\<\
+In writing this, I learned that Mathematica is not great for theorem proving. \
+We can only implement the rules of Zybooks Table 3.8.1 because of their \
+simple form. They lack conditional introduction, and other rules that allow \
+sub-derivations.
+For a dedicated logic/theorem proving class, one should use a special \
+software like Lean or Coq.\
+\>", "Text",
+ CellChangeTimes->{{3.947353441770295*^9, 3.9473535196573267`*^9}, {
+  3.947353549725273*^9, 3.9473535856923637`*^9}, {3.9473549225115*^9, 
+  3.947354977180972*^9}},ExpressionUUID->"db38a10f-0c34-4850-aac4-\
+6b13377d1cbf"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MemberQ", "[", 
+  RowBox[{
+   RowBox[{"{", "q", "}"}], ",", "q"}], "]"}]], "Input",
+ CellChangeTimes->{{3.947356541706175*^9, 3.947356578611054*^9}},
+ CellLabel->
+  "In[197]:=",ExpressionUUID->"135c632f-d13d-464c-9b59-d3a19a5bb288"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.9473565653493643`*^9, 3.947356579636909*^9}},
+ CellLabel->
+  "Out[197]=",ExpressionUUID->"1d7e278b-3db5-4e5f-a575-ec193a1ecb5f"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440, 701.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CellContext->Notebook,
+FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"31216c14-17cd-4ec5-baad-6d7520824e5a"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 180, 3, 96, "Title",ExpressionUUID->"2329cd06-ae2b-43e2-b053-42a64ae730b8"],
+Cell[759, 27, 1360, 23, 143, "Text",ExpressionUUID->"c2e3f167-4ba9-4cdf-84c1-628cab49c282"],
+Cell[CellGroupData[{
+Cell[2144, 54, 8405, 229, 516, "Input",ExpressionUUID->"50affe40-a16d-440d-af3e-1e31c29eb327"],
+Cell[10552, 285, 2040, 54, 53, "Output",ExpressionUUID->"265ddf50-7d3a-4bbf-9f1b-3de2b0267442"],
+Cell[CellGroupData[{
+Cell[12617, 343, 418, 11, 23, "Print",ExpressionUUID->"335ae286-28de-4a57-bcd9-4427dce6d912"],
+Cell[13038, 356, 1906, 65, 41, "Print",ExpressionUUID->"7a0b1056-9c4a-498b-aba8-140dbabb720d"]
+}, Open  ]]
+}, Open  ]],
+Cell[14971, 425, 594, 11, 77, "Text",ExpressionUUID->"db38a10f-0c34-4850-aac4-6b13377d1cbf"],
+Cell[CellGroupData[{
+Cell[15590, 440, 256, 6, 29, "Input",ExpressionUUID->"135c632f-d13d-464c-9b59-d3a19a5bb288"],
+Cell[15849, 448, 182, 3, 33, "Output",ExpressionUUID->"1d7e278b-3db5-4e5f-a575-ec193a1ecb5f"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
