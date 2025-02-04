@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[    104009,       2647]
-NotebookOptionsPosition[     95141,       2497]
-NotebookOutlinePosition[     95556,       2514]
-CellTagsIndexPosition[     95513,       2511]
+NotebookDataLength[    107966,       2725]
+NotebookOptionsPosition[     98718,       2571]
+NotebookOutlinePosition[     99133,       2588]
+CellTagsIndexPosition[     99090,       2585]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -38,14 +38,12 @@ Zybooks Table 3.8.1 introduces a list of inference rules that can be used to \
 prove things about propositions without resorting to drawing Truth tables. \
 These rules are entirely mechanical and are similar to the rewrite rules from \
 Table 1.5.1. The goal of this lab is to express the inference rules in \
-Mathematica in order to produce proofs automatically. This page explains how \
-it can be done: \
-https://mathematica.stackexchange.com/questions/298020/can-we-find-validity-\
-proofs-by-means-of-rules-of-inference-with-findequationalpr
+Mathematica in order to produce proofs automatically.
 Basically, we express each inference rule as a function, then use these \
 functions to produce re-write rules. These re-write rules should take some of \
 the propositions and apply the inference rule, then append the result onto \
-the list.
+the list of conclusions found so far, until we find the conclusion we\
+\[CloseCurlyQuote]re looking for.
 \
 \>", "Text",
  CellChangeTimes->{{3.947345106760154*^9, 3.947345147632979*^9}, 
@@ -54,8 +52,8 @@ the list.
    3.94734640030274*^9}, {3.9473465058590403`*^9, 3.947346566541183*^9}, {
    3.947346598422565*^9, 3.94734661169277*^9}, {3.947353402213217*^9, 
    3.9473534052182903`*^9}, {3.9473536006047373`*^9, 3.947353774240264*^9}, {
-   3.947353809511928*^9, 
-   3.947353812075705*^9}},ExpressionUUID->"c2e3f167-4ba9-4cdf-84c1-\
+   3.947353809511928*^9, 3.947353812075705*^9}, {3.947614376428677*^9, 
+   3.947614395251099*^9}},ExpressionUUID->"c2e3f167-4ba9-4cdf-84c1-\
 628cab49c282"],
 
 Cell[BoxData[{
@@ -170,14 +168,15 @@ Cell["\<\
 To what extent can the Zybooks proofs be mechanized? Which steps (if any) \
 require ingenuity?
 What is the relationship between the Laws of Propositional Logic (Table \
-1.5.1) and the inference rules (Table 3.8.1).
+1.5.1) and the inference rules (Table 3.8.1)?
 Are all of the Zybooks proofs possible using the rules listed?
 Are all of the rules necessary?
 What is the simplest way to  find a proof for problems such as those in \
 Zybooks 3.8?\
 \>", "Text",
- CellChangeTimes->{{3.94757592751188*^9, 
-  3.947576115807848*^9}},ExpressionUUID->"0974254d-0c30-4eab-9686-\
+ CellChangeTimes->{{3.94757592751188*^9, 3.947576115807848*^9}, {
+  3.947603953199758*^9, 
+  3.947603953895624*^9}},ExpressionUUID->"0974254d-0c30-4eab-9686-\
 e460d7fe5667"]
 }, Open  ]],
 
@@ -214,7 +213,7 @@ Cell[BoxData[{
     "We", " ", "put", " ", "the", " ", "list", " ", "of", " ", "functions", 
      " ", "here"}], ",", " ", 
     RowBox[{"omitting", " ", 
-     RowBox[{"simplification", "."}]}]}], "*)"}]}], "\[IndentingNewLine]", 
+     RowBox[{"addition", "."}]}]}], "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"patterns", " ", "=", 
@@ -274,10 +273,11 @@ Cell[BoxData[{
     "ApplyInferenceStep", " ", "creates", " ", "a", " ", "new", " ", "list", 
      " ", "of", " ", "conclusions", " ", "by", " ", "applying", " ", "all", 
      " ", "of", " ", "the", " ", "inference", " ", "rules", " ", "to", " ", 
-     "every", " ", 
-     RowBox[{"pair", ".", "\[IndentingNewLine]", "In"}], " ", "more", " ", 
+     "every", " ", "pair", " ", "of", " ", "conclusions", " ", "found", " ", 
+     "so", " ", 
+     RowBox[{"far", ".", "\[IndentingNewLine]", "In"}], " ", "more", " ", 
      "detail", " ", "from", " ", "the", " ", "inside", " ", 
-     RowBox[{"out", ":", " ", 
+     RowBox[{"out", ":", " ", "\[IndentingNewLine]", 
       RowBox[{
       "We", " ", "look", " ", "at", " ", "every", " ", "pair", " ", "of", " ",
         "propositions", " ", "in", " ", "the", " ", 
@@ -297,8 +297,8 @@ Cell[BoxData[{
      "longer", " ", "than", " ", "100", " ", 
      RowBox[{"symbols", ".", "\[IndentingNewLine]", "\t\t", "Then"}], " ", 
      "we", " ", "concatenate", " ", "these", " ", "selected", " ", 
-     "conclusions", " ", "to", " ", "knownList"}]}], 
-   "*)"}]}], "\[IndentingNewLine]", 
+     "conclusions", " ", "to", " ", 
+     RowBox[{"knownList", "."}]}]}], "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"applyInferenceStep", "[", 
@@ -392,9 +392,10 @@ Cell[BoxData[{
    3.947528745873748*^9, 3.947528746596033*^9}, {3.9475288094086933`*^9, 
    3.947528813518115*^9}, {3.947529123829508*^9, 3.947529146636723*^9}, {
    3.9475761421769*^9, 3.9475762593867188`*^9}, {3.947576296933568*^9, 
-   3.9475763228782597`*^9}, {3.9475774433285646`*^9, 3.947577451100896*^9}},
- CellLabel->
-  "In[661]:=",ExpressionUUID->"cb860b0e-afe0-49d4-b200-38c706d49924"]
+   3.9475763228782597`*^9}, {3.9475774433285646`*^9, 3.947577451100896*^9}, {
+   3.9476145910332623`*^9, 
+   3.947614666063964*^9}},ExpressionUUID->"cb860b0e-afe0-49d4-b200-\
+38c706d49924"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -465,15 +466,20 @@ Cell[BoxData["$Aborted"], "Output",
 
 Cell["\<\
 It didn\[CloseCurlyQuote]t work. We generated several inferences that one \
-could draw, but none were the target, !w. Examining the  justifications on \
-the Zybooks table, we see that De Morgan\[CloseCurlyQuote]s rule is used in \
-the intended solution, but this rule is not among our inference rules. It is \
-a rule of table 1.5.1. We will include the rules from Table 1.5.1 as \
-functions and apply these transformation rules alternately\
+could draw, but none were the target toProve, !w. Examining the  \
+justifications on the Zybooks table, we see that De Morgan\[CloseCurlyQuote]s \
+rule is used in the intended solution, but this rule is not among our \
+inference rules. It is a rule of table 1.5.1.  
+
+In the next section, we will include the rules from Table 1.5.1 as functions \
+and apply these transformation rules alternately. We will find that this \
+causes a crash because there are too many possible transformations, and the \
+list of conclusions exceeds memory.\
 \>", "Text",
  CellChangeTimes->{{3.947377078686928*^9, 3.947377087661688*^9}, {
   3.94737714579657*^9, 3.9473772757577477`*^9}, {3.947377341447155*^9, 
-  3.947377394908152*^9}},ExpressionUUID->"a69b81bf-aa05-4fa9-9958-\
+  3.947377394908152*^9}, {3.9476146792161922`*^9, 
+  3.947614767093248*^9}},ExpressionUUID->"a69b81bf-aa05-4fa9-9958-\
 79e0c9247b3f"]
 }, Open  ]],
 
@@ -496,6 +502,7 @@ a=>b, then we can apply an equivalence a<=>a\[CloseCurlyQuote] to derive a\
 \[CloseCurlyQuote]=>b. But we cannot apply an inference rule to derive a\
 \[CloseCurlyQuote]\[CloseCurlyQuote] from a to obtain a\[CloseCurlyQuote]\
 \[CloseCurlyQuote]=>b.
+
 In Lab 1, we showed how to implement logical equivalences using Mathematica\
 \[CloseCurlyQuote]s Rules. Here, we wrap the rules in functions so that we \
 can apply them to our list of known conclusions, similarly to how we \
@@ -510,8 +517,8 @@ repeated replace and will skip steps.\
    3.9474203294454813`*^9}, {3.947421330618765*^9, 3.947421428547956*^9}, {
    3.947421715798079*^9, 3.947421729770257*^9}, {3.9474218299233103`*^9, 
    3.947421878516673*^9}, {3.947422115496297*^9, 3.9474221338737917`*^9}, {
-   3.9474745488075647`*^9, 
-   3.947474599248131*^9}},ExpressionUUID->"db38a10f-0c34-4850-aac4-\
+   3.9474745488075647`*^9, 3.947474599248131*^9}, 
+   3.947614781486937*^9},ExpressionUUID->"db38a10f-0c34-4850-aac4-\
 6b13377d1cbf"],
 
 Cell[BoxData[{
@@ -1032,10 +1039,13 @@ Cell[BoxData[
 
 Cell["\<\
 It works as long as we use the smaller set of equivalences, but if we use the \
-full set of equivalences, then it crashes.\
+full set of equivalences, then it crashes. The smaller set of equivalences \
+has been tailored to this example. If you try this on most other examples, \
+you\[CloseCurlyQuote]ll probably find that the code fails.\
 \>", "Text",
- CellChangeTimes->{{3.947577526532793*^9, 
-  3.9475775630886507`*^9}},ExpressionUUID->"9e999496-f3d0-4f19-8d85-\
+ CellChangeTimes->{{3.947577526532793*^9, 3.9475775630886507`*^9}, {
+  3.947614816489328*^9, 
+  3.947614845149913*^9}},ExpressionUUID->"9e999496-f3d0-4f19-8d85-\
 586f7e0b45a9"]
 }, Open  ]],
 
@@ -1048,16 +1058,15 @@ Cell["Performance", "Section",
 
 Cell["\<\
 We\[CloseCurlyQuote]ve found that our program crashes when the full list of \
-equivalences is used. We started with 2 premises, then applied all inference \
-rules to all 4 pairs to get potentially (2+(4*7))*8=240 conclusions just by \
-applying each inference and equivalence once. Even though may be possible to \
-prove the theorem, memory is a practical limitation. To deal with this, we \
-need to reduce the number of inference rules and equivalence rules \
-considered. So we seek a smaller set of rules that is just as powerful.
+equivalences is used. Even though may be possible to prove the theorem, \
+memory is a practical limitation. To deal with this, we need to reduce the \
+number of inference rules and equivalence rules considered. So we seek a \
+smaller set of rules that is just as powerful, and puts each expression into \
+a standardized form, to reduce the memory requirement.
 
 Rather than use several equivalence rules, we will only use one, namely the \
-//. replacement rule from Lab 1. We copy/paste the rewrite rules from Lab 1 \
-that put each proposition in a more-or-less standard form:\
+//. replacement rule from Lab 1. This applies all of the rules in one step. \
+We copy/paste the rewrite rules from Lab 1 .\
 \>", "Text",
  CellChangeTimes->{{3.947511939428035*^9, 3.947512005564952*^9}, {
   3.947512066852728*^9, 3.947512111466797*^9}, {3.947512154080617*^9, 
@@ -1065,7 +1074,8 @@ that put each proposition in a more-or-less standard form:\
   3.947514262179167*^9, 3.947514308412098*^9}, {3.947514341612056*^9, 
   3.947514566245309*^9}, {3.9475145976562*^9, 3.947514610997425*^9}, {
   3.947518504786511*^9, 3.947518506505043*^9}, {3.9475248869213533`*^9, 
-  3.947525005543934*^9}},ExpressionUUID->"d310f69d-face-4703-ad1e-\
+  3.947525005543934*^9}, {3.9476149063733664`*^9, 
+  3.947614982103466*^9}},ExpressionUUID->"d310f69d-face-4703-ad1e-\
 8fd8301cb5be"],
 
 Cell[BoxData[{
@@ -1119,7 +1129,10 @@ Cell[BoxData[{
          RowBox[{"p_", "&&", "q_"}], ")"}]}], "->", 
        RowBox[{
         RowBox[{"!", "p"}], "||", 
-        RowBox[{"!", "q"}]}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"!", "q"}]}]}], ",", " ", 
+      RowBox[{"(*", 
+       RowBox[{"Another", " ", "version", " ", "of", " ", "DeMorgan"}], 
+       "*)"}], "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"(", " ", 
         RowBox[{
@@ -1172,7 +1185,7 @@ Cell[BoxData[{
   RowBox[{"(*", 
    RowBox[{
     RowBox[{"Removes", " ", "duplicates", " ", "from", " ", "the", " ", 
-     RowBox[{"list", ".", " ", "See"}], " ", 
+     RowBox[{"list", ".", " ", "Copied"}], " ", "from", " ", 
      RowBox[{"eldo", "'"}], "s", " ", 
      RowBox[{"answer", ":", " ", "https", ":"}]}], "//", 
     RowBox[{
@@ -1192,7 +1205,7 @@ Cell[BoxData[{
       RowBox[{"{", 
        RowBox[{"a_", ",", 
         RowBox[{"a_", ".."}]}], "}"}]}], "]"}]}]}], "\[IndentingNewLine]", 
-  "\[IndentingNewLine]", 
+  "\n", 
   RowBox[{"(*", 
    RowBox[{
     RowBox[{"Analog", " ", "of", " ", 
@@ -1202,7 +1215,7 @@ Cell[BoxData[{
     RowBox[{
     "then", " ", "applies", " ", "all", " ", "possible", " ", "inferences", 
      " ", "until", " ", "toProve", " ", "is", " ", 
-     RowBox[{"found", "."}]}]}], "*)"}]}], "\n", 
+     RowBox[{"found", "."}]}]}], "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"proveEfficient", "[", 
@@ -1227,9 +1240,10 @@ Cell[BoxData[{
  CellChangeTimes->{{3.9475292701341553`*^9, 3.9475292741007757`*^9}, {
    3.9475293916675673`*^9, 3.9475294030736237`*^9}, 3.947529498559619*^9, {
    3.9475776298610764`*^9, 3.947577651436108*^9}, {3.9475777989706*^9, 
-   3.947577829629757*^9}, {3.947577889542693*^9, 3.947577917187834*^9}},
- CellLabel->
-  "In[851]:=",ExpressionUUID->"9364f10f-b680-44ac-8c7d-e7e9e0cc876d"],
+   3.947577829629757*^9}, {3.947577889542693*^9, 3.947577917187834*^9}, {
+   3.947614990687521*^9, 
+   3.947615023719121*^9}},ExpressionUUID->"9364f10f-b680-44ac-8c7d-\
+e7e9e0cc876d"],
 
 Cell["\<\
 We reduce the inference rules by removing the ones that contain =>, since our \
@@ -1511,7 +1525,21 @@ Cell[BoxData["True"], "Output",
    3.947578036484112*^9},
  CellLabel->
   "Out[718]=",ExpressionUUID->"6188d0f6-b502-4fb7-8499-ae447c25f237"]
-}, Open  ]]
+}, Open  ]],
+
+Cell["\<\
+Now we have a method, proveEfficient, that might be able to solve the Zybooks \
+problems. It also might fail. We haven\[CloseCurlyQuote]t implemented all of \
+the transformation rules. Also, for the rules that we\[CloseCurlyQuote]ve \
+implemented, there is no guarantee that they can be readily applied to the \
+standard form that we find. The program will never introduce double negation \
+so that an inference rule can be used. Getting this to work properly is very \
+complicated.\
+\>", "Text",
+ CellChangeTimes->{{3.947615087264974*^9, 3.947615122870192*^9}, {
+  3.9476151653372717`*^9, 
+  3.947615380769725*^9}},ExpressionUUID->"ea303887-9bf9-4b16-8bbb-\
+ce4b37f42206"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1622,7 +1650,9 @@ Cell[BoxData[
       RowBox[{"conclusions", ",", 
        RowBox[{"standardize", "[", "conclusionAddition", "]"}]}], "]"}], 
      "\[IndentingNewLine]", "conclusions"}]}], " ", 
-   RowBox[{"(*", "fails", "*)"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"fails", " ", "for", " ", "the", " ", "addition", " ", 
+     RowBox[{"rule", "."}]}], "*)"}], "*)"}], "\[IndentingNewLine]", 
   "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
@@ -1650,9 +1680,10 @@ Cell[BoxData[
    3.947522234548862*^9}, {3.947522359569762*^9, 3.947522368299904*^9}, {
    3.9475228845241013`*^9, 3.947522901173764*^9}, {3.947523063805944*^9, 
    3.947523064695282*^9}, 3.947529660983307*^9, {3.947578062034109*^9, 
-   3.947578065711376*^9}, {3.9475780997454433`*^9, 3.947578145184574*^9}},
- CellLabel->
-  "In[745]:=",ExpressionUUID->"0e7c1035-6492-43aa-aec3-1a1cb9c5e011"],
+   3.947578065711376*^9}, {3.9475780997454433`*^9, 3.947578145184574*^9}, {
+   3.947614470087289*^9, 
+   3.9476144764603443`*^9}},ExpressionUUID->"0e7c1035-6492-43aa-aec3-\
+1a1cb9c5e011"],
 
 Cell[BoxData["True"], "Output",
  CellChangeTimes->{
@@ -1916,14 +1947,23 @@ Cell[BoxData[
    3.947578134952468*^9, 3.947578148583609*^9}},
  CellLabel->
   "Out[749]=",ExpressionUUID->"c3644805-4d58-4e23-b82d-72a7b440aad6"]
-}, Open  ]]
+}, Open  ]],
+
+Cell["\<\
+We found that 2 of the non-implemented rules could be proven using our \
+program. But one rule, addition, is not handled by our program.\
+\>", "Text",
+ CellChangeTimes->{{3.9476154138266773`*^9, 
+  3.9476154803391047`*^9}},ExpressionUUID->"8ab90c64-447e-4e84-ba47-\
+4126f02ae8ae"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Another Zybooks example", "Section",
- CellChangeTimes->{{3.9475281989023733`*^9, 
-  3.947528201837494*^9}},ExpressionUUID->"4d246b3c-1a10-4ec4-881c-\
+Cell["More Zybooks examples", "Section",
+ CellChangeTimes->{{3.9475281989023733`*^9, 3.947528201837494*^9}, {
+  3.9476154882393217`*^9, 
+  3.947615490387207*^9}},ExpressionUUID->"4d246b3c-1a10-4ec4-881c-\
 1f1701c8b6fe"],
 
 Cell["\<\
@@ -2022,7 +2062,15 @@ b7a38148b0de"],
 Cell[BoxData[""], "Input",
  CellChangeTimes->{{3.94753203442059*^9, 
   3.947532035038393*^9}},ExpressionUUID->"55d76ab4-d9af-4fbc-8949-\
-51d6c659acf0"]
+51d6c659acf0"],
+
+Cell["\<\
+The method works on these two examples. Basically, it seems to have a good \
+chance of working as long as the addition inference rule is not needed.\
+\>", "Text",
+ CellChangeTimes->{{3.94761550230527*^9, 
+  3.947615535579482*^9}},ExpressionUUID->"a979d4e6-d0be-472e-aec7-\
+f7e99ad737d4"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2037,15 +2085,14 @@ and equivalence rules until we find the proposition that we would like to \
 prove. This is nice, but it doesn\[CloseCurlyQuote]t produce a proof, because \
 the justifications are missing. Our next step is to store our justifications \
 as a function that records which steps were used in proving every step of our \
-conclusions. The function will expect a logical formula, and return a list of \
-size 3, where the first argument is the rule used, the other two arguments \
-are the inferences that the inference rule is applied to. For example, we \
-could write:\
+conclusions. The function will expect a logical formula, and return a list, \
+where the first argument is the rule used and the other arguments are \
+propositions that the rule is applied to. For example, we could write:\
 \>", "Text",
  CellChangeTimes->{{3.947429794703288*^9, 3.947429853008998*^9}, {
    3.9474741054864817`*^9, 3.947474107029688*^9}, {3.947474263948279*^9, 
-   3.94747437291183*^9}, 
-   3.9474744792692633`*^9},ExpressionUUID->"97ff089a-8fac-4b8e-a665-\
+   3.94747437291183*^9}, 3.9474744792692633`*^9, {3.947615549807034*^9, 
+   3.9476156240477867`*^9}},ExpressionUUID->"97ff089a-8fac-4b8e-a665-\
 c04da89d1888"],
 
 Cell[BoxData[
@@ -2069,6 +2116,7 @@ to store the justification for our conclusion p=>q as being applying \
 conditionalIdentityComplexify to the previous conclusion !p||q. We include \
 this previous conclusion twice so that all of our justifications can be lists \
 of length 3.
+
 We also need to deal with the question of when to record the justification. \
 It will be convenient to record the justification as soon as the rule is \
 applied. The problem with this is that only new conclusions are added to the \
@@ -2078,9 +2126,9 @@ function. If justification[newConclusion] is not defined, then it also is not \
 a list.\
 \>", "Text",
  CellChangeTimes->{{3.947474396839404*^9, 3.947474471857727*^9}, {
-  3.947474694121028*^9, 3.947474720139646*^9}, {3.947474756442606*^9, 
-  3.9474748777633257`*^9}, {3.9474749819493504`*^9, 
-  3.947475023799212*^9}},ExpressionUUID->"82760669-3135-467c-b985-\
+   3.947474694121028*^9, 3.947474720139646*^9}, {3.947474756442606*^9, 
+   3.9474748777633257`*^9}, {3.9474749819493504`*^9, 3.947475023799212*^9}, 
+   3.9476156307147503`*^9},ExpressionUUID->"82760669-3135-467c-b985-\
 1f5fff9277ec"],
 
 Cell[CellGroupData[{
@@ -2126,7 +2174,13 @@ Cell[BoxData[
    RowBox[{
    "Modify", " ", "standardize", " ", "so", " ", "that", " ", "it", " ", 
     "updates", " ", "justification", " ", "as", " ", "a", " ", "side", " ", 
-    RowBox[{"effect", "."}]}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"effect", ".", "\[IndentingNewLine]", "We"}], " ", "just", " ", 
+    "record", " ", "\"\<standardize\>\"", " ", "as", " ", "the", " ", "rule", 
+    " ", "being", " ", 
+    RowBox[{"used", ".", " ", "You"}], " ", "can", " ", "use", " ", "the", 
+    " ", "methods", " ", "of", " ", "Lab", " ", "1", " ", "to", " ", "view", 
+    " ", "the", " ", "steps", " ", "in", " ", "more", " ", 
+    RowBox[{"detail", "."}]}], "*)"}], "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
     RowBox[{
@@ -2152,24 +2206,27 @@ Cell[BoxData[
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"for", " ", "example"}], ",", " ", 
-     RowBox[{"now", " ", "calling"}]}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"now", " ", "calling", " ", "the", " ", "function"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{"standardizeWithJustification", "[", 
     RowBox[{"r", "\[Implies]", "s"}], "]"}], "\[IndentingNewLine]", 
-   RowBox[{"justification", "[", 
-    RowBox[{"s", "||", 
-     RowBox[{"!", "r"}]}], "]"}], " ", 
    RowBox[{"(*", 
     RowBox[{"should", " ", "return", " ", 
      RowBox[{"{", 
       RowBox[{"standardize", ",", " ", 
-       RowBox[{"r", "\[Implies]", "s"}]}], "}"}]}], "*)"}]}]}]], "Input",
+       RowBox[{"r", "\[Implies]", "s"}]}], "}"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"justification", "[", 
+    RowBox[{"s", "||", 
+     RowBox[{"!", "r"}]}], "]"}], " "}]}]], "Input",
  CellChangeTimes->{{3.947578295313504*^9, 3.9475784155335493`*^9}, {
   3.947578447055732*^9, 3.9475784721393967`*^9}, {3.947578519412088*^9, 
   3.947578626082047*^9}, {3.947579650038059*^9, 3.947579652569149*^9}, {
   3.9475813596359158`*^9, 3.9475813698398457`*^9}, {3.9475815344500217`*^9, 
-  3.947581535444971*^9}, {3.94758156601954*^9, 3.947581583883916*^9}},
- CellLabel->
-  "In[964]:=",ExpressionUUID->"87863ef1-ede6-4e75-8e66-0a3b4c11455a"],
+  3.947581535444971*^9}, {3.94758156601954*^9, 3.947581583883916*^9}, {
+  3.947615662007339*^9, 
+  3.9476157359725227`*^9}},ExpressionUUID->"87863ef1-ede6-4e75-8e66-\
+0a3b4c11455a"],
 
 Cell[BoxData[
  RowBox[{
@@ -2178,8 +2235,8 @@ Cell[BoxData[
    "This", " ", "helper", " ", "function", " ", "applies", " ", "a", " ", 
     "single", " ", "inference", " ", "rule", " ", "to", " ", "a", " ", "list",
      " ", "of", " ", "2", " ", "premises", " ", "and", " ", "records", " ", 
-    "a", " ", 
-    RowBox[{"justification", "."}]}], "*)"}], "\[IndentingNewLine]", 
+    "a", " ", "justification", " ", "as", " ", "a", " ", "side", " ", 
+    RowBox[{"effect", "."}]}], "*)"}], "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
     RowBox[{"applySingleRule", " ", "[", 
@@ -2207,9 +2264,9 @@ Cell[BoxData[
        "]"}], ";"}], ")"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
-    "Modify", " ", "applyInferencesStep", " ", "to", " ", "update", " ", 
-     "justification", " ", "as", " ", "a", " ", "side", " ", "effect"}], 
-    "*)"}], "\[IndentingNewLine]", 
+    "We", " ", "modify", " ", "applyInferencesStep", " ", "to", " ", "update",
+      " ", "justification", " ", "as", " ", "a", " ", "side", " ", "effect"}],
+     "*)"}], "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{
      RowBox[{"applyInferenceStep", "[", 
@@ -2283,9 +2340,17 @@ Cell[BoxData[
   3.947580180146593*^9, 3.9475801809361467`*^9}, {3.9475803016653967`*^9, 
   3.947580322548029*^9}, {3.947580387969294*^9, 3.947580400602599*^9}, {
   3.947581666661706*^9, 3.947581670839769*^9}, {3.947581736083581*^9, 
-  3.947581743224468*^9}},
- CellLabel->
-  "In[986]:=",ExpressionUUID->"56909d7a-cb9d-4a54-bcda-95093236cd39"]
+  3.947581743224468*^9}, {3.94761575399509*^9, 
+  3.9476157630692167`*^9}},ExpressionUUID->"56909d7a-cb9d-4a54-bcda-\
+95093236cd39"],
+
+Cell["\<\
+After calling proveEfficient, we can work backwards from toProve by \
+repeatedly calling the justification function.\
+\>", "Text",
+ CellChangeTimes->{{3.947615807424066*^9, 
+  3.947615842982679*^9}},ExpressionUUID->"ae563f0b-3802-4f60-883b-\
+0e2a7f3029bc"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2298,10 +2363,11 @@ Cell["Automated Proofs", "Section",
 Cell["\<\
 Now we have updated our application of equivalences and inferences so that \
 justifications are recorded every time those functions are called. Let\
-\[CloseCurlyQuote]s see how this can be useful \
+\[CloseCurlyQuote]s see how to use it.\
 \>", "Text",
- CellChangeTimes->{{3.94757944937077*^9, 
-  3.947579503075493*^9}},ExpressionUUID->"86fd9b29-22a8-4282-8f76-\
+ CellChangeTimes->{{3.94757944937077*^9, 3.947579503075493*^9}, {
+  3.947615855454216*^9, 
+  3.9476158570617456`*^9}},ExpressionUUID->"86fd9b29-22a8-4282-8f76-\
 9971f17a1f16"],
 
 Cell[CellGroupData[{
@@ -2444,10 +2510,14 @@ Cell[BoxData[
 
 Cell["\<\
 At this point, we have found justifications for each conclusion until we \
-reached the original premises of the problem.\
+reached the original premises of the problem. We can look at each step in \
+more detail until we are satisfied with the proof or discover an alarming \
+mistake. Basically, it looks like we can use this method to complete some of \
+the Zybooks proofs from 3.8. Those that involve the addition rule fail. \
 \>", "Text",
- CellChangeTimes->{{3.9475817807552977`*^9, 
-  3.947581822905593*^9}},ExpressionUUID->"583cdacf-af53-4919-af62-\
+ CellChangeTimes->{{3.9475817807552977`*^9, 3.947581822905593*^9}, {
+  3.94761587529664*^9, 3.947615926820808*^9}, {3.947616024521997*^9, 
+  3.947616025963212*^9}},ExpressionUUID->"583cdacf-af53-4919-af62-\
 b9c78aea2a28"]
 }, Open  ]],
 
@@ -2459,16 +2529,16 @@ Cell["Quiz Question", "Section",
 17b048cf41e0"],
 
 Cell["\<\
-Basically, it looks like we can use this method to complete all of the \
-Zybooks proofs from 3.8 except those that involve the addition rule. Derive \
-the addition rule using the simplification rule and logical equivalences that \
-establish that p=(p||q)&&p. Show each step.
-Bonus: Find a Zybooks problem where this method fails. Prove it by hand.\
+(15 points): Derive the addition rule using the simplification rule and \
+logical equivalences. Show each step. Hint: establish that p=(p||q)&&p.
+Bonus (5 points ): Find a Zybooks problem where this method fails. Prove it \
+by hand.\
 \>", "Text",
  CellChangeTimes->{{3.94752972254993*^9, 3.9475297933699636`*^9}, {
-  3.947529837306508*^9, 3.9475298389086027`*^9}, {3.9475317322586184`*^9, 
-  3.947531781513575*^9}, {3.947531883580009*^9, 
-  3.947531981384371*^9}},ExpressionUUID->"4b392a4b-429a-4527-9863-\
+   3.947529837306508*^9, 3.9475298389086027`*^9}, {3.9475317322586184`*^9, 
+   3.947531781513575*^9}, {3.947531883580009*^9, 3.947531981384371*^9}, {
+   3.947615939030064*^9, 3.947616077866727*^9}, 
+   3.947616140912169*^9},ExpressionUUID->"4b392a4b-429a-4527-9863-\
 2992c5938033"]
 }, Open  ]],
 
@@ -2483,14 +2553,18 @@ Cell["\<\
 In writing this, I learned that Mathematica is not great for theorem proving. \
 We can only implement the rules of Zybooks Table 3.8.1 because of their \
 simple form. They lack conditional introduction, and other rules that allow \
-sub-derivations. Some of the rules are not easily implemented.
+sub-derivations. Some of the rules are not easily implemented. They do have a \
+function, FindEquationalProof, but it isn\[CloseCurlyQuote]t easily \
+configurable.
+
 For a dedicated logic/theorem proving class, one should use a special \
 software like Lean or Coq.\
 \>", "Text",
  CellChangeTimes->{
   3.947378470562158*^9, {3.94742529581181*^9, 3.947425305283514*^9}, {
-   3.947531786852088*^9, 
-   3.94753187939587*^9}},ExpressionUUID->"b60005cd-01f9-4c28-b433-\
+   3.947531786852088*^9, 3.94753187939587*^9}, {3.94761452359249*^9, 
+   3.947614554601824*^9}, 
+   3.9476161228643827`*^9},ExpressionUUID->"b60005cd-01f9-4c28-b433-\
 3390072e77e9"]
 }, Open  ]]
 }, Open  ]]
@@ -2517,136 +2591,140 @@ Cell[CellGroupData[{
 Cell[576, 22, 229, 4, 96, "Title",ExpressionUUID->"2329cd06-ae2b-43e2-b053-42a64ae730b8"],
 Cell[CellGroupData[{
 Cell[830, 30, 157, 3, 65, "Section",ExpressionUUID->"f6c035ff-fa08-4364-8c55-aa2dbda20eff"],
-Cell[990, 35, 1360, 23, 143, "Text",ExpressionUUID->"c2e3f167-4ba9-4cdf-84c1-628cab49c282"],
-Cell[2353, 60, 4300, 98, 189, "Input",ExpressionUUID->"50affe40-a16d-440d-af3e-1e31c29eb327"]
+Cell[990, 35, 1320, 21, 121, "Text",ExpressionUUID->"c2e3f167-4ba9-4cdf-84c1-628cab49c282"],
+Cell[2313, 58, 4300, 98, 189, "Input",ExpressionUUID->"50affe40-a16d-440d-af3e-1e31c29eb327"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6690, 163, 165, 3, 65, "Section",ExpressionUUID->"667bb3ca-b2ce-4c50-8e46-fc74587666cf"],
-Cell[6858, 168, 545, 12, 121, "Text",ExpressionUUID->"0974254d-0c30-4eab-9686-e460d7fe5667"]
+Cell[6650, 161, 165, 3, 65, "Section",ExpressionUUID->"667bb3ca-b2ce-4c50-8e46-fc74587666cf"],
+Cell[6818, 166, 594, 13, 121, "Text",ExpressionUUID->"0974254d-0c30-4eab-9686-e460d7fe5667"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[7440, 185, 173, 3, 65, "Section",ExpressionUUID->"fd79710a-ed83-4b50-9bc0-65ef1c35ab4c"],
-Cell[7616, 190, 474, 9, 55, "Text",ExpressionUUID->"43c673a6-8a04-420e-a59f-a0bb4e94b86a"],
-Cell[8093, 201, 8118, 195, 398, "Input",ExpressionUUID->"cb860b0e-afe0-49d4-b200-38c706d49924"]
+Cell[7449, 184, 173, 3, 65, "Section",ExpressionUUID->"fd79710a-ed83-4b50-9bc0-65ef1c35ab4c"],
+Cell[7625, 189, 474, 9, 55, "Text",ExpressionUUID->"43c673a6-8a04-420e-a59f-a0bb4e94b86a"],
+Cell[8102, 200, 8256, 197, 398, "Input",ExpressionUUID->"cb860b0e-afe0-49d4-b200-38c706d49924"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[16248, 401, 257, 4, 65, "Section",ExpressionUUID->"4040d16d-a623-4a90-91bb-05580e210e6a"],
-Cell[16508, 407, 349, 7, 33, "Text",ExpressionUUID->"a5f8fd01-a34b-4b27-bbc9-3aa9986145f1"],
+Cell[16395, 402, 257, 4, 65, "Section",ExpressionUUID->"4040d16d-a623-4a90-91bb-05580e210e6a"],
+Cell[16655, 408, 349, 7, 33, "Text",ExpressionUUID->"a5f8fd01-a34b-4b27-bbc9-3aa9986145f1"],
 Cell[CellGroupData[{
-Cell[16882, 418, 1406, 36, 89, "Input",ExpressionUUID->"42978c2e-9ae4-4934-9522-5b86503e1585"],
-Cell[18291, 456, 404, 6, 33, "Output",ExpressionUUID->"3f1689c8-953d-4477-92ac-14abd87607cc"]
+Cell[17029, 419, 1406, 36, 89, "Input",ExpressionUUID->"42978c2e-9ae4-4934-9522-5b86503e1585"],
+Cell[18438, 457, 404, 6, 33, "Output",ExpressionUUID->"3f1689c8-953d-4477-92ac-14abd87607cc"]
 }, Open  ]],
-Cell[18710, 465, 685, 11, 55, "Text",ExpressionUUID->"a69b81bf-aa05-4fa9-9958-79e0c9247b3f"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[19432, 481, 189, 3, 65, "Section",ExpressionUUID->"5d8aa642-628b-4ad6-83cd-c94ccb8dbacc"],
-Cell[19624, 486, 1858, 28, 164, "Text",ExpressionUUID->"db38a10f-0c34-4850-aac4-6b13377d1cbf"],
-Cell[21485, 516, 14601, 379, 832, "Input",ExpressionUUID->"cb7e72a7-3316-4d98-b028-6bc4faf4e6bb"]
+Cell[18857, 466, 908, 16, 121, "Text",ExpressionUUID->"a69b81bf-aa05-4fa9-9958-79e0c9247b3f"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[36123, 900, 177, 3, 65, "Section",ExpressionUUID->"775d46d3-e4c6-4c11-a2a1-cff910357916"],
-Cell[36303, 905, 286, 6, 33, "Text",ExpressionUUID->"6da435a7-b45a-4881-a17a-b99898568752"],
-Cell[36592, 913, 2064, 42, 89, "Input",ExpressionUUID->"ccf828fb-3f27-4e51-88a8-8cad872ecf88"],
-Cell[CellGroupData[{
-Cell[38681, 959, 591, 12, 29, "Input",ExpressionUUID->"b9fa0acc-f10a-4d77-9ad1-562c50d171be"],
-Cell[39275, 973, 953, 15, 33, "Output",ExpressionUUID->"96206cc4-5ab2-40a5-986c-f77885e23b7d"]
+Cell[19802, 487, 189, 3, 65, "Section",ExpressionUUID->"5d8aa642-628b-4ad6-83cd-c94ccb8dbacc"],
+Cell[19994, 492, 1881, 29, 186, "Text",ExpressionUUID->"db38a10f-0c34-4850-aac4-6b13377d1cbf"],
+Cell[21878, 523, 14601, 379, 832, "Input",ExpressionUUID->"cb7e72a7-3316-4d98-b028-6bc4faf4e6bb"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[40265, 993, 414, 9, 29, "Input",ExpressionUUID->"70211e93-c9c8-46d6-90b5-25095cae2004"],
-Cell[40682, 1004, 927, 14, 33, "Output",ExpressionUUID->"351e0863-22e4-4fe9-836e-ba60dbee4cea"]
-}, Open  ]],
-Cell[41624, 1021, 371, 9, 29, "Input",ExpressionUUID->"fa61b612-7ee4-48f5-852b-fd9d3162dd5a"],
-Cell[41998, 1032, 274, 6, 33, "Text",ExpressionUUID->"9e999496-f3d0-4f19-8d85-586f7e0b45a9"]
-}, Open  ]],
+Cell[36516, 907, 177, 3, 65, "Section",ExpressionUUID->"775d46d3-e4c6-4c11-a2a1-cff910357916"],
+Cell[36696, 912, 286, 6, 33, "Text",ExpressionUUID->"6da435a7-b45a-4881-a17a-b99898568752"],
+Cell[36985, 920, 2064, 42, 89, "Input",ExpressionUUID->"ccf828fb-3f27-4e51-88a8-8cad872ecf88"],
 Cell[CellGroupData[{
-Cell[42309, 1043, 154, 3, 65, "Section",ExpressionUUID->"75396353-1409-4cd2-bd9a-2f5a5e13f081"],
-Cell[42466, 1048, 1280, 20, 121, "Text",ExpressionUUID->"d310f69d-face-4703-ad1e-8fd8301cb5be"],
-Cell[43749, 1070, 6231, 161, 483, "Input",ExpressionUUID->"9364f10f-b680-44ac-8c7d-e7e9e0cc876d"],
-Cell[49983, 1233, 572, 11, 55, "Text",ExpressionUUID->"5a7fc84b-d9d6-4230-b718-ad1bd2777745"],
-Cell[50558, 1246, 2728, 78, 198, "Input",ExpressionUUID->"0efdca5e-0bd4-42e8-a168-bae0ebfc9b58"],
-Cell[CellGroupData[{
-Cell[53311, 1328, 591, 13, 49, "Input",ExpressionUUID->"e62dd0bd-585f-4282-8552-3a9b174784e4"],
-Cell[53905, 1343, 429, 7, 33, "Output",ExpressionUUID->"275fb140-0857-4434-8375-09ca16f6046d"],
-Cell[54337, 1352, 429, 7, 33, "Output",ExpressionUUID->"47145add-7023-485e-9af6-9f6814b23b84"]
-}, Open  ]],
-Cell[54781, 1362, 3836, 93, 135, "Input",ExpressionUUID->"4713497d-7652-4df7-b2a4-ed65b87cffdf"],
-Cell[58620, 1457, 185, 3, 33, "Text",ExpressionUUID->"83c291ab-03fa-463c-be99-5fd6c2665523"],
-Cell[CellGroupData[{
-Cell[58830, 1464, 1122, 33, 109, "Input",ExpressionUUID->"ff02ee13-db10-415f-bfe1-297c7316eff0"],
-Cell[59955, 1499, 803, 13, 33, "Output",ExpressionUUID->"6188d0f6-b502-4fb7-8499-ae447c25f237"]
-}, Open  ]]
+Cell[39074, 966, 591, 12, 29, "Input",ExpressionUUID->"b9fa0acc-f10a-4d77-9ad1-562c50d171be"],
+Cell[39668, 980, 953, 15, 33, "Output",ExpressionUUID->"96206cc4-5ab2-40a5-986c-f77885e23b7d"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[60807, 1518, 172, 3, 65, "Section",ExpressionUUID->"e5112c19-2139-49a5-afc2-a9ff5a346c93"],
-Cell[60982, 1523, 376, 7, 33, "Text",ExpressionUUID->"ccee20f8-bbad-4af5-8613-7236f35a30f9"],
-Cell[CellGroupData[{
-Cell[61383, 1534, 779, 20, 109, "Input",ExpressionUUID->"a5dd0487-846c-41cb-912c-c7d00fbee111"],
-Cell[62165, 1556, 714, 11, 33, "Output",ExpressionUUID->"dca89a7a-e3eb-4ba6-9c6f-b5a8d9317bf3"],
-Cell[62882, 1569, 1247, 31, 33, "Output",ExpressionUUID->"4a6416be-1b10-4670-ac3e-de06cd282372"]
+Cell[40658, 1000, 414, 9, 29, "Input",ExpressionUUID->"70211e93-c9c8-46d6-90b5-25095cae2004"],
+Cell[41075, 1011, 927, 14, 33, "Output",ExpressionUUID->"351e0863-22e4-4fe9-836e-ba60dbee4cea"]
+}, Open  ]],
+Cell[42017, 1028, 371, 9, 29, "Input",ExpressionUUID->"fa61b612-7ee4-48f5-852b-fd9d3162dd5a"],
+Cell[42391, 1039, 493, 9, 55, "Text",ExpressionUUID->"9e999496-f3d0-4f19-8d85-586f7e0b45a9"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[64166, 1605, 2081, 49, 229, "Input",ExpressionUUID->"0e7c1035-6492-43aa-aec3-1a1cb9c5e011"],
-Cell[66250, 1656, 397, 7, 33, "Output",ExpressionUUID->"d83086b4-a2fa-4797-a2d4-a4b1ff8a364c"],
-Cell[66650, 1665, 6915, 252, 113, "Output",ExpressionUUID->"c3644805-4d58-4e23-b82d-72a7b440aad6"]
-}, Open  ]]
+Cell[42921, 1053, 154, 3, 65, "Section",ExpressionUUID->"75396353-1409-4cd2-bd9a-2f5a5e13f081"],
+Cell[43078, 1058, 1223, 20, 99, "Text",ExpressionUUID->"d310f69d-face-4703-ad1e-8fd8301cb5be"],
+Cell[44304, 1080, 6390, 165, 483, "Input",ExpressionUUID->"9364f10f-b680-44ac-8c7d-e7e9e0cc876d"],
+Cell[50697, 1247, 572, 11, 55, "Text",ExpressionUUID->"5a7fc84b-d9d6-4230-b718-ad1bd2777745"],
+Cell[51272, 1260, 2728, 78, 198, "Input",ExpressionUUID->"0efdca5e-0bd4-42e8-a168-bae0ebfc9b58"],
+Cell[CellGroupData[{
+Cell[54025, 1342, 591, 13, 49, "Input",ExpressionUUID->"e62dd0bd-585f-4282-8552-3a9b174784e4"],
+Cell[54619, 1357, 429, 7, 33, "Output",ExpressionUUID->"275fb140-0857-4434-8375-09ca16f6046d"],
+Cell[55051, 1366, 429, 7, 33, "Output",ExpressionUUID->"47145add-7023-485e-9af6-9f6814b23b84"]
+}, Open  ]],
+Cell[55495, 1376, 3836, 93, 135, "Input",ExpressionUUID->"4713497d-7652-4df7-b2a4-ed65b87cffdf"],
+Cell[59334, 1471, 185, 3, 33, "Text",ExpressionUUID->"83c291ab-03fa-463c-be99-5fd6c2665523"],
+Cell[CellGroupData[{
+Cell[59544, 1478, 1122, 33, 109, "Input",ExpressionUUID->"ff02ee13-db10-415f-bfe1-297c7316eff0"],
+Cell[60669, 1513, 803, 13, 33, "Output",ExpressionUUID->"6188d0f6-b502-4fb7-8499-ae447c25f237"]
+}, Open  ]],
+Cell[61487, 1529, 683, 12, 77, "Text",ExpressionUUID->"ea303887-9bf9-4b16-8bbb-ce4b37f42206"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[73614, 1923, 170, 3, 65, "Section",ExpressionUUID->"4d246b3c-1a10-4ec4-881c-1f1701c8b6fe"],
-Cell[73787, 1928, 323, 7, 33, "Text",ExpressionUUID->"1c7d48f0-f216-45d2-8bd0-bcd09891dc3e"],
+Cell[62207, 1546, 172, 3, 65, "Section",ExpressionUUID->"e5112c19-2139-49a5-afc2-a9ff5a346c93"],
+Cell[62382, 1551, 376, 7, 33, "Text",ExpressionUUID->"ccee20f8-bbad-4af5-8613-7236f35a30f9"],
 Cell[CellGroupData[{
-Cell[74135, 1939, 916, 24, 89, "Input",ExpressionUUID->"f56b9a04-552c-4eb8-a33b-706640b6a4af"],
-Cell[75054, 1965, 346, 6, 33, "Output",ExpressionUUID->"10d67459-86fc-46c4-a5ed-bb2ad2c9c2c3"]
+Cell[62783, 1562, 779, 20, 109, "Input",ExpressionUUID->"a5dd0487-846c-41cb-912c-c7d00fbee111"],
+Cell[63565, 1584, 714, 11, 33, "Output",ExpressionUUID->"dca89a7a-e3eb-4ba6-9c6f-b5a8d9317bf3"],
+Cell[64282, 1597, 1247, 31, 33, "Output",ExpressionUUID->"4a6416be-1b10-4670-ac3e-de06cd282372"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[75437, 1976, 839, 25, 89, "Input",ExpressionUUID->"81c35a6b-0291-41a2-9e92-14cf76e6e71f"],
-Cell[76279, 2003, 155, 3, 33, "Output",ExpressionUUID->"f2081c8b-547d-4f6e-9e9e-f3a889f84726"]
+Cell[65566, 1633, 2201, 52, 229, "Input",ExpressionUUID->"0e7c1035-6492-43aa-aec3-1a1cb9c5e011"],
+Cell[67770, 1687, 397, 7, 33, "Output",ExpressionUUID->"d83086b4-a2fa-4797-a2d4-a4b1ff8a364c"],
+Cell[68170, 1696, 6915, 252, 113, "Output",ExpressionUUID->"c3644805-4d58-4e23-b82d-72a7b440aad6"]
 }, Open  ]],
-Cell[76449, 2009, 399, 10, 29, "Input",ExpressionUUID->"c0a95ce6-52b2-4550-b804-b7a38148b0de"],
-Cell[76851, 2021, 151, 3, 29, "Input",ExpressionUUID->"55d76ab4-d9af-4fbc-8949-51d6c659acf0"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[77039, 2029, 154, 2, 65, "Section",ExpressionUUID->"7e739824-a7e3-49d2-a20d-3a8250ebfc79"],
-Cell[77196, 2033, 913, 15, 77, "Text",ExpressionUUID->"97ff089a-8fac-4b8e-a665-c04da89d1888"],
-Cell[78112, 2050, 529, 14, 29, "Input",ExpressionUUID->"1b2e1a72-1577-4008-961c-ac0e5fb75967"],
-Cell[78644, 2066, 997, 17, 121, "Text",ExpressionUUID->"82760669-3135-467c-b985-1f5fff9277ec"],
-Cell[CellGroupData[{
-Cell[79666, 2087, 475, 11, 49, "Input",ExpressionUUID->"6883299c-db4e-4009-82a6-bf185203a800"],
-Cell[80144, 2100, 254, 4, 33, "Output",ExpressionUUID->"cfb0f801-300c-45df-943a-bae0a2f342d7"],
-Cell[80401, 2106, 254, 4, 33, "Output",ExpressionUUID->"c7577f56-5670-4815-86b7-fe0b567660df"]
-}, Open  ]],
-Cell[80670, 2113, 353, 7, 33, "Text",ExpressionUUID->"2c840483-4f20-41d6-a6bd-906c19b6574e"],
-Cell[81026, 2122, 2138, 49, 175, "Input",ExpressionUUID->"87863ef1-ede6-4e75-8e66-0a3b4c11455a"],
-Cell[83167, 2173, 4909, 114, 325, "Input",ExpressionUUID->"56909d7a-cb9d-4a54-bcda-95093236cd39"]
+Cell[75100, 1951, 290, 6, 33, "Text",ExpressionUUID->"8ab90c64-447e-4e84-ba47-4126f02ae8ae"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[88113, 2292, 163, 3, 65, "Section",ExpressionUUID->"a48fbd18-8032-4884-8d73-7bef4b6f0103"],
-Cell[88279, 2297, 345, 7, 33, "Text",ExpressionUUID->"86fd9b29-22a8-4282-8f76-9971f17a1f16"],
+Cell[75427, 1962, 219, 4, 65, "Section",ExpressionUUID->"4d246b3c-1a10-4ec4-881c-1f1701c8b6fe"],
+Cell[75649, 1968, 323, 7, 33, "Text",ExpressionUUID->"1c7d48f0-f216-45d2-8bd0-bcd09891dc3e"],
 Cell[CellGroupData[{
-Cell[88649, 2308, 963, 28, 109, "Input",ExpressionUUID->"fc949173-d2d3-4dbc-8343-85598a2cd0b8"],
-Cell[89615, 2338, 567, 9, 33, "Output",ExpressionUUID->"b1a3a9d2-5881-4a1a-8cd3-833f1dc0d602"]
-}, Open  ]],
-Cell[90197, 2350, 225, 5, 33, "Text",ExpressionUUID->"13724a02-b4b2-4cba-ad60-70e07513707f"],
-Cell[CellGroupData[{
-Cell[90447, 2359, 345, 7, 29, "Input",ExpressionUUID->"61f3daad-77d9-42f5-8f5e-08d696a37dd3"],
-Cell[90795, 2368, 410, 10, 33, "Output",ExpressionUUID->"2f27ca87-36cc-4347-bc95-8a8ae023e997"]
+Cell[75997, 1979, 916, 24, 89, "Input",ExpressionUUID->"f56b9a04-552c-4eb8-a33b-706640b6a4af"],
+Cell[76916, 2005, 346, 6, 33, "Output",ExpressionUUID->"10d67459-86fc-46c4-a5ed-bb2ad2c9c2c3"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[91242, 2383, 260, 6, 29, "Input",ExpressionUUID->"7acd47cf-8b42-4e6b-bfa0-cb6ff7b51cf8"],
-Cell[91505, 2391, 736, 21, 33, "Output",ExpressionUUID->"fd4551e9-3624-4baa-b450-65ac3a473d3e"]
+Cell[77299, 2016, 839, 25, 89, "Input",ExpressionUUID->"81c35a6b-0291-41a2-9e92-14cf76e6e71f"],
+Cell[78141, 2043, 155, 3, 33, "Output",ExpressionUUID->"f2081c8b-547d-4f6e-9e9e-f3a889f84726"]
+}, Open  ]],
+Cell[78311, 2049, 399, 10, 29, "Input",ExpressionUUID->"c0a95ce6-52b2-4550-b804-b7a38148b0de"],
+Cell[78713, 2061, 151, 3, 29, "Input",ExpressionUUID->"55d76ab4-d9af-4fbc-8949-51d6c659acf0"],
+Cell[78867, 2066, 297, 6, 33, "Text",ExpressionUUID->"a979d4e6-d0be-472e-aec7-f7e99ad737d4"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[92278, 2417, 434, 12, 29, "Input",ExpressionUUID->"39a4cb9d-163b-4dc4-8eda-ea8060fe524a"],
-Cell[92715, 2431, 438, 10, 33, "Output",ExpressionUUID->"a2f3a8e9-84d2-4ab0-aab6-bddc598c3992"]
+Cell[79201, 2077, 154, 2, 65, "Section",ExpressionUUID->"7e739824-a7e3-49d2-a20d-3a8250ebfc79"],
+Cell[79358, 2081, 936, 14, 77, "Text",ExpressionUUID->"97ff089a-8fac-4b8e-a665-c04da89d1888"],
+Cell[80297, 2097, 529, 14, 29, "Input",ExpressionUUID->"1b2e1a72-1577-4008-961c-ac0e5fb75967"],
+Cell[80829, 2113, 1025, 18, 143, "Text",ExpressionUUID->"82760669-3135-467c-b985-1f5fff9277ec"],
+Cell[CellGroupData[{
+Cell[81879, 2135, 475, 11, 49, "Input",ExpressionUUID->"6883299c-db4e-4009-82a6-bf185203a800"],
+Cell[82357, 2148, 254, 4, 33, "Output",ExpressionUUID->"cfb0f801-300c-45df-943a-bae0a2f342d7"],
+Cell[82614, 2154, 254, 4, 33, "Output",ExpressionUUID->"c7577f56-5670-4815-86b7-fe0b567660df"]
 }, Open  ]],
-Cell[93168, 2444, 272, 6, 33, "Text",ExpressionUUID->"583cdacf-af53-4919-af62-b9c78aea2a28"]
+Cell[82883, 2161, 353, 7, 33, "Text",ExpressionUUID->"2c840483-4f20-41d6-a6bd-906c19b6574e"],
+Cell[83239, 2170, 2620, 58, 196, "Input",ExpressionUUID->"87863ef1-ede6-4e75-8e66-0a3b4c11455a"],
+Cell[85862, 2230, 4993, 114, 325, "Input",ExpressionUUID->"56909d7a-cb9d-4a54-bcda-95093236cd39"],
+Cell[90858, 2346, 266, 6, 33, "Text",ExpressionUUID->"ae563f0b-3802-4f60-883b-0e2a7f3029bc"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[93477, 2455, 158, 3, 65, "Section",ExpressionUUID->"f3809676-2b63-44c6-acea-17b048cf41e0"],
-Cell[93638, 2460, 646, 11, 77, "Text",ExpressionUUID->"4b392a4b-429a-4527-9863-2992c5938033"]
+Cell[91161, 2357, 163, 3, 65, "Section",ExpressionUUID->"a48fbd18-8032-4884-8d73-7bef4b6f0103"],
+Cell[91327, 2362, 387, 8, 33, "Text",ExpressionUUID->"86fd9b29-22a8-4282-8f76-9971f17a1f16"],
+Cell[CellGroupData[{
+Cell[91739, 2374, 963, 28, 109, "Input",ExpressionUUID->"fc949173-d2d3-4dbc-8343-85598a2cd0b8"],
+Cell[92705, 2404, 567, 9, 33, "Output",ExpressionUUID->"b1a3a9d2-5881-4a1a-8cd3-833f1dc0d602"]
+}, Open  ]],
+Cell[93287, 2416, 225, 5, 33, "Text",ExpressionUUID->"13724a02-b4b2-4cba-ad60-70e07513707f"],
+Cell[CellGroupData[{
+Cell[93537, 2425, 345, 7, 29, "Input",ExpressionUUID->"61f3daad-77d9-42f5-8f5e-08d696a37dd3"],
+Cell[93885, 2434, 410, 10, 33, "Output",ExpressionUUID->"2f27ca87-36cc-4347-bc95-8a8ae023e997"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[94321, 2476, 172, 3, 65, "Section",ExpressionUUID->"7f171a63-cc25-4554-bd61-65f9d5833f06"],
-Cell[94496, 2481, 617, 12, 77, "Text",ExpressionUUID->"b60005cd-01f9-4c28-b433-3390072e77e9"]
+Cell[94332, 2449, 260, 6, 29, "Input",ExpressionUUID->"7acd47cf-8b42-4e6b-bfa0-cb6ff7b51cf8"],
+Cell[94595, 2457, 736, 21, 33, "Output",ExpressionUUID->"fd4551e9-3624-4baa-b450-65ac3a473d3e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[95368, 2483, 434, 12, 29, "Input",ExpressionUUID->"39a4cb9d-163b-4dc4-8eda-ea8060fe524a"],
+Cell[95805, 2497, 438, 10, 33, "Output",ExpressionUUID->"a2f3a8e9-84d2-4ab0-aab6-bddc598c3992"]
+}, Open  ]],
+Cell[96258, 2510, 624, 10, 55, "Text",ExpressionUUID->"583cdacf-af53-4919-af62-b9c78aea2a28"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[96919, 2525, 158, 3, 65, "Section",ExpressionUUID->"f3809676-2b63-44c6-acea-17b048cf41e0"],
+Cell[97080, 2530, 606, 11, 55, "Text",ExpressionUUID->"4b392a4b-429a-4527-9863-2992c5938033"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[97723, 2546, 172, 3, 65, "Section",ExpressionUUID->"7f171a63-cc25-4554-bd61-65f9d5833f06"],
+Cell[97898, 2551, 792, 16, 99, "Text",ExpressionUUID->"b60005cd-01f9-4c28-b433-3390072e77e9"]
 }, Open  ]]
 }, Open  ]]
 }
