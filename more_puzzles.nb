@@ -1,0 +1,514 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     18839,        506]
+NotebookOptionsPosition[     18168,        487]
+NotebookOutlinePosition[     18560,        503]
+CellTagsIndexPosition[     18517,        500]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"Clear", "[", 
+  RowBox[{"P", ",", "Q", ",", "R", ",", "a", ",", "b", ",", "c"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Fun3", "[", 
+   RowBox[{
+    RowBox[{"p1_", "/;", 
+     RowBox[{"BooleanQ", "[", "p1", "]"}]}], ",", 
+    RowBox[{"p2_", "/;", 
+     RowBox[{"BooleanQ", "[", "p2", "]"}]}], ",", 
+    RowBox[{"p3_", "/;", 
+     RowBox[{"BooleanQ", "[", "p3", "]"}]}], ",", 
+    RowBox[{"p4_", "/;", 
+     RowBox[{"BooleanQ", "[", "p4", "]"}]}], ",", 
+    RowBox[{"p5_", "/;", 
+     RowBox[{"BooleanQ", "[", "p5", "]"}]}], ",", 
+    RowBox[{"p6_", "/;", 
+     RowBox[{"BooleanQ", "[", "p6", "]"}]}], ",", 
+    RowBox[{"p7_", "/;", 
+     RowBox[{"BooleanQ", "[", "p7", "]"}]}], ",", 
+    RowBox[{"p8_", "/;", 
+     RowBox[{"BooleanQ", "[", "p8", "]"}]}]}], "]"}], ":=", 
+  RowBox[{"BooleanFunction", "[", 
+   RowBox[{
+    RowBox[{"MapThread", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"#1", "->", "#2"}], "&"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Tuples", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"True", ",", "False"}], "}"}], ",", "3"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+         "p1", ",", "p2", ",", "p3", ",", "p4", ",", "p5", ",", "p6", ",", 
+          "p7", ",", "p8"}], "}"}]}], "}"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"a", ",", "b", ",", "c"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ColFunG", "[", "s_", "]"}], ":=", 
+  RowBox[{"DynamicModule", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"p1", "=", "Null"}], ",", 
+      RowBox[{"p2", "=", "Null"}], ",", 
+      RowBox[{"p3", "=", "Null"}], ",", 
+      RowBox[{"p4", "=", "Null"}], ",", 
+      RowBox[{"p5", "=", "Null"}], ",", 
+      RowBox[{"p6", "=", "Null"}], ",", 
+      RowBox[{"p7", "=", "Null"}], ",", 
+      RowBox[{"p8", "=", "Null"}], ",", 
+      RowBox[{"result", "=", "\"\<\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", "  ", 
+    RowBox[{"Grid", "@", 
+     RowBox[{"Transpose", "@", 
+      RowBox[{"{", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"ToString", "[", "s", "]"}], ",", "\[IndentingNewLine]", 
+         "   ", 
+         RowBox[{"InputField", "[", 
+          RowBox[{"Dynamic", "[", "p1", "]"}], "]"}], ",", 
+         "\[IndentingNewLine]", "    ", 
+         RowBox[{"InputField", "[", 
+          RowBox[{"Dynamic", "[", "p2", "]"}], "]"}], ",", 
+         "\[IndentingNewLine]", "    ", 
+         RowBox[{"InputField", "[", 
+          RowBox[{"Dynamic", "[", "p3", "]"}], "]"}], ",", 
+         "\[IndentingNewLine]", "    ", 
+         RowBox[{"InputField", "[", 
+          RowBox[{"Dynamic", "[", "p4", "]"}], "]"}], ",", 
+         "\[IndentingNewLine]", "   ", 
+         RowBox[{"InputField", "[", 
+          RowBox[{"Dynamic", "[", "p5", "]"}], "]"}], ",", 
+         "\[IndentingNewLine]", "    ", 
+         RowBox[{"InputField", "[", 
+          RowBox[{"Dynamic", "[", "p6", "]"}], "]"}], ",", 
+         "\[IndentingNewLine]", "    ", 
+         RowBox[{"InputField", "[", 
+          RowBox[{"Dynamic", "[", "p7", "]"}], "]"}], ",", 
+         "\[IndentingNewLine]", "    ", 
+         RowBox[{"InputField", "[", 
+          RowBox[{"Dynamic", "[", "p8", "]"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Button", "[", 
+          RowBox[{"\"\<Evaluate\>\"", ",", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"result", "=", 
+               RowBox[{"Fun3", "[", 
+                RowBox[{
+                "p1", ",", "p2", ",", "p3", ",", "p4", ",", "p5", ",", "p6", 
+                 ",", "p7", ",", "p8"}], "]"}]}], ",", 
+              RowBox[{"s", "=", "result"}]}], "}"}], ";"}]}], "]"}], ",", 
+         "\[IndentingNewLine]", "    ", 
+         RowBox[{"Dynamic", "[", " ", "\[IndentingNewLine]", "            ", 
+          RowBox[{"Style", "[", 
+           RowBox[{
+            RowBox[{"ToString", "[", 
+             RowBox[{"FullSimplify", "[", "result", "]"}], "]"}], ",", 
+            "Bold"}], "]"}], "]"}]}], "\[IndentingNewLine]", "  ", "}"}], 
+       "}"}]}]}], ",", 
+    RowBox[{"SaveDefinitions", "->", "True"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Row", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Grid", "[", 
+      RowBox[{
+       RowBox[{"Prepend", "[", 
+        RowBox[{
+         RowBox[{"Tuples", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"True", ",", "False"}], "}"}], ",", "3"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\<a\>\"", ",", "\"\<b\>\"", ",", "\"\<c\>\""}], "}"}]}], 
+        "]"}], ",", 
+       RowBox[{"Spacings", "->", 
+        RowBox[{"{", 
+         RowBox[{"Automatic", ",", "1.25"}], "}"}]}], ",", 
+       RowBox[{"BaselinePosition", "->", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"6", ",", "1"}], "}"}], ",", "Bottom"}], "}"}]}]}], "]"}], 
+     ",", 
+     RowBox[{"ColFunG", "[", "P", "]"}], ",", 
+     RowBox[{"ColFunG", "[", "Q", "]"}], ",", 
+     RowBox[{"ColFunG", "[", "R", "]"}]}], "}"}], ",", 
+   RowBox[{"Spacer", "[", "2", "]"}]}], "]"}]}], "Input",
+ CellLabel->
+  "In[399]:=",ExpressionUUID->"1a1ce44c-368a-4974-a68e-a2bb4e3adb70"],
+
+Cell[BoxData[
+ TemplateBox[{
+   TemplateBox[{2}, "Spacer1"], 
+   TagBox[
+    GridBox[{{"\"a\"", "\"b\"", "\"c\""}, {"True", "True", "True"}, {
+      "True", "True", "False"}, {"True", "False", "True"}, {
+      "True", "False", "False"}, {"False", "True", "True"}, {
+      "False", "True", "False"}, {"False", "False", "True"}, {
+      "False", "False", "False"}}, AutoDelete -> False, 
+     GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+      GridBoxSpacings -> {"Columns" -> {{Automatic}}, "Rows" -> {{1.25}}}, 
+     BaselinePosition -> {{6, 1}, Bottom}], "Grid"], 
+   DynamicModuleBox[{$CellContext`p1$$ = True, $CellContext`p2$$ = 
+     False, $CellContext`p3$$ = False, $CellContext`p4$$ = 
+     False, $CellContext`p5$$ = True, $CellContext`p6$$ = 
+     True, $CellContext`p7$$ = True, $CellContext`p8$$ = 
+     True, $CellContext`result$$ = Or[
+       Not[$CellContext`a], 
+       And[$CellContext`b, $CellContext`c]]}, 
+    TagBox[
+     GridBox[{{"\"P\""}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p1$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p2$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p3$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p4$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p5$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p6$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p7$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p8$$]]}, {
+        ButtonBox[
+        "\"Evaluate\"", Appearance -> Automatic, 
+         ButtonFunction :> ({$CellContext`result$$ = \
+$CellContext`Fun3[$CellContext`p1$$, $CellContext`p2$$, $CellContext`p3$$, \
+$CellContext`p4$$, $CellContext`p5$$, $CellContext`p6$$, $CellContext`p7$$, \
+$CellContext`p8$$], $CellContext`P = $CellContext`result$$}; Null), Evaluator -> 
+         Automatic, Method -> "Preemptive"]}, {
+        DynamicBox[
+         ToBoxes[
+          Style[
+           ToString[
+            FullSimplify[$CellContext`result$$]], Bold], StandardForm], 
+         ImageSizeCache -> {106.96875, {3.48046875, 12.55078125}}]}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"], 
+    DynamicModuleValues :> {}, Initialization :> {$CellContext`Fun3[
+        Condition[
+         Pattern[$CellContext`p1, 
+          Blank[]], 
+         BooleanQ[$CellContext`p1]], 
+        Condition[
+         Pattern[$CellContext`p2, 
+          Blank[]], 
+         BooleanQ[$CellContext`p2]], 
+        Condition[
+         Pattern[$CellContext`p3, 
+          Blank[]], 
+         BooleanQ[$CellContext`p3]], 
+        Condition[
+         Pattern[$CellContext`p4, 
+          Blank[]], 
+         BooleanQ[$CellContext`p4]], 
+        Condition[
+         Pattern[$CellContext`p5, 
+          Blank[]], 
+         BooleanQ[$CellContext`p5]], 
+        Condition[
+         Pattern[$CellContext`p6, 
+          Blank[]], 
+         BooleanQ[$CellContext`p6]], 
+        Condition[
+         Pattern[$CellContext`p7, 
+          Blank[]], 
+         BooleanQ[$CellContext`p7]], 
+        Condition[
+         Pattern[$CellContext`p8, 
+          Blank[]], 
+         BooleanQ[$CellContext`p8]]] := BooleanFunction[
+        MapThread[# -> #2& , {
+          
+          Tuples[{True, False}, 
+           3], {$CellContext`p1, $CellContext`p2, $CellContext`p3, \
+$CellContext`p4, $CellContext`p5, $CellContext`p6, $CellContext`p7, \
+$CellContext`p8}}], {$CellContext`a, $CellContext`b, $CellContext`c}], \
+$CellContext`Fun3[
+        Pattern[$CellContext`p, 
+         Blank[]]] := BooleanFunction[
+        MapThread[# -> #2& , {
+          Tuples[{True, False}, $CellContext`n], 
+          Table[
+           
+           Part[$CellContext`p, $CellContext`i], {$CellContext`i, 1, 
+            2^$CellContext`n}]}], {$CellContext`a, $CellContext`b, \
+$CellContext`c, $CellContext`d}], $CellContext`n = 4, $CellContext`i = 5}], 
+   DynamicModuleBox[{$CellContext`p1$$ = False, $CellContext`p2$$ = 
+     False, $CellContext`p3$$ = True, $CellContext`p4$$ = 
+     True, $CellContext`p5$$ = True, $CellContext`p6$$ = 
+     False, $CellContext`p7$$ = False, $CellContext`p8$$ = 
+     True, $CellContext`result$$ = Or[
+       And[$CellContext`a, 
+        Not[$CellContext`b]], 
+       And[
+        Not[$CellContext`a], $CellContext`b, $CellContext`c], 
+       And[
+        Not[$CellContext`b], 
+        Not[$CellContext`c]]]}, 
+    TagBox[
+     GridBox[{{"\"Q\""}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p1$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p2$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p3$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p4$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p5$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p6$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p7$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p8$$]]}, {
+        ButtonBox[
+        "\"Evaluate\"", Appearance -> Automatic, 
+         ButtonFunction :> ({$CellContext`result$$ = \
+$CellContext`Fun3[$CellContext`p1$$, $CellContext`p2$$, $CellContext`p3$$, \
+$CellContext`p4$$, $CellContext`p5$$, $CellContext`p6$$, $CellContext`p7$$, \
+$CellContext`p8$$], $CellContext`Q = $CellContext`result$$}; Null), Evaluator -> 
+         Automatic, Method -> "Preemptive"]}, {
+        DynamicBox[
+         ToBoxes[
+          Style[
+           ToString[
+            FullSimplify[$CellContext`result$$]], Bold], StandardForm], 
+         ImageSizeCache -> {137.53125, {3.48046875, 12.55078125}}]}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"], 
+    DynamicModuleValues :> {}, Initialization :> {$CellContext`Fun3[
+        Condition[
+         Pattern[$CellContext`p1, 
+          Blank[]], 
+         BooleanQ[$CellContext`p1]], 
+        Condition[
+         Pattern[$CellContext`p2, 
+          Blank[]], 
+         BooleanQ[$CellContext`p2]], 
+        Condition[
+         Pattern[$CellContext`p3, 
+          Blank[]], 
+         BooleanQ[$CellContext`p3]], 
+        Condition[
+         Pattern[$CellContext`p4, 
+          Blank[]], 
+         BooleanQ[$CellContext`p4]], 
+        Condition[
+         Pattern[$CellContext`p5, 
+          Blank[]], 
+         BooleanQ[$CellContext`p5]], 
+        Condition[
+         Pattern[$CellContext`p6, 
+          Blank[]], 
+         BooleanQ[$CellContext`p6]], 
+        Condition[
+         Pattern[$CellContext`p7, 
+          Blank[]], 
+         BooleanQ[$CellContext`p7]], 
+        Condition[
+         Pattern[$CellContext`p8, 
+          Blank[]], 
+         BooleanQ[$CellContext`p8]]] := BooleanFunction[
+        MapThread[# -> #2& , {
+          
+          Tuples[{True, False}, 
+           3], {$CellContext`p1, $CellContext`p2, $CellContext`p3, \
+$CellContext`p4, $CellContext`p5, $CellContext`p6, $CellContext`p7, \
+$CellContext`p8}}], {$CellContext`a, $CellContext`b, $CellContext`c}], \
+$CellContext`Fun3[
+        Pattern[$CellContext`p, 
+         Blank[]]] := BooleanFunction[
+        MapThread[# -> #2& , {
+          Tuples[{True, False}, $CellContext`n], 
+          Table[
+           
+           Part[$CellContext`p, $CellContext`i], {$CellContext`i, 1, 
+            2^$CellContext`n}]}], {$CellContext`a, $CellContext`b, \
+$CellContext`c, $CellContext`d}], $CellContext`n = 4, $CellContext`i = 5}], 
+   DynamicModuleBox[{$CellContext`p1$$ = False, $CellContext`p2$$ = 
+     True, $CellContext`p3$$ = False, $CellContext`p4$$ = 
+     False, $CellContext`p5$$ = True, $CellContext`p6$$ = 
+     False, $CellContext`p7$$ = True, $CellContext`p8$$ = 
+     True, $CellContext`result$$ = Or[
+       And[$CellContext`a, $CellContext`b, 
+        Not[$CellContext`c]], 
+       And[
+        Not[$CellContext`a], 
+        Not[$CellContext`b]], 
+       And[
+        Not[$CellContext`a], $CellContext`c]]}, 
+    TagBox[
+     GridBox[{{"\"R\""}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p1$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p2$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p3$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p4$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p5$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p6$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p7$$]]}, {
+        InputFieldBox[
+         Dynamic[$CellContext`p8$$]]}, {
+        ButtonBox[
+        "\"Evaluate\"", Appearance -> Automatic, 
+         ButtonFunction :> ({$CellContext`result$$ = \
+$CellContext`Fun3[$CellContext`p1$$, $CellContext`p2$$, $CellContext`p3$$, \
+$CellContext`p4$$, $CellContext`p5$$, $CellContext`p6$$, $CellContext`p7$$, \
+$CellContext`p8$$], $CellContext`R = $CellContext`result$$}; Null), Evaluator -> 
+         Automatic, Method -> "Preemptive"]}, {
+        DynamicBox[
+         ToBoxes[
+          Style[
+           ToString[
+            FullSimplify[$CellContext`result$$]], Bold], StandardForm], 
+         ImageSizeCache -> {137.53125, {3.48046875, 12.55078125}}]}}, 
+      AutoDelete -> False, 
+      GridBoxItemSize -> {
+       "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"], 
+    DynamicModuleValues :> {}, Initialization :> {$CellContext`Fun3[
+        Condition[
+         Pattern[$CellContext`p1, 
+          Blank[]], 
+         BooleanQ[$CellContext`p1]], 
+        Condition[
+         Pattern[$CellContext`p2, 
+          Blank[]], 
+         BooleanQ[$CellContext`p2]], 
+        Condition[
+         Pattern[$CellContext`p3, 
+          Blank[]], 
+         BooleanQ[$CellContext`p3]], 
+        Condition[
+         Pattern[$CellContext`p4, 
+          Blank[]], 
+         BooleanQ[$CellContext`p4]], 
+        Condition[
+         Pattern[$CellContext`p5, 
+          Blank[]], 
+         BooleanQ[$CellContext`p5]], 
+        Condition[
+         Pattern[$CellContext`p6, 
+          Blank[]], 
+         BooleanQ[$CellContext`p6]], 
+        Condition[
+         Pattern[$CellContext`p7, 
+          Blank[]], 
+         BooleanQ[$CellContext`p7]], 
+        Condition[
+         Pattern[$CellContext`p8, 
+          Blank[]], 
+         BooleanQ[$CellContext`p8]]] := BooleanFunction[
+        MapThread[# -> #2& , {
+          
+          Tuples[{True, False}, 
+           3], {$CellContext`p1, $CellContext`p2, $CellContext`p3, \
+$CellContext`p4, $CellContext`p5, $CellContext`p6, $CellContext`p7, \
+$CellContext`p8}}], {$CellContext`a, $CellContext`b, $CellContext`c}], \
+$CellContext`Fun3[
+        Pattern[$CellContext`p, 
+         Blank[]]] := BooleanFunction[
+        MapThread[# -> #2& , {
+          Tuples[{True, False}, $CellContext`n], 
+          Table[
+           
+           Part[$CellContext`p, $CellContext`i], {$CellContext`i, 1, 
+            2^$CellContext`n}]}], {$CellContext`a, $CellContext`b, \
+$CellContext`c, $CellContext`d}], $CellContext`n = 4, $CellContext`i = 5}]},
+  "RowWithSeparator"]], "Output",
+ CellChangeTimes->{3.9481485541232033`*^9},
+ CellLabel->
+  "Out[402]=",ExpressionUUID->"11cf517d-e72c-4cad-adc3-f2dd11926da0"]
+}, Open  ]],
+
+Cell["", "Text",
+ CellChangeTimes->{{3.948149531735075*^9, 
+  3.948149538427021*^9}},ExpressionUUID->"68837e51-8950-4d58-bb7f-\
+255dcf423d4e"],
+
+Cell["\<\
+2 Truths, 1 lie.
+a= \[OpenCurlyDoubleQuote]The target is identified\[CloseCurlyDoubleQuote]
+b= \[OpenCurlyDoubleQuote]The spy winks.\[CloseCurlyDoubleQuote]
+c= \[OpenCurlyDoubleQuote]You wink\[CloseCurlyDoubleQuote]
+
+1.) \[OpenCurlyDoubleQuote]If the target is identified, then both you and the \
+spy will wink.
+2.) \[OpenCurlyDoubleQuote]If you wink,  then the spy winks if and only if \
+the target is identified. Otherwise, the spy won\[CloseCurlyQuote]t wink.
+3.) \[OpenCurlyDoubleQuote]If the spy winks, then the target is identified if \
+and only if you wink. Otherwise, the target is not identified.\
+\>", "Text",
+ CellChangeTimes->{{3.9481495418436337`*^9, 3.948149680112433*^9}, {
+  3.9481497173119287`*^9, 3.948149769096232*^9}, {3.948149818922247*^9, 
+  3.948149907604188*^9}, {3.948150076919948*^9, 3.948150277183056*^9}, {
+  3.948150317875268*^9, 3.948150384364798*^9}, {3.948150426540131*^9, 
+  3.9481504279577837`*^9}, {3.948150471529163*^9, 
+  3.948150614402855*^9}},ExpressionUUID->"e4473260-5c6d-4f92-96b9-\
+76fd3bf740c9"]
+},
+WindowSize->{1440, 701.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"d2bdc2e5-bce7-4aab-8ca3-b80a40b84439"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 5264, 139, 421, "Input",ExpressionUUID->"1a1ce44c-368a-4974-a68e-a2bb4e3adb70"],
+Cell[5843, 163, 11112, 295, 301, "Output",ExpressionUUID->"11cf517d-e72c-4cad-adc3-f2dd11926da0"]
+}, Open  ]],
+Cell[16970, 461, 142, 3, 33, "Text",ExpressionUUID->"68837e51-8950-4d58-bb7f-255dcf423d4e"],
+Cell[17115, 466, 1049, 19, 186, "Text",ExpressionUUID->"e4473260-5c6d-4f92-96b9-76fd3bf740c9"]
+}
+]
+*)
+
