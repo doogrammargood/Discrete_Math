@@ -1,0 +1,1344 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     52201,       1336]
+NotebookOptionsPosition[     47101,       1247]
+NotebookOutlinePosition[     47493,       1263]
+CellTagsIndexPosition[     47450,       1260]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Lab ?: Mechanical Summations", "Title",
+ CellChangeTimes->{{3.948630333608295*^9, 3.9486303668471203`*^9}, {
+  3.9486388402314873`*^9, 
+  3.9486388412826633`*^9}},ExpressionUUID->"8b7ed600-bfa8-4d2d-ba59-\
+967f35ea605b"],
+
+Cell["The Wilf-Zeilberger Technique", "Subtitle",
+ CellChangeTimes->{{3.948638851422553*^9, 
+  3.948638856223377*^9}},ExpressionUUID->"3f0a38dd-a532-40f5-91ab-\
+cc6a2d8ce158"],
+
+Cell[CellGroupData[{
+
+Cell["Learning Outcomes:", "Section",
+ CellChangeTimes->{{3.948630392651866*^9, 
+  3.948630400611505*^9}},ExpressionUUID->"4e3083cf-d394-475d-91d3-\
+db7b89cb04fd"],
+
+Cell["\<\
+- Be able to perform almost any summation by applying the techniques of \
+recursion and telescoping.
+- Prove that the summation has been calculated correctly.\
+\>", "Text",
+ CellChangeTimes->{{3.948630406077383*^9, 3.9486305261189747`*^9}, {
+  3.948630619069919*^9, 3.948630760270412*^9}, {3.948630896465095*^9, 
+  3.948630908216008*^9}, {3.948639273586342*^9, 
+  3.948639274283206*^9}},ExpressionUUID->"5f3b523f-2aa5-48e2-b692-\
+1b87ca7b42b3"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Prerequisites:", "Section",
+ CellChangeTimes->{{3.948630568188109*^9, 
+  3.948630572504964*^9}},ExpressionUUID->"d49595d0-cf80-400f-a97c-\
+d6c5ff4f5911"],
+
+Cell["\<\
+We assume that you\[CloseCurlyQuote]ve already seen the following:
+-Homogeneous Linear Recurrences
+-Arithmetic, Geometric sums
+-Combinations
+-Have Mathematica installed and have access to the RISC packages.\
+\>", "Text",
+ CellChangeTimes->{{3.948630583221451*^9, 3.94863061491496*^9}, {
+  3.948630762716486*^9, 3.9486308336870317`*^9}, {3.948634371488846*^9, 
+  3.948634377935692*^9}},ExpressionUUID->"a01d98a8-3f40-45b7-9e7a-\
+82e23c0dc89d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Resources:", "Section",
+ CellChangeTimes->{{3.948630850082967*^9, 3.94863087191887*^9}, {
+  3.948634134265328*^9, 
+  3.948634135327178*^9}},ExpressionUUID->"a78a8241-db54-47ce-8068-\
+18152c693980"],
+
+Cell["\<\
+The examples in this lab mostly come from the book A=B. A helpful Mathematica \
+notebook tutorial can be found here: \
+https://www3.risc.jku.at/research/combinat/software/ergosum/RISC/fastZeil.\
+html.\
+\>", "Text",
+ CellChangeTimes->{{3.948634141373163*^9, 
+  3.948634179413117*^9}},ExpressionUUID->"85ae3049-faf7-4064-b68f-\
+b03d64103219"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Example 1: Evaluating a Sum", "Section",
+ CellChangeTimes->{{3.9486341933444853`*^9, 3.948634194824506*^9}, {
+  3.948635055304043*^9, 3.9486350660782146`*^9}, {3.94863928141184*^9, 
+  3.948639281426399*^9}},ExpressionUUID->"f65eae7f-3325-4500-a308-\
+c8a8caac6582"],
+
+Cell[TextData[{
+ "We start with a basic example that can be found at the beginning of the \
+book A=B. Suppose that we have the following sum: ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["f", "TI"], 
+         RowBox[{"(", 
+           StyleBox["n", "TI"], ")"}], "\[LongEqual]", 
+         UnderoverscriptBox["\[Sum]", 
+          RowBox[{
+            StyleBox["k", "TI"], "\[LongEqual]", "0"}], 
+          StyleBox["n", "TI"], LimitsPositioning -> True], 
+         SuperscriptBox[
+          RowBox[{"(", "-1", ")"}], 
+          StyleBox["k", "TI"]], 
+         RowBox[{"(", 
+           GridBox[{{
+              RowBox[{
+                StyleBox["x", "TI"], "-", 
+                StyleBox["k", "TI"], "+", "1"}]}, {
+              StyleBox["k", "TI"]}}], ")"}], 
+         RowBox[{"(", 
+           GridBox[{{
+              RowBox[{
+                StyleBox["x", "TI"], "-", "2", 
+                StyleBox["k", "TI"]}]}, {
+              RowBox[{
+                StyleBox["n", "TI"], "-", 
+                StyleBox["k", "TI"]}]}}], ")"}]}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "f(n)=\\sum_{k=0}^n(-1)^k{x-k+1 \\choose k}{x-2k \\choose n-k}", "state" -> 
+     "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "35fcfd6c-9043-4c1c-b143-176436c6bcb7"],
+ ". A formula like this could come about after applying the method \
+inclusion/exclusion. We will describe: a general method to simplify these \
+sums, a method to prove that our answers are correct, and a description of \
+the limitations of the technique."
+}], "Text",
+ CellChangeTimes->{{3.948634252004509*^9, 3.948634280830986*^9}, {
+  3.9486343274025793`*^9, 3.948634368604684*^9}, {3.948634411269105*^9, 
+  3.948634533564027*^9}, {3.948634631122487*^9, 
+  3.948634693359239*^9}},ExpressionUUID->"7cd944d6-0249-4020-84a1-\
+9e45f5508b0e"],
+
+Cell[TextData[{
+ "We let ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["F", "TI"], "(", 
+         RowBox[{
+           StyleBox["n", "TI"], ",", 
+           StyleBox["k", "TI"]}], ")"}], TraditionalForm], "errors" -> {}, 
+     "input" -> "F(n,k)", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "a3ce4736-396f-44b5-9d9f-4298711c657b"],
+ " be the summand, ",
+ Cell[BoxData[
+  TemplateBox[<|"boxes" -> FormBox[
+      RowBox[{
+        StyleBox["F", "TI"], 
+        RowBox[{"(", 
+          RowBox[{
+            StyleBox["n", "TI"], ",", 
+            StyleBox["k", "TI"]}], ")"}], "\[LongEqual]", 
+        SuperscriptBox[
+         RowBox[{"(", "-1", ")"}], 
+         StyleBox["k", "TI"]], 
+        RowBox[{"(", 
+          GridBox[{{
+             RowBox[{
+               StyleBox["x", "TI"], "-", 
+               StyleBox["k", "TI"], "+", "1"}]}, {
+             StyleBox["k", "TI"]}}], ")"}], 
+        RowBox[{"(", 
+          GridBox[{{
+             RowBox[{
+               StyleBox["x", "TI"], "-", "2", 
+               StyleBox["k", "TI"]}]}, {
+             RowBox[{
+               StyleBox["n", "TI"], "-", 
+               StyleBox["k", "TI"]}]}}], ")"}]}], TraditionalForm], 
+    "errors" -> {}, "input" -> 
+    "F(n,k)=(-1)^k{x-k+1 \\choose k}{x-2k \\choose n-k}", "state" -> "Boxes"|>,
+   "TeXAssistantTemplate"]], "InlineCode",ExpressionUUID->
+  "e856f7f1-ce04-4da3-9ab4-5d12e92a9630"],
+ ". "
+}], "Text",
+ CellChangeTimes->{{3.948634236023073*^9, 3.9486342472515173`*^9}, {
+  3.9486347181677723`*^9, 3.94863475172577*^9}, {3.948634799969542*^9, 
+  3.948634807182725*^9}, {3.9486348424380417`*^9, 3.9486349183735647`*^9}, {
+  3.948634998882847*^9, 3.948635040273446*^9}, {3.948635103416108*^9, 
+  3.948635120884348*^9}, {3.948635206565929*^9, 
+  3.948635208042346*^9}},ExpressionUUID->"75fac220-9bac-437d-9d39-\
+d10dcd992557"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"F", "[", 
+   RowBox[{"k_", ",", "n_"}], "]"}], ":=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"-", "1"}], ")"}], "^", "k"}], " ", 
+   RowBox[{"Binomial", "[", 
+    RowBox[{
+     RowBox[{"x", "-", "k", "+", "1"}], ",", "k"}], "]"}], " ", 
+   RowBox[{"Binomial", "[", 
+    RowBox[{
+     RowBox[{"x", "-", 
+      RowBox[{"2", "k"}]}], ",", 
+     RowBox[{"n", "-", "k"}]}], "]"}]}]}]], "Code",
+ CellChangeTimes->{{3.948635221593557*^9, 3.948635281523999*^9}, {
+  3.948637205429237*^9, 3.948637207810025*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"2e20a1cb-4ae6-4b52-8115-90e185df847d"],
+
+Cell[TextData[{
+ "The key idea is to find a special recurrence that is satisfied by ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["F", "TI"], "(", 
+         RowBox[{
+           StyleBox["n", "TI"], ",", 
+           StyleBox["k", "TI"]}], ")"}], TraditionalForm], "errors" -> {}, 
+     "input" -> "F(n,k)", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "cee96bb5-94ca-4074-ab43-b16dcff7041d"],
+ ". Then we sum the resulting recurrence over all values k to obtain a \
+recurrence for ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["f", "TI"], "(", 
+         StyleBox["n", "TI"], ")"}], TraditionalForm], "errors" -> {}, 
+     "input" -> "f(n)", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "7c311b45-b083-49b4-afce-2c2d6b5c5d94"],
+ ". This is achieved by Zeilberger\[CloseCurlyQuote]s creative telescoping \
+algorithm. We load it in."
+}], "Text",
+ CellChangeTimes->{
+  3.948635214647242*^9},ExpressionUUID->"d6e9621f-1919-4c56-85ff-\
+e64d28bece03"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"<<", " ", "RISC`fastZeil`"}]], "Input",
+ CellChangeTimes->{{3.633255490344521*^9, 3.6332554988121634`*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"15e5f1b3-436d-412e-acb0-0df6a33e5b24"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "F", "shdw", 
+   "\"Symbol \\!\\(\\*RowBox[{\\\"\\\\\\\"F\\\\\\\"\\\"}]\\) appears in \
+multiple contexts \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"\\\\\\\"RISC`RISCComb`\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"Global`\\\\\\\"\\\"}], \\\"}\\\"}]\\); definitions in context \\!\
+\\(\\*RowBox[{\\\"\\\\\\\"RISC`RISCComb`\\\\\\\"\\\"}]\\) may shadow or be \
+shadowed by other definitions.\"", 2, 7, 1, 20636081470180067126, "Local", 
+   "RISC`RISCComb`F"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellChangeTimes->{3.948637122430334*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"d5b8dce1-90eb-4dae-b089-161722a83b91"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Zb", "shdw", 
+   "\"Symbol \\!\\(\\*RowBox[{\\\"\\\\\\\"Zb\\\\\\\"\\\"}]\\) appears in \
+multiple contexts \\!\\(\\*RowBox[{\\\"{\\\", \
+RowBox[{\\\"\\\\\\\"RISC`fastZeil`\\\\\\\"\\\", \\\",\\\", \
+\\\"\\\\\\\"Global`\\\\\\\"\\\"}], \\\"}\\\"}]\\); definitions in context \\!\
+\\(\\*RowBox[{\\\"\\\\\\\"RISC`fastZeil`\\\\\\\"\\\"}]\\) may shadow or be \
+shadowed by other definitions.\"", 2, 7, 2, 20636081470180067126, "Local", 
+   "RISC`fastZeil`Zb"},
+  "MessageTemplate2"]], "Message", "MSG",
+ CellChangeTimes->{3.948637122546932*^9},
+ CellLabel->
+  "During evaluation of \
+In[7]:=",ExpressionUUID->"f216463e-df6d-4883-89b1-1f27b0217f2b"]
+}, Open  ]],
+
+Cell["\<\
+Fast Zeilberger Package version 3.61
+written by Peter Paule, Markus Schorn, and Axel Riese
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria\
+\>", "Text",
+ CellFrame->True,
+ GeneratedCell->True,
+ CellAutoOverwrite->True,
+ CellChangeTimes->{3.9486371226293488`*^9},
+ ShowAutoSpellCheck->False,
+ FontColor->RGBColor[0, 0, 0],
+ Background->RGBColor[
+  0.796887, 0.789075, 
+   0.871107],ExpressionUUID->"f3cdcc2b-328c-4675-a0fe-9ec950f9286d"],
+
+Cell["\<\
+The function from the package that we need is called Zb. We can check its \
+intended use with the ? function.\
+\>", "Text",
+ CellChangeTimes->{{3.948635158022235*^9, 
+  3.948635179841852*^9}},ExpressionUUID->"109a4812-ee80-4343-b48f-\
+66dd5f58497d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "Zb"}]], "Input",
+ CellChangeTimes->{{3.9486351456099997`*^9, 3.948635147658452*^9}},
+ CellLabel->"In[15]:=",ExpressionUUID->"7d85d87c-9ae7-4f25-afa9-022770440560"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = False, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox[
+             TagBox[
+              TooltipBox[
+               StyleBox["\<\" Symbol\"\>", "InformationRowLabel",
+                StripOnInput->False],
+               "\"Symbol\"",
+               TooltipStyle->"TextStyling"],
+              Annotation[#, "Symbol", "Tooltip"]& ], "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"Zb[ function, range, n, order],\\nuses Zeilberger's \
+algorithm to find a recurrence relation of given order in n\\nfor the sum of \
+the function over the range.\\n\\n\\nZb[ function, k, n, order],\\nuses \
+Zeilberger's algorithm to find a recurrence relation of given order in \
+n\\nfor the function. This recurrence is \[LongDash] up to a telescoping part \
+\[LongDash]\\nfree of k.\\n\\n\\nIn both calls, if the order is of the form \
+{ord1, ord2}, Zb tries to find\\na recurrence whose order is between ord1 and \
+ord2. Omitting the order is equivalent to\\nspecifying {0, Infinity}.\"\>", 
+             "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   PaneSelectorBox[{True->
+                    ButtonBox[
+                    PaneSelectorBox[{False->
+                    TemplateBox[{"\[ThickSpace]", "\"\[ThickSpace]\"", 
+                    StyleBox[
+                    "\"Options\"", "InformationRowLabel", StripOnInput -> 
+                    False], 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEBitmaps", "DownPointerOpener"]]},
+                    "RowWithSeparators"], True->
+                    TemplateBox[{"\[ThickSpace]", "\"\[ThickSpace]\"", 
+                    StyleBox[
+                    "\"Options\"", "InformationRowLabel", StripOnInput -> 
+                    False], 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEBitmaps", "DownPointerOpenerHot"]]},
+                    "RowWithSeparators"]}, Dynamic[
+                    CurrentValue["MouseOver"]],
+                    FrameMargins->0,
+                    ImageSize->Automatic],
+                    Appearance->None,
+                    BaseStyle->None,
+                    
+                    ButtonFunction:>(Part[System`InformationDump`open$$, 3] = 
+                    False),
+                    Evaluator->Automatic,
+                    FrameMargins->0,
+                    ImageMargins->0,
+                    Method->"Preemptive"], False->
+                    ButtonBox[
+                    PaneSelectorBox[{False->
+                    TemplateBox[{"\[ThickSpace]", "\"\[ThickSpace]\"", 
+                    StyleBox[
+                    "\"Options\"", "InformationRowLabel", StripOnInput -> 
+                    False], 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEBitmaps", "RightPointerOpener"]]},
+                    "RowWithSeparators"], True->
+                    TemplateBox[{"\[ThickSpace]", "\"\[ThickSpace]\"", 
+                    StyleBox[
+                    "\"Options\"", "InformationRowLabel", StripOnInput -> 
+                    False], 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEBitmaps", "RightPointerOpenerHot"]]},
+                    "RowWithSeparators"]}, Dynamic[
+                    CurrentValue["MouseOver"]],
+                    FrameMargins->0,
+                    ImageSize->Automatic],
+                    Appearance->None,
+                    BaseStyle->None,
+                    
+                    ButtonFunction:>(Part[System`InformationDump`open$$, 3] = 
+                    True),
+                    Evaluator->Automatic,
+                    FrameMargins->0,
+                    ImageMargins->0,
+                    Method->"Preemptive"]}, Dynamic[
+                    FEPrivate`Part[System`InformationDump`open$$, 3]]], 
+                   PaneSelectorBox[{True->GridBox[{
+                    {
+                    RowBox[{"pl", "\[Rule]", "0"}]},
+                    {
+                    RowBox[{"EquationSolver", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"Parameterized", "\[Rule]", 
+                    RowBox[{"{", "}"}]}]},
+                    {
+                    RowBox[{"NumericCheck", "\[Rule]", "False"}]},
+                    {
+                    StyleBox[
+                    
+                    TemplateBox[{
+                    "\"(\"", "\"\[InvisibleSpace]\"", "4", "\" total)\""},
+                    "RowDefault"], "InformationRowOpener",
+                    StripOnInput->False]}
+                    },
+                    BaselinePosition->{Baseline, {1, 1}},
+                    DefaultBaseStyle->"Column",
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{1.}}}], False->
+                    RowBox[{
+                    RowBox[{"pl", "\[Rule]", "0"}], "\[ThinSpace]", 
+                    StyleBox["\<\"\[Ellipsis]\"\>", "InformationRowOpener",
+                    StripOnInput->False], "\[ThinSpace]", 
+                    StyleBox[
+                    
+                    TemplateBox[{
+                    "\"(\"", "\"\[InvisibleSpace]\"", "4", "\" total)\""},
+                    "RowDefault"], "InformationRowOpener",
+                    StripOnInput->False]}]}, Dynamic[
+                    FEPrivate`Part[System`InformationDump`open$$, 3]],
+                    BaselinePosition->Baseline,
+                    ImageSize->Automatic]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Attributes\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"Attributes\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, "Attributes", "Tooltip"]& ], 
+                   RowBox[{"{", 
+                    RowBox[{"Locked", ",", "ReadProtected"}], "}"}]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"RISC`fastZeil`Zb\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox[
+             TagBox[
+              TooltipBox[
+               StyleBox["\<\" Symbol\"\>", "InformationRowLabel",
+                StripOnInput->False],
+               "\"Symbol\"",
+               TooltipStyle->"TextStyling"],
+              Annotation[#, "Symbol", "Tooltip"]& ], "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"Zb[ function, range, n, order],\\nuses Zeilberger's \
+algorithm to find a recurrence relation of given order in n\\nfor the sum of \
+the function over the range.\\n\\n\\nZb[ function, k, n, order],\\nuses \
+Zeilberger's algorithm to find a recurrence relation of given order in \
+n\\nfor the function. This recurrence is \[LongDash] up to a telescoping part \
+\[LongDash]\\nfree of k.\\n\\n\\nIn both calls, if the order is of the form \
+{ord1, ord2}, Zb tries to find\\na recurrence whose order is between ord1 and \
+ord2. Omitting the order is equivalent to\\nspecifying {0, Infinity}.\"\>", 
+             "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"],
+               ImageSizeCache->{10., {2.673828125, 7.326171875}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"],
+               ImageSizeCache->{10., {2.673828125, 7.326171875}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> 
+    "Zb[ function, range, n, order],\nuses Zeilberger's algorithm to find a \
+recurrence relation of given order in n\nfor the sum of the function over the \
+range.\n\n\nZb[ function, k, n, order],\nuses Zeilberger's algorithm to find \
+a recurrence relation of given order in n\nfor the function. This recurrence \
+is \[LongDash] up to a telescoping part \[LongDash]\nfree of k.\n\n\nIn both \
+calls, if the order is of the form {ord1, ord2}, Zb tries to find\na \
+recurrence whose order is between ord1 and ord2. Omitting the order is \
+equivalent to\nspecifying {0, Infinity}.", "Documentation" -> None, 
+    "OwnValues" -> None, "UpValues" -> None, "DownValues" -> None, 
+    "SubValues" -> None, "DefaultValues" -> None, "NValues" -> None, 
+    "FormatValues" -> None, 
+    "Options" -> {
+     RISC`fastZeil`pl -> 0, RISC`RISCComb`EquationSolver -> Automatic, 
+      RISC`fastZeil`Parameterized -> {}, RISC`RISCComb`NumericCheck -> False},
+     "Attributes" -> {Locked, ReadProtected}, "FullName" -> 
+    "RISC`fastZeil`Zb"|>, False]]], "Output",
+ CellChangeTimes->{
+  3.948635148551914*^9, {3.9486371229727488`*^9, 3.948637144505706*^9}},
+ CellLabel->"Out[15]=",ExpressionUUID->"08d64fbf-7fa6-482d-83fd-2a4ce8877451"]
+}, Open  ]],
+
+Cell["We try to find order-1 recurrences for F:", "Text",
+ CellChangeTimes->{{3.9486353336078157`*^9, 
+  3.948635342149035*^9}},ExpressionUUID->"fb6ce9fc-f8aa-4c11-ad64-\
+d58a58260592"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Zb", "[", 
+  RowBox[{
+   RowBox[{"F", "[", 
+    RowBox[{"n", ",", "k"}], "]"}], ",", "k", ",", "n", ",", "1"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.948635186125201*^9, 3.948635187966235*^9}, {
+  3.948635303234213*^9, 3.948635326839601*^9}, {3.948637128544125*^9, 
+  3.9486371695533733`*^9}},
+ CellLabel->"In[19]:=",ExpressionUUID->"376e2335-c43a-4724-bfbd-3ec5679e6de5"],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{{3.948635318763317*^9, 3.948635327383527*^9}, 
+   3.948636311284293*^9, {3.9486371230513906`*^9, 3.948637170215269*^9}},
+ CellLabel->"Out[19]=",ExpressionUUID->"97e8a0a6-171c-4d63-a6af-a9e7384e761b"]
+}, Open  ]],
+
+Cell["\<\
+No recurrence is found, so we search for higher order recurrences:\
+\>", "Text",
+ CellChangeTimes->{{3.948635348320879*^9, 
+  3.9486353579285088`*^9}},ExpressionUUID->"4b8764dd-a0fa-47a1-a4cd-\
+17fa89f4f077"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"recurrences", " ", "=", " ", 
+  RowBox[{"Zb", "[", 
+   RowBox[{
+    RowBox[{"F", "[", 
+     RowBox[{"n", ",", "k"}], "]"}], ",", "k", ",", "n", ",", "2"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.948635394234652*^9, 3.94863540166952*^9}, {
+  3.948635682262656*^9, 3.9486356837654448`*^9}, {3.948635930622871*^9, 
+  3.948635932567214*^9}, {3.948637082281057*^9, 3.948637111307117*^9}},
+ CellLabel->"In[20]:=",ExpressionUUID->"f6c215fb-66e5-4f1f-a80e-80d87135d9b9"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"2", "+", "n"}], ")"}], " ", 
+     RowBox[{"(", 
+      RowBox[{"n", "-", "x"}], ")"}], " ", 
+     TagBox[
+      RowBox[{"F", "[", 
+       RowBox[{"k", ",", "n"}], "]"}],
+      HoldForm]}], "-", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"2", "+", "n"}], ")"}], " ", 
+     RowBox[{"(", 
+      RowBox[{"n", "-", "x"}], ")"}], " ", 
+     TagBox[
+      RowBox[{"F", "[", 
+       RowBox[{"k", ",", 
+        RowBox[{"2", "+", "n"}]}], "]"}],
+      HoldForm]}]}], "\[Equal]", 
+   RowBox[{
+    SubscriptBox["\[CapitalDelta]", "k"], "[", 
+    RowBox[{
+     TagBox[
+      RowBox[{"F", "[", 
+       RowBox[{"k", ",", "n"}], "]"}],
+      HoldForm], " ", 
+     RowBox[{"R", "[", 
+      RowBox[{"k", ",", "n"}], "]"}]}], "]"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.948635402778035*^9, {3.948635656993174*^9, 3.9486356858216677`*^9}, 
+   3.948635934077511*^9, 3.948636316033143*^9, {3.948637091617168*^9, 
+   3.948637123111545*^9}, 3.948637179326263*^9},
+ CellLabel->"Out[20]=",ExpressionUUID->"b65a8ba9-ad80-4375-8913-139fe56126c9"]
+}, Open  ]],
+
+Cell["It\[CloseCurlyQuote]s slightly nicer to see the output in TeXForm.", \
+"Text",
+ CellChangeTimes->{{3.9486354154119463`*^9, 3.948635451958725*^9}, {
+   3.948635843551708*^9, 3.948635859417069*^9}, 
+   3.948636340419662*^9},ExpressionUUID->"5783f7f9-639b-4576-8e32-\
+ba776ddc8ea0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TeXForm", "[", 
+  RowBox[{"recurrences", "[", 
+   RowBox[{"[", "1", "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.9486354615568867`*^9, 3.948635509125112*^9}, {
+  3.948635602686714*^9, 3.948635690892433*^9}, {3.9486357498366623`*^9, 
+  3.948635793134424*^9}},
+ CellLabel->"In[11]:=",ExpressionUUID->"25387b15-ab92-44aa-a39d-db39adf6f8a4"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part", "partd", 
+   "\"Part specification \\!\\(\\*RowBox[{\\\"$Failed\\\", \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]\\) is \
+longer than depth of object.\"", 2, 11, 5, 20636081470180067126, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.948637123178534*^9},
+ CellLabel->
+  "During evaluation of \
+In[11]:=",ExpressionUUID->"fcc5b99b-6a00-4784-8dfb-5db238943558"]
+}, Open  ]],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[
+  TemplateBox[<|"boxes" -> FormBox[
+      RowBox[{
+        RowBox[{"(", 
+          RowBox[{
+            StyleBox["n", "TI"], "+", "2"}], ")"}], 
+        RowBox[{"(", 
+          RowBox[{
+            StyleBox["n", "TI"], "-", 
+            StyleBox["x", "TI"]}], ")"}], 
+        StyleBox["F", "TI"], 
+        RowBox[{"(", 
+          RowBox[{
+            StyleBox["k", "TI"], ",", 
+            StyleBox["n", "TI"]}], ")"}], "-", 
+        RowBox[{"(", 
+          RowBox[{
+            StyleBox["n", "TI"], "+", "2"}], ")"}], 
+        RowBox[{"(", 
+          RowBox[{
+            StyleBox["n", "TI"], "-", 
+            StyleBox["x", "TI"]}], ")"}], 
+        StyleBox["F", "TI"], 
+        RowBox[{"(", 
+          RowBox[{
+            StyleBox["k", "TI"], ",", "2", "+", 
+            StyleBox["n", "TI"]}], ")"}], "\[LongEqual]", 
+        SubscriptBox["\[CapitalDelta]", 
+         StyleBox["k", "TI"]], 
+        RowBox[{"(", 
+          RowBox[{
+            StyleBox["F", "TI"], 
+            RowBox[{"(", 
+              RowBox[{
+                StyleBox["k", "TI"], ",", 
+                StyleBox["n", "TI"]}], ")"}], 
+            StyleBox["R", "TI"], 
+            RowBox[{"(", 
+              RowBox[{
+                StyleBox["k", "TI"], ",", 
+                StyleBox["n", "TI"]}], ")"}]}], ")"}], "\[LongEqual]", 
+        StyleBox["F", "TI"], 
+        RowBox[{"(", 
+          RowBox[{
+            StyleBox["n", "TI"], ",", 
+            StyleBox["k", "TI"], "+", "1"}], ")"}], 
+        StyleBox["R", "TI"], 
+        RowBox[{"(", 
+          RowBox[{
+            StyleBox["n", "TI"], ",", 
+            StyleBox["k", "TI"], "+", "1"}], ")"}], "-", 
+        StyleBox["F", "TI"], 
+        RowBox[{"(", 
+          RowBox[{
+            StyleBox["n", "TI"], ",", 
+            StyleBox["k", "TI"]}], ")"}], 
+        StyleBox["R", "TI"], 
+        RowBox[{"(", 
+          RowBox[{
+            StyleBox["n", "TI"], ",", 
+            StyleBox["k", "TI"]}], ")"}]}], TraditionalForm], "errors" -> {}, 
+    "input" -> 
+    "(n+2) (n-x) F(k,n)-(n+2) (n-x) F(k,2+n)=\\Delta _k(F(k,n) \
+R(k,n))=F(n,k+1)R(n,k+1)-F(n,k)R(n,k)", "state" -> "Boxes"|>,
+   "TeXAssistantTemplate"], 
+  TraditionalForm]],ExpressionUUID->"c08f6f4d-7276-46cc-a890-be74360a069e"]], \
+"Text",
+ CellChangeTimes->{
+  3.948635824952332*^9, {3.9486361218708773`*^9, 
+   3.9486361227315683`*^9}},ExpressionUUID->"b5a9d6ef-67ed-49e6-abed-\
+ffbc3b1905ae"],
+
+Cell["\<\
+As part of the output, there is another function, R, that is defined. We \
+check its value, though it doesn\[CloseCurlyQuote]t actually help us in doing \
+the sum. Later, we will see that it can be used to construct a proof that the \
+sum was performed correctly.\
+\>", "Text",
+ CellChangeTimes->{{3.948635951105811*^9, 
+  3.948636008206278*^9}},ExpressionUUID->"4f79b014-4622-411c-81ed-\
+33824ed4beb7"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TeXForm", "[", 
+  RowBox[{"show", "[", "R", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.948635862764173*^9, 3.948635895917432*^9}},
+ CellLabel->"In[12]:=",ExpressionUUID->"271e7e7e-8220-4d07-baa0-cbb7ed6c4924"],
+
+Cell["\\text{show}(R)", "Output",
+ CellChangeTimes->{{3.94863586857722*^9, 3.948635896719318*^9}, 
+   3.948635938822913*^9, 3.948637123273674*^9},
+ CellLabel->
+  "Out[12]//TeXForm=",ExpressionUUID->"d2fc69a3-099a-4338-aa58-0813f835a4d7"]
+}, Open  ]],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["R", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], ",", 
+             StyleBox["k", "TI"]}], ")"}], "\[LongEqual]", 
+         FractionBox[
+          RowBox[{
+            StyleBox["k", "TI"], 
+            RowBox[{"(", 
+              RowBox[{"-2", 
+                StyleBox["k", "TI"], "+", 
+                StyleBox["x", "TI"], "+", "1"}], ")"}], 
+            RowBox[{"(", 
+              RowBox[{"-", 
+                StyleBox["k", "TI"], "+", 
+                StyleBox["x", "TI"], "+", "2"}], ")"}], 
+            RowBox[{"(", 
+              RowBox[{"2", 
+                StyleBox["n", "TI"], "-", 
+                StyleBox["x", "TI"], "+", "2"}], ")"}]}], 
+          RowBox[{
+            RowBox[{"(", 
+              RowBox[{"-", 
+                StyleBox["k", "TI"], "+", 
+                StyleBox["n", "TI"], "+", "1"}], ")"}], "(", 
+            RowBox[{"-", 
+              StyleBox["k", "TI"], "+", 
+              StyleBox["n", "TI"], "+", "2"}], ")"}]]}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "R(n,k)=\\frac{k (-2 k+x+1) (-k+x+2) (2 n-x+2)}{(-k+n+1) (-k+n+2)}", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "e3643479-7a4d-4b69-ab18-02665b287ba9"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.94863601798847*^9, 3.948636023119837*^9}, 
+   3.948636067914618*^9},ExpressionUUID->"d3e6ac97-b14e-41c5-af83-\
+08413c87fa94"],
+
+Cell[TextData[{
+ "The key point is that we have a recurrence in n on the left side and a \
+recurrence in k on the right side. When we sum both sides over k, there is \
+telescoping cancellation on the right. As long as F(n,k)R(n,k)=0 for all but \
+a finite number of k, we have ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         UnderoverscriptBox["\[Sum]", 
+          RowBox[{
+            StyleBox["k", "TI"], "\[LongEqual]", "0"}], 
+          StyleBox["n", "TI"], LimitsPositioning -> True], 
+         StyleBox["F", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], ",", 
+             StyleBox["k", "TI"], "+", "1"}], ")"}], 
+         StyleBox["R", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], ",", 
+             StyleBox["k", "TI"], "+", "1"}], ")"}], "-", 
+         StyleBox["F", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], ",", 
+             StyleBox["k", "TI"]}], ")"}], 
+         StyleBox["R", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], ",", 
+             StyleBox["k", "TI"]}], ")"}], "\[LongEqual]", "0"}], 
+       TraditionalForm], "errors" -> {}, "input" -> 
+     "\\sum_{k=0}^n F(n,k+1)R(n,k+1)-F(n,k)R(n,k)=0", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "45548680-555f-4b9b-aa01-8f783e77bf00"],
+ ". Therefore, summing both sides of the recurrence for F(n,k) over all \
+values k gives ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         UnderoverscriptBox["\[Sum]", 
+          RowBox[{
+            StyleBox["k", "TI"], "\[LongEqual]", "-", "\[Infinity]"}], 
+          "\[Infinity]", LimitsPositioning -> True], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "+", "2"}], ")"}], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "-", 
+             StyleBox["x", "TI"]}], ")"}], 
+         StyleBox["F", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["k", "TI"], ",", 
+             StyleBox["n", "TI"]}], ")"}], "-", 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "+", "2"}], ")"}], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "-", 
+             StyleBox["x", "TI"]}], ")"}], 
+         StyleBox["F", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["k", "TI"], ",", 
+             StyleBox["n", "TI"], "+", "2"}], ")"}], "\[LongEqual]", "0"}], 
+       TraditionalForm], "errors" -> {}, "input" -> 
+     "\\sum_{k=-\\infty}^{\\infty} (n+2)(n-x)F(k,n)-(n+2)(n-x)F(k,n+2)=0", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "0c7af611-487e-4478-8a90-46cf8d581854"],
+ "\n",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "+", "2"}], ")"}], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "-", 
+             StyleBox["x", "TI"]}], ")"}], 
+         UnderoverscriptBox["\[Sum]", 
+          RowBox[{
+            StyleBox["k", "TI"], "\[LongEqual]", "-", "\[Infinity]"}], 
+          "\[Infinity]", LimitsPositioning -> True], 
+         StyleBox["F", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["k", "TI"], ",", 
+             StyleBox["n", "TI"]}], ")"}], "-", 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "+", "2"}], ")"}], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "-", 
+             StyleBox["x", "TI"]}], ")"}], 
+         UnderoverscriptBox["\[Sum]", 
+          RowBox[{
+            StyleBox["k", "TI"], "\[LongEqual]", "-", "\[Infinity]"}], 
+          "\[Infinity]", LimitsPositioning -> True], 
+         StyleBox["F", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["k", "TI"], ",", 
+             StyleBox["n", "TI"], "+", "2"}], ")"}], "\[LongEqual]", "0"}], 
+       TraditionalForm], "errors" -> {}, "input" -> 
+     "(n+2)(n-x)\\sum_{k=-\\infty}^{\\infty}F(k,n)-(n+2)(n-x)\\sum_{k=-\\\
+infty}^{\\infty}F(k,n+2)=0", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "24b64b83-47c3-4058-a7c5-fec749af1f6d"]
+}], "Text",
+ CellChangeTimes->{{3.9486362217911663`*^9, 3.94863623184308*^9}, {
+  3.9486363696343946`*^9, 3.948636402869617*^9}, {3.948636528983253*^9, 
+  3.948636537553944*^9}, {3.948636614295445*^9, 3.948636631944167*^9}, {
+  3.948636753201239*^9, 3.948636945874123*^9}, {3.9486375391998253`*^9, 
+  3.9486375463270397`*^9}},ExpressionUUID->"85b111ba-885a-42ea-a9a8-\
+b2553bb4a27e"],
+
+Cell[TextData[{
+ "Note that F(k,n)=0, except when k is in [0,n], so f(n) is the summation of \
+F(n,k) over all integers k.\n",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "+", "2"}], ")"}], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "-", 
+             StyleBox["x", "TI"]}], ")"}], 
+         StyleBox["f", "TI"], 
+         RowBox[{"(", 
+           StyleBox["n", "TI"], ")"}], "-", 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "+", "2"}], ")"}], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "-", 
+             StyleBox["x", "TI"]}], ")"}], 
+         StyleBox["f", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "+", "2"}], ")"}], "\[LongEqual]", "0"}], 
+       TraditionalForm], "errors" -> {}, "input" -> 
+     "(n+2)(n-x)f(n)-(n+2)(n-x)f(n+2)=0", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "3cc1221d-9d8f-4251-bd6c-ed74145521c9"],
+ ". As long as ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    TemplateBox[<|"boxes" -> FormBox[
+        RowBox[{
+          StyleBox["n", "TI"], "\[NotEqual]", 
+          StyleBox["x", "TI"]}], TraditionalForm], "errors" -> {}, "input" -> 
+      "n\\neq x", "state" -> "Boxes"|>,
+     "TeXAssistantTemplate"], ","}], TraditionalForm]],ExpressionUUID->
+  "4c492e17-d486-4e59-badf-579c416665ba"],
+ " this implies that\n",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["f", "TI"], 
+         RowBox[{"(", 
+           StyleBox["n", "TI"], ")"}], "\[LongEqual]", 
+         StyleBox["f", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], "+", "2"}], ")"}]}], TraditionalForm], 
+     "errors" -> {}, "input" -> "f(n)=f(n+2)", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "65ff15fd-0178-48d0-99e7-4ea9a3c7c435"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.948637637966998*^9, 3.948637747619857*^9}, {
+  3.948637796055772*^9, 3.948637806773197*^9}, {3.948637903545187*^9, 
+  3.948637925696183*^9}, {3.948637982546918*^9, 
+  3.9486380081085997`*^9}},ExpressionUUID->"38a820bf-0b46-4102-ac0f-\
+617f9c11a9d5"],
+
+Cell["\<\
+This is a linear, homogeneous recurrence for the summation f(n), that we want \
+to simplify. By checking its initial conditions, we have simplified the sum.\
+\>", "Text",
+ CellChangeTimes->{{3.948637735134503*^9, 3.948637739116894*^9}, {
+  3.9486379499684277`*^9, 3.948637968082697*^9}, {3.948638020431466*^9, 
+  3.94863804847192*^9}, {3.948639314651649*^9, 
+  3.948639319660901*^9}},ExpressionUUID->"042e1691-1431-4b82-911e-\
+a86914353cef"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"F", "[", 
+   RowBox[{"0", ",", "0"}], "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Calculate", " ", "f", 
+     RowBox[{"(", "0", ")"}]}], "=", " ", 
+    RowBox[{"F", 
+     RowBox[{"(", 
+      RowBox[{"0", ",", "0"}], ")"}]}]}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.948638063424924*^9, 
+  3.9486381170001507`*^9}},ExpressionUUID->"b1cde6a2-4ab2-4a06-8437-\
+23217aa8b2a3"],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{3.948638099675046*^9},
+ CellLabel->"Out[2]=",ExpressionUUID->"c6735883-e4cb-4cfd-8071-7e8d0c41cb1d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"F", "[", 
+   RowBox[{"0", ",", "1"}], "]"}], "+", 
+  RowBox[{"F", "[", 
+   RowBox[{"1", ",", "1"}], "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Calculate", " ", "f", 
+     RowBox[{"(", "1", ")"}]}], "=", 
+    RowBox[{
+     RowBox[{"F", 
+      RowBox[{"(", 
+       RowBox[{"0", ",", "1"}], ")"}]}], "+", 
+     RowBox[{"F", 
+      RowBox[{"(", 
+       RowBox[{"1", ",", "1"}], ")"}]}]}]}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.94863811902106*^9, 3.948638147670437*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"ec184f68-839a-4a76-91f9-49607cd1735a"],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.9486381494177523`*^9},
+ CellLabel->"Out[3]=",ExpressionUUID->"d4329b4e-882b-45ab-a295-a70b1b516b8f"]
+}, Open  ]],
+
+Cell["This completely solves our original question.", "Text",
+ CellChangeTimes->{{3.948638184433617*^9, 
+  3.948638233000491*^9}},ExpressionUUID->"e662aa04-c0ad-4fb3-879e-\
+371d121b2299"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Questions related to first example.", "Section",
+ CellChangeTimes->{{3.9486382442430887`*^9, 
+  3.9486382757507763`*^9}},ExpressionUUID->"07384a8c-42bb-4536-a801-\
+abb6bec92c3c"],
+
+Cell["\<\
+The first example is practical one that demonstrates how to deal with sums. \
+But maybe it raises more questions than it answers. We give some brief answers.
+1.) Is this method completely general? When does it fail? 
+\tWe will discuss this in the next lab. It \[OpenCurlyDoubleQuote]basically\
+\[CloseCurlyDoubleQuote] always works.
+2.) How can we trust the result? 
+\tThe algebraic claims can be verified with Mathematica. If you don\
+\[CloseCurlyQuote]t trust Mathematica, you can use a different Computer \
+Algebra System. In theory, you could verify the claimed identities by hand, \
+since they are just a matter of algebraic manipulations. But in practice this \
+is sometimes infeasible. By publishing the function R(k,n), we can devise a \
+succinct standard-form proof that can be verified with the help of a machine.
+3.) How does the function Zb work? 
+\tThis is addressed in the book A=B. We just accept that it does work and \
+focus on its use.
+4.) What about singularities, like when n=x in the Example?
+\tWe can usually ignore them by appealing to continuity. This question \
+usually isn\[CloseCurlyQuote]t addressed.\
+\>", "Text",
+ CellChangeTimes->{{3.948638284786121*^9, 3.9486387266845503`*^9}, {
+  3.948638911028617*^9, 3.9486390828939867`*^9}, {3.9486392550748177`*^9, 
+  3.948639259115376*^9}},ExpressionUUID->"dea39c7a-2e1d-4fe5-8b6b-\
+7d0d4b283f3e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Flow Chart for Summations", "Section",
+ CellChangeTimes->{{3.948638757724146*^9, 
+  3.948638783941161*^9}},ExpressionUUID->"783078bc-8a13-4433-903d-\
+1c74ee01cb26"],
+
+Cell["\<\
+Here, we present a simple flow chart that describes the Wilf-Zeilberger \
+method.\
+\>", "Text",
+ CellChangeTimes->{{3.9486387922625647`*^9, 
+  3.948638824546081*^9}},ExpressionUUID->"840b52e4-22e1-42a3-8cad-\
+42bd89296b9b"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440, 701.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"80596375-f053-4984-a7ab-aaae2d45c1bb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 226, 4, 96, "Title",ExpressionUUID->"8b7ed600-bfa8-4d2d-ba59-967f35ea605b"],
+Cell[805, 28, 175, 3, 52, "Subtitle",ExpressionUUID->"3f0a38dd-a532-40f5-91ab-cc6a2d8ce158"],
+Cell[CellGroupData[{
+Cell[1005, 35, 163, 3, 65, "Section",ExpressionUUID->"4e3083cf-d394-475d-91d3-db7b89cb04fd"],
+Cell[1171, 40, 454, 9, 55, "Text",ExpressionUUID->"5f3b523f-2aa5-48e2-b692-1b87ca7b42b3"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1662, 54, 159, 3, 65, "Section",ExpressionUUID->"d49595d0-cf80-400f-a97c-d6c5ff4f5911"],
+Cell[1824, 59, 452, 10, 121, "Text",ExpressionUUID->"a01d98a8-3f40-45b7-9e7a-82e23c0dc89d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2313, 74, 203, 4, 65, "Section",ExpressionUUID->"a78a8241-db54-47ce-8068-18152c693980"],
+Cell[2519, 80, 350, 8, 33, "Text",ExpressionUUID->"85ae3049-faf7-4064-b68f-b03d64103219"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2906, 93, 270, 4, 65, "Section",ExpressionUUID->"f65eae7f-3325-4500-a308-c8a8caac6582"],
+Cell[3179, 99, 1885, 45, 78, "Text",ExpressionUUID->"7cd944d6-0249-4020-84a1-9e45f5508b0e"],
+Cell[5067, 146, 1920, 51, 49, "Text",ExpressionUUID->"75fac220-9bac-437d-9d39-d10dcd992557"],
+Cell[6990, 199, 636, 18, 51, "Code",ExpressionUUID->"2e20a1cb-4ae6-4b52-8115-90e185df847d"],
+Cell[7629, 219, 1137, 29, 56, "Text",ExpressionUUID->"d6e9621f-1919-4c56-85ff-e64d28bece03"],
+Cell[CellGroupData[{
+Cell[8791, 252, 209, 3, 29, "Input",ExpressionUUID->"15e5f1b3-436d-412e-acb0-0df6a33e5b24"],
+Cell[9003, 257, 670, 14, 21, "Message",ExpressionUUID->"d5b8dce1-90eb-4dae-b089-161722a83b91"],
+Cell[9676, 273, 673, 14, 21, "Message",ExpressionUUID->"f216463e-df6d-4883-89b1-1f27b0217f2b"]
+}, Open  ]],
+Cell[10364, 290, 502, 14, 115, "Text",ExpressionUUID->"f3cdcc2b-328c-4675-a0fe-9ec950f9286d"],
+Cell[10869, 306, 259, 6, 33, "Text",ExpressionUUID->"109a4812-ee80-4343-b48f-66dd5f58497d"],
+Cell[CellGroupData[{
+Cell[11153, 316, 192, 3, 29, "Input",ExpressionUUID->"7d85d87c-9ae7-4f25-afa9-022770440560"],
+Cell[11348, 321, 15657, 358, 377, "Output",ExpressionUUID->"08d64fbf-7fa6-482d-83fd-2a4ce8877451"]
+}, Open  ]],
+Cell[27020, 682, 185, 3, 33, "Text",ExpressionUUID->"fb6ce9fc-f8aa-4c11-ad64-d58a58260592"],
+Cell[CellGroupData[{
+Cell[27230, 689, 400, 9, 29, "Input",ExpressionUUID->"376e2335-c43a-4724-bfbd-3ec5679e6de5"],
+Cell[27633, 700, 264, 4, 33, "Output",ExpressionUUID->"97e8a0a6-171c-4d63-a6af-a9e7384e761b"]
+}, Open  ]],
+Cell[27912, 707, 218, 5, 33, "Text",ExpressionUUID->"4b8764dd-a0fa-47a1-a4cd-17fa89f4f077"],
+Cell[CellGroupData[{
+Cell[28155, 716, 492, 10, 29, "Input",ExpressionUUID->"f6c215fb-66e5-4f1f-a80e-80d87135d9b9"],
+Cell[28650, 728, 1127, 36, 34, "Output",ExpressionUUID->"b65a8ba9-ad80-4375-8913-139fe56126c9"]
+}, Open  ]],
+Cell[29792, 767, 285, 5, 33, "Text",ExpressionUUID->"5783f7f9-639b-4576-8e32-ba776ddc8ea0"],
+Cell[CellGroupData[{
+Cell[30102, 776, 369, 7, 29, "Input",ExpressionUUID->"25387b15-ab92-44aa-a39d-db39adf6f8a4"],
+Cell[30474, 785, 453, 10, 26, "Message",ExpressionUUID->"fcc5b99b-6a00-4784-8dfb-5db238943558"]
+}, Open  ]],
+Cell[30942, 798, 2433, 71, 37, "Text",ExpressionUUID->"b5a9d6ef-67ed-49e6-abed-ffbc3b1905ae"],
+Cell[33378, 871, 413, 8, 55, "Text",ExpressionUUID->"4f79b014-4622-411c-81ed-33824ed4beb7"],
+Cell[CellGroupData[{
+Cell[33816, 883, 236, 4, 29, "Input",ExpressionUUID->"271e7e7e-8220-4d07-baa0-cbb7ed6c4924"],
+Cell[34055, 889, 237, 4, 46, "Output",ExpressionUUID->"d2fc69a3-099a-4338-aa58-0813f835a4d7"]
+}, Open  ]],
+Cell[34307, 896, 1536, 42, 67, "Text",ExpressionUUID->"d3e6ac97-b14e-41c5-af83-08413c87fa94"],
+Cell[35846, 940, 4794, 124, 157, "Text",ExpressionUUID->"85b111ba-885a-42ea-a9a8-b2553bb4a27e"],
+Cell[40643, 1066, 2346, 64, 77, "Text",ExpressionUUID->"38a820bf-0b46-4102-ac0f-617f9c11a9d5"],
+Cell[42992, 1132, 451, 8, 33, "Text",ExpressionUUID->"042e1691-1431-4b82-911e-a86914353cef"],
+Cell[CellGroupData[{
+Cell[43468, 1144, 420, 13, 29, "Input",ExpressionUUID->"b1cde6a2-4ab2-4a06-8437-23217aa8b2a3"],
+Cell[43891, 1159, 148, 2, 33, "Output",ExpressionUUID->"c6735883-e4cb-4cfd-8071-7e8d0c41cb1d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[44076, 1166, 596, 18, 29, "Input",ExpressionUUID->"ec184f68-839a-4a76-91f9-49607cd1735a"],
+Cell[44675, 1186, 150, 2, 33, "Output",ExpressionUUID->"d4329b4e-882b-45ab-a295-a70b1b516b8f"]
+}, Open  ]],
+Cell[44840, 1191, 187, 3, 33, "Text",ExpressionUUID->"e662aa04-c0ad-4fb3-879e-371d121b2299"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45064, 1199, 184, 3, 65, "Section",ExpressionUUID->"07384a8c-42bb-4536-a801-abb6bec92c3c"],
+Cell[45251, 1204, 1379, 23, 252, "Text",ExpressionUUID->"dea39c7a-2e1d-4fe5-8b6b-7d0d4b283f3e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[46667, 1232, 170, 3, 65, "Section",ExpressionUUID->"783078bc-8a13-4433-903d-1c74ee01cb26"],
+Cell[46840, 1237, 233, 6, 33, "Text",ExpressionUUID->"840b52e4-22e1-42a3-8cad-42bd89296b9b"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
