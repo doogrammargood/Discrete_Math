@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     18839,        506]
-NotebookOptionsPosition[     18168,        487]
-NotebookOutlinePosition[     18560,        503]
-CellTagsIndexPosition[     18517,        500]
+NotebookDataLength[     18894,        507]
+NotebookOptionsPosition[     18223,        488]
+NotebookOutlinePosition[     18615,        504]
+CellTagsIndexPosition[     18572,        501]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -473,7 +473,7 @@ c= \[OpenCurlyDoubleQuote]You wink\[CloseCurlyDoubleQuote]
 1.) \[OpenCurlyDoubleQuote]If the target is identified, then both you and the \
 spy will wink.
 2.) \[OpenCurlyDoubleQuote]If you wink,  then the spy winks if and only if \
-the target is identified. Otherwise, the spy won\[CloseCurlyQuote]t wink.
+the target is not identified. Otherwise, the spy won\[CloseCurlyQuote]t wink.
 3.) \[OpenCurlyDoubleQuote]If the spy winks, then the target is identified if \
 and only if you wink. Otherwise, the target is not identified.\
 \>", "Text",
@@ -481,8 +481,9 @@ and only if you wink. Otherwise, the target is not identified.\
   3.9481497173119287`*^9, 3.948149769096232*^9}, {3.948149818922247*^9, 
   3.948149907604188*^9}, {3.948150076919948*^9, 3.948150277183056*^9}, {
   3.948150317875268*^9, 3.948150384364798*^9}, {3.948150426540131*^9, 
-  3.9481504279577837`*^9}, {3.948150471529163*^9, 
-  3.948150614402855*^9}},ExpressionUUID->"e4473260-5c6d-4f92-96b9-\
+  3.9481504279577837`*^9}, {3.948150471529163*^9, 3.948150614402855*^9}, {
+  3.948657210233176*^9, 
+  3.9486572106681633`*^9}},ExpressionUUID->"e4473260-5c6d-4f92-96b9-\
 76fd3bf740c9"]
 },
 WindowSize->{1440, 701.25},
@@ -507,7 +508,7 @@ Cell[576, 22, 5264, 139, 421, "Input",ExpressionUUID->"1a1ce44c-368a-4974-a68e-a
 Cell[5843, 163, 11112, 295, 301, "Output",ExpressionUUID->"11cf517d-e72c-4cad-adc3-f2dd11926da0"]
 }, Open  ]],
 Cell[16970, 461, 142, 3, 33, "Text",ExpressionUUID->"68837e51-8950-4d58-bb7f-255dcf423d4e"],
-Cell[17115, 466, 1049, 19, 186, "Text",ExpressionUUID->"e4473260-5c6d-4f92-96b9-76fd3bf740c9"]
+Cell[17115, 466, 1104, 20, 186, "Text",ExpressionUUID->"e4473260-5c6d-4f92-96b9-76fd3bf740c9"]
 }
 ]
 *)
