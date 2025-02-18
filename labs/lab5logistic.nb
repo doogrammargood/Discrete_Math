@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     73579,       1547]
-NotebookOptionsPosition[     72207,       1520]
-NotebookOutlinePosition[     72641,       1537]
-CellTagsIndexPosition[     72598,       1534]
+NotebookDataLength[     73636,       1549]
+NotebookOptionsPosition[     72264,       1522]
+NotebookOutlinePosition[     72698,       1539]
+CellTagsIndexPosition[     72655,       1536]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -24,7 +24,7 @@ Cell[TextData[{
  StyleBox["Introduction to the Logistic Population Model \n(Our focus is \
 actually on the logistic growth function, we just added exponential growth \
 function to compare)", "Section"],
- "\nIn an ideal world, any species could multiply indefinitely, leading to \
+ "\nIn an ideal world,any species could multiply indefinitely,leading to \
 explosive population growth. Consider a single pair of mice, if they were to \
 reproduce at their maximum biological rate without any constraints, their \
 numbers could reach millions within just a few years. Even more extreme, a \
@@ -58,8 +58,8 @@ equation, so we define the logistic growth function in Mathematica as follows \
    3.9488115708381634`*^9}, {3.94881224952549*^9, 3.948812277574684*^9}, {
    3.948812360389408*^9, 3.9488124449173393`*^9}, {3.9488124853321743`*^9, 
    3.948812485443018*^9}, {3.948812667871704*^9, 3.9488126750848427`*^9}, {
-   3.9488130057303963`*^9, 3.9488130591161156`*^9}, {3.948820720378517*^9, 
-   3.948820721849434*^9}},ExpressionUUID->"729f2321-9197-c040-bdee-\
+   3.9488130057303963`*^9, 
+   3.9488130591161156`*^9}},ExpressionUUID->"729f2321-9197-c040-bdee-\
 ddb0922ea393"],
 
 Cell[TextData[{
@@ -1471,9 +1471,9 @@ dzJMT1NIVuncpGkE/wFTZRFa
            RowBox[{#2, ",", "After"}], "]"}]}], "]"}]& )]}], "}"}]], "Output",
  CellChangeTimes->{
   3.9485705791147194`*^9, 3.948570863857609*^9, {3.9488119201411324`*^9, 
-   3.948811922671219*^9}, 3.9488130856223392`*^9, {3.9488206914694843`*^9, 
-   3.948820691962617*^9}},
- CellLabel->"Out[24]=",ExpressionUUID->"5a40c469-9e7f-4c73-bcb3-632cd5888467"]
+   3.948811922671219*^9}, 3.9488130856223392`*^9, {3.948885067830765*^9, 
+   3.948885068674036*^9}},
+ CellLabel->"Out[24]=",ExpressionUUID->"33955abb-bc3a-42b7-a6f7-bf8b0048b61d"]
 }, Open  ]],
 
 Cell[TextData[{
@@ -1484,18 +1484,20 @@ Cell[TextData[{
  "\n-The Logistic Growth function is significant because it models population \
 growth with limited resources.\n-It is widely used in epidemiology to \
 describe how infectious diseases spread under constraints.\n-The domain is R+ \
-(Number of individuals), and the codomain is (0,K],where K is the carrying \
-capacity.\n-It is neither injective nor surjective but is commonly used in \
-modeling biological systems.\n-The function is often composed with other \
-differential equations in population and epidemic models.\n-Mathematica has \
-built-in logistic functions, but we implemented our own for clarity.\n"
+(time), and the codomain is (0,K],where K is the carrying capacity.\n-N(t) is \
+injective since it passes the horizontal line test.\n-The function is often \
+composed with other differential equations in population and epidemic models.\
+\n-Mathematica has built-in logistic functions, but we implemented our own \
+for clarity.\n"
 }], "Text",
  CellChangeTimes->{{3.948811934805973*^9, 3.9488119947669983`*^9}, {
    3.948812159268444*^9, 3.9488122335410995`*^9}, {3.9488128092431183`*^9, 
    3.948812872333002*^9}, {3.948812931240757*^9, 3.9488129637373447`*^9}, {
    3.948813093833868*^9, 3.948813097147793*^9}, {3.948813475836031*^9, 
-   3.948813504478571*^9}, 
-   3.9488135619431953`*^9},ExpressionUUID->"bd15b339-b900-de4f-8a83-\
+   3.948813504478571*^9}, 3.9488135619431953`*^9, {3.948824984122431*^9, 
+   3.9488249844588127`*^9}, {3.9488256899075623`*^9, 
+   3.9488257615267487`*^9}, {3.9488260189972515`*^9, 
+   3.9488260195919285`*^9}},ExpressionUUID->"bd15b339-b900-de4f-8a83-\
 4fe93e6a3f02"],
 
 Cell[TextData[{
@@ -1523,7 +1525,7 @@ WindowMargins->{{0, Automatic}, {Automatic, 0}},
 TaggingRules-><|"TryRealOnly" -> False|>,
 FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
 StyleDefinitions->"Default.nb",
-ExpressionUUID->"899241a7-0295-49e1-a547-82f060020bf1"
+ExpressionUUID->"635a5e69-4d8c-4390-8910-ff0c79a5ab7f"
 ]
 (* End of Notebook Content *)
 
@@ -1536,19 +1538,19 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[554, 20, 2921, 42, 495, "Text",ExpressionUUID->"729f2321-9197-c040-bdee-ddb0922ea393"],
-Cell[3478, 64, 1671, 25, 376, "Text",ExpressionUUID->"87c794e1-a29b-4443-89dd-8ada5bcb8c7b"],
-Cell[5152, 91, 1072, 27, 90, "Code",ExpressionUUID->"e6ca358f-6617-6643-9843-a9da619bc76a"],
-Cell[6227, 120, 811, 14, 114, "Text",ExpressionUUID->"07ee1b07-5a07-a643-ad33-c9565243ba11"],
-Cell[7041, 136, 823, 16, 90, "Code",ExpressionUUID->"c9c6bc82-c487-1640-8de6-ec9bee576386"],
-Cell[7867, 154, 849, 14, 93, "Text",ExpressionUUID->"ea177a68-05ad-084c-9a33-a9116a1c0fbb"],
+Cell[554, 20, 2873, 42, 495, "Text",ExpressionUUID->"729f2321-9197-c040-bdee-ddb0922ea393"],
+Cell[3430, 64, 1671, 25, 376, "Text",ExpressionUUID->"87c794e1-a29b-4443-89dd-8ada5bcb8c7b"],
+Cell[5104, 91, 1072, 27, 90, "Code",ExpressionUUID->"e6ca358f-6617-6643-9843-a9da619bc76a"],
+Cell[6179, 120, 811, 14, 114, "Text",ExpressionUUID->"07ee1b07-5a07-a643-ad33-c9565243ba11"],
+Cell[6993, 136, 823, 16, 90, "Code",ExpressionUUID->"c9c6bc82-c487-1640-8de6-ec9bee576386"],
+Cell[7819, 154, 849, 14, 93, "Text",ExpressionUUID->"ea177a68-05ad-084c-9a33-a9116a1c0fbb"],
 Cell[CellGroupData[{
-Cell[8741, 172, 8429, 215, 690, "Code",ExpressionUUID->"4dc74eda-af36-6849-8aca-13766da23f30"],
-Cell[17173, 389, 53147, 1086, 123, "Output",ExpressionUUID->"5a40c469-9e7f-4c73-bcb3-632cd5888467"]
+Cell[8693, 172, 8429, 215, 690, "Code",ExpressionUUID->"4dc74eda-af36-6849-8aca-13766da23f30"],
+Cell[17125, 389, 53145, 1086, 123, "Output",ExpressionUUID->"33955abb-bc3a-42b7-a6f7-bf8b0048b61d"]
 }, Open  ]],
-Cell[70335, 1478, 1178, 20, 330, "Text",ExpressionUUID->"bd15b339-b900-de4f-8a83-4fe93e6a3f02"],
-Cell[71516, 1500, 433, 9, 71, "Text",ExpressionUUID->"437076bf-dbaf-c64e-b5a6-4b556ff75be6"],
-Cell[71952, 1511, 251, 7, 55, "Text",ExpressionUUID->"23e967f0-b1ca-1c44-98ea-a8bf12e915e6"]
+Cell[70285, 1478, 1285, 22, 330, "Text",ExpressionUUID->"bd15b339-b900-de4f-8a83-4fe93e6a3f02"],
+Cell[71573, 1502, 433, 9, 71, "Text",ExpressionUUID->"437076bf-dbaf-c64e-b5a6-4b556ff75be6"],
+Cell[72009, 1513, 251, 7, 55, "Text",ExpressionUUID->"23e967f0-b1ca-1c44-98ea-a8bf12e915e6"]
 }
 ]
 *)
