@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     22359,        509]
-NotebookOptionsPosition[     20105,        460]
-NotebookOutlinePosition[     20497,        476]
-CellTagsIndexPosition[     20454,        473]
+NotebookDataLength[     22481,        510]
+NotebookOptionsPosition[     20227,        461]
+NotebookOutlinePosition[     20619,        477]
+CellTagsIndexPosition[     20576,        474]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -168,8 +168,8 @@ OEIS entry, the formula for the number of ways to shuffle n cards is ",
   FormBox[
    TemplateBox[<|"boxes" -> FormBox[
        RowBox[{
-         SuperscriptBox["2", "5"], "2", "-", "52"}], TraditionalForm], 
-     "errors" -> {}, "input" -> "2^52-52", "state" -> "Boxes"|>,
+         SuperscriptBox["2", "52"], "-", "52"}], TraditionalForm], 
+     "errors" -> {}, "input" -> "2^{52}-52", "state" -> "Boxes"|>,
     "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
   "772563e3-9638-4569-a0f5-5001aa11b228"],
  " ways to shuffle a deck. We can use Mathematica as a calculator to get a \
@@ -372,7 +372,7 @@ Cell[BoxData[{
   3.949096315219565*^9, 3.9490963687113934`*^9}, {3.949096415182124*^9, 
   3.949096415572513*^9}},
  CellLabel->
-  "In[147]:=",ExpressionUUID->"a9171932-9fcf-4a64-8536-108301bc6236"],
+  "In[155]:=",ExpressionUUID->"a9171932-9fcf-4a64-8536-108301bc6236"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -382,9 +382,9 @@ Cell[BoxData[
  CellChangeTimes->{
   3.9490957551175528`*^9, {3.949095821769368*^9, 3.949095859890019*^9}, {
    3.9490961802732563`*^9, 3.9490961882747173`*^9}, 3.949096235421279*^9, 
-   3.949096375125214*^9, 3.949096420049656*^9},
+   3.949096375125214*^9, 3.949096420049656*^9, 3.9492269483066072`*^9},
  CellLabel->
-  "Out[151]=",ExpressionUUID->"bac68153-de99-4e7b-b2f9-69de6ff2dad9"]
+  "Out[159]=",ExpressionUUID->"5f6cdd3f-fc7a-423c-bb82-f3b0f2d8d740"]
 }, Open  ]]
 }, Open  ]],
 
@@ -440,7 +440,7 @@ Cell["Step 5: Quiz", "Section",
 f8db7e1ae00e"],
 
 Cell["\<\
-(15 points ) Suppose that we want to shuffle a deck of 52 cards. We perform a \
+(15 points) Suppose that we want to shuffle a deck of 52 cards. We perform a \
 shuffle that is the same as the valid shuffles described earlier, except that \
 we split the deck into 3 instead of 2 piles before interleaving. How many \
 ways can this occur?
@@ -448,12 +448,13 @@ ways can this occur?
 Steps:
 1.) Modify the Mathematica Code to generate the first 8 examples.
 2.) Enter these numbers into OEIS. There is only 1 matching entry.
-3.) Find the Mathematica code in this entry.
+3.) Find the Mathematica code in this entry, and run it in Mathematica.
 4.) Modify that Mathematica code to tell you the 52nd number in the series.\
 \>", "Text",
  CellChangeTimes->{{3.949096673117134*^9, 3.94909676002943*^9}, {
-  3.949096885624848*^9, 
-  3.949097138557122*^9}},ExpressionUUID->"c32a284f-76bb-4979-902f-\
+   3.949096885624848*^9, 3.949097138557122*^9}, 3.949495282654582*^9, {
+   3.949495318891096*^9, 
+   3.949495380981534*^9}},ExpressionUUID->"c32a284f-76bb-4979-902f-\
 8b47b6c2bbec"]
 }, Open  ]]
 }, Open  ]]
@@ -488,27 +489,27 @@ Cell[3159, 80, 2353, 40, 339, "Text",ExpressionUUID->"cbbe8cf7-0ffc-4612-bfe1-5c
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[5549, 125, 167, 3, 65, "Section",ExpressionUUID->"c73f114f-17dc-4680-91eb-7d3063fa5152"],
-Cell[5719, 130, 2445, 51, 164, "Text",ExpressionUUID->"8442e1d1-ecb6-46fd-8555-8346612f021c"],
+Cell[5719, 130, 2443, 51, 164, "Text",ExpressionUUID->"8442e1d1-ecb6-46fd-8555-8346612f021c"],
 Cell[CellGroupData[{
-Cell[8189, 185, 310, 7, 29, "Input",ExpressionUUID->"26506ad1-61b0-4d78-bb9c-f37b03fa915e"],
-Cell[8502, 194, 348, 11, 46, "Output",ExpressionUUID->"bec435ef-2dc1-4a22-b804-a65fa67ed39d"]
+Cell[8187, 185, 310, 7, 29, "Input",ExpressionUUID->"26506ad1-61b0-4d78-bb9c-f37b03fa915e"],
+Cell[8500, 194, 348, 11, 46, "Output",ExpressionUUID->"bec435ef-2dc1-4a22-b804-a65fa67ed39d"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8899, 211, 241, 5, 65, "Section",ExpressionUUID->"8320214b-d291-43a1-ae83-2eaf9ef29900"],
-Cell[9143, 218, 2761, 45, 361, "Text",ExpressionUUID->"4c2ea87f-c5bc-48d3-b239-f6b74a706b44"],
+Cell[8897, 211, 241, 5, 65, "Section",ExpressionUUID->"8320214b-d291-43a1-ae83-2eaf9ef29900"],
+Cell[9141, 218, 2761, 45, 361, "Text",ExpressionUUID->"4c2ea87f-c5bc-48d3-b239-f6b74a706b44"],
 Cell[CellGroupData[{
-Cell[11929, 267, 4469, 107, 198, "Input",ExpressionUUID->"a9171932-9fcf-4a64-8536-108301bc6236"],
-Cell[16401, 376, 447, 10, 33, "Output",ExpressionUUID->"bac68153-de99-4e7b-b2f9-69de6ff2dad9"]
+Cell[11927, 267, 4469, 107, 198, "Input",ExpressionUUID->"a9171932-9fcf-4a64-8536-108301bc6236"],
+Cell[16399, 376, 471, 10, 33, "Output",ExpressionUUID->"5f6cdd3f-fc7a-423c-bb82-f3b0f2d8d740"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[16897, 392, 246, 4, 65, "Section",ExpressionUUID->"6cc24644-2206-4051-9a3a-8bba894b03e5"],
-Cell[17146, 398, 2018, 33, 274, "Text",ExpressionUUID->"ae859b9c-81fd-46cc-a0f0-4cefc1ebb2e5"]
+Cell[16919, 392, 246, 4, 65, "Section",ExpressionUUID->"6cc24644-2206-4051-9a3a-8bba894b03e5"],
+Cell[17168, 398, 2018, 33, 274, "Text",ExpressionUUID->"ae859b9c-81fd-46cc-a0f0-4cefc1ebb2e5"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[19201, 436, 157, 3, 65, "Section",ExpressionUUID->"c504b856-3828-48b2-8036-f8db7e1ae00e"],
-Cell[19361, 441, 716, 15, 186, "Text",ExpressionUUID->"c32a284f-76bb-4979-902f-8b47b6c2bbec"]
+Cell[19223, 436, 157, 3, 65, "Section",ExpressionUUID->"c504b856-3828-48b2-8036-f8db7e1ae00e"],
+Cell[19383, 441, 816, 16, 186, "Text",ExpressionUUID->"c32a284f-76bb-4979-902f-8b47b6c2bbec"]
 }, Open  ]]
 }, Open  ]]
 }
