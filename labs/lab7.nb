@@ -1,0 +1,520 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     19293,        512]
+NotebookOptionsPosition[     16250,        452]
+NotebookOutlinePosition[     16665,        469]
+CellTagsIndexPosition[     16622,        466]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Lab 7: The Euclidean Algorithm", "Title",
+ CellChangeTimes->{{3.951826835573132*^9, 
+  3.951826861435568*^9}},ExpressionUUID->"6f458762-9d00-4c69-99a8-\
+3e6f91f384ad"],
+
+Cell["\<\
+In this lab, we will implement the extended Euclidean algorithm and give some \
+examples.\
+\>", "Text",
+ CellChangeTimes->{{3.9518268692444763`*^9, 
+  3.951826886122118*^9}},ExpressionUUID->"4d637db3-0c37-41a6-b23c-\
+870011b3e9c2"],
+
+Cell[CellGroupData[{
+
+Cell["The Euclidean Algorithm", "Section",
+ CellChangeTimes->{{3.951826895813476*^9, 
+  3.951826900406913*^9}},ExpressionUUID->"4322ccc3-7a28-420a-b871-\
+dd8581e033e5"],
+
+Cell["\<\
+The Euclidean Algorithm is a technique to calculate the greatest common \
+divisor of two natural numbers by repeatedly subtracting them, using the fact \
+that GCD(a,b)=GCD(a-b,b). We have to remember to swap the arguments so that \
+the first argument is always at least as large as the second.\
+\>", "Text",
+ CellChangeTimes->{{3.95182690547521*^9, 3.951826955400302*^9}, {
+  3.951827211038254*^9, 
+  3.951827239478805*^9}},ExpressionUUID->"4e03d475-ab61-4d0e-ae9e-\
+409f44c55b77"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"euclideanAlgorithm", "[", 
+    RowBox[{"a_", ",", "b_"}], "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"Equal", "[", 
+      RowBox[{"b", ",", "0"}], "]"}], ",", " ", "a", ",", " ", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"a", "-", "b"}], ">", "b"}], ",", 
+       RowBox[{"euclideanAlgorithm", "[", 
+        RowBox[{
+         RowBox[{"a", "-", "b"}], ",", "b"}], "]"}], ",", 
+       RowBox[{"euclideanAlgorithm", "[", 
+        RowBox[{"b", ",", 
+         RowBox[{"a", "-", "b"}]}], "]"}]}], "]"}]}], "]"}]}], ";"}]], "Input",\
+
+ CellChangeTimes->{{3.951826975213142*^9, 3.95182700555329*^9}, {
+   3.951827055170066*^9, 3.951827080450843*^9}, {3.951827116796433*^9, 
+   3.9518271495260077`*^9}, 3.951827248603591*^9, {3.9518316606451178`*^9, 
+   3.95183166287315*^9}},ExpressionUUID->"995a668a-4ae4-4e29-9aea-\
+940a56512d8d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"euclideanAlgorithm", "[", 
+  RowBox[{"45", ",", "25"}], "]"}]], "Input",
+ CellChangeTimes->{{3.951827082007193*^9, 3.9518270921041203`*^9}, {
+  3.951827162989277*^9, 3.951827163226261*^9}},
+ CellLabel->"In[11]:=",ExpressionUUID->"65afd1c0-7060-4efa-91a4-f0b3864d0057"],
+
+Cell[BoxData["5"], "Output",
+ CellChangeTimes->{
+  3.951827093350955*^9, {3.95182715593565*^9, 3.951827163754086*^9}, 
+   3.9518272512415648`*^9},
+ CellLabel->"Out[11]=",ExpressionUUID->"d1272d74-4137-46c3-9ac0-7c6f2991f405"]
+}, Open  ]],
+
+Cell["\<\
+This implementation of the Euclidean Algorithm should have the same behavior \
+as the builtin function GCD:\
+\>", "Text",
+ CellChangeTimes->{{3.9518277931082363`*^9, 
+  3.951827809377967*^9}},ExpressionUUID->"e72a500b-60b5-4011-a29a-\
+f3ea65425c25"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"GCD", "[", 
+   RowBox[{"14203", ",", "2151"}], "]"}], "==", 
+  RowBox[{"euclideanAlgorithm", "[", 
+   RowBox[{"14203", ",", "2151"}], "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Checks", " ", "that", " ", "our", " ", "euclideanAlgorithm", " ", 
+    "agrees", " ", "with", " ", "the", " ", "builtin", " ", 
+    RowBox[{"GCD", "."}]}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.951827818079894*^9, 3.9518278472770557`*^9}, {
+  3.9518326084598017`*^9, 
+  3.951832623233822*^9}},ExpressionUUID->"7d972b05-495c-47a3-a892-\
+4f26eb1611b7"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{3.95182784867453*^9},
+ CellLabel->"Out[12]=",ExpressionUUID->"e9997057-cdc6-4d91-b697-35820063c62a"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["The Euclidean Algorithm and the Division Algorithm", "Section",
+ CellChangeTimes->{{3.951827270864716*^9, 3.951827283629534*^9}, {
+  3.951827425274531*^9, 
+  3.9518274271045313`*^9}},ExpressionUUID->"2eab00b5-3226-48f9-af7d-\
+70ae1f1477ea"],
+
+Cell[TextData[{
+ "The Division Algorithm (which is not actually an algorithm) is the fact \
+that for any two natural numbers, ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["a", "TI"], ",", 
+         StyleBox["b", "TI"], "\[Element]", 
+         StyleBox["N", FontSlant -> "Plain"]}], TraditionalForm], 
+     "errors" -> {}, "input" -> "a,b\\in\\mathbb{N}", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "e981784f-7e1e-4d9f-a5e8-8db53a326b7c"],
+ ", we can express ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["a", "TI"], TraditionalForm], "errors" -> {}, "input" -> "a", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "c7290a81-3ef5-452d-a45f-7aec25250885"],
+ " uniquely as ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["a", "TI"], "\[LongEqual]", 
+         StyleBox["k", "TI"], 
+         StyleBox["b", "TI"], "+", 
+         StyleBox["r", "TI"]}], TraditionalForm], "errors" -> {}, "input" -> 
+     "a=kb+r", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "c85297ff-38e0-4b2a-aa21-88d92caf17f9"],
+ ", where ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["k", "TI"], ",", 
+         StyleBox["r", "TI"], "\[Element]", 
+         StyleBox["N", FontSlant -> "Plain"]}], TraditionalForm], 
+     "errors" -> {}, "input" -> "k,r \\in \\mathbb{N}", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "80e36b6f-2967-48c4-9802-2a5bebc52f82"],
+ ", and ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["r", "TI"], "<", 
+         StyleBox["b", "TI"]}], TraditionalForm], "errors" -> {}, "input" -> 
+     "r<b", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "91c69945-9c63-4aa3-8484-287e6116fec4"],
+ ". In other words, we can subtract ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["b", "TI"], TraditionalForm], "errors" -> {}, "input" -> "b", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "1c7e9900-7fee-406c-8b22-fed850b99af8"],
+ " from ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["a", "TI"], TraditionalForm], "errors" -> {}, "input" -> "a", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "605cfe93-f8f4-441f-bc6f-1d9221fef9b8"],
+ " at most ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["k", "TI"], TraditionalForm], "errors" -> {}, "input" -> "k", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "c3a19ea6-1348-4b4e-8028-2eef0cfcc24f"],
+ " times, and if we do this, we will be left with a remainder of ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["r", "TI"], TraditionalForm], "errors" -> {}, "input" -> "r", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "a3289dc8-de6a-4fc2-9465-09e1b454f483"],
+ ". Repeated subtraction can be represented by the division algorithm. In \
+Mathematica, we can use the division algorithm using the builtin function \
+QuotientRemainder"
+}], "Text",
+ CellChangeTimes->{{3.951827433472959*^9, 3.951827689159226*^9}, {
+  3.951827737822632*^9, 3.951827784383115*^9}, {3.951831184303474*^9, 
+  3.951831189643978*^9}},ExpressionUUID->"5a9732ba-9502-40ee-8705-\
+bcea6706ff2d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"QuotientRemainder", "[", 
+   RowBox[{"24", ",", "3"}], "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"Enacts", " ", "the", " ", "division", " ", 
+    RowBox[{"algorithm", "."}]}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.9518311929492273`*^9, 3.951831236955306*^9}, {
+  3.951832543264255*^9, 3.951832565381453*^9}, {3.9518341135616617`*^9, 
+  3.951834113642812*^9}},
+ CellLabel->"In[13]:=",ExpressionUUID->"e7709d55-75c7-4e4a-81e8-5fed7f26d914"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"8", ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{{3.951832561729094*^9, 3.9518325660413923`*^9}, 
+   3.9518341147760983`*^9},
+ CellLabel->"Out[13]=",ExpressionUUID->"d86dd1d6-9479-49f0-abb2-c7fe9e1816b9"]
+}, Open  ]],
+
+Cell["\<\
+We can use the division algorithm to perform the Euclidean Algorithm more \
+efficiently.\
+\>", "Text",
+ CellChangeTimes->{{3.951831302248403*^9, 
+  3.9518313619448338`*^9}},ExpressionUUID->"4f75c27e-4553-4661-968e-\
+e1213c2f90df"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"euclideanAlgorithmWithDivisionAlg", "[", 
+    RowBox[{"a_", ",", "b_"}], "]"}], ":=", " ", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"Equal", "[", 
+      RowBox[{"b", ",", "0"}], "]"}], ",", "a", ",", " ", 
+     RowBox[{"euclideanAlgorithm", "[", 
+      RowBox[{"b", ",", 
+       RowBox[{
+        RowBox[{"QuotientRemainder", "[", 
+         RowBox[{"a", ",", "b"}], "]"}], "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.9518313644178*^9, 3.951831424258295*^9}, 
+   3.951831472890031*^9},ExpressionUUID->"1955bd6b-ba8f-42e3-8d36-\
+02b42c3c0e4f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"GCD", "[", 
+   RowBox[{"14203", ",", "2151"}], "]"}], "==", 
+  RowBox[{"euclideanAlgorithmWithDivisionAlg", "[", 
+   RowBox[{"14203", ",", " ", "2151"}], "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Checks", " ", "that", " ", "our", " ", "updated", " ", 
+    "euclideanAlgorithm", " ", "agrees", " ", "wtih", " ", "the", " ", 
+    "builtin", " ", "GCD"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.951831433160756*^9, 3.951831470601701*^9}, {
+  3.951832628809895*^9, 
+  3.951832648930756*^9}},ExpressionUUID->"a5621994-ab76-4dab-b9b5-\
+0f71e3360141"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{3.951831474454461*^9},
+ CellLabel->"Out[15]=",ExpressionUUID->"5421384a-f5cd-4576-9868-ea8199eaa939"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["The Extended Euclidean Algorithm", "Section",
+ CellChangeTimes->{{3.951831500339355*^9, 
+  3.951831504619829*^9}},ExpressionUUID->"68852bf9-92d0-4e54-b786-\
+6533421158a2"],
+
+Cell[TextData[{
+ "The extended Euclidean Algorithm gives an integer solution to the equation \
+ax+by=GCD(a,b), where ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["a", "TI"], ",", 
+         StyleBox["b", "TI"], "\[Element]", 
+         StyleBox["N", FontSlant -> "Plain"]}], TraditionalForm], 
+     "errors" -> {}, "input" -> "a,b\\in \\mathbb{N}", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "e3215c84-0acf-42fa-b38a-2b91e9eae1ed"],
+ ". "
+}], "Text",
+ CellChangeTimes->{{3.951831508057811*^9, 3.951831554832762*^9}, 
+   3.951831608125054*^9, {3.9518329959960938`*^9, 3.951833001658168*^9}, {
+   3.951833198088871*^9, 3.9518332066576443`*^9}, {3.9518334390699797`*^9, 
+   3.951833445702911*^9}},ExpressionUUID->"ef491f2d-85c3-4851-81f6-\
+3c38f638c82a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"a", ",", "b", ",", "c", ",", "s", ",", "t", ",", "r", ",", "k"}], 
+   "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.95183444920609*^9, 3.951834463684807*^9}, 
+   3.951834509183234*^9},
+ CellLabel->"In[64]:=",ExpressionUUID->"6d52b5ea-7884-4edd-b784-503c880e989c"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"extendedEuclideanAlgorithm", "[", 
+    RowBox[{"a_", ",", "0"}], "]"}], ":=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"extendedEuclideanAlgorithm", "[", 
+     RowBox[{"a_", ",", 
+      RowBox[{"b_", "/;", " ", 
+       RowBox[{"b", ">", "0"}]}]}], "]"}], ":=", " ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"k", ",", "r", ",", "s", ",", "t"}], "}"}], ",", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"k", ",", "r"}], "}"}], " ", "=", 
+         RowBox[{"QuotientRemainder", "[", 
+          RowBox[{"a", ",", "b"}], "]"}]}], " ", ";", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"s", ",", "t"}], "}"}], " ", "=", " ", 
+         RowBox[{"extendedEuclideanAlgorithm", "[", 
+          RowBox[{"b", ",", "r"}], "]"}]}], ";", " ", 
+        RowBox[{"Return", "[", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", 
+           RowBox[{"s", "-", 
+            RowBox[{"t", " ", "k"}]}]}], "}"}], "]"}]}], ")"}]}], "]"}]}], 
+   ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Without", " ", 
+     RowBox[{"the", " ", "'"}], 
+     RowBox[{"Module", "'"}], " ", "to", " ", "designate", " ", "that", " ", 
+     "k"}], ",", "r", ",", "s", ",", 
+    RowBox[{"t", " ", "are", " ", "local", " ", "variables"}], ",", " ", 
+    RowBox[{
+    "we", " ", "get", " ", "an", " ", "error", " ", "where", " ", "k", " ", 
+     "and", " ", "r", " ", "get", " ", "overwritten", " ", "in", " ", "the", 
+     " ", "recursive", " ", 
+     RowBox[{"calls", "."}]}]}], "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.951831577665284*^9, 3.9518316058088284`*^9}, {
+  3.9518324432779503`*^9, 3.9518325362792683`*^9}, {3.95183256942015*^9, 
+  3.951832590121065*^9}, {3.951832745558379*^9, 3.951832760309553*^9}, {
+  3.9518330996774883`*^9, 3.951833100157987*^9}, {3.951833143126361*^9, 
+  3.951833145226741*^9}, {3.951833514484455*^9, 3.951833521699649*^9}, {
+  3.95183362630033*^9, 3.9518336512894173`*^9}, {3.951833684396529*^9, 
+  3.951833736819593*^9}, {3.9518337792783203`*^9, 3.951833779591613*^9}, {
+  3.951834150751133*^9, 3.9518341781433487`*^9}, {3.9518342360536222`*^9, 
+  3.951834247526422*^9}, {3.9518344073132772`*^9, 3.951834434357779*^9}, {
+  3.951834469978945*^9, 3.951834506887528*^9}, {3.951834835701584*^9, 
+  3.951834906055065*^9}, {3.951835051352602*^9, 3.951835083052314*^9}, {
+  3.9518351268683643`*^9, 
+  3.951835152376782*^9}},ExpressionUUID->"a7498f20-ad99-4028-b884-\
+4093139336ef"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"extendedEuclideanAlgorithm", "[", 
+   RowBox[{"56", ",", "12"}], "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "We", " ", "did", " ", "this", " ", "example", " ", "in", " ", "class"}], 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.9518337275771627`*^9, 3.951833749886705*^9}, {
+  3.951834218980101*^9, 3.951834221310276*^9}, {3.9518343724684772`*^9, 
+  3.951834386620899*^9}, {3.951835106338725*^9, 
+  3.951835123869157*^9}},ExpressionUUID->"efc4c662-83cc-4fe8-a115-\
+e0ec65895682"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"-", "1"}], ",", "5"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.95183375114137*^9, 3.9518337828510847`*^9, 3.951833991904262*^9, {
+   3.951834148155943*^9, 3.951834166238183*^9}, {3.9518342089278183`*^9, 
+   3.951834264392062*^9}, {3.951834376798951*^9, 3.951834512908915*^9}, 
+   3.9518346999514027`*^9, 3.951834733463266*^9, 3.951834910082532*^9, {
+   3.9518349479090557`*^9, 3.9518349720657873`*^9}, {3.9518350777965317`*^9, 
+   3.951835112109497*^9}},
+ CellLabel->"Out[92]=",ExpressionUUID->"d172ae21-efdd-4beb-98c4-03b878cb4e24"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Quiz:", "Section",
+ CellChangeTimes->{{3.951835166226841*^9, 
+  3.951835177591264*^9}},ExpressionUUID->"8280c818-acac-4e73-9299-\
+4545cc10357c"],
+
+Cell["\<\
+Use the Extended Euclidean Algorithm to calculate the inverse of 101 modulo \
+1013.\
+\>", "Text",
+ CellChangeTimes->{{3.951835187437063*^9, 3.9518352790449743`*^9}, {
+  3.951835311290886*^9, 
+  3.95183531226719*^9}},ExpressionUUID->"73a6b253-65b7-47cd-a8fa-\
+4a12d961c866"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440, 701.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CellContext->Notebook,
+FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"13f976de-8f4f-4964-a04e-c36468928cf9"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 173, 3, 96, "Title",ExpressionUUID->"6f458762-9d00-4c69-99a8-3e6f91f384ad"],
+Cell[752, 27, 241, 6, 33, "Text",ExpressionUUID->"4d637db3-0c37-41a6-b23c-870011b3e9c2"],
+Cell[CellGroupData[{
+Cell[1018, 37, 168, 3, 65, "Section",ExpressionUUID->"4322ccc3-7a28-420a-b871-dd8581e033e5"],
+Cell[1189, 42, 491, 9, 55, "Text",ExpressionUUID->"4e03d475-ab61-4d0e-ae9e-409f44c55b77"],
+Cell[1683, 53, 921, 24, 30, "Input",ExpressionUUID->"995a668a-4ae4-4e29-9aea-940a56512d8d"],
+Cell[CellGroupData[{
+Cell[2629, 81, 292, 5, 29, "Input",ExpressionUUID->"65afd1c0-7060-4efa-91a4-f0b3864d0057"],
+Cell[2924, 88, 225, 4, 33, "Output",ExpressionUUID->"d1272d74-4137-46c3-9ac0-7c6f2991f405"]
+}, Open  ]],
+Cell[3164, 95, 259, 6, 33, "Text",ExpressionUUID->"e72a500b-60b5-4011-a29a-f3ea65425c25"],
+Cell[CellGroupData[{
+Cell[3448, 105, 569, 14, 29, "Input",ExpressionUUID->"7d972b05-495c-47a3-a892-4f26eb1611b7"],
+Cell[4020, 121, 151, 2, 33, "Output",ExpressionUUID->"e9997057-cdc6-4d91-b697-35820063c62a"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4220, 129, 246, 4, 65, "Section",ExpressionUUID->"2eab00b5-3226-48f9-af7d-70ae1f1477ea"],
+Cell[4469, 135, 3679, 93, 77, "Text",ExpressionUUID->"5a9732ba-9502-40ee-8705-bcea6706ff2d"],
+Cell[CellGroupData[{
+Cell[8173, 232, 476, 10, 29, "Input",ExpressionUUID->"e7709d55-75c7-4e4a-81e8-5fed7f26d914"],
+Cell[8652, 244, 248, 5, 33, "Output",ExpressionUUID->"d86dd1d6-9479-49f0-abb2-c7fe9e1816b9"]
+}, Open  ]],
+Cell[8915, 252, 240, 6, 33, "Text",ExpressionUUID->"4f75c27e-4553-4661-968e-e1213c2f90df"],
+Cell[9158, 260, 657, 17, 30, "Input",ExpressionUUID->"1955bd6b-ba8f-42e3-8d36-02b42c3c0e4f"],
+Cell[CellGroupData[{
+Cell[9840, 281, 586, 14, 30, "Input",ExpressionUUID->"a5621994-ab76-4dab-b9b5-0f71e3360141"],
+Cell[10429, 297, 152, 2, 33, "Output",ExpressionUUID->"5421384a-f5cd-4576-9868-ea8199eaa939"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10630, 305, 177, 3, 65, "Section",ExpressionUUID->"68852bf9-92d0-4e54-b786-6533421158a2"],
+Cell[10810, 310, 849, 19, 33, "Text",ExpressionUUID->"ef491f2d-85c3-4851-81f6-3c38f638c82a"],
+Cell[11662, 331, 324, 7, 29, "Input",ExpressionUUID->"6d52b5ea-7884-4edd-b784-503c880e989c"],
+Cell[11989, 340, 2617, 61, 93, "Input",ExpressionUUID->"a7498f20-ad99-4028-b884-4093139336ef"],
+Cell[CellGroupData[{
+Cell[14631, 405, 516, 12, 29, "Input",ExpressionUUID->"efc4c662-83cc-4fe8-a115-e0ec65895682"],
+Cell[15150, 419, 587, 11, 33, "Output",ExpressionUUID->"d172ae21-efdd-4beb-98c4-03b878cb4e24"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15786, 436, 150, 3, 65, "Section",ExpressionUUID->"8280c818-acac-4e73-9299-4545cc10357c"],
+Cell[15939, 441, 283, 7, 33, "Text",ExpressionUUID->"73a6b253-65b7-47cd-a8fa-4a12d961c866"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

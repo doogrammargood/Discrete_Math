@@ -1,0 +1,516 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,epsfig}
+\usepackage{fancyhdr}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\ni{\noindent}
+\def\qed{\hfill\fbox{\hbox{}}\smallskip}
+
+\topmargin -0.5in
+\oddsidemargin -0.2 in 
+\evensidemargin -0.2 in 
+\global\advance\textwidth by 1.2 in
+\global\advance\textheight by 1in
+
+\def\ontest#1{#1}
+\def\solution#1{}
+%\def\solution#1{}\def\myspace#1{{\vspace*{#1}}}\def\mynewpage{{\newpage}}\def\ontest#1{{#1}}
+\def\sectionOneA#1{}
+\def\sectionOneB#1{}
+\def\sectionTwoA#1{}
+\def\sectionTwoB#1{}
+\def\sectionVicsection#1{#1}
+
+\newcounter{pgpts}
+\newcounter{cumpts}
+\newcommand{\cnewpage}{\addtocounter{cumpts}{\value{pgpts}}\newpage\setcounter{pgpts}{0}}
+
+
+\pagestyle{fancy}
+\fancyhead[LE,LO]{CMPS/MATH 2170, Midterm, Fall 23}
+\fancyhead[RE,RO]{page \thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot{}
+\fancyfoot[CO,CE]{}
+\fancyfoot[LE,LO]{page points: \arabic{pgpts}}
+\fancyfoot[RE,RO]{total points: \arabic{cumpts}}
+
+
+
+\begin{document}
+%\vspace*{-4ex}
+\begin{center}{\Large CMPS/MATH 2170 Discrete Mathematics -- Fall 23}\end{center}
+\flushright{10/3/23}
+\begin{center}{\huge Midterm}\end{center} 
+\flushleft
+
+\ontest{
+\vspace*{2cm}
+\flushleft{}
+\hspace*{3cm}{\bf\huge Name:}
+\vspace*{2cm}
+%
+\ni
+\begin{itemize}
+\item Put your name on the exam.
+%\item {\bf Try to give short justifications or comments to your answers. This will help us in determining partial credit.}
+\item This exam is closed-book, closed-notes, and closed-calculators. You are allowed to use a helper sheet (one single-sided letter page).
+\item If you have a question, {\bf stay seated} and raise your hand.
+\item Please try to write legibly -- if we cannot read it you may not get
+  credit.
+\item {\bf Do not waste time} -- if you cannot solve a question immediately, skip
+  it and return to it later. 
+%  \item The number of points for a question roughly corresponds to the number of minutes it should maximally take you to solve it.
+\end{itemize}
+}%ontest
+
+\solution{
+\vspace*{4cm}
+\begin{center}
+%{\sc\LARGE SOLUTION}
+\vspace*{2cm}
+\end{center}
+}
+
+
+\vspace*{2ex}
+\begin{center}
+{\LARGE
+\begin{tabular}{l|r|r}
+1) Logic & \hspace*{1cm} & 15\\\hline
+2) Rules of Inference & \hspace*{1cm} & 10\\\hline
+3) Functions & \hspace*{1cm} & 15\\\hline
+4) Proof By \sectionOneA{Contrapositive}\sectionOneB{Contrapositive}\sectionTwoA{Contradiction}\sectionTwoB{Contradiction}\sectionVicsection{Contradiction} &\hspace*{1cm} &15\\\hline
+5) Counterexample & \hspace*{1cm} & 5\\\hline
+6) Sets & \hspace*{1cm} & 10\\\hline
+7) Functional Completeness & \hspace*{1cm} & 10 \\\hline
+8) Summations & \hspace*{1cm} & 10 \\\hline
+
+Bonus &&10\\\hline
+\hline
+Total &&100
+\end{tabular}
+}
+\end{center}
+\addtocounter{pgpts}{10}
+\flushleft
+
+\cnewpage
+
+\section{Logic (15 points)}\addtocounter{pgpts}{15}
+% From F15
+
+\begin{enumerate}
+\item {\bf Equivalence (5 points)}\\
+  Let $p$ and $q$ be propositions. Use a truth table to determine whether
+  
+  \sectionOneA{$\neg (p\rightarrow q)$ is equivalent to $p\wedge \neg q$.}
+  \sectionOneB{$p\wedge \neg q$ is equivalent to $\neg (p\rightarrow q)$.} %Flipped order
+  \sectionTwoA{$\neg (p\rightarrow \neg q)$ is equivalent to $p\wedge q$.}
+  \sectionTwoB{$p\wedge q$ is equivalent to $\neg (p\rightarrow \neg q)$.} %Flipped order
+  \sectionVicsection{$(p\vee q) \to p$ is equivalent to $q\to p$.}
+  
+%% Other option
+%% Use a truth table to determine whether $\neg (p\rightarrow \neq q)$ is equivalent to $p\wedge q$.
+
+\begin{center}
+{\Large
+\begin{tabular}{|c|c|c|c|c|c|}
+    $p$ & $q$ & $p\vee q$ & $(p\vee q) \to p$  & $q \to p$ &\hspace*{7cm}\\\hline
+T&T& T & T & T&\\
+T&F& T & T & T&\\
+F&T& T & F & F&\\
+F&F& F & T & T&\\
+\end{tabular}
+}
+\end{center}
+
+\vspace*{2ex}
+Are  $(p \vee q) \to p$ and $q \to p$ equivalent? Justify your answer.
+\vspace*{1cm}
+
+Answer:
+
+Yes. The two columns corresponding to these propositions are identical in the table above.
+\vspace*{1cm}
+
+\item {\bf Negation (5 points)}\\
+% From F15
+
+Simplify the following Boolean formula such that it contains
+no negation operators $\neg$, but possibly $\leq$ symbols.
+%
+\sectionOneA{{\Large $$\neg\exists x \;\forall y \;\exists z:\; (x=y\;\wedge\; y=z)$$}}
+\sectionOneB{{\Large $$\neg\forall x \;\exists y \;\forall z:\; (x=y\;\wedge\; y=z)$$}} % Flipped quantifiers
+\sectionTwoA{{{\Large $$\neg \forall p \;\forall q:\; ((p\vee q)\rightarrow q)$$}} {\em\normalsize (Hint: Use $a\rightarrow b \equiv \neg  a\vee b$)} }
+\sectionTwoB{{{\Large $$\neg \exists p \;\exists q:\; ((p\vee q)\rightarrow q)$$}} {\em\normalsize (Hint: Use $a\rightarrow b \equiv \neg  a\vee b$)} } %
+\sectionVicsection{{{\Large $$\neg \left((\exists p \in \mathbb{N}) \;(\forall q \in \mathbb{Z}):\; p>q \right) $$}} {\em\normalsize (Hint: Use $a\leq b \equiv \neg(a >b)$.)} 
+}
+\vspace*{1cm}
+
+Answer:
+
+\[(\forall p \in \mathbb{N}) (\exists q \in \mathbb{Z}) : p\leq q\]
+\vspace*{1cm}
+
+
+
+\item {\bf Translation (5 points)}\\
+% From F15
+
+Express the following sentence as a logic formula with
+quantifiers:\\[1ex]
+
+\sectionOneA{''For every integer there is a real number such that both sum up to zero.''}
+\sectionOneB{''For every integer there is a rational number such that both sum up to zero.''} % real -> rational
+\sectionTwoA{''For every positive integer there is a rational number such that their product\\ equals 1.''}
+\sectionTwoB{''For every positive integer there is a real number such that their product equals 1.''} %rational -> real
+\sectionVicsection{``For every positive integer, there is a different integer with the same square.''}
+
+%``There is a real number whose product with any other real number equals $0$.''\\
+
+Answer:
+
+$(\forall n\in \mathbb{N}- \{0\})(\exists m\in \mathbb{Z}) : m\neq n \wedge m^2=n^2$
+
+
+\end{enumerate}
+
+
+
+
+\cnewpage
+
+%% % NOT on F15
+
+%% \item {\bf Contrapositive (6 points)}\\
+%%  What is the contrapositive of $(p\wedge q)\rightarrow q$ ? Simplify
+%%  your answer such that there is {\bf no} $\neg$-symbol in front of any
+%%  parenthesis.
+
+%%  \cnewpage
+
+
+\section{Rules of Inference (10 points)}\addtocounter{pgpts}{10}
+% From F15
+
+Consider the following collection of premises:
+\begin{quote}
+\sectionOneA{
+``I am smart or I am lucky.''\\
+``I am not smart.''\\
+  ``If I am lucky then I will win the lottery.''}
+\sectionOneB{ %Same as OneA
+``I am smart or I am lucky.''\\
+``I am not smart.''\\
+  ``If I am lucky then I will win the lottery.''}
+\sectionTwoA{
+``I am lucky then I will win the lottery.''\\
+``If I win the lottery then I am smart.''\\
+  ``I am not smart.''}
+\sectionTwoB{ %Same as TwoA
+``I am lucky then I will win the lottery.''\\
+``If I win the lottery then I am smart.''\\
+  ``I am not smart.''}
+\sectionVicsection{
+``If Dracula is out, then it is raining or it is night or the full moon shines.''\\
+``Dracula is out.''\\
+``It is not raining.''\\
+``Whenever the full moon shines, it is night.''}
+\end{quote}
+Use rules of inference to infer
+\sectionOneA{``I will win the lottery.''}
+\sectionOneB{``I will win the lottery.''} % Same as OneA
+\sectionTwoA{``I am not lucky.''}
+\sectionTwoB{``I am not lucky.''} % Same as TwoA
+\sectionVicsection{``It is night.''}
+from these premises. 
+
+You may use the rules in Zybooks table 3.8 and table 1.5.1.
+
+
+\begin{center}
+    {\Large
+\begin{tabular}{|c|c|c|}
+    Proposition & Symbol
+    &\hspace*{7cm}\\\hline
+    Dracula is out & $D$ &\\
+    It is raining & $R$ & \\
+    The full moon shines & $M$ & \\
+    It is night & $N$ &
+\end{tabular} }
+\end{center}
+
+\begin{center}
+{\Large
+\begin{tabular}{|c|c|c|c|}
+    Statement number & Statement & Justification
+    &\hspace*{7cm}\\\hline
+    1& $D\to (R \vee N \vee M)$ & Premise\\
+    2& $D$ & Premise\\
+    3 & $\neg R$ & Premise \\
+    4 & $M\to N$ & Premise \\
+    5 & $R\vee N \vee M$ & Modus Ponens $1$,$2$\\
+    6 & $R\vee (N \vee M)$ & Associative law $5$\\
+    7 & $N\vee M$ & Disjunctive Syllogism, $3,6$\\
+    8 & $\neg M \vee N$ & Conditional identity $4$\\
+    9 & $M\vee N $ & Commutative identity $7$ & \\
+    10 & $N \vee N$ & Resolution $8,9$ & \\
+    11 & $N$ & Idempotent law 10\\
+\end{tabular}
+}
+\end{center}
+\cnewpage
+% \begin{array}{llll}
+
+% \begin{array}{l}
+% \mbox{Modus ponens}\\
+% p\\
+% p\rightarrow q\\
+% \hline
+% \therefore q
+% \end{array}
+
+% &
+% \begin{array}{l}
+% \mbox{Modus tollens}\\
+% \neg q\\
+% p\rightarrow q\\
+% \hline
+% \therefore \neg p
+% \end{array}
+
+% &
+% \begin{array}{l}
+% \mbox{Hypothetical syllogism}\\
+% p\rightarrow q\\
+% q\rightarrow r\\
+% \hline
+% \therefore p\rightarrow r
+% \end{array}
+
+% &
+% \begin{array}{l}
+% \mbox{Disjunctive syllogism}\\
+% p\vee q\\
+% \neg p\\
+% \hline
+% \therefore q
+% \end{array}
+
+% \end{array}
+% $$
+
+% \cnewpage
+
+\section{Functions (15 points)}\addtocounter{pgpts}{15}
+% From F15
+
+
+Let
+\sectionOneA{$f(x)=\frac{x-1}{3}$\;.}
+\sectionOneB{$f(x)=\frac{x-1}{2}$\;.} % 3->2
+\sectionTwoA{$f(x)=5x+2$\;.}
+\sectionTwoB{$f(x)=2x+5$\;.} % 2<->5
+\sectionVicsection{$f(x)=7x-\frac{1}{2}$\;.}
+  \begin{enumerate}
+    \item (10 points) Give a domain and a codomain for which $f$ is bijective. Use the definitions of surjective, injective, and bijective to prove that $f$ is bijective.
+       \vspace*{1cm}
+
+    (Solution 1) Let $A=B=\emptyset$. Then $f:A\to B$ is a bijection.
+    Let us show that it is an injection. By definition, we must show that $\forall x,y \in A, f(x)=f(y) \implies x =y$. This holds trivially, since there are no $x,y\in A$.
+
+    Now let us show that $f$ is a surjection. By definition, we must show that $(\forall y \in B)(\exists x\in A) f(x)=y$. Again, since $B=\emptyset$, this is true trivially.
+
+    (Alternatively, one could pick $A = \{0\}, B=\{-\frac{1}{2}\}$.)
+
+    \vspace*{1cm}
+    
+    (Solution 2) Let $A=B=\mathbb{Q}$. The $f:A\to B$ is a bijection. First, we show that $f$ is an injection. Let $x,y\in A$. Assume that $f(x)=f(y)$. Then $fx-\frac{1}{2}=7y-\frac{1}{2}$, so $7x=7y$, and after dividing by $7$, we find $x=y$. This shows that $f$ is injective.
+
+    To show that $f$ is a surjection, let $z\in B$. Let $w=\frac{1}{7}(z+\frac{1}{2})$. Because $\mathbb{Q}$ is closed under addition and multiplication, $w\in \mathbb{Q}=A$. We defined $w$ so that it satisfies $f(w)= 7w-\frac{1}{2} = 7(\frac{1}{7}(z+\frac{1}{2}))-\frac{1}{2} =z$. Since $z$ was arbitrary, this shows (by universal generalization) that $(\forall z \in B)(\exists w\in A) f(w)=z$, which is the definition of $f$ being surjective.
+
+    \vspace*{1cm}
+    \item (5 points) Give a domain and a codomain for which $f$ is injective but not surjective. Justify your answer shortly.
+
+    \vspace*{1cm}
+    (Solution $1$)Let the domain be $A=\emptyset$ and let the codomain be $B=\mathbb{R}$. Then $f$ is injective but not surjective. $f$ is injective trivially, because $(\forall x,y \in \emptyset) : f(x)=f(y)$.
+
+    The function $f$ is not surjective because, for example, the element $10\in \mathbb{R}$ has no preimage under $f$.
+
+    \vspace*{1cm}
+    (Solution 2) Let $A=\mathbb{Q}$ and let $B=\mathbb{R}$. The function $f$ is injective because $f:A\to \mathbb{Q}$ is injective by problem 1 (solution 2), and because $\mathbb{Q}\subset \mathbb{R}$. The function $f$ cannot be surjective because $|\mathbb{Q}|<|\mathbb{R}|$.
+  \end{enumerate}
+
+
+%% Other option:
+
+%% Let $f:\Z \longrightarrow \Q$ with $f(x) = 3x-4$, and
+%% let $g:\Q \longrightarrow \R$ with $g(x)=\frac{x}{3}$. 
+%%   \begin{enumerate}
+%%     \item (6 points) What is the codomain of $f$? What is the codomain of $g\circ f$?
+%% \vspace*{14ex}
+
+%%     \item (6 points) Is $f$ injective? Justify your answer.
+%% \vspace*{20ex}
+
+
+%%     \item (6 points) Is $g$ surjective? Justify your answer.
+%% \vspace*{20ex}
+
+%%   \end{enumerate}
+
+\cnewpage
+
+\section{Proof By \sectionOneA{Contrapositive}\sectionOneB{Contrapositive}\sectionTwoA{Contradiction}\sectionTwoB{Contradiction}\sectionVicsection{Contradiction} (15 points)}\addtocounter{pgpts}{15}
+% From F15
+
+Consider the theorem below.
+\begin{quote}
+  {\bf Theorem:}
+  \sectionOneA{If $x^3$ is irrational then $x$ is irrational.}
+  \sectionOneB{If $x^4$ is irrational then $x$ is irrational.} % 3->4
+  \sectionTwoA{If $x^3$ is irrational then $x$ is irrational.}
+  \sectionTwoB{If $x^4$ is irrational then $x$ is irrational.} % 3->4
+  \sectionVicsection{If $x$ is irrational then $\frac{x}{2}$ is irrational.}
+  
+%
+%Other options:\\
+%If $x^3$ is odd then $x$ is odd.\\
+%If $x^2$ is odd then $x$ is not a power of $2$.\\
+\end{quote}
+
+
+Prove the theorem using a proof by \sectionOneA{contrapositive}\sectionOneB{contrapositive}\sectionTwoA{contradiction}\sectionTwoB{contradiction}\sectionVicsection{contradiction}.
+%% \begin{enumerate}
+%% % From F15
+
+%% \item (10 points) Prove the theorem using a proof by contrapositive.
+%%   \vspace*{10cm}
+%% \item (4 points) What's the difference between a proof by contrapositive and a proof by contradiction?
+%% \end{enumerate}
+\vspace*{2cm}
+Assume for the sake of contradiction that $x\in \mathbb{R}-\mathbb{Q}$ yet $\frac{x}{2}\in \mathbb{Q}$. Then $\exists a,b\in \mathbb{Z}$ with $b\neq 0$ such that $\frac{x}{2}=\frac{a}{b}$. Multiplying both sides of this equation by $2$ results in the equation $x=\frac{2a}{b}$. Since $2a\in \mathbb{Z}$ and $b\neq 0$, we have shown that $x\in \mathbb{Q}$, but this contradicts that $x\in \mathbb{R}-\mathbb{Q}$.
+
+\vspace*{1cm}
+
+From the contradiction, we learn that our initial assumption was wrong, so there is no $x\in \mathbb{R}-\mathbb{Q}$ such that $\frac{x}{2}\in \mathbb{Q}$. In other words, if $x$ is irrational, then $\frac{x}{2}$ is irrational.
+\vspace*{6cm}
+
+
+\section{Counterexample (5 points)}\addtocounter{pgpts}{5}
+Disprove the following statement:\\
+\sectionOneA{$$\forall x,y\in \Q^+: \sqrt{x+y}\not\in\Q^+$$}
+\sectionOneB{$$\forall x,y\in \Q^+: \sqrt{x*y}\not\in\Q^+$$} % +->*
+\sectionTwoA{$$\forall x,y\in \Q^+: \sqrt{x+y}\not\in\Q^+$$}
+\sectionTwoB{$$\forall x,y\in \Q^+: \sqrt{x*y}\not\in\Q^+$$} % +->*
+\sectionVicsection{$$ (\forall x,y \in \mathbb{Q}): x^2 + y^2 +xy \geq x+y$$}
+
+Set $x=y=\frac{1}{2}$. Then we find that
+
+\[
+\frac{3}{4}=(\frac{1}{2})^2 + (\frac{1}{2})^2  + (\frac{1}{2}+\frac{1}{2}) < \frac{1}{2}+\frac{1}{2}=1,
+\]
+and this is ca counterexample to the claim.
+\cnewpage
+
+\section{Sets (10 points)}\addtocounter{pgpts}{10}
+% From F15
+
+%\begin{enumerate}
+%\item {\bf Sets and Power Sets (12 points)}\\
+Let \sectionOneA{$A=\{4,6,8\}$}\sectionOneB{$A=\{1,5,9\}$}\sectionTwoA{$A=\{3,6,9\}$}\sectionTwoB{$A=\{4,7,10\}$}
+\sectionVicsection{$A=\{1,3,5,7\}$, $B=\{1,2,3,4\}$}
+and $C=\{1,2,3,4,5,6,7\}$. Please fill in the blanks below. (2 points each).\\[5ex]
+
+$A - C = \emptyset$
+\vspace*{1cm}
+
+$B\cap C= \{1,2,3,4\}$
+\vspace*{1cm}
+
+ $A\cap B = \{1,3\}$ 
+\vspace*{1cm}
+
+% $A \cap {\cal P}(A) = $
+\sectionOneA{$A \times \{1\} = $}
+\sectionOneB{$A \times \{1\} = $} % Same as OneA
+\sectionTwoA{$\{1\} \times A = $}
+\sectionTwoB{$\{1\} \times A = $} % Same as TwoA
+\sectionVicsection{$|A \times B|=16$}
+
+\vspace*{1cm}
+ 
+ $|2^{A\cap B}| = 4$\\ 
+\vspace*{0.5cm}
+{\em (Hint: In order to find $|2^{A\cap B}|$ and $|A\times B|$ you do not need to specify the power set.)}
+\vspace{1cm}
+\section{Functional Completeness (10 points)}\addtocounter{pgpts}{10}
+Recall that the nor operator $\downarrow$ is defined by $p\downarrow q = \neg (p \vee q)$. Show that $\downarrow$ is functionally complete by expressing each operation in the set $\{\wedge, \neg\}$ in terms of $\downarrow$.
+
+\vspace{1cm}
+
+Let $p$ and $q$ be propositions. Then $\neg p = \neg (p \vee p) = p\downarrow p$. This expresses $\neg$ in terms of $\downarrow$.
+\vspace{1cm}
+
+Since $p\downarrow q = \neg(p\vee q) = \neg p \wedge \neg q$, it follows that $(\neg p) \downarrow (\neg q) = \neg p \wedge \neg q$. Using that $\neg p= p\downarrow p $ and $\neg q = q \downarrow q $, we find that $p\wedge q= (p\downarrow p) \downarrow (q\downarrow q)$. This expresses $\wedge$ in terms of $\downarrow$.
+
+\cnewpage
+\section{Summations (10 points)}\addtocounter{pgpts}{10}
+\begin{enumerate}
+    \item (1 point) Express $5+15+25+35+45+\dots+95+105$ in summation notation.
+    
+    \vspace{1cm}
+    $\sum_{k=0}^{10} 5+10k$
+    
+    \vspace{2cm}
+    \item (8 points) Calculate the value of the expression from part $1$.
+    
+    \vspace{1cm}
+    $\sum_{k=0}^{10} 5+10k= \sum_{k=0}^{10} 5 +10\sum_{k=0}^{10} k = 55+10\frac{10 \cdot 11}{2} = 55+550 = 605$
+    \vspace{2cm}
+    \item (1 point) How many terms are in the series? (For example, the series $1+2+3$ has $3$ terms.)
+    \vspace{2cm}
+
+    There are $11$ terms.
+\end{enumerate}
+
+%\end{enumerate}
+
+%% Other option:
+%% Let $A=\{b,d,f\}$ and $C=\{a,b,c,d,e,f,g\}$. Please determine which of the statements below are true, and which are false.
+
+%% \begin{enumerate}
+%% \item (4 points) $A\in C$ \vspace*{4ex}
+
+%% \item (4 points) $A\subseteq C$ \vspace*{4ex}
+
+%% \item (4 points) $A\in {\cal P}(C)$\vspace*{4ex}
+
+%% \item (4 points) $|A\cup C| = 10$\vspace*{4ex}
+%% \end{enumerate}
+
+
+
+\cnewpage
+
+
+
+\end{document}
+
+
+% From F15
+
+\vspace*{1cm}
+\item {\bf Cardinality (8 points)}\\
+% From F15
+
+For each of the sets below determine whether they are finite, infinitely countable, or uncountable. Justify your answers shortly.
+\begin{enumerate}
+%  \item The set of all positive powers of two: $\{2^i\;|\; i\in \N\} = \{2^0, 2^1, 2^2, 2^3,\ldots\}$
+  \item The set $S$ of all squares of positive integers: $S=\{i^2\;|\; i\in \Z^+\} = \{1^2, 2^2, 3^2, 4^2, \ldots\}$
+  \vspace*{4cm}
+  \item The real interval $[0,2]$.
+\end{enumerate}

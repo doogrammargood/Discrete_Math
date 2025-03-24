@@ -1,0 +1,502 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,epsfig}
+\usepackage{fancyhdr}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\ni{\noindent}
+\def\qed{\hfill\fbox{\hbox{}}\smallskip}
+
+\topmargin -0.5in
+\oddsidemargin -0.2 in 
+\evensidemargin -0.2 in 
+\global\advance\textwidth by 1.2 in
+\global\advance\textheight by 1in
+
+\def\ontest#1{#1}
+\def\solution#1{}
+%\def\solution#1{}\def\myspace#1{{\vspace*{#1}}}\def\mynewpage{{\newpage}}\def\ontest#1{{#1}}
+\def\sectionOneA#1{}
+\def\sectionOneB#1{}
+\def\sectionTwoA#1{#1}
+\def\sectionTwoB#1{}
+\def\sectionVicsection#1{}
+
+\newcounter{pgpts}
+\newcounter{cumpts}
+\newcommand{\cnewpage}{\addtocounter{cumpts}{\value{pgpts}}\newpage\setcounter{pgpts}{0}}
+
+
+\pagestyle{fancy}
+\fancyhead[LE,LO]{CMPS/MATH 2170, Midterm, Spring 24}
+\fancyhead[RE,RO]{page \thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot{}
+\fancyfoot[CO,CE]{}
+\fancyfoot[LE,LO]{page points: \arabic{pgpts}}
+\fancyfoot[RE,RO]{total points: \arabic{cumpts}}
+
+\newcommand{\ignore}[1]{}
+
+\begin{document}
+%\vspace*{-4ex}
+\begin{center}{\Large CMPS/MATH 2170 Discrete Mathematics -- Spring 24}\end{center}
+\flushright{3/12/24}
+\begin{center}{\huge Midterm}\end{center} 
+\flushleft
+
+\vspace*{1cm}
+\flushleft{}
+%\hspace*{3cm}{\bf\huge Name:}
+{\bf\large Name: \enspace\hrulefill} \\
+\bigskip
+{\bf\large Student ID: \enspace\hrulefill}
+\vspace*{1cm}
+%
+\ontest{
+\ni
+\begin{itemize}
+\item Put your name on the exam.
+%\item {\bf Try to give short justifications or comments to your answers. This will help us in determining partial credit.}
+\item This exam is closed-book, closed-notes, and closed-calculators. You are allowed to use a helper sheet (one single-sided letter page).
+\item If you have a question, {\bf stay seated} and raise your hand.
+\item Please try to write legibly -- if we cannot read it you may not get
+  credit.
+\item {\bf Do not waste time} -- if you cannot solve a question immediately, skip
+  it and return to it later. 
+%  \item The number of points for a question roughly corresponds to the number of minutes it should maximally take you to solve it.
+\end{itemize}
+}%ontest
+
+\solution{
+\vspace*{4cm}
+\begin{center}
+%{\sc\LARGE SOLUTION}
+\vspace*{2cm}
+\end{center}
+}
+
+
+\vspace*{2ex}
+\begin{center}
+{\LARGE
+\begin{tabular}{l|r|r}
+1) Logic & \hspace*{1cm} & 15\\\hline
+2) Rules of Inference & \hspace*{1cm} & 10\\\hline
+
+3) Proof by Contradiction\ignore{\sectionOneA{Contrapositive}\sectionOneB{Contrapositive}\sectionTwoA{Contradiction}\sectionTwoB{Contradiction}\sectionVicsection{Contradiction}} &\hspace*{1cm} &15\\\hline
+4) Counterexample & \hspace*{1cm} & 5\\\hline
+5) Sets & \hspace*{1cm} & 10\\\hline
+6) Functions & \hspace*{1cm} & 15\\\hline
+7) Sequences & \hspace*{1cm} & 10 \\\hline
+8) Induction & \hspace*{1cm} & 10 \\\hline
+
+Bonus &&10\\\hline
+\hline
+Total &&100
+\end{tabular}
+}
+\end{center}
+\addtocounter{pgpts}{10}
+\flushleft
+
+\cnewpage
+
+\section{Logic (15 points)}\addtocounter{pgpts}{15}
+% From F15
+
+\begin{enumerate}
+\item {\bf Equivalence (10 points)}\\
+\ignore{
+  Let $p$ and $q$ be propositions. Use a truth table to determine whether
+  
+  \sectionOneA{$\neg (p\rightarrow q)$ is equivalent to $p\wedge \neg q$.}
+  \sectionOneB{$p\wedge \neg q$ is equivalent to $\neg (p\rightarrow q)$.} %Flipped order
+  \sectionTwoA{$\neg (p\rightarrow \neg q)$ is equivalent to $p\wedge q$.}
+  \sectionTwoB{$p\wedge q$ is equivalent to $\neg (p\rightarrow \neg q)$.} %Flipped order
+  \sectionVicsection{$(p\vee q) \to p$ is equivalent to $q\to p$.}
+  
+%% Other option
+%% Use a truth table to determine whether $\neg (p\rightarrow \neq q)$ is equivalent to $p\wedge q$.
+
+\begin{center}
+{\Large
+\begin{tabular}{|c|c|c}
+    $p$ & $q$ & \hspace*{7cm}\\\hline
+T&T&\\
+T&F&\\
+F&T&\\
+F&F&\\
+\end{tabular}
+}
+\end{center}
+
+\vspace*{2ex}
+Are  $(p \vee q) \to p$ and $q \to p$ equivalent? Justify your answer.
+\vspace*{2cm}
+
+}
+
+\sectionOneA{Show that $(r \rightarrow p) \vee (r \rightarrow q)$ and $r \rightarrow p \vee q$}\sectionTwoA{Show that $(p \rightarrow r) \vee (q \rightarrow r)$ and $(p \wedge q) \rightarrow r$} are logically equivalent by using the laws of propositional logic (Zybooks table 1.5.1). Show each step.
+
+\ignore{
+\begin{enumerate}
+	\item constructing a truth table;
+
+{\Large
+\begin{tabular}{|c|c|c|c}
+    $p$ & $q$ & $r$ &\hspace*{7cm}\\\hline
+T&T&T\\
+T&T&F\\
+T&F&T\\
+T&F&F\\
+F&T&T\\
+F&T&F\\
+F&F&T\\
+F&F&F\\
+\end{tabular}
+}
+\item using the laws of propositional logic (Zybooks table 1.5.1). Show each step.
+ \vspace*{7cm}
+\end{enumerate}
+}
+
+ \vspace*{11cm}
+ 
+\ignore{
+\item {\bf Negation (5 points)}\\
+% From F15
+
+Simplify the following Boolean formula such that it contains
+no negation operators $\neg$, but possibly $\leq$ symbols.
+%
+\sectionOneA{{\Large $$\neg\exists x \;\forall y \;\exists z:\; (x=y\;\wedge\; y=z)$$}}
+\sectionOneB{{\Large $$\neg\forall x \;\exists y \;\forall z:\; (x=y\;\wedge\; y=z)$$}} % Flipped quantifiers
+\sectionTwoA{{{\Large $$\neg \forall p \;\forall q:\; ((p\vee q)\rightarrow q)$$}} {\em\normalsize (Hint: Use $a\rightarrow b \equiv \neg  a\vee b$)} }
+\sectionTwoB{{{\Large $$\neg \exists p \;\exists q:\; ((p\vee q)\rightarrow q)$$}} {\em\normalsize (Hint: Use $a\rightarrow b \equiv \neg  a\vee b$)} } %
+\sectionVicsection{{{\Large $$\neg \left((\exists p \in \mathbb{N}) \;(\forall q \in \mathbb{Z}):\; p>q \right) $$}} {\em\normalsize (Hint: Use $a\leq b \equiv \neg(a >b)$.)} 
+}
+
+\vspace*{3cm}
+}
+
+
+\item {\bf Translation (5 points)}\\
+% From F15
+
+\ignore{
+Express the following sentence as a logic formula with
+quantifiers:\\[1ex]
+
+\sectionOneA{''For every integer there is a real number such that both sum up to zero.''}
+\sectionOneB{''For every integer there is a rational number such that both sum up to zero.''} % real -> rational
+\sectionTwoA{''For every positive integer there is a rational number such that their product\\ equals 1.''}
+\sectionTwoB{''For every positive integer there is a real number such that their product equals 1.''} %rational -> real
+\sectionVicsection{``For every positive integer, there is a different integer with the same square.''}
+
+%``There is a real number whose product with any other real number equals $0$.''\\
+
+}
+
+Let the domain be the members of a chess club. The predicate $B(x, y)$ means that person $x$ has beaten person $y$ at some point in time. Give a logical expression equivalent to the following English statement. %Note that it is impossible for a person to beat himself or herself.
+
+\vspace*{1ex}
+\sectionOneA{``Everyone has won at least one game.''}\sectionTwoA{``Everyone has won at least one game.''}
+
+
+\end{enumerate}
+
+
+
+
+\cnewpage
+
+%% % NOT on F15
+
+%% \item {\bf Contrapositive (6 points)}\\
+%%  What is the contrapositive of $(p\wedge q)\rightarrow q$ ? Simplify
+%%  your answer such that there is {\bf no} $\neg$-symbol in front of any
+%%  parenthesis.
+
+%%  \cnewpage
+
+
+\section{Rules of Inference (10 points)}\addtocounter{pgpts}{10}
+% From F15
+
+Consider the following collection of premises:
+\begin{quote}
+\sectionOneA{
+``I am smart or I am lucky.''\\
+  ``If I am lucky then both I will win the lottery and I am not smart.''\\
+  ``If I am smart, then I will not win the lottery.''\\
+``I will not win the lottery.''\\
+  }
+\sectionOneB{ %Same as OneA
+``I am smart or I am lucky.''\\
+``I am not smart.''\\
+  ``If I am lucky then I will win the lottery.''}
+  
+\sectionTwoA{
+``I ate dinner or I ate lunch.''\\
+``If I ate lunch, then I neither ate dinner nor breakfast.''\\
+  ``If I ate dinner, then I ate breakfast.''\\
+  ``I ate breakfast.''}
+
+  
+\sectionTwoB{ %Same as TwoA
+``I am lucky then I will win the lottery.''\\
+``If I win the lottery then I am smart.''\\
+  ``I am not smart.''}
+\sectionVicsection{
+``If Dracula is out, then it is raining or it is night or the full moon shines.''\\
+``Dracula is out.''\\
+``It is not raining.''\\
+``Whenever the full moon shines, it is night.''}
+\end{quote}
+Use rules of inference to infer
+\sectionOneA{``I am smart.''}
+\sectionOneB{``I will win the lottery.''} % Same as OneA
+\sectionTwoA{``I ate dinner.''}
+\sectionTwoB{``I am not lucky.''} % Same as TwoA
+\sectionVicsection{``It is night.''}
+from these premises. 
+
+You may use the rules in Zybooks table 3.8 and table 1.5.1.
+\cnewpage
+% \begin{array}{llll}
+
+% \begin{array}{l}
+% \mbox{Modus ponens}\\
+% p\\
+% p\rightarrow q\\
+% \hline
+% \therefore q
+% \end{array}
+
+% &
+% \begin{array}{l}
+% \mbox{Modus tollens}\\
+% \neg q\\
+% p\rightarrow q\\
+% \hline
+% \therefore \neg p
+% \end{array}
+
+% &
+% \begin{array}{l}
+% \mbox{Hypothetical syllogism}\\
+% p\rightarrow q\\
+% q\rightarrow r\\
+% \hline
+% \therefore p\rightarrow r
+% \end{array}
+
+% &
+% \begin{array}{l}
+% \mbox{Disjunctive syllogism}\\
+% p\vee q\\
+% \neg p\\
+% \hline
+% \therefore q
+% \end{array}
+
+% \end{array}
+% $$
+
+% \cnewpage
+
+\section{Proof by Contradiction
+\ignore{
+\sectionOneA{Contrapositive}\sectionOneB{Contrapositive}\sectionTwoA{Contradiction}\sectionTwoB{Contradiction}\sectionVicsection{Contradiction} 
+}
+(15 points)}\addtocounter{pgpts}{15}
+
+% From F15
+
+\ignore{
+Consider the theorem below.
+\begin{quote}
+  {\bf Theorem:}
+  \sectionOneA{If $x^3$ is irrational then $x$ is irrational.}
+  \sectionOneB{If $x^4$ is irrational then $x$ is irrational.} % 3->4
+  \sectionTwoA{If $x^3$ is irrational then $x$ is irrational.}
+  \sectionTwoB{If $x^4$ is irrational then $x$ is irrational.} % 3->4
+  \sectionVicsection{If $x$ is irrational then $\frac{x}{2}$ is irrational.}
+  
+%
+%Other options:\\
+%If $x^3$ is odd then $x$ is odd.\\
+%If $x^2$ is odd then $x$ is not a power of $2$.\\
+\end{quote}
+
+
+Prove the theorem using a proof by \sectionOneA{contrapositive}\sectionOneB{contrapositive}\sectionTwoA{contradiction}\sectionTwoB{contradiction}\sectionVicsection{contradiction}.
+%% \begin{enumerate}
+%% % From F15
+}
+
+Use a proof by contradiction to show that for any five real numbers $a_1, a_2, ..., a_5$, at least one of them is greater than or equal to the average of these numbers. Recall that the average of the five numbers is given by $(a_1+a_2+\cdots+a_5)/5$.
+
+%% \item (10 points) Prove the theorem using a proof by contrapositive.
+%%   \vspace*{10cm}
+%% \item (4 points) What's the difference between a proof by contrapositive and a proof by contradiction?
+%% \end{enumerate}
+\vspace*{12cm}
+
+
+\section{Counterexample (5 points)}\addtocounter{pgpts}{5}
+Disprove the following statement:\\
+\sectionOneA{$$\forall x,y\in \N: \frac{x+y}{x-y}\in \mathbb{Q}$$}
+\sectionOneB{$$\forall x,y\in \Q^+: \sqrt{x*y}\not\in\Q^+$$} % +->*
+\sectionTwoA{$$\forall x,y\in \mathbb{R}^+, x^2+y^2\geq 2\min(x,y)$$}
+\sectionTwoB{$$\forall x,y\in \Q^+: \sqrt{x*y}\not\in\Q^+$$} % +->*
+\sectionVicsection{$$ (\forall x,y \in \mathbb{Q}): x^2 + y^2 +xy \geq x+y$$}
+
+
+\cnewpage
+
+\section{Sets (10 points)}\addtocounter{pgpts}{10}
+% From F15
+
+%\begin{enumerate}
+%\item {\bf Sets and Power Sets (12 points)}\\
+\ignore{
+Let \sectionOneA{$A=\{4,6,8\}$}\sectionOneB{$A=\{1,5,9\}$}\sectionTwoA{$A=\{3,6,9\}$}\sectionTwoB{$A=\{4,7,10\}$}
+\sectionVicsection{$A=\{1,3,5,7\}$, $B=\{1,2,3,4\}$}
+and $C=\{1,2,3,4,5,6,7\}$. 
+}
+Let \sectionOneA{$A=\{2,4,6,8\}$, $B=\{1,2,3,4\}$,
+and $C=\{1,2,3,4,5,6,7\}$}\sectionTwoA{$A=\{1,3,5,7\}$, $B=\{5,6,7\}$,
+and $C=\{1,2,3,4,5,6,7\}$}. Please fill in the blanks below. (2 points each).\\[9ex]
+
+$A - C = $
+\vspace*{2cm}
+
+$B\cap C=$
+\vspace*{2cm}
+
+ $A\cup B =$ 
+\vspace*{2cm}
+
+% $A \cap {\cal P}(A) = $
+\sectionOneA{$A \times \{1\} = $}
+\sectionOneB{$A \times \{1\} = $} % Same as OneA
+\sectionTwoA{$\{1\} \times A = $}
+\sectionTwoB{$\{1\} \times A = $} % Same as TwoA
+\sectionVicsection{$|A \times B|=$}
+
+\vspace*{2cm}
+ 
+ $|P({A\cap B})| = $\\ 
+%\vspace*{0.5cm}
+%{\em (Hint: In order to find $|2^{A\cap B}|$ and $|A\times B|$ you do not need to specify the power set.)}
+
+%\vspace{1cm}
+%\section{Functional Completeness (10 points)}\addtocounter{pgpts}{10}
+%Recall that the nor operator $\downarrow$ is defined by $p\downarrow q = \neg (p \vee q)$. Show that $\downarrow$ is functionally complete by expressing each operation in the set $\{\wedge, \neg\}$ in terms of $\downarrow$.
+
+\cnewpage
+
+\section{Functions (15 points)}\addtocounter{pgpts}{15}
+% From F15
+
+
+Let
+\sectionOneA{ $f:\mathbb{R}^+\to\mathbb{R}^+$ be defined by $f(x)=\frac{1}{x^2}$\;.}
+\sectionOneB{$f(x)=\frac{x-1}{2}$\;.} % 3->2
+\sectionTwoA{$f:(1,\infty) \to (0,\infty)$ be defined by $f(x)=\sqrt{x-1}$\;.}
+\sectionTwoB{$f(x)=2x+5$\;.} % 2<->5
+\sectionVicsection{$f(x)=7x-\frac{1}{2}$\;.}
+  \begin{enumerate}
+    \item (10 points) Use the definitions of surjective, injective, and bijective to prove that $f$ is bijective on this domain and codomain.
+       \vspace*{10cm}
+    \item (5 points) Give a domain and a codomain for which $f$ is injective but not surjective. Justify your answer shortly.
+  \end{enumerate}
+
+
+%% Other option:
+
+%% Let $f:\Z \longrightarrow \Q$ with $f(x) = 3x-4$, and
+%% let $g:\Q \longrightarrow \R$ with $g(x)=\frac{x}{3}$. 
+%%   \begin{enumerate}
+%%     \item (6 points) What is the codomain of $f$? What is the codomain of $g\circ f$?
+%% \vspace*{14ex}
+
+%%     \item (6 points) Is $f$ injective? Justify your answer.
+%% \vspace*{20ex}
+
+
+%%     \item (6 points) Is $g$ surjective? Justify your answer.
+%% \vspace*{20ex}
+
+%%   \end{enumerate}
+
+
+\cnewpage
+\section{Sequences (10 points)}\addtocounter{pgpts}{10}
+\begin{enumerate}
+    \item (4 points) \sectionOneA{Give an example of a geometric sequence that is neither increasing nor decreasing.} \sectionTwoA{Give an example of a geometric sequence that is neither non-increasing nor non-decreasing.}  %Consider the geometric sequence $\{a_n\}_{n \in \mathbb{N}}$ where $a_0 \in \mathbb{R}$, $r \in \mathbb{R}$, and $a_n= ra_{n-1}$ for $n \geq 1$. Is there a way to assign the common ratio $r$ and initial value $a_0$ that can make the sequence non-decreasing but not increasing? Justify your answer. 
+    %\begin{enumerate}
+    %\item What are the conditions on the common ratio $r$ and initial value $a_0$, that would make the resulting geometric sequence increasing? 
+    %\vspace{3cm}
+    %\item Is it possible to have a geometric sequence that is non-decreasing but not increasing? Justify your answer. 
+    %\end{enumerate}
+    \vspace{6cm}
+    \item (2 point) %Express $5+15+25+35+45+\dots+95+105$ in summation notation.
+    Express \sectionOneA{$8+16+24+32+40+\dots+88+96$}\sectionTwoA{$5+15+25+35+45+\dots+95+105$} in summation notation
+    
+    \vspace{4cm}
+    \item (4 points) Calculate the value of the expression from (2).
+    \vspace{3cm}
+    %\item (1 point) How many terms are in the series? (For example, the series $1+2+3$ has $3$ terms.)
+    \vspace{3cm}
+\end{enumerate}
+
+%\end{enumerate}
+
+%% Other option:
+%% Let $A=\{b,d,f\}$ and $C=\{a,b,c,d,e,f,g\}$. Please determine which of the statements below are true, and which are false.
+
+%% \begin{enumerate}
+%% \item (4 points) $A\in C$ \vspace*{4ex}
+
+%% \item (4 points) $A\subseteq C$ \vspace*{4ex}
+
+%% \item (4 points) $A\in {\cal P}(C)$\vspace*{4ex}
+
+%% \item (4 points) $|A\cup C| = 10$\vspace*{4ex}
+%% \end{enumerate}
+
+
+
+\cnewpage
+
+\section{Induction (10 points)}\addtocounter{pgpts}{10}
+Show by mathematical induction that for all $n\in \mathbb{N}$ satisfying $n\geq 3$, the following holds.
+\[
+n^2 \geq 2n+1.
+\]
+
+\cnewpage
+
+\end{document}
+
+
+
+% From F15
+
+\vspace*{1cm}
+\item {\bf Cardinality (8 points)}\\
+% From F15
+
+For each of the sets below determine whether they are finite, infinitely countable, or uncountable. Justify your answers shortly.
+\begin{enumerate}
+%  \item The set of all positive powers of two: $\{2^i\;|\; i\in \N\} = \{2^0, 2^1, 2^2, 2^3,\ldots\}$
+  \item The set $S$ of all squares of positive integers: $S=\{i^2\;|\; i\in \Z^+\} = \{1^2, 2^2, 3^2, 4^2, \ldots\}$
+  \vspace*{4cm}
+  \item The real interval $[0,2]$.
+\end{enumerate}
+
+
