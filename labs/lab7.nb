@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     19293,        512]
-NotebookOptionsPosition[     16250,        452]
-NotebookOutlinePosition[     16665,        469]
-CellTagsIndexPosition[     16622,        466]
+NotebookDataLength[     19509,        514]
+NotebookOptionsPosition[     16466,        454]
+NotebookOutlinePosition[     16881,        471]
+CellTagsIndexPosition[     16838,        468]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -441,11 +441,13 @@ Cell["Quiz:", "Section",
 
 Cell["\<\
 Use the Extended Euclidean Algorithm to calculate the inverse of 101 modulo \
-1013.\
+1013. Verify your result by taking using the builtin Mod function. Take a \
+screenshot and submit it as Lab 8 on Gradescope.\
 \>", "Text",
  CellChangeTimes->{{3.951835187437063*^9, 3.9518352790449743`*^9}, {
-  3.951835311290886*^9, 
-  3.95183531226719*^9}},ExpressionUUID->"73a6b253-65b7-47cd-a8fa-\
+  3.951835311290886*^9, 3.95183531226719*^9}, {3.951863586295294*^9, 
+  3.951863608036661*^9}, {3.9518637130368357`*^9, 
+  3.951863739184019*^9}},ExpressionUUID->"73a6b253-65b7-47cd-a8fa-\
 4a12d961c866"]
 }, Open  ]]
 }, Open  ]]
@@ -511,7 +513,7 @@ Cell[15150, 419, 587, 11, 33, "Output",ExpressionUUID->"d172ae21-efdd-4beb-98c4-
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[15786, 436, 150, 3, 65, "Section",ExpressionUUID->"8280c818-acac-4e73-9299-4545cc10357c"],
-Cell[15939, 441, 283, 7, 33, "Text",ExpressionUUID->"73a6b253-65b7-47cd-a8fa-4a12d961c866"]
+Cell[15939, 441, 499, 9, 33, "Text",ExpressionUUID->"73a6b253-65b7-47cd-a8fa-4a12d961c866"]
 }, Open  ]]
 }, Open  ]]
 }
