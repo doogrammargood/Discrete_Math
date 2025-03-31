@@ -1,0 +1,309 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     11018,        299]
+NotebookOptionsPosition[      9976,        271]
+NotebookOutlinePosition[     10368,        287]
+CellTagsIndexPosition[     10325,        284]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Lab 8: Proofs", "Title",
+ CellChangeTimes->{{3.95243633588276*^9, 
+  3.952436340619767*^9}},ExpressionUUID->"511d5c51-6257-4e2e-b4fb-\
+bda462a57e48"],
+
+Cell[CellGroupData[{
+
+Cell["Warm Up:", "Section",
+ CellChangeTimes->{{3.9524363506534033`*^9, 
+  3.952436353220276*^9}},ExpressionUUID->"9bd7f16b-6124-4e7d-bec3-\
+c26bceffbe7f"],
+
+Cell[TextData[{
+ "Find the error in the following argument:\nClaim: All cows are the same \
+color.\nProof: By induction on the number of cows.\n\tBase: If there is only \
+1 cow, then of course it is the same color as itself.\n\tInductive \
+Hypothesis: Suppose that for some natural number k, any k cows are the same \
+color.\n\tInductive claim: Any collection of k+1 cows is the same color.\n\t\
+Inductive step: Suppose that we have a collection of k+1 cows, ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{"{", 
+         RowBox[{
+           SubscriptBox[
+            StyleBox["C", "TI"], "1"], ",", 
+           SubscriptBox[
+            StyleBox["C", "TI"], "2"], ",", "\[Ellipsis]", ",", 
+           SubscriptBox[
+            StyleBox["C", "TI"], 
+            RowBox[{
+              StyleBox["k", "TI"], "+", "1"}]]}], "}"}], TraditionalForm], 
+     "errors" -> {}, "input" -> "\\{C_1,C_2,\\dots,C_{k+1}\\}", "state" -> 
+     "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "6c66d9a7-b494-408e-97d2-5d0677bed5bf"],
+ ". By the inductive hypothesis, the first ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["k", "TI"], TraditionalForm], "errors" -> {}, "input" -> "k", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "4fbd4920-460b-4bc2-b5ed-7f340d237af2"],
+ " cows ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{"{", 
+         RowBox[{
+           SubscriptBox[
+            StyleBox["C", "TI"], "1"], ",", 
+           SubscriptBox[
+            StyleBox["C", "TI"], "2"], ",", "\[Ellipsis]", ",", 
+           SubscriptBox[
+            StyleBox["C", "TI"], 
+            StyleBox["k", "TI"]]}], "}"}], TraditionalForm], "errors" -> {}, 
+     "input" -> "\\{C_1,C_2,\\dots,C_k\\}", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "77fb5cc3-262b-46ba-b77d-45094d1c5227"],
+ " are all the same color. Also by the inductive hypothesis, the last ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["k", "TI"], TraditionalForm], "errors" -> {}, "input" -> "k", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "0dd847bf-44f7-420c-95c6-31d94f37b2a6"],
+ " cows, ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{"{", 
+         RowBox[{
+           SubscriptBox[
+            StyleBox["C", "TI"], "2"], ",", 
+           SubscriptBox[
+            StyleBox["C", "TI"], "3"], ",", "\[Ellipsis]", ",", 
+           SubscriptBox[
+            StyleBox["C", "TI"], 
+            RowBox[{
+              StyleBox["k", "TI"], "+", "1"}]]}], "}"}], TraditionalForm], 
+     "errors" -> {}, "input" -> "\\{C_2,C_3,\\dots,C_{k+1}\\}", "state" -> 
+     "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "7c57ef13-0600-40d4-9f1d-b4964df8ccf0"],
+ " are all the same color. Pick any two cows. There are 3 cases. Either these \
+two cows are both among the first ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["k", "TI"], TraditionalForm], "errors" -> {}, "input" -> "k", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "2b9ab5e1-b13b-4f92-9169-115bff931443"],
+ ", both among the last ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["k", "TI"], TraditionalForm], "errors" -> {}, "input" -> "k", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "e1faa1d4-51bb-4eb5-b60d-6364a3301aba"],
+ ", or are the pair ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{"(", 
+         RowBox[{
+           SubscriptBox[
+            StyleBox["C", "TI"], "1"], ",", 
+           SubscriptBox[
+            StyleBox["C", "TI"], 
+            RowBox[{
+              StyleBox["k", "TI"], "+", "1"}]]}], ")"}], TraditionalForm], 
+     "errors" -> {}, "input" -> "(C_1,C_{k+1})", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "5b16d75e-a7d4-4afe-84cc-7c55adb1a652"],
+ ". The first two cases are handled directly using the inductive hypothesis. \
+In the third cases, both ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubscriptBox[
+        StyleBox["C", "TI"], "1"], TraditionalForm], "errors" -> {}, "input" -> 
+     "C_1", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "b0c5b88f-9417-4725-ad4d-5f76c4f6b5e0"],
+ "  and ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubscriptBox[
+        StyleBox["C", "TI"], "2"], TraditionalForm], "errors" -> {}, "input" -> 
+     "C_2", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "3a3308f5-aab9-4748-83e3-3df9a9a6c871"],
+ " are the same color and ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubscriptBox[
+        StyleBox["C", "TI"], "2"], TraditionalForm], "errors" -> {}, "input" -> 
+     "C_2", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "d9a818e1-6a2f-4d70-a091-5e7458fa70ad"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubscriptBox[
+        StyleBox["C", "TI"], 
+        RowBox[{
+          StyleBox["k", "TI"], "+", "1"}]], TraditionalForm], "errors" -> {}, 
+     "input" -> "C_{k+1}", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "e2787799-0dca-4edb-9878-2501f18645bf"],
+ " are the same color. Therefore ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubscriptBox[
+        StyleBox["C", "TI"], "1"], TraditionalForm], "errors" -> {}, "input" -> 
+     "C_1", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "03ec7a52-68f3-41b2-964c-cb4ca6503dc1"],
+ "  and ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubscriptBox[
+        StyleBox["C", "TI"], 
+        RowBox[{
+          StyleBox["k", "TI"], "+", "1"}]], TraditionalForm], "errors" -> {}, 
+     "input" -> "C_{k+1}", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "4ca6d8bf-c936-4bb5-825d-788957a533c1"],
+ " are the same color. In all three cases, the two cows picked are the same \
+color, so all ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["k", "TI"], "+", "1"}], TraditionalForm], "errors" -> {}, 
+     "input" -> "k+1", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "ed86f987-7d19-4360-84a6-69db266d8870"],
+ " cows are the same color."
+}], "Text",
+ CellChangeTimes->{{3.952436383253319*^9, 3.9524367403175507`*^9}, {
+  3.95243697550527*^9, 
+  3.952437315573193*^9}},ExpressionUUID->"f488c5ea-181d-4716-8703-\
+f23d424f993e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Activity: Trade proofs", "Section",
+ CellChangeTimes->{{3.952437339910776*^9, 
+  3.952437342451379*^9}},ExpressionUUID->"24250798-5071-4dbe-939c-\
+0d844b649385"],
+
+Cell["\<\
+To complete this lab, you have brought a proof from Homework 8, preferably \
+Problem 3. Form groups of 2 or 3 and trade your proofs. Read the proofs \
+carefully and look for errors or omissions. Here is a checklist to guide you \
+in looking over each others\[CloseCurlyQuote] proofs.
+
+1.) Is the claim clearly stated?
+2.) Are all symbols introduced?
+3.) Are any statements out of order? Can each sentence understood without \
+reading ahead?
+4.) Is each use of the equals symbol correct? Do not use the equals symbol \
+for anything other than literal equality.
+5.) Are there any grammatical errors?
+6.) If bullet points are used, is it clear how the items are related?
+7.) Are there any logical errors?
+8.) Are there weird edge cases where a claim is false?
+9.) Are any arguments missing?
+10.) Are any sentences ambiguous?
+11.) At the end of the proof, is it clear that the claim has been proven?
+12.) Are there any arrows? If so, is it clear what the arrows mean?
+13.) Are any sub-arguments sufficiently complicated to merit a lemma?
+14.) Is any weird notation used? Can the proof be made more clear by changing \
+to a simpler or more standard notation?\
+\>", "Text",
+ CellChangeTimes->{{3.952437348854457*^9, 3.952438022027679*^9}, {
+  3.952438053826395*^9, 3.952438076565598*^9}, {3.952438130264851*^9, 
+  3.9524382002972527`*^9}},ExpressionUUID->"dd36bf46-6aae-47d3-99c4-\
+7ac219da25c7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Quiz", "Section",
+ CellChangeTimes->{{3.9524380943298693`*^9, 
+  3.9524380948580093`*^9}},ExpressionUUID->"6ec591f8-964b-44c3-b177-\
+f3a0e49b4655"],
+
+Cell["\<\
+The quiz is participation credit. To get credit, you must attend the lab and \
+bring a proof to complete the activity.\
+\>", "Text",
+ CellChangeTimes->{{3.952438101008872*^9, 
+  3.952438125301948*^9}},ExpressionUUID->"0c16ae6b-3159-4f71-96d4-\
+e69daedcf319"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440, 701.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"92e6b8a9-3295-48af-92fb-e01e4f132bc3"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 155, 3, 96, "Title",ExpressionUUID->"511d5c51-6257-4e2e-b4fb-bda462a57e48"],
+Cell[CellGroupData[{
+Cell[756, 29, 155, 3, 65, "Section",ExpressionUUID->"9bd7f16b-6124-4e7d-bec3-c26bceffbe7f"],
+Cell[914, 34, 6966, 180, 230, "Text",ExpressionUUID->"f488c5ea-181d-4716-8703-f23d424f993e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7917, 219, 167, 3, 65, "Section",ExpressionUUID->"24250798-5071-4dbe-939c-0d844b649385"],
+Cell[8087, 224, 1400, 27, 383, "Text",ExpressionUUID->"dd36bf46-6aae-47d3-99c4-7ac219da25c7"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9524, 256, 153, 3, 65, "Section",ExpressionUUID->"6ec591f8-964b-44c3-b177-f3a0e49b4655"],
+Cell[9680, 261, 268, 6, 33, "Text",ExpressionUUID->"0c16ae6b-3159-4f71-96d4-e69daedcf319"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
