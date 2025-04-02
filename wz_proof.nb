@@ -1,0 +1,546 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     19637,        538]
+NotebookOptionsPosition[     16989,        484]
+NotebookOutlinePosition[     17404,        501]
+CellTagsIndexPosition[     17361,        498]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Computational Combinatorial Identities", "Title",
+ CellChangeTimes->{{3.952595511119616*^9, 
+  3.952595529012542*^9}},ExpressionUUID->"cbabd4a9-da01-4322-9efc-\
+3b712fc8e81d"],
+
+Cell[CellGroupData[{
+
+Cell["Introduction", "Section",
+ CellChangeTimes->{{3.952595537465027*^9, 
+  3.952595540781431*^9}},ExpressionUUID->"6c0fa5ab-3b4a-4618-ac4b-\
+64187dcfdaf7"],
+
+Cell[TextData[{
+ "In this notebook, we will see examples of how to prove combinatorial \
+identities using the Wilf-Zeilberger technique. \n\nWe assume that we start \
+with a sum that we want to verify of the form ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["f", "TI"], 
+         RowBox[{"(", 
+           StyleBox["n", "TI"], ")"}], "\[LongEqual]", 
+         UnderoverscriptBox["\[Sum]", 
+          RowBox[{
+            StyleBox["k", "TI"], "\[LongEqual]", "-", "\[Infinity]"}], 
+          "\[Infinity]", LimitsPositioning -> True], 
+         StyleBox["F", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], ",", 
+             StyleBox["k", "TI"]}], ")"}]}], TraditionalForm], "errors" -> {},
+      "input" -> "f(n)=\\sum_{k=-\\infty}^\\infty F(n,k)", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "ffb643b2-5337-4ba2-bf59-3bc7a04dcb67"],
+ ".\nWe put the sum into a standard form by dividing by f(n) on both sides.\n\
+The main example is ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["F", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], ",", 
+             StyleBox["k", "TI"]}], ")"}], "\[LongEqual]", 
+         SuperscriptBox[
+          RowBox[{"(", 
+            GridBox[{{
+               StyleBox["n", "TI"]}, {
+               StyleBox["k", "TI"]}}], ")"}], "2"]}], TraditionalForm], 
+     "errors" -> {}, "input" -> "F(n,k)={n\\choose k}^2", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "dcfe1050-9311-4a07-8c74-d91b3cd7d0e3"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["f", "TI"], 
+         RowBox[{"(", 
+           StyleBox["n", "TI"], ")"}], "\[LongEqual]", 
+         RowBox[{"(", 
+           GridBox[{{
+              RowBox[{"2", 
+                StyleBox["n", "TI"]}]}, {
+              StyleBox["n", "TI"]}}], ")"}]}], TraditionalForm], 
+     "errors" -> {}, "input" -> "f(n)={2n\\choose n}", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "0db9ea1b-7933-40ad-b5e1-a2a593a647cb"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.9525955462343683`*^9, 3.952595597143518*^9}, {
+  3.952595643445363*^9, 3.952595776898273*^9}, {3.9525958746445293`*^9, 
+  3.952595910193623*^9}, {3.952596081252461*^9, 
+  3.95259614470113*^9}},ExpressionUUID->"5bd54de6-0b93-42e6-9003-\
+798cc983d878"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["General Strategy", "Section",
+ CellChangeTimes->{{3.952595787738222*^9, 
+  3.952595792651971*^9}},ExpressionUUID->"08fc57e1-64f8-43e1-a965-\
+608176630259"],
+
+Cell[TextData[{
+ "The general strategy is:\n1.) Divide both sides by ",
+ Cell[BoxData[
+  TemplateBox[<|"boxes" -> FormBox[
+      RowBox[{
+        StyleBox["f", "TI"], "(", 
+        StyleBox["n", "TI"], ")"}], TraditionalForm], "errors" -> {}, "input" -> 
+    "f(n)", "state" -> "Boxes"|>,
+   "TeXAssistantTemplate"]], "InlineCode",ExpressionUUID->
+  "4849f53b-f2af-455c-a69e-e5cf182e2bfb"],
+ " and re-name F(n,k):=F(n,k)/f(n). Now we want to verify that ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         UnderoverscriptBox["\[Sum]", 
+          RowBox[{
+            StyleBox["k", "TI"], "\[LongEqual]", "-", "\[Infinity]"}], 
+          "\[Infinity]", LimitsPositioning -> True], 
+         StyleBox["F", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], ",", 
+             StyleBox["k", "TI"]}], ")"}], "\[LongEqual]", "1"}], 
+       TraditionalForm], "errors" -> {}, "input" -> 
+     "\\sum_{k=-\\infty}^\\infty F(n,k)=1", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "7d7b0974-7b92-40b8-a6c0-c2a4021f8567"],
+ ".\n2.) Use Zeilberger\[CloseCurlyQuote]s algorithm of order 1 to obtain a \
+telescoping recurrence in k for F(n,k).\n3.) Sum both sides of the \
+recurrence. (Check that ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["F", "TI"], 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["n", "TI"], ",", 
+             StyleBox["k", "TI"]}], ")"}], "\[LongEqual]", "0"}], 
+       TraditionalForm], "errors" -> {}, "input" -> "F(n,k)=0", "state" -> 
+     "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "bb43eaad-571b-4628-91da-33179753b9a1"],
+ " when k is very big or small).\n4.) Obtain a recurrence for the sum that \
+demonstrates that the sum is a constant, independent of ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["n", "TI"], TraditionalForm], "errors" -> {}, "input" -> "n", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "561def33-7d5b-4fc0-ab6c-ca6ceb28fb1f"],
+ ".\n5.) Verify that the constant is ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|
+    "boxes" -> FormBox["1", TraditionalForm], "errors" -> {}, "input" -> "1", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "cfb51763-f731-4356-aba4-f9f00acf6c22"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.952595799372633*^9, 3.9525958418894653`*^9}, {
+  3.952595928602803*^9, 3.952596067114504*^9}, {3.952596161931054*^9, 
+  3.9525962192930593`*^9}, {3.9525962846483192`*^9, 
+  3.952596347036227*^9}},ExpressionUUID->"2b60f5f0-b11f-4a5d-bc9d-\
+afaef174a077"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Main Example", "Section",
+ CellChangeTimes->{{3.952596359403051*^9, 
+  3.952596360982531*^9}},ExpressionUUID->"bc7cfd7f-e184-4f64-a646-\
+3151f3ceb6cd"],
+
+Cell[BoxData[
+ RowBox[{"<<", "RISC`fastZeil`", " ", 
+  RowBox[{"(*", 
+   RowBox[{"Loads", " ", "a", " ", "package", " ", "containing", " ", 
+    RowBox[{"Zeilberger", "'"}], "s", " ", "Algorithm"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.9525948141996803`*^9, 3.952594830016288*^9}, {
+  3.952595176361828*^9, 
+  3.952595193486168*^9}},ExpressionUUID->"adb3bcf7-15ba-435e-b2b7-\
+30c0b54c7c85"],
+
+Cell["\<\
+Fast Zeilberger Package version 3.61
+written by Peter Paule, Markus Schorn, and Axel Riese
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria\
+\>", "Text",
+ CellFrame->True,
+ GeneratedCell->True,
+ CellAutoOverwrite->True,
+ CellChangeTimes->{3.952595125765411*^9},
+ ShowAutoSpellCheck->False,
+ FontColor->RGBColor[0, 0, 0],
+ Background->RGBColor[
+  0.796887, 0.789075, 
+   0.871107],ExpressionUUID->"425006af-265a-4f37-a8e2-2498b635d65d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"F", "[", 
+     RowBox[{"k_", ",", "n_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Binomial", "[", 
+       RowBox[{"n", ",", "k"}], "]"}], "^", "2"}], "/", 
+     RowBox[{"Binomial", "[", 
+      RowBox[{
+       RowBox[{"2", "n"}], ",", "n"}], "]"}]}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Defines", " ", "the", " ", "summands", " ", "after", " ", "step", " ", 
+    "1"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.952594841391225*^9, 3.952594858676915*^9}, 
+   3.952595084119218*^9, {3.952595204260318*^9, 3.9525952107475986`*^9}, {
+   3.952595453446871*^9, 3.9525954569457006`*^9}, {3.9525963695586987`*^9, 
+   3.952596372181336*^9}, {3.952596457054161*^9, 
+   3.952596466069613*^9}},ExpressionUUID->"18d7ed84-a5cd-48d9-a5ec-\
+be4e6dc400a1"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"show", "[", "F", "]"}], "  ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Checks", " ", "that", " ", "F", " ", "is", " ", "defined", " ", 
+    "correctly"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.9525950752332573`*^9, 3.952595076863263*^9}, {
+  3.9525954633705273`*^9, 
+  3.952595481117244*^9}},ExpressionUUID->"81ba0ec7-bdc7-4096-9e4a-\
+afc0f34acba6"],
+
+Cell[BoxData[
+ FractionBox[
+  SuperscriptBox[
+   RowBox[{"Binomial", "[", 
+    RowBox[{"n", ",", "k"}], "]"}], "2"], 
+  RowBox[{"Binomial", "[", 
+   RowBox[{
+    RowBox[{"2", " ", "n"}], ",", "n"}], "]"}]]], "Output",
+ CellChangeTimes->{{3.952595077638988*^9, 3.952595131290361*^9}, 
+   3.95259546909846*^9},
+ CellLabel->"Out[11]=",ExpressionUUID->"08640316-4d36-49f9-be47-9663a3fc1700"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Zb", "[", 
+   RowBox[{
+    RowBox[{"F", "[", 
+     RowBox[{"k", ",", "n"}], "]"}], ",", "k", ",", "n", ",", "1"}], "]"}], 
+  " ", 
+  RowBox[{"(*", 
+   RowBox[{"Calls", " ", 
+    RowBox[{"Zeilberger", "'"}], "s", " ", "algorithm", " ", "to", " ", 
+    "obtain", " ", "a", " ", "recurrence", " ", "for", " ", "F", " ", "from", 
+    " ", "step", " ", "2"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.952594869351078*^9, 3.952594872373599*^9}, {
+  3.952594903957121*^9, 3.952594924985639*^9}, {3.9525949870967093`*^9, 
+  3.952595005987274*^9}, {3.9525951433518677`*^9, 3.9525951505157824`*^9}, {
+  3.9525951986314774`*^9, 3.9525952020755987`*^9}, {3.952595483063982*^9, 
+  3.952595494309704*^9}, {3.9525963805047083`*^9, 3.952596382502606*^9}},
+ CellLabel->"In[16]:=",ExpressionUUID->"bd46388b-790d-4f68-b679-e40ddf839951"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", 
+     TagBox[
+      RowBox[{"F", "[", 
+       RowBox[{"k", ",", "n"}], "]"}],
+      HoldForm]}], "+", 
+    TagBox[
+     RowBox[{"F", "[", 
+      RowBox[{"k", ",", 
+       RowBox[{"1", "+", "n"}]}], "]"}],
+     HoldForm]}], "\[Equal]", 
+   RowBox[{
+    SubscriptBox["\[CapitalDelta]", "k"], "[", 
+    RowBox[{
+     TagBox[
+      RowBox[{"F", "[", 
+       RowBox[{"k", ",", "n"}], "]"}],
+      HoldForm], " ", 
+     RowBox[{"R", "[", 
+      RowBox[{"k", ",", "n"}], "]"}]}], "]"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.952594874014017*^9, 3.952594925677525*^9, {3.952594988700396*^9, 
+   3.9525950116909857`*^9}, {3.952595115528657*^9, 3.9525951516327467`*^9}, 
+   3.952596617484639*^9},
+ CellLabel->"Out[16]=",ExpressionUUID->"33dd5618-f0fa-404d-bad7-adcec82ced60"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The symbol ",
+ Cell[BoxData[
+  SubscriptBox["\[CapitalDelta]", "k"]], "Output",
+  CellChangeTimes->{
+   3.952594874014017*^9, 3.952594925677525*^9, {3.952594988700396*^9, 
+    3.9525950116909857`*^9}, {3.952595115528657*^9, 3.9525951516327467`*^9}},
+  ExpressionUUID->"5c4fdb73-546b-4c9c-afd5-b316e2fa45d2"],
+ " on the right means ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox["\[CapitalDelta]", 
+          StyleBox["k", "TI"]], 
+         RowBox[{"[", 
+           RowBox[{
+             StyleBox["F", "TI"], 
+             RowBox[{"[", 
+               RowBox[{
+                 StyleBox["k", "TI"], ",", 
+                 StyleBox["n", "TI"]}], "]"}], 
+             StyleBox["R", "TI"], 
+             RowBox[{"[", 
+               RowBox[{
+                 StyleBox["k", "TI"], ",", 
+                 StyleBox["n", "TI"]}], "]"}]}], "]"}], "\[LongEqual]", 
+         StyleBox["F", "TI"], 
+         RowBox[{"[", 
+           RowBox[{
+             StyleBox["k", "TI"], "+", "1", ",", 
+             StyleBox["n", "TI"]}], "]"}], 
+         StyleBox["R", "TI"], 
+         RowBox[{"[", 
+           RowBox[{
+             StyleBox["k", "TI"], "+", "1", ",", 
+             StyleBox["n", "TI"]}], "]"}], "-", 
+         StyleBox["F", "TI"], 
+         RowBox[{"[", 
+           RowBox[{
+             StyleBox["k", "TI"], ",", 
+             StyleBox["n", "TI"]}], "]"}], 
+         StyleBox["R", "TI"], 
+         RowBox[{"[", 
+           RowBox[{
+             StyleBox["k", "TI"], ",", 
+             StyleBox["n", "TI"]}], "]"}]}], TraditionalForm], "errors" -> {},
+      "input" -> "\\Delta_k[F[k,n] R[k,n]]= F[k+1,n] R[k+1,n]-F[k,n] R[k,n]", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "eac56b69-85d1-4595-9840-ec18c0b18d91"],
+ ". So the right hand side is a telescoping summand. The function R[k,n] is a \
+rational function whose value is not important, but it can be checked as \
+follows:"
+}], "Text",
+ CellChangeTimes->{{3.9525964056800833`*^9, 3.9525964299780693`*^9}, {
+  3.952596481111039*^9, 3.95259651184728*^9}, {3.952596547155292*^9, 
+  3.952596600226565*^9}},ExpressionUUID->"df13d4fd-66ea-4320-9c28-\
+11c5b9ea1a43"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"show", "[", "R", "]"}]], "Input",
+ CellChangeTimes->{{3.952596602449456*^9, 3.95259663223066*^9}},
+ CellLabel->"In[20]:=",ExpressionUUID->"654cd499-ff5d-4386-8d0b-0e2fc03414de"],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   SuperscriptBox["k", "2"], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"2", " ", "k"}], "-", 
+     RowBox[{"3", " ", 
+      RowBox[{"(", 
+       RowBox[{"1", "+", "n"}], ")"}]}]}], ")"}]}], 
+  RowBox[{"2", " ", 
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{"1", "-", "k", "+", "n"}], ")"}], "2"], " ", 
+   RowBox[{"(", 
+    RowBox[{"1", "+", 
+     RowBox[{"2", " ", "n"}]}], ")"}]}]]], "Output",
+ CellChangeTimes->{{3.9525966074981413`*^9, 3.952596632992724*^9}},
+ CellLabel->"Out[20]=",ExpressionUUID->"c05fb0a6-9a37-41c6-bca4-dc71c499bdf4"]
+}, Open  ]],
+
+Cell["\<\
+This recurrence relation can be verified using algebra, though it is usually \
+too complicated to do by hand.\
+\>", "Text",
+ CellChangeTimes->{{3.952596662833518*^9, 
+  3.952596735842869*^9}},ExpressionUUID->"a7fd4f87-0879-47a3-b76b-\
+8b368aaa5ff6"],
+
+Cell[TextData[{
+ "After summing both sides of the recurrence relation, we learn that ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         UnderoverscriptBox["\[Sum]", 
+          RowBox[{
+            StyleBox["k", "TI"], "\[LongEqual]", "-", "\[Infinity]"}], 
+          "\[Infinity]", LimitsPositioning -> True], 
+         StyleBox["F", "TI"], 
+         RowBox[{"[", 
+           RowBox[{
+             StyleBox["k", "TI"], ",", 
+             StyleBox["n", "TI"]}], "]"}], "\[LongEqual]", 
+         UnderoverscriptBox["\[Sum]", 
+          RowBox[{
+            StyleBox["k", "TI"], "\[LongEqual]", "-", "\[Infinity]"}], 
+          "\[Infinity]", LimitsPositioning -> True], 
+         StyleBox["F", "TI"], 
+         RowBox[{"[", 
+           RowBox[{
+             StyleBox["k", "TI"], ",", 
+             StyleBox["n", "TI"], "+", "1"}], "]"}]}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "\\sum_{k=-\\infty}^\\infty F[k,n]=\\sum_{k=-\\infty}^\\infty F[k,n+1]", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "c2320b2c-c8b5-4c1e-accf-a5aea564c743"],
+ ". So the sum is independent of n and is a constant.\nFinally, we need to \
+check that the sum is the constant 1. For this, we can plug in any particular \
+value of n, such as n=0"
+}], "Text",
+ CellChangeTimes->{{3.9525967461440268`*^9, 3.952596758931655*^9}, {
+  3.952596813939354*^9, 
+  3.9525968718684797`*^9}},ExpressionUUID->"221a3c98-2ec6-4047-b2b0-\
+7e6c5c119db3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Sum", "[", 
+  RowBox[{
+   RowBox[{"F", "[", 
+    RowBox[{"0", ",", "k"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", "0", ",", "0"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.952596874979252*^9, 3.9525969161867228`*^9}},
+ CellLabel->"In[23]:=",ExpressionUUID->"b678cec6-1046-4bc0-8900-099d6e3980f8"],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{{3.952596883801703*^9, 3.952596917065421*^9}},
+ CellLabel->"Out[23]=",ExpressionUUID->"d1739e09-35b6-4034-a96d-7633976b2cb3"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Discussion", "Section",
+ CellChangeTimes->{{3.952596923901285*^9, 
+  3.952596934777267*^9}},ExpressionUUID->"9d3fe20f-8c84-484f-a0aa-\
+3c2a9a0d7507"],
+
+Cell["\<\
+This example shows a standard method to prove almost any combinatorial \
+identity. One catch is that the identity must be known ahead of time. In the \
+next lab, we will see that the Wilf-Zeilberger technique can be applied even \
+when we do not know the value of the summation ahead of time.\
+\>", "Text",
+ CellChangeTimes->{{3.952596939690287*^9, 
+  3.952597038310665*^9}},ExpressionUUID->"11cc43ab-caec-4578-ad3c-\
+7817f7c12bcf"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440, 701.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CellContext->Notebook,
+FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"181f5d3c-0f8c-4a12-97d0-37e739f3afad"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 181, 3, 96, "Title",ExpressionUUID->"cbabd4a9-da01-4322-9efc-3b712fc8e81d"],
+Cell[CellGroupData[{
+Cell[782, 29, 157, 3, 65, "Section",ExpressionUUID->"6c0fa5ab-3b4a-4618-ac4b-64187dcfdaf7"],
+Cell[942, 34, 2549, 64, 161, "Text",ExpressionUUID->"5bd54de6-0b93-42e6-9003-798cc983d878"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3528, 103, 161, 3, 65, "Section",ExpressionUUID->"08fc57e1-64f8-43e1-a965-608176630259"],
+Cell[3692, 108, 2761, 67, 164, "Text",ExpressionUUID->"2b60f5f0-b11f-4a5d-bc9d-afaef174a077"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6490, 180, 157, 3, 65, "Section",ExpressionUUID->"bc7cfd7f-e184-4f64-a646-3151f3ceb6cd"],
+Cell[6650, 185, 395, 8, 29, "Input",ExpressionUUID->"adb3bcf7-15ba-435e-b2b7-30c0b54c7c85"],
+Cell[7048, 195, 500, 14, 115, "Text",ExpressionUUID->"425006af-265a-4f37-a8e2-2498b635d65d"],
+Cell[7551, 211, 827, 22, 30, "Input",ExpressionUUID->"18d7ed84-a5cd-48d9-a5ec-be4e6dc400a1"],
+Cell[CellGroupData[{
+Cell[8403, 237, 381, 10, 29, "Input",ExpressionUUID->"81ba0ec7-bdc7-4096-9e4a-afc0f34acba6"],
+Cell[8787, 249, 387, 10, 55, "Output",ExpressionUUID->"08640316-4d36-49f9-be47-9663a3fc1700"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9211, 264, 854, 17, 29, "Input",ExpressionUUID->"bd46388b-790d-4f68-b679-e40ddf839951"],
+Cell[10068, 283, 840, 27, 34, "Output",ExpressionUUID->"33dd5618-f0fa-404d-bad7-adcec82ced60"]
+}, Open  ]],
+Cell[10923, 313, 2235, 58, 59, "Text",ExpressionUUID->"df13d4fd-66ea-4320-9c28-11c5b9ea1a43"],
+Cell[CellGroupData[{
+Cell[13183, 375, 201, 3, 29, "Input",ExpressionUUID->"654cd499-ff5d-4386-8d0b-0e2fc03414de"],
+Cell[13387, 380, 593, 18, 59, "Output",ExpressionUUID->"c05fb0a6-9a37-41c6-bca4-dc71c499bdf4"]
+}, Open  ]],
+Cell[13995, 401, 259, 6, 33, "Text",ExpressionUUID->"a7fd4f87-0879-47a3-b76b-8b368aaa5ff6"],
+Cell[14257, 409, 1515, 36, 76, "Text",ExpressionUUID->"221a3c98-2ec6-4047-b2b0-7e6c5c119db3"],
+Cell[CellGroupData[{
+Cell[15797, 449, 339, 8, 29, "Input",ExpressionUUID->"b678cec6-1046-4bc0-8900-099d6e3980f8"],
+Cell[16139, 459, 173, 2, 33, "Output",ExpressionUUID->"d1739e09-35b6-4034-a96d-7633976b2cb3"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16361, 467, 155, 3, 65, "Section",ExpressionUUID->"9d3fe20f-8c84-484f-a0aa-3c2a9a0d7507"],
+Cell[16519, 472, 442, 8, 55, "Text",ExpressionUUID->"11cc43ab-caec-4578-ad3c-7817f7c12bcf"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
