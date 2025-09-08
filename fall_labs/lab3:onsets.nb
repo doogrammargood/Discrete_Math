@@ -1,0 +1,321 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     11931,        313]
+NotebookOptionsPosition[     11213,        291]
+NotebookOutlinePosition[     11628,        308]
+CellTagsIndexPosition[     11585,        305]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Lab 3: On-Sets", "Title",
+ CellChangeTimes->{{3.947867002240912*^9, 3.947867006645816*^9}, {
+  3.966347134674384*^9, 
+  3.9663471347473*^9}},ExpressionUUID->"e41dfa02-d97d-4bd3-b6a5-609e47ab8ff6"],
+
+Cell["\<\
+In this lab, you will practice naming sets using the set operation. See the \
+accompanying pdf for instructions on the game.\
+\>", "Text",
+ CellChangeTimes->{{3.966347156950556*^9, 
+  3.9663472260447407`*^9}},ExpressionUUID->"8131112e-fa90-44e5-8f3c-\
+5b1b501f0c03"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Column", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{"ClickPane", "[", 
+        RowBox[{
+         RowBox[{"Dynamic", "@", 
+          RowBox[{"Show", "[", 
+           RowBox[{
+            RowBox[{"{", "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Length", "[", "plist", "]"}], "==", "0"}], ",", 
+               "grid", ",", 
+               RowBox[{"{", 
+                RowBox[{"grid", ",", 
+                 RowBox[{"Graphics", "[", 
+                  RowBox[{"{", 
+                   RowBox[{"Black", ",", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"circ", "[", 
+                    RowBox[{"plist", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", 
+                    RowBox[{"Length", "[", "plist", "]"}], ",", "1"}], 
+                    "}"}]}], "]"}]}], "}"}], "]"}]}], "}"}]}], "]"}], "}"}], 
+            ",", 
+            RowBox[{"ImageSize", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"600", ",", "600"}], "}"}]}]}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"plist", "=", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"MemberQ", "[", 
+               RowBox[{"plist", ",", 
+                RowBox[{"Reverse", "@", 
+                 RowBox[{"Floor", "[", "#", "]"}]}]}], "]"}], ",", 
+              RowBox[{"DeleteCases", "[", 
+               RowBox[{"plist", ",", 
+                RowBox[{"Reverse", "@", 
+                 RowBox[{"Floor", "[", "#", "]"}]}]}], "]"}], ",", 
+              RowBox[{"Append", "[", 
+               RowBox[{"plist", ",", 
+                RowBox[{"Reverse", "@", 
+                 RowBox[{"Floor", "[", "#", "]"}]}]}], "]"}]}], "]"}]}], 
+           ")"}], "&"}]}], "]"}], "}"}], ",", 
+      RowBox[{"Spacings", "\[Rule]", "2"}], ",", 
+      RowBox[{"Alignment", "\[Rule]", "Center"}]}], "]"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"plist", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "1"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", "1"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", "2"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"2", ",", "1"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"2", ",", "2"}], "}"}]}], "}"}]}], "}"}], ",", 
+      RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "This", " ", "complicated", " ", "command", " ", "creates", " ", "the", 
+    " ", "widget", " ", "that", " ", "we", " ", "can", " ", "click", " ", 
+    "on", " ", "to", " ", "visualize", " ", "the", " ", 
+    RowBox[{"universe", "."}]}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.947959677539103*^9, 3.947959699096807*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"cdaeabbe-c362-4941-9834-25e49d1c585c"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`plist$$ = {}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`plist$$], {{0, 1}, {1, 1}, {1, 2}, {2, 1}, {2, 2}}}, 
+      ControlType -> None}}, Typeset`size$$ = {600., {297.1875, 302.8125}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = False, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`plist$$ = {{0, 1}, {1, 1}, {1, 2}, {2, 
+         1}, {2, 2}}}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> Column[{
+         ClickPane[
+          Dynamic[
+           Show[{
+             If[
+             Length[$CellContext`plist$$] == 
+              0, $CellContext`grid, {$CellContext`grid, 
+               Graphics[{Black, 
+                 Table[
+                  $CellContext`circ[
+                   
+                   Part[$CellContext`plist$$, $CellContext`i]], \
+{$CellContext`i, 1, 
+                   Length[$CellContext`plist$$], 1}]}]}]}, 
+            ImageSize -> {600, 600}]], ($CellContext`plist$$ = If[
+            MemberQ[$CellContext`plist$$, 
+             Reverse[
+              Floor[#]]], 
+            DeleteCases[$CellContext`plist$$, 
+             Reverse[
+              Floor[#]]], 
+            Append[$CellContext`plist$$, 
+             Reverse[
+              Floor[#]]]])& ]}, Spacings -> 2, Alignment -> Center], 
+      "Specifications" :> {{{$CellContext`plist$$, {{0, 1}, {1, 1}, {1, 2}, {
+          2, 1}, {2, 2}}}, ControlType -> None}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{645.0999999999999, {325.803125, 331.428125}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`grid = Graphics[{
+          
+          Line[{{{0, 0}, {0, 4}}, {{1, 0}, {1, 4}}, {{2, 0}, {2, 4}}, {{3, 
+           0}, {3, 4}}, {{4, 0}, {4, 4}}}], 
+          
+          Line[{{{0, 0}, {4, 0}}, {{0, 1}, {4, 1}}, {{0, 2}, {4, 2}}, {{0, 
+           3}, {4, 3}}, {{0, 4}, {4, 4}}}], {
+           Text[
+           OverBar[$CellContext`B] OverBar[$CellContext`G], {-0.25, 0.25}], 
+           Text[$CellContext`G OverBar[$CellContext`B], {-0.25, 1.25}], 
+           Text[$CellContext`B OverBar[$CellContext`G], {-0.25, 3.25}], 
+           Text[$CellContext`B $CellContext`G, {-0.25, 2.25}]}, {
+           Text[$CellContext`R OverBar[$CellContext`Y], {0.75, 4.25}], 
+           Text[$CellContext`R $CellContext`Y, {1.75, 4.25}], 
+           Text[
+           OverBar[$CellContext`R] OverBar[$CellContext`Y], {3.75, 4.25}], 
+           Text[$CellContext`Y OverBar[$CellContext`R], {2.75, 4.25}]}, 
+          Line[{{0, 4}, {-0.75, 4.75}}], 
+          Text[
+           Style[
+            TraditionalForm[$CellContext`B], 16], {-0.7, 3}], 
+          Text[
+           Style[
+            TraditionalForm[$CellContext`R], 16], {1.2, 4.7}], 
+          Text[
+           Style[
+            TraditionalForm[$CellContext`G], 16], {4.5, 2}], 
+          Text[
+           Style[
+            TraditionalForm[$CellContext`Y], 16], {2, -0.5}], {
+           RGBColor[1, 0, 0], 
+           Disk[{0.5, 0.6}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{1.5, 0.6}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{1.5, 0.2}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{2.5, 0.2}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{0.5, 1.6}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{0.5, 1.4}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{1.5, 1.6}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{1.5, 1.4}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{1.5, 1.2}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{2.5, 1.4}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{2.5, 1.2}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{3.5, 1.4}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{0.5, 2.8}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{0.5, 2.6}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{0.5, 2.4}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{1.5, 2.8}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{1.5, 2.6}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{1.5, 2.4}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{1.5, 2.2}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{2.5, 2.8}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{2.5, 2.4}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{2.5, 2.2}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{3.5, 2.8}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{3.5, 2.4}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{0.5, 3.8}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{0.5, 3.6}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{1.5, 3.8}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{1.5, 3.6}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{1.5, 3.2}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{2.5, 3.8}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{2.5, 3.2}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{3.5, 3.8}, 0.08]}}, 
+         ImageSize -> {200, 200}], $CellContext`circ[{
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]]}] := 
+       Rectangle[{$CellContext`y, $CellContext`x}], $CellContext`i = 5}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.947959667743675*^9, 3.9481942907261667`*^9, 3.948206182269115*^9, 
+   3.948206345092836*^9, 3.9482063951172743`*^9, 3.9482066291277447`*^9, 
+   3.94820666874997*^9, 3.948206715274988*^9, 3.9482722532484417`*^9, {
+   3.966346985408235*^9, 3.966347001771076*^9}},
+ CellLabel->"Out[3]=",ExpressionUUID->"3fc8c750-7fc3-4bc3-9d8e-5d9ae1cb074a"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440, 701.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CellContext->Notebook,
+FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"90b766fe-bf9f-4e20-af88-92c8bff2180b"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 202, 3, 96, "Title",ExpressionUUID->"e41dfa02-d97d-4bd3-b6a5-609e47ab8ff6"],
+Cell[781, 27, 276, 6, 33, "Text",ExpressionUUID->"8131112e-fa90-44e5-8f3c-5b1b501f0c03"],
+Cell[CellGroupData[{
+Cell[1082, 37, 3359, 84, 149, "Input",ExpressionUUID->"cdaeabbe-c362-4941-9834-25e49d1c585c"],
+Cell[4444, 123, 6741, 164, 674, "Output",ExpressionUUID->"3fc8c750-7fc3-4bc3-9d8e-5d9ae1cb074a"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
