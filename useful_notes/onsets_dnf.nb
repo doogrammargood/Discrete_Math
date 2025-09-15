@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     33706,        860]
-NotebookOptionsPosition[     32343,        827]
-NotebookOutlinePosition[     32735,        843]
-CellTagsIndexPosition[     32692,        840]
+NotebookDataLength[     35327,        898]
+NotebookOptionsPosition[     33998,        867]
+NotebookOutlinePosition[     34390,        883]
+CellTagsIndexPosition[     34347,        880]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -352,24 +352,27 @@ Cell[BoxData[{
     "cards"}], "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"isValidExpression", "[", "expr_String", "]"}], ":=", 
-  RowBox[{"Quiet", "[", 
-   RowBox[{"Check", "[", 
+  RowBox[{"If", "[", 
+   RowBox[{
     RowBox[{
-     RowBox[{
+     RowBox[{"StringLength", "[", "expr", "]"}], ">", "0"}], ",", 
+    RowBox[{"Quiet", "[", 
+     RowBox[{"Check", "[", 
       RowBox[{
-       RowBox[{"BooleanTable", "[", 
+       RowBox[{
+        RowBox[{"BooleanTable", "[", 
+         RowBox[{
+          RowBox[{"ToExpression", "[", "expr", "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"R", ",", "G", ",", "B", ",", "Y"}], "}"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", "True"}], ",", 
+       RowBox[{"(*", 
         RowBox[{
-         RowBox[{"ToExpression", "[", "expr", "]"}], ",", 
-         RowBox[{"{", 
-          RowBox[{"R", ",", "G", ",", "B", ",", "Y"}], "}"}]}], "]"}], "&&"}],
-       ";", "\[IndentingNewLine]", "True"}], ",", 
-     RowBox[{"(*", 
-      RowBox[{
-       RowBox[{"No", " ", "error"}], "\[RightArrow]", "valid"}], "*)"}], 
-     "False"}], "   ", 
-    RowBox[{"(*", 
-     RowBox[{"Error", "\[RightArrow]", "invalid"}], "*)"}], "]"}], 
-   "]"}]}]}], "Input",
+         RowBox[{"No", " ", "error"}], "\[RightArrow]", "valid"}], "*)"}], 
+       "False"}], "   ", 
+      RowBox[{"(*", 
+       RowBox[{"Error", "\[RightArrow]", "invalid"}], "*)"}], "]"}], "]"}], 
+    ",", "False"}], "]"}]}]}], "Input",
  CellChangeTimes->{{3.966874278521001*^9, 3.966874280721777*^9}, {
    3.966875702841748*^9, 3.9668757142405577`*^9}, {3.966875791969528*^9, 
    3.9668757921822853`*^9}, {3.966875883486597*^9, 3.966875892290989*^9}, {
@@ -387,10 +390,11 @@ Cell[BoxData[{
    3.966882893169346*^9, 3.9668828984315*^9}, {3.966883079229648*^9, 
    3.966883109678162*^9}, {3.966883216999709*^9, 3.966883218584084*^9}, {
    3.966883296868009*^9, 3.966883302049653*^9}, {3.9668851413180447`*^9, 
-   3.966885141443577*^9}},ExpressionUUID->"a0894eed-ba03-4e4a-b628-\
-64d68d0235c3"],
-
-Cell[CellGroupData[{
+   3.966885141443577*^9}, {3.966887898832115*^9, 3.9668879349475393`*^9}, {
+   3.966888087209815*^9, 3.966888105165786*^9}, {3.9668883229938707`*^9, 
+   3.966888326646097*^9}, {3.966888386603416*^9, 3.966888388650927*^9}},
+ CellLabel->
+  "In[791]:=",ExpressionUUID->"a0894eed-ba03-4e4a-b628-64d68d0235c3"],
 
 Cell[BoxData[
  RowBox[{"Manipulate", "[", 
@@ -561,19 +565,20 @@ Cell[BoxData[
    3.9668844381491423`*^9}, {3.966884513156103*^9, 3.966884518441374*^9}, {
    3.9668846701527*^9, 3.966884690228386*^9}, {3.966884822334402*^9, 
    3.9668848297776623`*^9}, {3.966884868165854*^9, 3.966884898285405*^9}, {
-   3.966885029432836*^9, 3.9668850381499557`*^9}},
+   3.966885029432836*^9, 3.9668850381499557`*^9}, 3.966887678222952*^9},
  CellLabel->
-  "In[710]:=",ExpressionUUID->"b9395312-a642-45f4-8266-44d48ee296fa"],
+  "In[801]:=",ExpressionUUID->"b9395312-a642-45f4-8266-44d48ee296fa"],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`plist$$ = {}, Typeset`show$$ = True, 
+   DynamicModuleBox[{$CellContext`plist$$ = {{0, 0}, {1, 0}, {2, 0}, {3, 1}, {
+    3, 2}, {3, 3}, {2, 3}, {1, 3}, {0, 3}, {3, 0}}, Typeset`show$$ = True, 
     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{{
        Hold[$CellContext`plist$$], {}}, ControlType -> None}}, 
-    Typeset`size$$ = {695.6312499999999, {240.07421875, 245.69921875}}, 
+    Typeset`size$$ = {741.48203125, {240.07421875, 245.69921875}}, 
     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = False, 
     Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
     DynamicBox[Manipulate`ManipulateBoxes[
@@ -641,11 +646,11 @@ $CellContext`G, $CellContext`B, $CellContext`Y}],
               FullSimplify[$CellContext`cardsExpression]}}]]}], 
       "Specifications" :> {{{$CellContext`plist$$, {}}, ControlType -> None}},
        "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{740.7312499999998, {268.68984375, 274.31484375}},
+     ImageSizeCache->{786.5820312499999, {268.68984375, 274.31484375}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
-    Initialization:>({$CellContext`plist$$ = {}, $CellContext`grid = Graphics[{
+    Initialization:>({$CellContext`grid = Graphics[{
           
           Line[{{{0, 0}, {0, 4}}, {{1, 0}, {1, 4}}, {{2, 0}, {2, 4}}, {{3, 
            0}, {3, 4}}, {{4, 0}, {4, 4}}}], 
@@ -745,14 +750,60 @@ $CellContext`G, $CellContext`B, $CellContext`Y}],
           Pattern[$CellContext`y, 
            Blank[]]}] := 
        Rectangle[{$CellContext`y, $CellContext`x}], $CellContext`faceUp = {{0,
-         1}, {0, 2}, {1, 0}, {1, 1}, {1, 3}, {2, 0}, {2, 1}, {3, 1}, {3, 
-        2}}, $CellContext`cardsExpression = Or[
+         0}, {0, 1}, {0, 2}, {0, 3}, {1, 0}, {1, 1}, {1, 2}, {1, 3}, {2, 0}, {
+        2, 1}, {2, 2}, {2, 3}, {3, 0}, {3, 1}, {3, 2}, {3, 
+        3}}, $CellContext`cardsExpression = Or[
          And[
-          Not[$CellContext`B], $CellContext`G, 
+          Not[$CellContext`B], $CellContext`R, 
+          Not[$CellContext`G], 
           Not[$CellContext`Y]], 
-         And[$CellContext`G, $CellContext`R], 
          And[
-          Not[$CellContext`G], $CellContext`Y]], $CellContext`toMinterm[{
+          Not[$CellContext`B], $CellContext`R, 
+          Not[$CellContext`G], $CellContext`Y], 
+         And[
+          Not[$CellContext`B], 
+          Not[$CellContext`R], 
+          Not[$CellContext`G], $CellContext`Y], 
+         And[
+          Not[$CellContext`B], 
+          Not[$CellContext`R], 
+          Not[$CellContext`G], 
+          Not[$CellContext`Y]], 
+         And[
+          Not[$CellContext`B], $CellContext`R, $CellContext`G, 
+          Not[$CellContext`Y]], 
+         And[
+          
+          Not[$CellContext`B], $CellContext`R, $CellContext`G, \
+$CellContext`Y], 
+         And[
+          Not[$CellContext`B], 
+          Not[$CellContext`R], $CellContext`G, $CellContext`Y], 
+         And[
+          Not[$CellContext`B], 
+          Not[$CellContext`R], $CellContext`G, 
+          Not[$CellContext`Y]], 
+         And[$CellContext`B, $CellContext`R, $CellContext`G, 
+          Not[$CellContext`Y]], 
+         And[$CellContext`B, $CellContext`R, $CellContext`G, $CellContext`Y], 
+         
+         And[$CellContext`B, 
+          Not[$CellContext`R], $CellContext`G, $CellContext`Y], 
+         And[$CellContext`B, 
+          Not[$CellContext`R], $CellContext`G, 
+          Not[$CellContext`Y]], 
+         And[$CellContext`B, $CellContext`R, 
+          Not[$CellContext`G], 
+          Not[$CellContext`Y]], 
+         And[$CellContext`B, $CellContext`R, 
+          Not[$CellContext`G], $CellContext`Y], 
+         And[$CellContext`B, 
+          Not[$CellContext`R], 
+          Not[$CellContext`G], $CellContext`Y], 
+         And[$CellContext`B, 
+          Not[$CellContext`R], 
+          Not[$CellContext`G], 
+          Not[$CellContext`Y]]], $CellContext`toMinterm[{
           Pattern[$CellContext`x, 
            Blank[]], 
           Pattern[$CellContext`y, 
@@ -767,22 +818,17 @@ $CellContext`G, $CellContext`B, $CellContext`Y}],
             Not[$CellContext`G]], 
            If[
             Or[$CellContext`y == 1, $CellContext`y == 2], $CellContext`Y, 
-            Not[$CellContext`Y]]}]], $CellContext`cardsExpressionCopy = Or[
-         And[
-          Not[$CellContext`B], $CellContext`G, 
-          Not[$CellContext`Y]], 
-         And[$CellContext`G, $CellContext`R], 
-         And[
-          
-          Not[$CellContext`G], $CellContext`Y]], \
-$CellContext`isValidExpression[
-         Pattern[$CellContext`expr, 
-          Blank[String]]] := Quiet[
-         Check[BooleanTable[
             
-            ToExpression[$CellContext`expr], {$CellContext`R, $CellContext`G, \
-$CellContext`B, $CellContext`Y}]; True, 
-          False]], $CellContext`isValidExpression[
+            Not[$CellContext`Y]]}]], $CellContext`cardsExpressionCopy = \
+$CellContext`\[AliasDelimiter], $CellContext`isValidExpression[
+         Pattern[$CellContext`expr, 
+          Blank[String]]] := If[StringLength[$CellContext`expr] > 0, 
+         Quiet[
+          Check[BooleanTable[
+             
+             ToExpression[$CellContext`expr], {$CellContext`R, \
+$CellContext`G, $CellContext`B, $CellContext`Y}]; True, False]], 
+         False], $CellContext`isValidExpression[
          Pattern[$CellContext`inp, 
           Blank[]]] := Quiet[
          Check[BooleanTable[
@@ -800,16 +846,10 @@ $CellContext`B, $CellContext`Y}] True, False]], $CellContext`expr =
     UntrackedVariables:>{Typeset`size$$}], "Manipulate",
    Deployed->True,
    StripOnInput->False],
-  Manipulate`InterpretManipulate[1]]], "Output",
- CellChangeTimes->{
-  3.9668833093322897`*^9, 3.966883385782404*^9, 3.9668834477018967`*^9, 
-   3.9668835296157627`*^9, 3.966883872297751*^9, 3.966883985703858*^9, 
-   3.966884439199263*^9, 3.966884519724955*^9, 3.966884692026791*^9, 
-   3.966884764815955*^9, 3.966884831521759*^9, {3.966884874036615*^9, 
-   3.9668848998175097`*^9}, 3.9668850392306137`*^9, 3.966885183660967*^9},
+  Manipulate`InterpretManipulate[1]]], "Input",
+ CellChangeTimes->{3.9669343719052362`*^9},
  CellLabel->
-  "Out[710]=",ExpressionUUID->"72405fa6-a2bf-4748-9be1-847f31d42c42"]
-}, Open  ]],
+  "In[808]:=",ExpressionUUID->"a193642e-40d0-473d-a5a9-633cab30a5b1"],
 
 Cell["\<\
 This widget illustrates the connection between sets and propositions. When \
@@ -819,8 +859,8 @@ compound proposition in the textbox, then the widget will identify the cards \
 in the corresponding set.\
 \>", "Text",
  CellChangeTimes->{{3.966885412108144*^9, 3.966885491553426*^9}, {
-  3.966885572787198*^9, 
-  3.966885574886407*^9}},ExpressionUUID->"3271b106-401c-48d5-8623-\
+  3.966885572787198*^9, 3.966885574886407*^9}, {3.966934567364582*^9, 
+  3.966934569298267*^9}},ExpressionUUID->"3271b106-401c-48d5-8623-\
 d7d5953c4495"]
 }, Open  ]]
 }, Open  ]]
@@ -854,12 +894,10 @@ Cell[1386, 50, 946, 15, 99, "Text",ExpressionUUID->"d661dd5d-40a7-4e58-9ac2-4a49
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[2369, 70, 167, 3, 65, "Section",ExpressionUUID->"1453fa81-1c25-4308-b5d4-9aa05e305b2b"],
-Cell[2539, 75, 11395, 315, 374, "Input",ExpressionUUID->"a0894eed-ba03-4e4a-b628-64d68d0235c3"],
-Cell[CellGroupData[{
-Cell[13959, 394, 7704, 171, 229, "Input",ExpressionUUID->"b9395312-a642-45f4-8266-44d48ee296fa"],
-Cell[21666, 567, 10103, 243, 560, "Output",ExpressionUUID->"72405fa6-a2bf-4748-9be1-847f31d42c42"]
-}, Open  ]],
-Cell[31784, 813, 531, 10, 55, "Text",ExpressionUUID->"3271b106-401c-48d5-8623-d7d5953c4495"]
+Cell[2539, 75, 11759, 321, 374, "Input",ExpressionUUID->"a0894eed-ba03-4e4a-b628-64d68d0235c3"],
+Cell[14301, 398, 7726, 171, 229, "Input",ExpressionUUID->"b9395312-a642-45f4-8266-44d48ee296fa"],
+Cell[22030, 571, 11360, 280, 556, "Input",ExpressionUUID->"a193642e-40d0-473d-a5a9-633cab30a5b1"],
+Cell[33393, 853, 577, 10, 55, "Text",ExpressionUUID->"3271b106-401c-48d5-8623-d7d5953c4495"]
 }, Open  ]]
 }, Open  ]]
 }
