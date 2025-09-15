@@ -1,0 +1,868 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     33706,        860]
+NotebookOptionsPosition[     32343,        827]
+NotebookOutlinePosition[     32735,        843]
+CellTagsIndexPosition[     32692,        840]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["On-Sets and Propositional Logic", "Title",
+ CellChangeTimes->{{3.966878893780719*^9, 
+  3.966878898826112*^9}},ExpressionUUID->"6d07c29d-3dfa-4fb1-b926-\
+21bf17c6b401"],
+
+Cell[CellGroupData[{
+
+Cell["Purpose", "Section",
+ CellChangeTimes->{{3.966878903898746*^9, 
+  3.9668789049804497`*^9}},ExpressionUUID->"e39151e8-f403-4300-b761-\
+d8796857b49d"],
+
+Cell["\<\
+The purpose of this document is to illustrate the connection between set \
+theory and logic. \
+\>", "Text",
+ CellChangeTimes->{{3.9668789112058573`*^9, 
+  3.966878990996777*^9}},ExpressionUUID->"bc1036d6-6ff6-4dbd-8c5f-\
+1746f03443be"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Propositions as Sets", "Section",
+ CellChangeTimes->{{3.9668789974131613`*^9, 
+  3.9668790144917393`*^9}},ExpressionUUID->"3237db0c-ea8b-448f-911f-\
+e5b972f0ca9c"],
+
+Cell["\<\
+Propositions can be identified with Truth Tables. Each truth table can be \
+viewed as a subset of the power set of the basic propositions. In the game \
+On-Sets, we can view the colors RGBY as basic propositions. The cards are all \
+16=2^4 possible minterms over these basic propositions, and they can also be \
+identified with the rows of the truth table. Each compound proposition can be \
+identified with the  set of rows in the truth table where that compound \
+proposition is true. So each compound proposition can be associated with a \
+subset of cards. Conversely, each subset of cards can be identified with a \
+subset of rows in a truth table with 4 basic propositions, and truth tables \
+can be identified with compound propositions.\
+\>", "Text",
+ CellChangeTimes->{{3.9668790200926723`*^9, 3.9668790977897043`*^9}, {
+  3.966885252797933*^9, 
+  3.966885409107135*^9}},ExpressionUUID->"d661dd5d-40a7-4e58-9ac2-\
+4a4946b9b207"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["A widget to illustrate", "Section",
+ CellChangeTimes->{{3.966885242911378*^9, 
+  3.966885245986946*^9}},ExpressionUUID->"1453fa81-1c25-4308-b5d4-\
+9aa05e305b2b"],
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", 
+  RowBox[{"R", ",", "B", ",", "G", ",", "Y"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Clear", "[", "plist", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Clear", "[", "toMinterm", "]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"toMinterm", "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+   RowBox[{"Last", "[", 
+    RowBox[{"FoldList", "[", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"#1", " ", "&&", "#2"}], ")"}], "&"}], ",", "True", " ", ",", 
+      
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"x", ">", "1"}], ",", "B", ",", 
+          RowBox[{"!", "B"}]}], "]"}], ",", " ", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"y", "<", "2"}], ",", "R", ",", 
+          RowBox[{"!", "R"}]}], "]"}], ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"x", "==", "1"}], "||", 
+           RowBox[{"x", "==", "2"}]}], ",", "G", ",", 
+          RowBox[{"!", "G"}]}], "]"}], ",", " ", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"y", "==", "1"}], "||", 
+           RowBox[{"y", "==", "2"}]}], ",", "Y", ",", 
+          RowBox[{"!", "Y"}]}], "]"}]}], "}"}]}], " ", "]"}], " ", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"rect", "[", 
+     RowBox[{"{", 
+      RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+    RowBox[{"Rectangle", "[", 
+     RowBox[{"{", 
+      RowBox[{"y", ",", "x"}], "}"}], "]"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "A", " ", "black", " ", "rectangle", " ", "to", " ", "cover", " ", "a", 
+    " ", "card", " ", "to", " ", "make", " ", "it", " ", "face", " ", 
+    RowBox[{"down", "."}]}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"card", "[", 
+    RowBox[{"x_", ",", "y_"}], "]"}], ":=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"y", ">", "1"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"Blue", ",", 
+         RowBox[{"Disk", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"x", "+", "0.5"}], ",", 
+             RowBox[{"y", "+", "0.8"}]}], "}"}], ",", "0.08"}], "]"}]}], 
+        "}"}], ",", "Nothing"}], "]"}], ",", " ", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"x", "<", "2"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"Red", ",", " ", 
+         RowBox[{"Disk", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"x", "+", "0.5"}], ",", 
+             RowBox[{"y", "+", "0.6"}]}], "}"}], ",", "0.08"}], "]"}]}], 
+        "}"}], ",", "Nothing"}], "]"}], ",", 
+     RowBox[{"If", "[", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"y", "==", "1"}], "||", 
+        RowBox[{"y", "==", "2"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"Green", ",", 
+         RowBox[{"Disk", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"x", "+", "0.5"}], ",", 
+             RowBox[{"y", "+", "0.4"}]}], "}"}], ",", "0.08"}], "]"}]}], 
+        "}"}], ",", "Nothing"}], "]"}], ",", " ", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"x", "==", "1"}], "||", 
+        RowBox[{"x", "==", "2"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"Yellow", ",", 
+         RowBox[{"Disk", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"x", "+", "0.5"}], ",", 
+             RowBox[{"y", "+", "0.2"}]}], "}"}], ",", "0.08"}], "]"}]}], 
+        "}"}], ",", "Nothing"}], "]"}]}], "}"}]}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Draws", " ", "the", " ", "colored", " ", "circles", " ", "for", " ", 
+    "each", " ", 
+    RowBox[{"card", "."}]}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"labelsTop", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"R", " ", 
+       RowBox[{"OverBar", "[", "Y", "]"}]}], ",", 
+      RowBox[{"R", " ", "Y"}], ",", 
+      RowBox[{
+       RowBox[{"OverBar", "[", "R", "]"}], "Y"}], ",", 
+      RowBox[{
+       RowBox[{"OverBar", "[", "R", "]"}], 
+       RowBox[{"OverBar", "[", "Y", "]"}]}]}], "}"}]}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{
+   "A", " ", "list", " ", "of", " ", "the", " ", "labels", " ", "to", " ", 
+    "go", " ", "on", " ", "top", " ", "of", " ", "the", " ", "diagram"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"labelsSide", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"B", " ", 
+       RowBox[{"OverBar", "[", "G", "]"}]}], ",", 
+      RowBox[{"B", " ", "G"}], ",", 
+      RowBox[{
+       RowBox[{"OverBar", "[", "B", "]"}], "G"}], ",", 
+      RowBox[{
+       RowBox[{"OverBar", "[", "B", "]"}], 
+       RowBox[{"OverBar", "[", "G", "]"}]}]}], "}"}]}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{
+   "A", " ", "list", " ", "of", " ", "the", " ", "labels", " ", "to", " ", 
+    "go", " ", "on", " ", "the", " ", "side", " ", "of", " ", "the", " ", 
+    "diagram"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"grid", "=", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Line", "@", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"i", ",", "0"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "4"}], "}"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "0", ",", "4", ",", "1"}], "}"}]}], "]"}]}], 
+        ",", "\[IndentingNewLine]", 
+        RowBox[{"Line", "@", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", "i"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"4", ",", "i"}], "}"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "0", ",", "4", ",", "1"}], "}"}]}], "]"}]}], 
+        ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"labelsSide", "[", 
+             RowBox[{"[", 
+              RowBox[{"3", "-", "i", "+", "1"}], "]"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "0.25"}], ",", 
+              RowBox[{"i", "+", "0.25"}]}], "}"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "1", ",", "3", ",", "2"}], "}"}]}], "}"}]}], 
+         "]"}], ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"labelsTop", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", "+", "1"}], "]"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"i", "+", "0.75"}], ",", "4.25"}], "}"}]}], "]"}], ",", 
+          
+          RowBox[{"{", 
+           RowBox[{"i", ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "1", ",", "3", ",", "2"}], "}"}]}], "}"}]}], 
+         "]"}], ",", 
+        RowBox[{"Line", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"0", ",", "4"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "0.75"}], ",", "4.75"}], "}"}]}], "}"}], "]"}], ",", 
+        RowBox[{"Text", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{
+            RowBox[{"TraditionalForm", "[", "B", " ", "]"}], ",", "16"}], 
+           "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "0.7"}], ",", "3"}], "}"}]}], "]"}], ",", 
+        RowBox[{"Text", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{
+            RowBox[{"TraditionalForm", "[", "R", "]"}], ",", "16"}], "]"}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{"1.2", ",", "4.7"}], "}"}]}], "]"}], ",", 
+        RowBox[{"Text", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{
+            RowBox[{"TraditionalForm", "[", "G", " ", "]"}], ",", "16"}], 
+           "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"4.5", ",", "2"}], "}"}]}], "]"}], ",", 
+        RowBox[{"Text", "[", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{
+            RowBox[{"TraditionalForm", "[", "Y", " ", "]"}], ",", "16"}], 
+           "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"2", ",", 
+            RowBox[{"-", "0.5"}]}], "}"}]}], "]"}], ",", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"card", "[", 
+              RowBox[{"a", ",", "b"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"a", ",", "0", ",", "3"}], "}"}]}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"b", ",", "0", ",", "3"}], "}"}]}], "]"}], "]"}]}], "}"}],
+       " ", ",", 
+      RowBox[{"ImageSize", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"200", ",", "200"}], "}"}]}]}], "]"}]}], " ", ";"}], 
+  RowBox[{"(*", 
+   RowBox[{
+   "Draws", " ", "the", " ", "grid", " ", "of", " ", "all", " ", "the", " ", 
+    "cards"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"isValidExpression", "[", "expr_String", "]"}], ":=", 
+  RowBox[{"Quiet", "[", 
+   RowBox[{"Check", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"BooleanTable", "[", 
+        RowBox[{
+         RowBox[{"ToExpression", "[", "expr", "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"R", ",", "G", ",", "B", ",", "Y"}], "}"}]}], "]"}], "&&"}],
+       ";", "\[IndentingNewLine]", "True"}], ",", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{"No", " ", "error"}], "\[RightArrow]", "valid"}], "*)"}], 
+     "False"}], "   ", 
+    RowBox[{"(*", 
+     RowBox[{"Error", "\[RightArrow]", "invalid"}], "*)"}], "]"}], 
+   "]"}]}]}], "Input",
+ CellChangeTimes->{{3.966874278521001*^9, 3.966874280721777*^9}, {
+   3.966875702841748*^9, 3.9668757142405577`*^9}, {3.966875791969528*^9, 
+   3.9668757921822853`*^9}, {3.966875883486597*^9, 3.966875892290989*^9}, {
+   3.966875956496063*^9, 3.9668760195257063`*^9}, {3.966876183042903*^9, 
+   3.966876236413281*^9}, {3.96687626681454*^9, 3.966876271505867*^9}, {
+   3.966876309049808*^9, 3.966876319629079*^9}, {3.9668764146956472`*^9, 
+   3.966876419267494*^9}, {3.966876610490213*^9, 3.9668766233510427`*^9}, {
+   3.9668766819063787`*^9, 3.966876745989562*^9}, {3.966876823483982*^9, 
+   3.966876826434004*^9}, {3.9668771685873823`*^9, 3.966877184400144*^9}, {
+   3.9668774083240137`*^9, 3.9668774117963943`*^9}, 3.9668776660356827`*^9, {
+   3.966882372008007*^9, 3.966882405106114*^9}, {3.966882601881647*^9, 
+   3.966882603307522*^9}, {3.966882665198347*^9, 3.966882670028854*^9}, {
+   3.966882702742735*^9, 3.966882712638545*^9}, {3.966882760764331*^9, 
+   3.966882768900828*^9}, {3.966882813825953*^9, 3.9668828190139723`*^9}, {
+   3.966882893169346*^9, 3.9668828984315*^9}, {3.966883079229648*^9, 
+   3.966883109678162*^9}, {3.966883216999709*^9, 3.966883218584084*^9}, {
+   3.966883296868009*^9, 3.966883302049653*^9}, {3.9668851413180447`*^9, 
+   3.966885141443577*^9}},ExpressionUUID->"a0894eed-ba03-4e4a-b628-\
+64d68d0235c3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Row", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Column", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"ClickPane", "[", 
+           RowBox[{
+            RowBox[{"Dynamic", "@", 
+             RowBox[{"Show", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"Length", "[", "plist", "]"}], "==", "0"}], ",", 
+                  "grid", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"grid", ",", 
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"Black", ",", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"rect", "[", 
+                    RowBox[{"plist", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", 
+                    RowBox[{"Length", "[", "plist", "]"}]}], "}"}]}], "]"}]}],
+                     "}"}], "]"}]}], "}"}]}], "]"}], "}"}], ",", 
+               RowBox[{"ImageSize", "->", 
+                RowBox[{"{", 
+                 RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}]}], ",", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"plist", "=", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"MemberQ", "[", 
+                   RowBox[{"plist", ",", 
+                    RowBox[{"Reverse", "@", 
+                    RowBox[{"Floor", "[", "#", "]"}]}]}], "]"}], ",", 
+                  RowBox[{"DeleteCases", "[", 
+                   RowBox[{"plist", ",", 
+                    RowBox[{"Reverse", "@", 
+                    RowBox[{"Floor", "[", "#", "]"}]}]}], "]"}], ",", 
+                  RowBox[{"Append", "[", 
+                   RowBox[{"plist", ",", 
+                    RowBox[{"Reverse", "@", 
+                    RowBox[{"Floor", "[", "#", "]"}]}]}], "]"}]}], "]"}]}], 
+               ";", "\[IndentingNewLine]", 
+               RowBox[{"(*", 
+                RowBox[{
+                "recompute", " ", "DNF", " ", "whenever", " ", "plist", " ", 
+                 "changes"}], "*)"}], 
+               RowBox[{"faceUp", "=", 
+                RowBox[{"Complement", "[", 
+                 RowBox[{
+                  RowBox[{"Flatten", "[", 
+                   RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"r", ",", "c"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"r", ",", "0", ",", "3"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"c", ",", "0", ",", "3"}], "}"}]}], "]"}], ",", 
+                    "1"}], "]"}], ",", "plist"}], "]"}]}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"cardsExpression", "=", 
+                RowBox[{"Or", "@@", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"toMinterm", "[", "#", "]"}], "&"}], "/@", 
+                   "faceUp"}], ")"}]}]}], ";"}], ")"}], "&"}]}], "]"}], ",", 
+          "cardsExpressionCopy", ",", 
+          RowBox[{"InputField", "[", 
+           RowBox[{
+            RowBox[{"Dynamic", "[", 
+             RowBox[{"cardsExpressionCopy", ",", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{"isValidExpression", "[", "#", "]"}], ",", 
+                   RowBox[{
+                    RowBox[{"cardsExpressionCopy", "=", 
+                    RowBox[{"ToExpression", "[", "#", "]"}]}], ";", " ", 
+                    RowBox[{
+                    "cardsExpression", " ", "=", " ", "cardsExpressionCopy"}],
+                     ";", 
+                    RowBox[{"plist", "=", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{"Tuples", "[", 
+                    RowBox[{
+                    RowBox[{"Range", "[", 
+                    RowBox[{"0", ",", "3"}], "]"}], ",", "2"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"Not", "[", 
+                    RowBox[{"TrueQ", "[", 
+                    RowBox[{"Simplify", "[", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"toMinterm", "[", "#", "]"}], ")"}], "\[Implies]",
+                     "cardsExpression"}], "]"}], "]"}], "]"}], ")"}], "&"}]}],
+                     "]"}]}]}]}], "]"}], ";"}], ")"}], "&"}]}], "]"}], ",", 
+            "String"}], "]"}]}], "}"}], ",", 
+        RowBox[{"Spacings", "->", "2"}], ",", 
+        RowBox[{"Alignment", "->", "Center"}]}], "]"}], ",", 
+      RowBox[{"Dynamic", "@", 
+       RowBox[{"TableForm", "[", 
+        RowBox[{
+         RowBox[{"BooleanTable", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+            "R", ",", "G", ",", "B", ",", "Y", ",", "cardsExpression"}], 
+            "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"R", ",", "G", ",", "B", ",", "Y"}], "}"}]}], "]"}], ",", 
+         
+         RowBox[{"TableHeadings", "->", 
+          RowBox[{"{", 
+           RowBox[{"None", ",", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<R\>\"", ",", "\"\<G\>\"", ",", "\"\<B\>\"", ",", 
+              "\"\<Y\>\"", ",", 
+              RowBox[{"FullSimplify", "[", "cardsExpression", "]"}]}], 
+             "}"}]}], "}"}]}]}], "]"}]}]}], "}"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"plist", ",", 
+       RowBox[{"{", "}"}]}], "}"}], ",", 
+     RowBox[{"ControlType", "->", "None"}]}], "}"}], ",", 
+   RowBox[{"SaveDefinitions", "->", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.9668798563635607`*^9, 3.9668798987405453`*^9}, {
+   3.966879930456521*^9, 3.966879935539433*^9}, {3.966880206354433*^9, 
+   3.966880233779817*^9}, {3.9668802974241753`*^9, 3.966880352634294*^9}, {
+   3.966880417661666*^9, 3.9668805092885237`*^9}, {3.966880542184029*^9, 
+   3.9668807194350233`*^9}, {3.9668807566834517`*^9, 3.966880887985268*^9}, 
+   3.9668809246216717`*^9, 3.966880957380855*^9, {3.96688098760056*^9, 
+   3.966881011315878*^9}, {3.966881072346881*^9, 3.966881133876772*^9}, {
+   3.9668811832021427`*^9, 3.966881218909054*^9}, {3.966881250394672*^9, 
+   3.9668812831881437`*^9}, {3.9668813158113623`*^9, 3.966881358941956*^9}, {
+   3.96688142226097*^9, 3.966881503293194*^9}, {3.9668815360251417`*^9, 
+   3.966881536654851*^9}, {3.9668816381057863`*^9, 3.966881831054777*^9}, {
+   3.96688186845298*^9, 3.966881911287483*^9}, {3.966882215705271*^9, 
+   3.9668822803368597`*^9}, {3.9668824434323263`*^9, 3.966882485736788*^9}, {
+   3.966882552091785*^9, 3.966882559734273*^9}, {3.966883156391513*^9, 
+   3.9668831749529877`*^9}, {3.966883381535864*^9, 3.9668833831607933`*^9}, {
+   3.96688343781493*^9, 3.966883446882544*^9}, {3.966883512947435*^9, 
+   3.966883527455224*^9}, {3.966883869507552*^9, 3.966883870463976*^9}, {
+   3.966883954392071*^9, 3.96688398385432*^9}, {3.96688443434837*^9, 
+   3.9668844381491423`*^9}, {3.966884513156103*^9, 3.966884518441374*^9}, {
+   3.9668846701527*^9, 3.966884690228386*^9}, {3.966884822334402*^9, 
+   3.9668848297776623`*^9}, {3.966884868165854*^9, 3.966884898285405*^9}, {
+   3.966885029432836*^9, 3.9668850381499557`*^9}},
+ CellLabel->
+  "In[710]:=",ExpressionUUID->"b9395312-a642-45f4-8266-44d48ee296fa"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`plist$$ = {}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`plist$$], {}}, ControlType -> None}}, 
+    Typeset`size$$ = {695.6312499999999, {240.07421875, 245.69921875}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = False, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`plist$$ = {}}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> Row[{
+         Column[{
+           ClickPane[
+            Dynamic[
+             Show[{
+               If[
+               Length[$CellContext`plist$$] == 
+                0, $CellContext`grid, {$CellContext`grid, 
+                 Graphics[{Black, 
+                   Table[
+                    $CellContext`rect[
+                    
+                    Part[$CellContext`plist$$, $CellContext`i]], \
+{$CellContext`i, 1, 
+                    Length[$CellContext`plist$$]}]}]}]}, 
+              ImageSize -> {400, 400}]], ($CellContext`plist$$ = If[
+               MemberQ[$CellContext`plist$$, 
+                Reverse[
+                 Floor[#]]], 
+               DeleteCases[$CellContext`plist$$, 
+                Reverse[
+                 Floor[#]]], 
+               Append[$CellContext`plist$$, 
+                Reverse[
+                 Floor[#]]]]; $CellContext`faceUp = Complement[
+               Flatten[
+                
+                Table[{$CellContext`r, $CellContext`c}, {$CellContext`r, 0, 
+                  3}, {$CellContext`c, 0, 3}], 
+                1], $CellContext`plist$$]; $CellContext`cardsExpression = 
+             Apply[Or, 
+               Map[$CellContext`toMinterm[#]& , $CellContext`faceUp]]; 
+            Null)& ], $CellContext`cardsExpressionCopy, 
+           InputField[
+            Dynamic[$CellContext`cardsExpressionCopy, (If[
+               $CellContext`isValidExpression[#], \
+$CellContext`cardsExpressionCopy = 
+                ToExpression[#]; $CellContext`cardsExpression = \
+$CellContext`cardsExpressionCopy; $CellContext`plist$$ = Select[
+                  Tuples[
+                   Range[0, 3], 2], Not[
+                   TrueQ[
+                    Simplify[
+                    Implies[
+                    $CellContext`toMinterm[#], \
+$CellContext`cardsExpression]]]]& ]]; Null)& ], String]}, Spacings -> 2, 
+          Alignment -> Center], 
+         Dynamic[
+          TableForm[
+           
+           BooleanTable[{$CellContext`R, $CellContext`G, $CellContext`B, \
+$CellContext`Y, $CellContext`cardsExpression}, {$CellContext`R, \
+$CellContext`G, $CellContext`B, $CellContext`Y}], 
+           TableHeadings -> {None, {"R", "G", "B", "Y", 
+              FullSimplify[$CellContext`cardsExpression]}}]]}], 
+      "Specifications" :> {{{$CellContext`plist$$, {}}, ControlType -> None}},
+       "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{740.7312499999998, {268.68984375, 274.31484375}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`plist$$ = {}, $CellContext`grid = Graphics[{
+          
+          Line[{{{0, 0}, {0, 4}}, {{1, 0}, {1, 4}}, {{2, 0}, {2, 4}}, {{3, 
+           0}, {3, 4}}, {{4, 0}, {4, 4}}}], 
+          
+          Line[{{{0, 0}, {4, 0}}, {{0, 1}, {4, 1}}, {{0, 2}, {4, 2}}, {{0, 
+           3}, {4, 3}}, {{0, 4}, {4, 4}}}], {
+           Text[
+           OverBar[$CellContext`B] OverBar[$CellContext`G], {-0.25, 0.25}], 
+           Text[$CellContext`G OverBar[$CellContext`B], {-0.25, 1.25}], 
+           Text[$CellContext`B OverBar[$CellContext`G], {-0.25, 3.25}], 
+           Text[$CellContext`B $CellContext`G, {-0.25, 2.25}]}, {
+           Text[$CellContext`R OverBar[$CellContext`Y], {0.75, 4.25}], 
+           Text[$CellContext`R $CellContext`Y, {1.75, 4.25}], 
+           Text[
+           OverBar[$CellContext`R] OverBar[$CellContext`Y], {3.75, 4.25}], 
+           Text[$CellContext`Y OverBar[$CellContext`R], {2.75, 4.25}]}, 
+          Line[{{0, 4}, {-0.75, 4.75}}], 
+          Text[
+           Style[
+            TraditionalForm[$CellContext`B], 16], {-0.7, 3}], 
+          Text[
+           Style[
+            TraditionalForm[$CellContext`R], 16], {1.2, 4.7}], 
+          Text[
+           Style[
+            TraditionalForm[$CellContext`G], 16], {4.5, 2}], 
+          Text[
+           Style[
+            TraditionalForm[$CellContext`Y], 16], {2, -0.5}], {
+           RGBColor[1, 0, 0], 
+           Disk[{0.5, 0.6}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{1.5, 0.6}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{1.5, 0.2}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{2.5, 0.2}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{0.5, 1.6}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{0.5, 1.4}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{1.5, 1.6}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{1.5, 1.4}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{1.5, 1.2}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{2.5, 1.4}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{2.5, 1.2}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{3.5, 1.4}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{0.5, 2.8}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{0.5, 2.6}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{0.5, 2.4}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{1.5, 2.8}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{1.5, 2.6}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{1.5, 2.4}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{1.5, 2.2}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{2.5, 2.8}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{2.5, 2.4}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{2.5, 2.2}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{3.5, 2.8}, 0.08], 
+           RGBColor[0, 1, 0], 
+           Disk[{3.5, 2.4}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{0.5, 3.8}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{0.5, 3.6}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{1.5, 3.8}, 0.08], 
+           RGBColor[1, 0, 0], 
+           Disk[{1.5, 3.6}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{1.5, 3.2}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{2.5, 3.8}, 0.08], 
+           RGBColor[1, 1, 0], 
+           Disk[{2.5, 3.2}, 0.08], 
+           RGBColor[0, 0, 1], 
+           Disk[{3.5, 3.8}, 0.08]}}, 
+         ImageSize -> {200, 200}], $CellContext`rect[{
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]]}] := 
+       Rectangle[{$CellContext`y, $CellContext`x}], $CellContext`faceUp = {{0,
+         1}, {0, 2}, {1, 0}, {1, 1}, {1, 3}, {2, 0}, {2, 1}, {3, 1}, {3, 
+        2}}, $CellContext`cardsExpression = Or[
+         And[
+          Not[$CellContext`B], $CellContext`G, 
+          Not[$CellContext`Y]], 
+         And[$CellContext`G, $CellContext`R], 
+         And[
+          Not[$CellContext`G], $CellContext`Y]], $CellContext`toMinterm[{
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]]}] := Last[
+         FoldList[And[#, #2]& , True, {
+           If[$CellContext`x > 1, $CellContext`B, 
+            Not[$CellContext`B]], 
+           If[$CellContext`y < 2, $CellContext`R, 
+            Not[$CellContext`R]], 
+           If[
+            Or[$CellContext`x == 1, $CellContext`x == 2], $CellContext`G, 
+            Not[$CellContext`G]], 
+           If[
+            Or[$CellContext`y == 1, $CellContext`y == 2], $CellContext`Y, 
+            Not[$CellContext`Y]]}]], $CellContext`cardsExpressionCopy = Or[
+         And[
+          Not[$CellContext`B], $CellContext`G, 
+          Not[$CellContext`Y]], 
+         And[$CellContext`G, $CellContext`R], 
+         And[
+          
+          Not[$CellContext`G], $CellContext`Y]], \
+$CellContext`isValidExpression[
+         Pattern[$CellContext`expr, 
+          Blank[String]]] := Quiet[
+         Check[BooleanTable[
+            
+            ToExpression[$CellContext`expr], {$CellContext`R, $CellContext`G, \
+$CellContext`B, $CellContext`Y}]; True, 
+          False]], $CellContext`isValidExpression[
+         Pattern[$CellContext`inp, 
+          Blank[]]] := Quiet[
+         Check[BooleanTable[
+            
+            ToExpression[$CellContext`inp], {$CellContext`R, $CellContext`G, \
+$CellContext`B, $CellContext`Y}] True, False]], $CellContext`expr = 
+       And[$CellContext`B, 
+         Not[$CellContext`R], 
+         Not[$CellContext`G], 
+         Not[$CellContext`Y]], $CellContext`inp = "R&&G"}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.9668833093322897`*^9, 3.966883385782404*^9, 3.9668834477018967`*^9, 
+   3.9668835296157627`*^9, 3.966883872297751*^9, 3.966883985703858*^9, 
+   3.966884439199263*^9, 3.966884519724955*^9, 3.966884692026791*^9, 
+   3.966884764815955*^9, 3.966884831521759*^9, {3.966884874036615*^9, 
+   3.9668848998175097`*^9}, 3.9668850392306137`*^9, 3.966885183660967*^9},
+ CellLabel->
+  "Out[710]=",ExpressionUUID->"72405fa6-a2bf-4748-9be1-847f31d42c42"]
+}, Open  ]],
+
+Cell["\<\
+This widget illustrates the connection between sets and propositions. When \
+you select some of the cards to make face down, the remaining face-up cards \
+determine a set of rows in the truth table. Conversely, if you enter a \
+compound proposition in the textbox, then the widget will identify the cards \
+in the corresponding set.\
+\>", "Text",
+ CellChangeTimes->{{3.966885412108144*^9, 3.966885491553426*^9}, {
+  3.966885572787198*^9, 
+  3.966885574886407*^9}},ExpressionUUID->"3271b106-401c-48d5-8623-\
+d7d5953c4495"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440, 701.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"f2e4571f-b8b3-4d9e-9782-f3d2b1553d8f"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 174, 3, 96, "Title",ExpressionUUID->"6d07c29d-3dfa-4fb1-b926-21bf17c6b401"],
+Cell[CellGroupData[{
+Cell[775, 29, 154, 3, 65, "Section",ExpressionUUID->"e39151e8-f403-4300-b761-d8796857b49d"],
+Cell[932, 34, 245, 6, 33, "Text",ExpressionUUID->"bc1036d6-6ff6-4dbd-8c5f-1746f03443be"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1214, 45, 169, 3, 65, "Section",ExpressionUUID->"3237db0c-ea8b-448f-911f-e5b972f0ca9c"],
+Cell[1386, 50, 946, 15, 99, "Text",ExpressionUUID->"d661dd5d-40a7-4e58-9ac2-4a4946b9b207"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2369, 70, 167, 3, 65, "Section",ExpressionUUID->"1453fa81-1c25-4308-b5d4-9aa05e305b2b"],
+Cell[2539, 75, 11395, 315, 374, "Input",ExpressionUUID->"a0894eed-ba03-4e4a-b628-64d68d0235c3"],
+Cell[CellGroupData[{
+Cell[13959, 394, 7704, 171, 229, "Input",ExpressionUUID->"b9395312-a642-45f4-8266-44d48ee296fa"],
+Cell[21666, 567, 10103, 243, 560, "Output",ExpressionUUID->"72405fa6-a2bf-4748-9be1-847f31d42c42"]
+}, Open  ]],
+Cell[31784, 813, 531, 10, 55, "Text",ExpressionUUID->"3271b106-401c-48d5-8623-d7d5953c4495"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
