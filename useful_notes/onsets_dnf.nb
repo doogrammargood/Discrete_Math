@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     35327,        898]
-NotebookOptionsPosition[     33998,        867]
-NotebookOutlinePosition[     34390,        883]
-CellTagsIndexPosition[     34347,        880]
+NotebookDataLength[     35297,        898]
+NotebookOptionsPosition[     33968,        867]
+NotebookOutlinePosition[     34360,        883]
+CellTagsIndexPosition[     34317,        880]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -68,9 +68,10 @@ can be identified with compound propositions.\
 
 Cell[CellGroupData[{
 
-Cell["A widget to illustrate", "Section",
- CellChangeTimes->{{3.966885242911378*^9, 
-  3.966885245986946*^9}},ExpressionUUID->"1453fa81-1c25-4308-b5d4-\
+Cell["A Widget to Illustrate", "Section",
+ CellChangeTimes->{{3.966885242911378*^9, 3.966885245986946*^9}, {
+  3.96693710756931*^9, 
+  3.966937112857277*^9}},ExpressionUUID->"1453fa81-1c25-4308-b5d4-\
 9aa05e305b2b"],
 
 Cell[BoxData[{
@@ -572,13 +573,12 @@ Cell[BoxData[
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`plist$$ = {{0, 0}, {1, 0}, {2, 0}, {3, 1}, {
-    3, 2}, {3, 3}, {2, 3}, {1, 3}, {0, 3}, {3, 0}}, Typeset`show$$ = True, 
+   DynamicModuleBox[{$CellContext`plist$$ = {}, Typeset`show$$ = True, 
     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{{
        Hold[$CellContext`plist$$], {}}, ControlType -> None}}, 
-    Typeset`size$$ = {741.48203125, {240.07421875, 245.69921875}}, 
+    Typeset`size$$ = {695.6312499999999, {240.07421875, 245.69921875}}, 
     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = False, 
     Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
     DynamicBox[Manipulate`ManipulateBoxes[
@@ -646,7 +646,7 @@ $CellContext`G, $CellContext`B, $CellContext`Y}],
               FullSimplify[$CellContext`cardsExpression]}}]]}], 
       "Specifications" :> {{{$CellContext`plist$$, {}}, ControlType -> None}},
        "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{786.5820312499999, {268.68984375, 274.31484375}},
+     ImageSizeCache->{740.7312499999998, {268.68984375, 274.31484375}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -893,11 +893,11 @@ Cell[1214, 45, 169, 3, 65, "Section",ExpressionUUID->"3237db0c-ea8b-448f-911f-e5
 Cell[1386, 50, 946, 15, 99, "Text",ExpressionUUID->"d661dd5d-40a7-4e58-9ac2-4a4946b9b207"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2369, 70, 167, 3, 65, "Section",ExpressionUUID->"1453fa81-1c25-4308-b5d4-9aa05e305b2b"],
-Cell[2539, 75, 11759, 321, 374, "Input",ExpressionUUID->"a0894eed-ba03-4e4a-b628-64d68d0235c3"],
-Cell[14301, 398, 7726, 171, 229, "Input",ExpressionUUID->"b9395312-a642-45f4-8266-44d48ee296fa"],
-Cell[22030, 571, 11360, 280, 556, "Input",ExpressionUUID->"a193642e-40d0-473d-a5a9-633cab30a5b1"],
-Cell[33393, 853, 577, 10, 55, "Text",ExpressionUUID->"3271b106-401c-48d5-8623-d7d5953c4495"]
+Cell[2369, 70, 215, 4, 65, "Section",ExpressionUUID->"1453fa81-1c25-4308-b5d4-9aa05e305b2b"],
+Cell[2587, 76, 11759, 321, 374, "Input",ExpressionUUID->"a0894eed-ba03-4e4a-b628-64d68d0235c3"],
+Cell[14349, 399, 7726, 171, 229, "Input",ExpressionUUID->"b9395312-a642-45f4-8266-44d48ee296fa"],
+Cell[22078, 572, 11282, 279, 556, "Input",ExpressionUUID->"a193642e-40d0-473d-a5a9-633cab30a5b1"],
+Cell[33363, 853, 577, 10, 55, "Text",ExpressionUUID->"3271b106-401c-48d5-8623-d7d5953c4495"]
 }, Open  ]]
 }, Open  ]]
 }
