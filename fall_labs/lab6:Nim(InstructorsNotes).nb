@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     45840,       1065]
-NotebookOptionsPosition[     43797,       1020]
-NotebookOutlinePosition[     44189,       1036]
-CellTagsIndexPosition[     44146,       1033]
+NotebookDataLength[     45842,       1065]
+NotebookOptionsPosition[     43799,       1020]
+NotebookOutlinePosition[     44191,       1036]
+CellTagsIndexPosition[     44148,       1033]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -541,12 +541,12 @@ Cell["Discussion Questions", "Subsection",
 Cell["\<\
 Who wins the game when both players play intelligently, and what\
 \[CloseCurlyQuote]s the winning strategy?
-How would you prove that your solution works?
+How would you prove that your strategy works?
 How can you generalize this game? Does the winning strategy generalize?\
 \>", "Text",
  CellChangeTimes->{{3.968701533233219*^9, 3.9687016293064013`*^9}, {
-  3.968780131564601*^9, 
-  3.968780139756731*^9}},ExpressionUUID->"657dfa98-78d4-4701-88a2-\
+  3.9687801033264923`*^9, 
+  3.968780109783617*^9}},ExpressionUUID->"657dfa98-78d4-4701-88a2-\
 fd50c34beeba"]
 }, Open  ]]
 }, Open  ]],
@@ -1022,7 +1022,7 @@ WindowSize->{1440, 701.25},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
 FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
 StyleDefinitions->"Default.nb",
-ExpressionUUID->"ab56799e-993d-4c63-bddc-74581ae433e3"
+ExpressionUUID->"8485e6ac-e513-49d9-a225-fb3e364e7767"
 ]
 (* End of Notebook Content *)
 
@@ -1047,24 +1047,24 @@ Cell[10808, 254, 12291, 276, 130, "Output",ExpressionUUID->"e1a1f83a-a0fe-4158-b
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[23136, 535, 168, 3, 53, "Subsection",ExpressionUUID->"5e7fe8c5-0eb8-4e38-8ad6-9d4397fb6ce1"],
-Cell[23307, 540, 426, 9, 77, "Text",ExpressionUUID->"657dfa98-78d4-4701-88a2-fd50c34beeba"]
+Cell[23307, 540, 428, 9, 77, "Text",ExpressionUUID->"657dfa98-78d4-4701-88a2-fd50c34beeba"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[23782, 555, 148, 3, 65, "Section",ExpressionUUID->"37caadec-b726-43f6-b76f-6be4fcd3a5bd"],
-Cell[23933, 560, 480, 8, 55, "Text",ExpressionUUID->"ac61bc39-4639-4c53-9041-831234c8e7ec"],
+Cell[23784, 555, 148, 3, 65, "Section",ExpressionUUID->"37caadec-b726-43f6-b76f-6be4fcd3a5bd"],
+Cell[23935, 560, 480, 8, 55, "Text",ExpressionUUID->"ac61bc39-4639-4c53-9041-831234c8e7ec"],
 Cell[CellGroupData[{
-Cell[24438, 572, 11999, 271, 541, "Input",ExpressionUUID->"1cf7255e-1ee7-4af9-ac38-cb6be3bc36e2"],
-Cell[36440, 845, 6252, 136, 182, "Output",ExpressionUUID->"cff17364-09a2-436d-a52b-36912bd7da6e"]
+Cell[24440, 572, 11999, 271, 541, "Input",ExpressionUUID->"1cf7255e-1ee7-4af9-ac38-cb6be3bc36e2"],
+Cell[36442, 845, 6252, 136, 182, "Output",ExpressionUUID->"cff17364-09a2-436d-a52b-36912bd7da6e"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[42729, 986, 170, 3, 53, "Subsection",ExpressionUUID->"03c3c63b-fc3c-4670-a3f1-b3264e7aad31"],
-Cell[42902, 991, 429, 8, 99, "Text",ExpressionUUID->"e5f7d6ed-1d83-4f2e-9dfb-3de79bc65e2f"]
+Cell[42731, 986, 170, 3, 53, "Subsection",ExpressionUUID->"03c3c63b-fc3c-4670-a3f1-b3264e7aad31"],
+Cell[42904, 991, 429, 8, 99, "Text",ExpressionUUID->"e5f7d6ed-1d83-4f2e-9dfb-3de79bc65e2f"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[43380, 1005, 155, 3, 65, "Section",ExpressionUUID->"ca7a38ce-191f-4bb9-80a7-3a4389d99fe8"],
-Cell[43538, 1010, 231, 6, 33, "Text",ExpressionUUID->"e54f5b76-b156-400f-943a-5d6130accc3d"]
+Cell[43382, 1005, 155, 3, 65, "Section",ExpressionUUID->"ca7a38ce-191f-4bb9-80a7-3a4389d99fe8"],
+Cell[43540, 1010, 231, 6, 33, "Text",ExpressionUUID->"e54f5b76-b156-400f-943a-5d6130accc3d"]
 }, Open  ]]
 }, Open  ]]
 }

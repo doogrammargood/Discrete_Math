@@ -1,0 +1,30 @@
+Lab 6 Notes
+- If possible, get physical tokens.
+
+Take 2:
+	- Aim to spend 5 minutes describing the rules.
+	- Aim to spend 15 minutes of playing this game, 
+	- Aim to spend 15 miniutes for discussion.
+	Gamplay:
+	- If any students see the best-play solution, don't let them say.
+	Discussion:
+	- Students should notice 
+		- Player 1 will win if the number of stones in a multiple of 3, and player 2 will win otherwise. 
+		- When the opponent takes 1 stone, player 1 takes 2 stones. When the opponent takes 2 stones, the player takes 1 stone. The total number of stones then decreases by 3 after each round of play.
+	
+	- Some reasonable generalizations:
+		- Each player takes a number of stones between 1 and k, for some natural number k. Of course, the winning strategy generalizes.
+		- Each player takes a number of stones, and this number is constrained to be from a given set.
+		- Stones are of different types, and players must choose stones of the same type (see Nim)
+	
+Nim:
+	Gameplay:
+	- Time breakdowns as in Take 2.
+	- Encourage the students to explore different starting positions.
+	Discussion:
+	- Students probably will not find the general winning solution. Assure them that the game is solved like Take 2 and we will learn the solution later in the semester.
+	- Students should notice:
+		- If there is only 1 pile, player 1 wins.
+		- If there are 2 equal piles, player 1 wins by mirroring player 2.
+	- Students will probably say that Nim is a generalization of Take 2. Mention the Sprague-Grundy theorem: Every 'impartial' game (where the players have the same moves) has a solution in terms of Nim.
+	- Students should notice that identifying a winning position in any of these games comes from recursively evaluating the positions that can result from the players' moves. Game positions admit a recursive description in terms of the game positions they can lead to. Due to the recursive structure, we have inductive proofs of the correctness of winning strategies.
