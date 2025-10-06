@@ -1,0 +1,1067 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     45260,       1059]
+NotebookOptionsPosition[     43433,       1018]
+NotebookOutlinePosition[     43825,       1034]
+CellTagsIndexPosition[     43782,       1031]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Take 2", "Section",
+ CellChangeTimes->{{3.9687013616908293`*^9, 
+  3.968701366795205*^9}},ExpressionUUID->"2c12268d-0fce-4646-a481-\
+218516325ee5"],
+
+Cell["\<\
+Take 2 is a 2-player game. In the game, some number of stones are in a pile. \
+On their turn, a player must remove 1 or 2 stones from the pile. If a player \
+cannot move because the pile is empty, then that player loses.\
+\>", "Text",
+ CellChangeTimes->{{3.968701373074811*^9, 
+  3.96870148952061*^9}},ExpressionUUID->"2f7228b2-82c5-4ab4-99e4-\
+a8cd0b34707c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Deploy", "[", 
+   RowBox[{"DynamicModule", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"n", "=", "10"}], ",", 
+       RowBox[{"current", "=", "1"}], ",", "stones", ",", "message", ",", 
+       RowBox[{"history", "=", 
+        RowBox[{"{", "}"}]}]}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"stones", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<\[FilledCircle]\>\"", ",", "40", ",", "Black"}], "]"}],
+          ",", "n"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"message", "=", "\"\<Player 1's turn\>\""}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Panel", "[", 
+       RowBox[{"Column", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Row", "[", 
+           RowBox[{"{", 
+            RowBox[{"\"\<Number of stones: \>\"", ",", 
+             RowBox[{"SetterBar", "[", 
+              RowBox[{
+               RowBox[{"Dynamic", "[", 
+                RowBox[{"n", ",", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"n", "=", "#"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"stones", "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    "\"\<\[FilledCircle]\>\"", ",", "40", ",", "Black"}], 
+                    "]"}], ",", "n"}], "]"}]}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"current", "=", "1"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"message", "=", "\"\<Player 1's turn\>\""}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"history", "=", 
+                    RowBox[{"{", "}"}]}]}], ")"}], "&"}]}], "]"}], ",", 
+               RowBox[{"Range", "[", 
+                RowBox[{"3", ",", "20"}], "]"}]}], "]"}]}], "}"}], "]"}], ",", 
+          RowBox[{"Dynamic", "[", 
+           RowBox[{"Column", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Row", "[", "stones", "]"}], ",", 
+              RowBox[{"Spacer", "[", "10", "]"}], ",", 
+              RowBox[{"Style", "[", 
+               RowBox[{"message", ",", "Bold", ",", "16"}], "]"}], ",", 
+              RowBox[{"Row", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Button", "[", 
+                  RowBox[{"\"\<Take 1\>\"", ",", 
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"n", ">=", "1"}], "&&", 
+                    RowBox[{"!", 
+                    RowBox[{"StringContainsQ", "[", 
+                    RowBox[{"message", ",", "\"\<wins\>\""}], "]"}]}]}], ",", 
+                    
+                    RowBox[{
+                    RowBox[{"AppendTo", "[", 
+                    RowBox[{"history", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"n", ",", "current", ",", "message"}], "}"}]}], 
+                    "]"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"n", "-=", "1"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"stones", "=", 
+                    RowBox[{"Take", "[", 
+                    RowBox[{"stones", ",", "n"}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"current", "=", 
+                    RowBox[{"3", "-", "current"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"n", "==", "0"}], ",", 
+                    RowBox[{"message", "=", 
+                    RowBox[{"\"\<Player \>\"", "<>", 
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"3", "-", "current"}], "]"}], "<>", 
+                    "\"\< wins!\>\""}]}], ",", 
+                    RowBox[{"message", "=", 
+                    RowBox[{"\"\<Player \>\"", "<>", 
+                    RowBox[{"ToString", "[", "current", "]"}], "<>", 
+                    "\"\<'s turn\>\""}]}]}], "]"}]}]}], "]"}], ",", 
+                   RowBox[{"Enabled", "->", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"n", ">", "0"}], "&&", 
+                    RowBox[{"!", 
+                    RowBox[{"StringContainsQ", "[", 
+                    RowBox[{"message", ",", "\"\<wins\>\""}], "]"}]}]}], 
+                    ")"}]}]}], "]"}], ",", 
+                 RowBox[{"Button", "[", 
+                  RowBox[{"\"\<Take 2\>\"", ",", 
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"n", ">=", "2"}], "&&", 
+                    RowBox[{"!", 
+                    RowBox[{"StringContainsQ", "[", 
+                    RowBox[{"message", ",", "\"\<wins\>\""}], "]"}]}]}], ",", 
+                    
+                    RowBox[{
+                    RowBox[{"AppendTo", "[", 
+                    RowBox[{"history", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"n", ",", "current", ",", "message"}], "}"}]}], 
+                    "]"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"n", "-=", "2"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"stones", "=", 
+                    RowBox[{"Take", "[", 
+                    RowBox[{"stones", ",", "n"}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"current", "=", 
+                    RowBox[{"3", "-", "current"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"n", "==", "0"}], ",", 
+                    RowBox[{"message", "=", 
+                    RowBox[{"\"\<Player \>\"", "<>", 
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"3", "-", "current"}], "]"}], "<>", 
+                    "\"\< wins!\>\""}]}], ",", 
+                    RowBox[{"message", "=", 
+                    RowBox[{"\"\<Player \>\"", "<>", 
+                    RowBox[{"ToString", "[", "current", "]"}], "<>", 
+                    "\"\<'s turn\>\""}]}]}], "]"}]}]}], "]"}], ",", 
+                   RowBox[{"Enabled", "->", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"n", ">", "1"}], "&&", 
+                    RowBox[{"!", 
+                    RowBox[{"StringContainsQ", "[", 
+                    RowBox[{"message", ",", "\"\<wins\>\""}], "]"}]}]}], 
+                    ")"}]}]}], "]"}], ",", 
+                 RowBox[{"Button", "[", 
+                  RowBox[{"\"\<Undo\>\"", ",", 
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"history", "=!=", 
+                    RowBox[{"{", "}"}]}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"n", ",", "current", ",", "message"}], "}"}], "=", 
+                    RowBox[{"Last", "[", "history", "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"history", "=", 
+                    RowBox[{"Most", "[", "history", "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"stones", "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    "\"\<\[FilledCircle]\>\"", ",", "40", ",", "Black"}], 
+                    "]"}], ",", "n"}], "]"}]}], ";"}]}], "]"}], ",", 
+                   RowBox[{"Enabled", "->", 
+                    RowBox[{"(", 
+                    RowBox[{"history", "=!=", 
+                    RowBox[{"{", "}"}]}], ")"}]}]}], "]"}], ",", 
+                 RowBox[{"Button", "[", 
+                  RowBox[{"\"\<Reset\>\"", ",", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"n", "=", "10"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"current", "=", "1"}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"stones", "=", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    "\"\<\[FilledCircle]\>\"", ",", "40", ",", "Black"}], 
+                    "]"}], ",", "n"}], "]"}]}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"message", "=", "\"\<Player 1's turn\>\""}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"history", "=", 
+                    RowBox[{"{", "}"}]}], ";"}], ")"}]}], "]"}]}], "}"}], 
+               "]"}]}], "}"}], "]"}], "]"}]}], "}"}], "]"}], "]"}]}]}], "]"}],
+    "]"}], "\n"}]], "Input",
+ ShowSelection->True,
+ ShowGroupOpener->"Inline",
+ GroupOpenerInsideFrame->False,
+ ShowClosedCellArea->False,
+ CellChangeTimes->{{3.968699630127687*^9, 3.968699630128484*^9}, {
+  3.968700722621324*^9, 3.9687007276720133`*^9}},
+ CellLabel->"In[13]:=",ExpressionUUID->"94b7e6f6-b349-4a41-b8d6-3b6b47a0d467"],
+
+Cell[BoxData[
+ TagBox[
+  DynamicModuleBox[{$CellContext`n$$ = 10, $CellContext`current$$ = 
+   1, $CellContext`stones$$ = {
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]]}, $CellContext`message$$ = 
+   "Player 1's turn", $CellContext`history$$ = {}}, 
+   PanelBox[
+    TagBox[GridBox[{
+       {
+        TemplateBox[{"\"Number of stones: \"", 
+          InterpretationBox[
+           StyleBox[
+            GridBox[{{
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {3}, 
+                "3"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {4}, 
+                "4"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {5}, 
+                "5"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {6}, 
+                "6"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {7}, 
+                "7"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {8}, 
+                "8"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {9}, 
+                "9"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {10}, 
+                "10"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {11}, 
+                "11"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {12}, 
+                "12"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {13}, 
+                "13"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {14}, 
+                "14"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {15}, 
+                "15"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {16}, 
+                "16"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {17}, 
+                "17"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {18}, 
+                "18"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {19}, 
+                "19"], 
+               SetterBox[
+                
+                Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                    Style[
+                    "\[FilledCircle]", 40, 
+                    Black], $CellContext`n$$]; $CellContext`current$$ = 
+                  1; $CellContext`message$$ = 
+                  "Player 1's turn"; $CellContext`history$$ = {})& ], {20}, 
+                "20"]}}, ColumnSpacings -> 0, BaselinePosition -> {1, 1}], 
+            Deployed -> True], 
+           SetterBar[
+            
+            Dynamic[$CellContext`n$$, ($CellContext`n$$ = #; \
+$CellContext`stones$$ = Table[
+                Style[
+                "\[FilledCircle]", 40, 
+                 Black], $CellContext`n$$]; $CellContext`current$$ = 
+              1; $CellContext`message$$ = 
+              "Player 1's turn"; $CellContext`history$$ = {})& ], {3, 4, 5, 6,
+             7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}]]},
+         "RowDefault"]},
+       {
+        DynamicBox[ToBoxes[
+          Column[{
+            Row[$CellContext`stones$$], 
+            Spacer[10], 
+            Style[$CellContext`message$$, Bold, 16], 
+            Row[{
+              Button["Take 1", 
+               If[
+                And[$CellContext`n$$ >= 1, 
+                 Not[
+                  StringContainsQ[$CellContext`message$$, "wins"]]], 
+                AppendTo[$CellContext`history$$, {$CellContext`n$$, \
+$CellContext`current$$, $CellContext`message$$}]; 
+                SubtractFrom[$CellContext`n$$, 1]; $CellContext`stones$$ = 
+                 Take[$CellContext`stones$$, $CellContext`n$$]; \
+$CellContext`current$$ = 3 - $CellContext`current$$; 
+                If[$CellContext`n$$ == 0, $CellContext`message$$ = 
+                  "Player " <> ToString[3 - $CellContext`current$$] <> 
+                   " wins!", $CellContext`message$$ = 
+                  "Player " <> ToString[$CellContext`current$$] <> 
+                   "'s turn"]], Enabled -> And[$CellContext`n$$ > 0, 
+                 Not[
+                  StringContainsQ[$CellContext`message$$, "wins"]]]], 
+              Button["Take 2", 
+               If[
+                And[$CellContext`n$$ >= 2, 
+                 Not[
+                  StringContainsQ[$CellContext`message$$, "wins"]]], 
+                AppendTo[$CellContext`history$$, {$CellContext`n$$, \
+$CellContext`current$$, $CellContext`message$$}]; 
+                SubtractFrom[$CellContext`n$$, 2]; $CellContext`stones$$ = 
+                 Take[$CellContext`stones$$, $CellContext`n$$]; \
+$CellContext`current$$ = 3 - $CellContext`current$$; 
+                If[$CellContext`n$$ == 0, $CellContext`message$$ = 
+                  "Player " <> ToString[3 - $CellContext`current$$] <> 
+                   " wins!", $CellContext`message$$ = 
+                  "Player " <> ToString[$CellContext`current$$] <> 
+                   "'s turn"]], Enabled -> And[$CellContext`n$$ > 1, 
+                 Not[
+                  StringContainsQ[$CellContext`message$$, "wins"]]]], 
+              Button["Undo", 
+               
+               If[$CellContext`history$$ =!= {}, {$CellContext`n$$, \
+$CellContext`current$$, $CellContext`message$$} = 
+                 Last[$CellContext`history$$]; $CellContext`history$$ = 
+                 Most[$CellContext`history$$]; $CellContext`stones$$ = Table[
+                   Style["\[FilledCircle]", 40, Black], $CellContext`n$$]; 
+                Null], Enabled -> $CellContext`history$$ =!= {}], 
+              Button[
+              "Reset", $CellContext`n$$ = 10; $CellContext`current$$ = 
+                1; $CellContext`stones$$ = Table[
+                  Style[
+                  "\[FilledCircle]", 40, 
+                   Black], $CellContext`n$$]; $CellContext`message$$ = 
+                "Player 1's turn"; $CellContext`history$$ = {}; Null]}]}], 
+          StandardForm],
+         ImageSizeCache->{
+          285.8203125, {39.726171875000006`, 44.378515625000006`}}]}
+      },
+      DefaultBaseStyle->"Column",
+      GridBoxAlignment->{"Columns" -> {{Left}}},
+      GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+     
+     "Column"]],
+   DynamicModuleValues:>{}],
+  Deploy,
+  DefaultBaseStyle->"Deploy"]], "Output",
+ CellChangeTimes->{
+  3.9686996311509457`*^9, {3.9687007287757807`*^9, 3.968700734984379*^9}, 
+   3.968701506013146*^9},
+ CellLabel->"Out[13]=",ExpressionUUID->"e1a1f83a-a0fe-4158-b9e2-529adbebb07c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Discussion Questions", "Subsection",
+ CellChangeTimes->{{3.968701514693701*^9, 
+  3.968701518548829*^9}},ExpressionUUID->"5e7fe8c5-0eb8-4e38-8ad6-\
+9d4397fb6ce1"],
+
+Cell["\<\
+Who wins the game when both players play intelligently, and what\
+\[CloseCurlyQuote]s the winning strategy?
+How can you generalize this game? Does the winning strategy generalize?\
+\>", "Text",
+ CellChangeTimes->{{3.968701533233219*^9, 
+  3.9687016293064013`*^9}},ExpressionUUID->"657dfa98-78d4-4701-88a2-\
+fd50c34beeba"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Nim", "Section",
+ CellChangeTimes->{{3.968701132936034*^9, 
+  3.968701136829855*^9}},ExpressionUUID->"37caadec-b726-43f6-b76f-\
+6be4fcd3a5bd"],
+
+Cell["\<\
+In this two-player game, there are several piles of stones. On their turn, \
+the player will remove some stones from one of the plies. The player gets to \
+choose how many stones to remove, but this number cannot be zero, and the \
+stones must all be removed from the same pile on each turn. Again, the player \
+who cannot moves loses.\
+\>", "Text",
+ CellChangeTimes->{{3.968701146154385*^9, 
+  3.968701336139*^9}},ExpressionUUID->"ac61bc39-4639-4c53-9041-831234c8e7ec"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Deploy", "[", 
+   RowBox[{"DynamicModule", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"heaps", "=", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", "4", ",", "5"}], "}"}]}], ",", 
+       RowBox[{"custom", "=", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", "4", ",", "5"}], "}"}]}], ",", 
+       RowBox[{"current", "=", "1"}], ",", 
+       RowBox[{"message", "=", "\"\<Player 1's turn\>\""}], ",", 
+       RowBox[{"history", "=", 
+        RowBox[{"{", "}"}]}]}], "}"}], ",", 
+     RowBox[{"Column", "[", 
+      RowBox[{"{", 
+       RowBox[{"(*", 
+        RowBox[{"Presets", " ", "and", " ", "custom", " ", "apply"}], "*)"}], 
+       
+       RowBox[{
+        RowBox[{"Row", "[", 
+         RowBox[{"{", 
+          RowBox[{"\"\<Heaps: \>\"", ",", 
+           RowBox[{"SetterBar", "[", 
+            RowBox[{
+             RowBox[{"Dynamic", "[", 
+              RowBox[{"heaps", ",", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"heaps", "=", "#"}], ";", 
+                  RowBox[{"current", "=", "1"}], ";", 
+                  RowBox[{"message", "=", "\"\<Player 1's turn\>\""}], ";", 
+                  RowBox[{"history", "=", 
+                   RowBox[{"{", "}"}]}]}], ")"}], "&"}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"3", ",", "4", ",", "5"}], "}"}], "->", 
+                "\"\<Classic (3,4,5)\>\""}], ",", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"1", ",", "3", ",", "7"}], "}"}], "->", 
+                "\"\<Short (1,3,7)\>\""}], ",", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"2", ",", "5", ",", "8", ",", "9"}], "}"}], "->", 
+                "\"\<Hard (2,5,8,9)\>\""}]}], "}"}]}], "]"}], ",", 
+           RowBox[{"Spacer", "[", "12", "]"}], ",", "\"\<Custom: \>\"", ",", 
+           RowBox[{"InputField", "[", 
+            RowBox[{
+             RowBox[{"Dynamic", "[", "custom", "]"}], ",", 
+             RowBox[{"FieldSize", "->", "Medium"}]}], "]"}], ",", 
+           RowBox[{"Button", "[", 
+            RowBox[{"\"\<Apply\>\"", ",", 
+             RowBox[{"Module", "[", 
+              RowBox[{
+               RowBox[{"{", "c", "}"}], ",", 
+               RowBox[{
+                RowBox[{"c", "=", 
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{"ListQ", "[", "custom", "]"}], ",", 
+                   RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Max", "[", 
+                    RowBox[{"0", ",", 
+                    RowBox[{"Floor", "[", "#", "]"}]}], "]"}], "&"}], ",", 
+                    "custom"}], "]"}], ",", 
+                   RowBox[{"{", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+                
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"ListQ", "[", "c", "]"}], "&&", 
+                   RowBox[{
+                    RowBox[{"Length", "[", "c", "]"}], ">", "0"}]}], ",", 
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"heaps", "=", "c"}], ";", 
+                    RowBox[{"current", "=", "1"}], ";", 
+                    RowBox[{"message", "=", "\"\<Player 1's turn\>\""}], ";", 
+                    
+                    RowBox[{"history", "=", 
+                    RowBox[{"{", "}"}]}], ";"}], ")"}], ",", 
+                  RowBox[{
+                  "MessageDialog", "[", 
+                   "\"\<Custom must be a nonempty list of numbers (e.g. \
+{3,4,5}).\>\"", "]"}]}], "]"}]}]}], "]"}], ",", 
+             RowBox[{"Method", "->", "\"\<Queued\>\""}]}], "]"}]}], "}"}], 
+         "]"}], ",", 
+        RowBox[{"(*", 
+         RowBox[{"Main", " ", "interactive", " ", "area"}], "*)"}], 
+        RowBox[{"Dynamic", "[", 
+         RowBox[{"Column", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Grid", "[", 
+             RowBox[{"{", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"Module", "[", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"ii", "=", "i"}], ",", "n"}], "}"}], ",", 
+                  RowBox[{
+                   RowBox[{"n", "=", 
+                    RowBox[{"Max", "[", 
+                    RowBox[{"0", ",", 
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"heaps", "[", 
+                    RowBox[{"[", "ii", "]"}], "]"}], "]"}]}], "]"}]}], ";", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{"Column", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"\"\<Heap \>\"", "<>", 
+                    RowBox[{"ToString", "[", "ii", "]"}]}], ",", "Bold"}], 
+                    "]"}], ",", 
+                    RowBox[{"Row", "@", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<\[FilledCircle]\>\"", ",", 
+                    RowBox[{"FontSize", "->", "26"}]}], "]"}], ",", 
+                    RowBox[{"{", "n", "}"}]}], "]"}]}], ",", 
+                    RowBox[{"Row", "[", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"With", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"take", "=", "k"}], ",", 
+                    RowBox[{"jj", "=", "ii"}]}], "}"}], ",", 
+                    RowBox[{"Button", "[", 
+                    RowBox[{
+                    RowBox[{"ToString", "[", "take", "]"}], ",", 
+                    RowBox[{"Module", "[", 
+                    RowBox[{
+                    RowBox[{"{", "newHeaps", "}"}], ",", 
+                    RowBox[{"(*", 
+                    RowBox[{
+                    "save", " ", "a", " ", "copy", " ", "of", " ", "the", " ",
+                     "state"}], "*)"}], 
+                    RowBox[{
+                    RowBox[{"history", "=", 
+                    RowBox[{"Append", "[", 
+                    RowBox[{"history", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"heaps", ",", "current", ",", "message"}], 
+                    "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"(*", 
+                    RowBox[{"update", " ", "heaps", " ", "safely"}], "*)"}], 
+                    RowBox[{"newHeaps", "=", "heaps"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"newHeaps", "[", 
+                    RowBox[{"[", "jj", "]"}], "]"}], "=", 
+                    RowBox[{"Max", "[", 
+                    RowBox[{"0", ",", 
+                    RowBox[{
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"newHeaps", "[", 
+                    RowBox[{"[", "jj", "]"}], "]"}], "]"}], "-", "take"}]}], 
+                    "]"}]}], ";", "\[IndentingNewLine]", 
+                    RowBox[{"heaps", "=", "newHeaps"}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(*", 
+                    RowBox[{
+                    RowBox[{"switch", " ", "player"}], ",", 
+                    RowBox[{"update", " ", "message"}]}], "*)"}], 
+                    RowBox[{"current", "=", 
+                    RowBox[{"3", "-", "current"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"message", "=", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Total", "[", 
+                    RowBox[{"Map", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Max", "[", 
+                    RowBox[{"0", ",", 
+                    RowBox[{"Floor", "[", "#", "]"}]}], "]"}], "&"}], ",", 
+                    "heaps"}], "]"}], "]"}], "==", "0"}], ",", 
+                    RowBox[{"\"\<Player \>\"", "<>", 
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"3", "-", "current"}], "]"}], "<>", 
+                    "\"\< wins!\>\""}], ",", 
+                    RowBox[{"\"\<Player \>\"", "<>", 
+                    RowBox[{"ToString", "[", "current", "]"}], "<>", 
+                    "\"\<'s turn\>\""}]}], "]"}]}], ";"}]}], "]"}], ",", 
+                    RowBox[{"Enabled", "->", 
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Max", "[", 
+                    RowBox[{"0", ",", 
+                    RowBox[{"Floor", "[", 
+                    RowBox[{"heaps", "[", 
+                    RowBox[{"[", "jj", "]"}], "]"}], "]"}]}], "]"}], ">=", 
+                    "take"}], "&&", 
+                    RowBox[{"!", 
+                    RowBox[{"StringContainsQ", "[", 
+                    RowBox[{"message", ",", "\"\<wins\>\""}], "]"}]}]}], 
+                    "]"}]}], ",", 
+                    RowBox[{"Method", "->", "\"\<Queued\>\""}]}], "]"}]}], 
+                    "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"k", ",", "1", ",", "n"}], "}"}]}], "]"}], 
+                    "]"}]}], "}"}], "]"}]}]}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", 
+                  RowBox[{"Length", "[", "heaps", "]"}]}], "}"}]}], "]"}], 
+              "}"}], "]"}], ",", 
+            RowBox[{"Spacer", "[", "10", "]"}], ",", 
+            RowBox[{"Style", "[", 
+             RowBox[{"message", ",", "Bold", ",", "16"}], "]"}], ",", 
+            RowBox[{"Row", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Button", "[", 
+                RowBox[{"\"\<Undo\>\"", ",", 
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{"history", "=!=", 
+                    RowBox[{"{", "}"}]}], ",", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"heaps", ",", "current", ",", "message"}], "}"}], 
+                    "=", 
+                    RowBox[{"Last", "[", "history", "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"history", "=", 
+                    RowBox[{"Most", "[", "history", "]"}]}], ";"}]}], "]"}], 
+                 ",", 
+                 RowBox[{"Enabled", "->", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"history", "=!=", 
+                    RowBox[{"{", "}"}]}], "]"}]}], ",", 
+                 RowBox[{"Method", "->", "\"\<Queued\>\""}]}], "]"}], ",", 
+               RowBox[{"Spacer", "[", "12", "]"}], ",", 
+               RowBox[{"Button", "[", 
+                RowBox[{"\"\<Reset\>\"", ",", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"heaps", "=", 
+                    RowBox[{"{", 
+                    RowBox[{"3", ",", "4", ",", "5"}], "}"}]}], ";", 
+                   RowBox[{"current", "=", "1"}], ";", 
+                   RowBox[{"message", "=", "\"\<Player 1's turn\>\""}], ";", 
+                   RowBox[{"history", "=", 
+                    RowBox[{"{", "}"}]}], ";"}], ")"}], ",", 
+                 RowBox[{"Method", "->", "\"\<Queued\>\""}]}], "]"}]}], "}"}],
+              "]"}]}], "}"}], "]"}], "]"}]}], "}"}], "]"}]}], "]"}], "]"}], 
+  "\n"}]], "Input",
+ CellChangeTimes->{{3.968699946256116*^9, 3.968699946256864*^9}, {
+  3.968700015006341*^9, 3.968700015869424*^9}, {3.968700052101098*^9, 
+  3.9687000582822*^9}, {3.968700133567485*^9, 3.968700160719976*^9}, {
+  3.968700675197833*^9, 3.968700682601289*^9}},
+ CellLabel->"In[10]:=",ExpressionUUID->"1cf7255e-1ee7-4af9-ac38-cb6be3bc36e2"],
+
+Cell[BoxData[
+ TagBox[
+  DynamicModuleBox[{$CellContext`heaps$$ = {3, 4, 
+   5}, $CellContext`custom$$ = {3, 4, 5}, $CellContext`current$$ = 
+   1, $CellContext`message$$ = 
+   "Player 1's turn", $CellContext`history$$ = {}}, 
+   TagBox[GridBox[{
+      {
+       TemplateBox[{"\"Heaps: \"", 
+         InterpretationBox[
+          StyleBox[
+           GridBox[{{
+              SetterBox[
+               
+               Dynamic[$CellContext`heaps$$, ($CellContext`heaps$$ = #; \
+$CellContext`current$$ = 1; $CellContext`message$$ = 
+                 "Player 1's turn"; $CellContext`history$$ = {})& ], {{3, 4, 
+               5}}, "\"Classic (3,4,5)\""], 
+              SetterBox[
+               
+               Dynamic[$CellContext`heaps$$, ($CellContext`heaps$$ = #; \
+$CellContext`current$$ = 1; $CellContext`message$$ = 
+                 "Player 1's turn"; $CellContext`history$$ = {})& ], {{1, 3, 
+               7}}, "\"Short (1,3,7)\""], 
+              SetterBox[
+               
+               Dynamic[$CellContext`heaps$$, ($CellContext`heaps$$ = #; \
+$CellContext`current$$ = 1; $CellContext`message$$ = 
+                 "Player 1's turn"; $CellContext`history$$ = {})& ], {{2, 5, 
+               8, 9}}, "\"Hard (2,5,8,9)\""]}}, ColumnSpacings -> 0, 
+            BaselinePosition -> {1, 1}], Deployed -> True], 
+          SetterBar[
+           
+           Dynamic[$CellContext`heaps$$, ($CellContext`heaps$$ = #; \
+$CellContext`current$$ = 1; $CellContext`message$$ = 
+             "Player 1's turn"; $CellContext`history$$ = {})& ], {{3, 4, 5} -> 
+            "Classic (3,4,5)", {1, 3, 7} -> "Short (1,3,7)", {2, 5, 8, 9} -> 
+            "Hard (2,5,8,9)"}]], 
+         TemplateBox[{12}, "Spacer1"], "\"Custom: \"", 
+         InputFieldBox[
+          Dynamic[$CellContext`custom$$], FieldSize -> Medium], 
+         ButtonBox[
+         "\"Apply\"", ButtonFunction :> 
+          Module[{$CellContext`c$}, $CellContext`c$ = If[
+               ListQ[$CellContext`custom$$], 
+               Map[Max[0, 
+                 Floor[#]]& , $CellContext`custom$$], {}]; If[
+              And[
+               ListQ[$CellContext`c$], Length[$CellContext`c$] > 
+               0], $CellContext`heaps$$ = $CellContext`c$; \
+$CellContext`current$$ = 1; $CellContext`message$$ = 
+               "Player 1's turn"; $CellContext`history$$ = {}; Null, 
+              MessageDialog[
+              "Custom must be a nonempty list of numbers (e.g. {3,4,5})."]]], 
+          Method -> "Queued", Appearance -> Automatic, Evaluator -> 
+          Automatic]},
+        "RowDefault"]},
+      {
+       DynamicBox[ToBoxes[
+         Column[{
+           Grid[{
+             Table[
+              
+              Module[{$CellContext`ii$ = $CellContext`i, $CellContext`n$}, \
+$CellContext`n$ = Max[0, 
+                  Floor[
+                   Part[$CellContext`heaps$$, $CellContext`ii$]]]; Column[{
+                  Style["Heap " <> ToString[$CellContext`ii$], Bold], 
+                  Row[
+                   Table[
+                    Style[
+                    "\[FilledCircle]", FontSize -> 26], {$CellContext`n$}]], 
+                  Row[
+                   Table[
+                    
+                    With[{$CellContext`take$ = $CellContext`k, \
+$CellContext`jj$ = $CellContext`ii$}, 
+                    Button[
+                    ToString[$CellContext`take$], 
+                    
+                    Module[{$CellContext`newHeaps$}, $CellContext`history$$ = 
+                    Append[$CellContext`history$$, {$CellContext`heaps$$, \
+$CellContext`current$$, $CellContext`message$$}]; $CellContext`newHeaps$ = \
+$CellContext`heaps$$; Part[$CellContext`newHeaps$, $CellContext`jj$] = 
+                    Max[0, Floor[
+                    
+                    Part[$CellContext`newHeaps$, $CellContext`jj$]] - \
+$CellContext`take$]; $CellContext`heaps$$ = $CellContext`newHeaps$; \
+$CellContext`current$$ = 3 - $CellContext`current$$; $CellContext`message$$ = 
+                    If[Total[
+                    Map[Max[0, 
+                    Floor[#]]& , $CellContext`heaps$$]] == 0, "Player " <> 
+                    ToString[3 - $CellContext`current$$] <> " wins!", 
+                    "Player " <> ToString[$CellContext`current$$] <> 
+                    "'s turn"]; Null], Enabled -> Dynamic[
+                    And[Max[0, 
+                    Floor[
+                    
+                    Part[$CellContext`heaps$$, $CellContext`jj$]]] >= \
+$CellContext`take$, 
+                    Not[
+                    StringContainsQ[$CellContext`message$$, "wins"]]]], 
+                    Method -> "Queued"]], {$CellContext`k, 
+                    1, $CellContext`n$}]]}]], {$CellContext`i, 
+               Length[$CellContext`heaps$$]}]}], 
+           Spacer[10], 
+           Style[$CellContext`message$$, Bold, 16], 
+           Row[{
+             Button["Undo", 
+              
+              If[$CellContext`history$$ =!= {}, {$CellContext`heaps$$, \
+$CellContext`current$$, $CellContext`message$$} = 
+                Last[$CellContext`history$$]; $CellContext`history$$ = 
+                Most[$CellContext`history$$]; Null], Enabled -> 
+              Dynamic[$CellContext`history$$ =!= {}], Method -> "Queued"], 
+             Spacer[12], 
+             Button[
+             "Reset", $CellContext`heaps$$ = {3, 4, 
+                5}; $CellContext`current$$ = 1; $CellContext`message$$ = 
+               "Player 1's turn"; $CellContext`history$$ = {}; Null, Method -> 
+              "Queued"]}]}], StandardForm],
+        ImageSizeCache->{199.4, {63.130859375000014`, 68.75585937500001}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"],
+   DynamicModuleValues:>{}],
+  Deploy,
+  DefaultBaseStyle->"Deploy"]], "Output",
+ CellChangeTimes->{
+  3.968699947117099*^9, {3.968700017538207*^9, 3.968700024343418*^9}, 
+   3.9687000598271513`*^9, 3.968700161764285*^9, 3.968700683686551*^9},
+ CellLabel->"Out[10]=",ExpressionUUID->"cff17364-09a2-436d-a52b-36912bd7da6e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Discussion questions", "Subsection",
+ CellChangeTimes->{{3.9687038714967613`*^9, 
+  3.968703873525155*^9}},ExpressionUUID->"03c3c63b-fc3c-4670-a3f1-\
+b3264e7aad31"],
+
+Cell["\<\
+If both players play well, who wins? What\[CloseCurlyQuote]s the best strategy?
+Are there any special cases where a best strategy is easier to find?
+What is the relationship between this game and the previous game (Take 2)?
+How are these games related to induction and recursion?\
+\>", "Text",
+ CellChangeTimes->{{3.968703883492916*^9, 
+  3.968704034415313*^9}},ExpressionUUID->"e5f7d6ed-1d83-4f2e-9dfb-\
+3de79bc65e2f"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Hackenbush", "Section",
+ CellChangeTimes->{{3.968703685525614*^9, 
+  3.968703688171412*^9}},ExpressionUUID->"ca7a38ce-191f-4bb9-80a7-\
+3a4389d99fe8"],
+
+Cell["\<\
+Play the classic game, Hackenbush here: http://susanne.wtak.nl/mathgames.html\
+\
+\>", "Text",
+ CellChangeTimes->{{3.9687036913571377`*^9, 
+  3.968703704763797*^9}},ExpressionUUID->"e54f5b76-b156-400f-943a-\
+5d6130accc3d"]
+}, Open  ]]
+},
+WindowSize->{1440, 701.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"ab56799e-993d-4c63-bddc-74581ae433e3"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 153, 3, 65, "Section",ExpressionUUID->"2c12268d-0fce-4646-a481-218516325ee5"],
+Cell[732, 27, 369, 7, 33, "Text",ExpressionUUID->"2f7228b2-82c5-4ab4-99e4-a8cd0b34707c"],
+Cell[CellGroupData[{
+Cell[1126, 38, 9147, 199, 554, "Input",ExpressionUUID->"94b7e6f6-b349-4a41-b8d6-3b6b47a0d467"],
+Cell[10276, 239, 12729, 295, 147, "Output",ExpressionUUID->"e1a1f83a-a0fe-4158-b9e2-529adbebb07c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23042, 539, 168, 3, 53, "Subsection",ExpressionUUID->"5e7fe8c5-0eb8-4e38-8ad6-9d4397fb6ce1"],
+Cell[23213, 544, 331, 7, 55, "Text",ExpressionUUID->"657dfa98-78d4-4701-88a2-fd50c34beeba"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23593, 557, 148, 3, 65, "Section",ExpressionUUID->"37caadec-b726-43f6-b76f-6be4fcd3a5bd"],
+Cell[23744, 562, 480, 8, 55, "Text",ExpressionUUID->"ac61bc39-4639-4c53-9041-831234c8e7ec"],
+Cell[CellGroupData[{
+Cell[24249, 574, 11999, 271, 541, "Input",ExpressionUUID->"1cf7255e-1ee7-4af9-ac38-cb6be3bc36e2"],
+Cell[36251, 847, 6089, 133, 182, "Output",ExpressionUUID->"cff17364-09a2-436d-a52b-36912bd7da6e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42377, 985, 170, 3, 53, "Subsection",ExpressionUUID->"03c3c63b-fc3c-4670-a3f1-b3264e7aad31"],
+Cell[42550, 990, 429, 8, 99, "Text",ExpressionUUID->"e5f7d6ed-1d83-4f2e-9dfb-3de79bc65e2f"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[43028, 1004, 155, 3, 65, "Section",ExpressionUUID->"ca7a38ce-191f-4bb9-80a7-3a4389d99fe8"],
+Cell[43186, 1009, 231, 6, 33, "Text",ExpressionUUID->"e54f5b76-b156-400f-943a-5d6130accc3d"]
+}, Open  ]]
+}
+]
+*)
+

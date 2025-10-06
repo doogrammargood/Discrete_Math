@@ -1,0 +1,62 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      1472,         52]
+NotebookOptionsPosition[      1125,         38]
+NotebookOutlinePosition[      1517,         54]
+CellTagsIndexPosition[      1474,         51]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"TableForm", "[", 
+  RowBox[{
+   RowBox[{"BooleanTable", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"p", ",", "q", ",", 
+       RowBox[{"p", "\[Xor]", "q"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"p", ",", "q"}], "}"}]}], "]"}], ",", 
+   RowBox[{"TableHeadings", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"None", ",", 
+      RowBox[{"{", 
+       RowBox[{"p", ",", "q", ",", " ", 
+        RowBox[{"p", " ", "\[Xor]", "q"}]}], " ", "}"}]}], "}"}]}]}], 
+  "]"}]], "Input",ExpressionUUID->"cfdcf5b2-a88e-407a-b972-8177862457ae"]
+},
+WindowSize->{1440, 701.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"5796ee01-6f1e-4eeb-98dd-c046f7612756"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 567, 16, 30, "Input",ExpressionUUID->"cfdcf5b2-a88e-407a-b972-8177862457ae"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
