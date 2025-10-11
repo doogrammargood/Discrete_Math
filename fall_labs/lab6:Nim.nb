@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     45840,       1065]
-NotebookOptionsPosition[     43797,       1020]
-NotebookOutlinePosition[     44189,       1036]
-CellTagsIndexPosition[     44146,       1033]
+NotebookDataLength[     47881,       1127]
+NotebookOptionsPosition[     45609,       1078]
+NotebookOutlinePosition[     46001,       1094]
+CellTagsIndexPosition[     45958,       1091]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -250,15 +250,53 @@ Cell[BoxData[
  ShowClosedCellArea->False,
  CellChangeTimes->{{3.968699630127687*^9, 3.968699630128484*^9}, {
   3.968700722621324*^9, 3.9687007276720133`*^9}},
- CellLabel->"In[13]:=",ExpressionUUID->"94b7e6f6-b349-4a41-b8d6-3b6b47a0d467"],
+ CellLabel->"In[15]:=",ExpressionUUID->"94b7e6f6-b349-4a41-b8d6-3b6b47a0d467"],
 
 Cell[BoxData[
  TagBox[
-  DynamicModuleBox[{$CellContext`n$$ = 0, $CellContext`current$$ = 
-   2, $CellContext`stones$$ = {}, $CellContext`message$$ = 
-   "Player 1 wins!", $CellContext`history$$ = {{10, 1, "Player 1's turn"}, {
-    8, 2, "Player 2's turn"}, {6, 1, "Player 1's turn"}, {
-    4, 2, "Player 2's turn"}, {2, 1, "Player 1's turn"}}}, 
+  DynamicModuleBox[{$CellContext`n$$ = 20, $CellContext`current$$ = 
+   1, $CellContext`stones$$ = {
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]], 
+    Style["\[FilledCircle]", 40, 
+     GrayLevel[0]]}, $CellContext`message$$ = 
+   "Player 1's turn", $CellContext`history$$ = {}}, 
    PanelBox[
     TagBox[GridBox[{
        {
@@ -515,7 +553,8 @@ $CellContext`current$$, $CellContext`message$$} =
                    Black], $CellContext`n$$]; $CellContext`message$$ = 
                 "Player 1's turn"; $CellContext`history$$ = {}; Null]}]}], 
           StandardForm],
-         ImageSizeCache->{141.6875, {31.20078125, 35.853125}}]}
+         ImageSizeCache->{
+          571.640625, {39.726171875000006`, 44.378515625000006`}}]}
       },
       DefaultBaseStyle->"Column",
       GridBoxAlignment->{"Columns" -> {{Left}}},
@@ -527,8 +566,8 @@ $CellContext`current$$, $CellContext`message$$} =
   DefaultBaseStyle->"Deploy"]], "Output",
  CellChangeTimes->{
   3.9686996311509457`*^9, {3.9687007287757807`*^9, 3.968700734984379*^9}, 
-   3.968701506013146*^9},
- CellLabel->"Out[13]=",ExpressionUUID->"e1a1f83a-a0fe-4158-b9e2-529adbebb07c"]
+   3.968701506013146*^9, 3.9687961381922493`*^9},
+ CellLabel->"Out[15]=",ExpressionUUID->"03bb8273-3d08-4b04-aa7e-dcd60b4d2f74"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -845,12 +884,13 @@ Cell[BoxData[
 
 Cell[BoxData[
  TagBox[
-  DynamicModuleBox[{$CellContext`heaps$$ = {3, 0, 
+  DynamicModuleBox[{$CellContext`heaps$$ = {0, 0, 
    0}, $CellContext`custom$$ = {3, 4, 5}, $CellContext`current$$ = 
    1, $CellContext`message$$ = 
-   "Player 1's turn", $CellContext`history$$ = {{{3, 4, 5}, 1, 
-     "Player 1's turn"}, {{3, 4, 4}, 2, "Player 2's turn"}, {{3, 4, 1}, 1, 
-     "Player 1's turn"}, {{3, 4, 0}, 2, "Player 2's turn"}}}, 
+   "Player 2 wins!", $CellContext`history$$ = {{{3, 4, 5}, 1, 
+     "Player 1's turn"}, {{3, 1, 5}, 2, "Player 2's turn"}, {{3, 1, 2}, 1, 
+     "Player 1's turn"}, {{3, 1, 0}, 2, "Player 2's turn"}, {{3, 0, 0}, 1, 
+     "Player 1's turn"}, {{1, 0, 0}, 2, "Player 2's turn"}}}, 
    TagBox[GridBox[{
       {
        TemplateBox[{"\"Heaps: \"", 
@@ -936,9 +976,9 @@ $CellContext`take$]; $CellContext`heaps$$ = $CellContext`newHeaps$; \
 $CellContext`current$$ = 3 - $CellContext`current$$; $CellContext`message$$ = 
                     If[Total[
                     Map[Max[0, 
-                    Floor[#]]& , $CellContext`heaps$$]] == 0, "Player " <> 
-                    ToString[3 - $CellContext`current$$] <> " wins!", 
-                    "Player " <> ToString[$CellContext`current$$] <> 
+                    Floor[#]]& , $CellContext`heaps$$]] == 
+                    0, ("Player " <> ToString[3 - $CellContext`current$$]) <> 
+                    " wins!", ("Player " <> ToString[$CellContext`current$$]) <> 
                     "'s turn"]; Null], Enabled -> Dynamic[
                     And[Max[0, 
                     Floor[
@@ -966,8 +1006,7 @@ $CellContext`current$$, $CellContext`message$$} =
                 5}; $CellContext`current$$ = 1; $CellContext`message$$ = 
                "Player 1's turn"; $CellContext`history$$ = {}; Null, Method -> 
               "Queued"]}]}], StandardForm],
-        ImageSizeCache->{
-         149.3375, {63.130859375000014`, 68.75585937500001}}]}
+        ImageSizeCache->{147.93125, {55.951171875, 61.576171875}}]}
      },
      DefaultBaseStyle->"Column",
      GridBoxAlignment->{"Columns" -> {{Left}}},
@@ -1009,12 +1048,31 @@ Cell["Hackenbush", "Section",
 3a4389d99fe8"],
 
 Cell["\<\
+Hackenbush is a game where players take turns removing edges that are \
+connected to a line called the ground. Edges are colored blue, red or green. \
+The first player may remove blue or green edges. The second player may remove \
+red or green edges. If a player cannot remove an edge, then they lose. If any \
+edge is no longer connected to the ground, then it disappears.\
+\>", "Text",
+ CellChangeTimes->{{3.969207763329905*^9, 
+  3.969207835082017*^9}},ExpressionUUID->"f96f6e89-0cee-4de9-ad2d-\
+75817598d666"],
+
+Cell[CellGroupData[{
+
+Cell["Game Link", "Subsection",
+ CellChangeTimes->{{3.969207755520384*^9, 
+  3.969207757508271*^9}},ExpressionUUID->"68d57737-bfc3-4c41-a377-\
+cf8572d3cb6f"],
+
+Cell["\<\
 Play the classic game, Hackenbush here: http://susanne.wtak.nl/mathgames.html\
 \
 \>", "Text",
- CellChangeTimes->{{3.9687036913571377`*^9, 
-  3.968703704763797*^9}},ExpressionUUID->"e54f5b76-b156-400f-943a-\
+ CellChangeTimes->{{3.9687036913571377`*^9, 3.968703704763797*^9}, 
+   3.969207875523119*^9},ExpressionUUID->"e54f5b76-b156-400f-943a-\
 5d6130accc3d"]
+}, Open  ]]
 }, Open  ]]
 }, Open  ]]
 },
@@ -1043,28 +1101,32 @@ Cell[1059, 36, 202, 4, 65, "Section",ExpressionUUID->"2c12268d-0fce-4646-a481-21
 Cell[1264, 42, 369, 7, 33, "Text",ExpressionUUID->"2f7228b2-82c5-4ab4-99e4-a8cd0b34707c"],
 Cell[CellGroupData[{
 Cell[1658, 53, 9147, 199, 554, "Input",ExpressionUUID->"94b7e6f6-b349-4a41-b8d6-3b6b47a0d467"],
-Cell[10808, 254, 12291, 276, 130, "Output",ExpressionUUID->"e1a1f83a-a0fe-4158-b9e2-529adbebb07c"]
+Cell[10808, 254, 13302, 315, 147, "Output",ExpressionUUID->"03bb8273-3d08-4b04-aa7e-dcd60b4d2f74"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[23136, 535, 168, 3, 53, "Subsection",ExpressionUUID->"5e7fe8c5-0eb8-4e38-8ad6-9d4397fb6ce1"],
-Cell[23307, 540, 426, 9, 77, "Text",ExpressionUUID->"657dfa98-78d4-4701-88a2-fd50c34beeba"]
+Cell[24147, 574, 168, 3, 53, "Subsection",ExpressionUUID->"5e7fe8c5-0eb8-4e38-8ad6-9d4397fb6ce1"],
+Cell[24318, 579, 426, 9, 77, "Text",ExpressionUUID->"657dfa98-78d4-4701-88a2-fd50c34beeba"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[23782, 555, 148, 3, 65, "Section",ExpressionUUID->"37caadec-b726-43f6-b76f-6be4fcd3a5bd"],
-Cell[23933, 560, 480, 8, 55, "Text",ExpressionUUID->"ac61bc39-4639-4c53-9041-831234c8e7ec"],
+Cell[24793, 594, 148, 3, 65, "Section",ExpressionUUID->"37caadec-b726-43f6-b76f-6be4fcd3a5bd"],
+Cell[24944, 599, 480, 8, 55, "Text",ExpressionUUID->"ac61bc39-4639-4c53-9041-831234c8e7ec"],
 Cell[CellGroupData[{
-Cell[24438, 572, 11999, 271, 541, "Input",ExpressionUUID->"1cf7255e-1ee7-4af9-ac38-cb6be3bc36e2"],
-Cell[36440, 845, 6252, 136, 182, "Output",ExpressionUUID->"cff17364-09a2-436d-a52b-36912bd7da6e"]
+Cell[25449, 611, 11999, 271, 541, "Input",ExpressionUUID->"1cf7255e-1ee7-4af9-ac38-cb6be3bc36e2"],
+Cell[37451, 884, 6310, 136, 167, "Output",ExpressionUUID->"cff17364-09a2-436d-a52b-36912bd7da6e"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[42729, 986, 170, 3, 53, "Subsection",ExpressionUUID->"03c3c63b-fc3c-4670-a3f1-b3264e7aad31"],
-Cell[42902, 991, 429, 8, 99, "Text",ExpressionUUID->"e5f7d6ed-1d83-4f2e-9dfb-3de79bc65e2f"]
+Cell[43798, 1025, 170, 3, 53, "Subsection",ExpressionUUID->"03c3c63b-fc3c-4670-a3f1-b3264e7aad31"],
+Cell[43971, 1030, 429, 8, 99, "Text",ExpressionUUID->"e5f7d6ed-1d83-4f2e-9dfb-3de79bc65e2f"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[43380, 1005, 155, 3, 65, "Section",ExpressionUUID->"ca7a38ce-191f-4bb9-80a7-3a4389d99fe8"],
-Cell[43538, 1010, 231, 6, 33, "Text",ExpressionUUID->"e54f5b76-b156-400f-943a-5d6130accc3d"]
+Cell[44449, 1044, 155, 3, 65, "Section",ExpressionUUID->"ca7a38ce-191f-4bb9-80a7-3a4389d99fe8"],
+Cell[44607, 1049, 523, 9, 55, "Text",ExpressionUUID->"f96f6e89-0cee-4de9-ad2d-75817598d666"],
+Cell[CellGroupData[{
+Cell[45155, 1062, 157, 3, 53, "Subsection",ExpressionUUID->"68d57737-bfc3-4c41-a377-cf8572d3cb6f"],
+Cell[45315, 1067, 254, 6, 33, "Text",ExpressionUUID->"e54f5b76-b156-400f-943a-5d6130accc3d"]
+}, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }
