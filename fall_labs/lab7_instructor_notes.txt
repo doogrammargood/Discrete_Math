@@ -1,0 +1,44 @@
+~~~These notes are written for the TAs, but students may read them.
+~~~There are some potential answers to the discussion questions, but of course the questions are open-ended and typically have unlimited correct answers. 
+Lab 7 notes:
+-Chomp (Total time ~25 minutes.
+		   ~5 minutse to explain the game.
+		   ~10 minutes to play ~2 rounds of the game.
+		   ~10 for the discussion questions.)
+	1.) [Who wins?] Students might not find this argument for the existence of a winning strategy.
+	Player 1 wins with best play: If Player 1 eats the bottom candy and Player 2 has a winning response, then Player 1 could have just played that winning response to begin with!
+	Demonstrate this by opening 2 browsers. In the first browser, eat the candy in the bottom. Play the computer's response from the first browser into the second browser. In this way, you can play the computer against itself and win the game.
+	2.) [Special cases]  Simple cases:
+		- Two special cases are listed on the Wikipedia article (https://en.wikipedia.org/wiki/Chomp)
+		- When the starting position is an nxn square,
+			eat the candy at (2,2) to create an L shape. When the opponent plays, mirror them on the other arm of the L.
+		- When the starting position is a 2xn rectangle,
+			eat the bottom corner. After each opponent's move, make the move that creates a 2xn rectangle that's missing its bottom right corner.
+	3.) [Relations to other games]:
+		- If the candy at position (2,2) gets eaten, then an L shape remains. The two arms of the L can be viewed as two Nim piles.
+		- All three games are "impartial" in the sense that both players have the same moves available to them.
+	4.) [Generalizations]:
+		- Play on 3-d grid.
+		- Poison all 4 candies in the top 2x2 corner.
+		- Set a limit on how many candies you can eat in a turn.
+		
+-Divisors Game (Total time: ~25 minutes
+		~5 minutes describing the lattice of divisors, 
+		~10 minutes playing ~2 rounds of the divisors game, 
+		~10 minutes for discussion.)
+	1.) [Divisors game for 7x5 Chomp] 2^7 x 3^5 = 31104
+	2.) [Divisors game on divisors of n and m] You're just playing the game on GCD(n,m)
+	3.) [Modifications/generalizations] Modify the game by using the union of the divisors of 2 numbers, n,m. This game is a position in the Divisor Game for LCM(n,m).
+	4.) [Games where first player wins] Hex also has this property. It's well-known that Connect 4 is a win for the first player, but the strategy is too complicated to memorize.
+
+Hackenbush (Total time: ~25 minutes
+			~5 minutes explaining the game,
+			~10 minutes playing the game,
+			~10 minutes on discussion.) 
+	1.) [Relationship with previous games]	- Nim can be viewed as a special case of Hackenbush where all of the edges are green, and there is a 'tower' of green edges that corresponds to each Nim pile.
+		-Chomp can be viewed as a game where we are removing vertices instead of edges. It seems closely related to Hackenbush, but the exact connection is not so clear.
+		-The Sprague-Grundy Theorem will explain that Nim, Chomp, and Hackenbush with green edges are all equivalent.
+	2.) [Heuristic strategies]:
+		- Remove the green edges before your own colors.
+		- Remove edges of your color if the opponent may soon disconnect them from the ground.
+		- Disconnect your opponent's edges from the ground.
