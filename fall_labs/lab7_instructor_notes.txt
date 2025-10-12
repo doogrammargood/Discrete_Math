@@ -1,12 +1,13 @@
-~~~These notes are written for the TAs, but students may read them.
-~~~There are some potential answers to the discussion questions, but of course the questions are open-ended and typically have unlimited correct answers. 
+ ~~~These notes are written for the TAs, but students may read them.
+~~~There are some suggested answers to the discussion questions, but of course the questions are open-ended and typically have unlimited correct answers.
+~~~The items marked * are high-priority. The rest of the discussion points are optional. You may come up with your own discussion points.
 Lab 7 notes:
 -Chomp (Total time ~25 minutes.
-		   ~5 minutse to explain the game.
+		   ~5 minutes to explain the game.
 		   ~10 minutes to play ~2 rounds of the game.
 		   ~10 for the discussion questions.)
 	1.) [Who wins?] Students might not find this argument for the existence of a winning strategy.
-	Player 1 wins with best play: If Player 1 eats the bottom candy and Player 2 has a winning response, then Player 1 could have just played that winning response to begin with!
+	*Player 1 wins with best play: If Player 1 eats the bottom candy and Player 2 has a winning response, then Player 1 could have just played that winning response to begin with!
 	Demonstrate this by opening 2 browsers. In the first browser, eat the candy in the bottom. Play the computer's response from the first browser into the second browser. In this way, you can play the computer against itself and win the game.
 	2.) [Special cases]  Simple cases:
 		- Two special cases are listed on the Wikipedia article (https://en.wikipedia.org/wiki/Chomp)
@@ -35,9 +36,10 @@ Hackenbush (Total time: ~25 minutes
 			~5 minutes explaining the game,
 			~10 minutes playing the game,
 			~10 minutes on discussion.) 
-	1.) [Relationship with previous games]	- Nim can be viewed as a special case of Hackenbush where all of the edges are green, and there is a 'tower' of green edges that corresponds to each Nim pile.
-		-Chomp can be viewed as a game where we are removing vertices instead of edges. It seems closely related to Hackenbush, but the exact connection is not so clear.
-		-The Sprague-Grundy Theorem will explain that Nim, Chomp, and Hackenbush with green edges are all equivalent.
+	1.) [Relationship with previous games]:	
+		- *Nim can be viewed as a special case of Hackenbush where all of the edges are green, and there is a 'tower' of green edges that corresponds to each Nim pile.
+		- Chomp can be viewed as a game where we are removing vertices instead of edges. It seems closely related to Hackenbush, but the exact connection is not so clear.
+		- The Sprague-Grundy Theorem will explain that Nim, Chomp, and Hackenbush with green edges are all equivalent.
 	2.) [Heuristic strategies]:
 		- Remove the green edges before your own colors.
 		- Remove edges of your color if the opponent may soon disconnect them from the ground.
