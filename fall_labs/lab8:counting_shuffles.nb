@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     22198,        514]
-NotebookOptionsPosition[     19943,        465]
-NotebookOutlinePosition[     20335,        481]
-CellTagsIndexPosition[     20292,        478]
+NotebookDataLength[     23220,        532]
+NotebookOptionsPosition[     20963,        483]
+NotebookOutlinePosition[     21355,        499]
+CellTagsIndexPosition[     21312,        496]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -29,14 +29,18 @@ Cell["Lab 6: How Many Ways to Shuffle A Deck?", "Title",
 Cell["\<\
 In this lab, we will see an example of a general method to solve common \
 problems. The method is simple: 
-1.) Compute small examples, 
-2.) Consult the Online Encyclopedia of Integer Sequences (OEIS, see \
-https://oeis.org/). 
-Problem 2 of Homework 6 is solved in a similar way.\
+1.) Compute small examples.
+2.) Search the Online Encyclopedia of Integer Sequences (OEIS, see \
+https://oeis.org/ ) for a formula.
+3.) (Optional) Write a program to compute medium-sized examples.
+4.) Find a proof or explanation for the formula.
+\
 \>", "Text",
  CellChangeTimes->{{3.949075672996107*^9, 3.9490757509755373`*^9}, {
-  3.9695345640254717`*^9, 
-  3.9695346006679*^9}},ExpressionUUID->"3f0f8b3a-92a2-4aee-be8b-67da6d7d8b2a"],
+  3.9695345640254717`*^9, 3.9695346006679*^9}, {3.9695524642395277`*^9, 
+  3.969552579045463*^9}, {3.969552932175548*^9, 
+  3.9695529393195553`*^9}},ExpressionUUID->"3f0f8b3a-92a2-4aee-be8b-\
+67da6d7d8b2a"],
 
 Cell[CellGroupData[{
 
@@ -51,31 +55,34 @@ We need to explain what we mean by shuffling a deck of cards. I\
 \[OpenCurlyDoubleQuote]Shape\[CloseCurlyDoubleQuote] by Jordan Ellenberg.
 
 We mean that you perform the following procedure: 
-1.) Split the deck into two (not necessarily equal) pieces. 
+1.) Cut the deck into two (not necessarily equal) pieces. 
 2.) Interleave those two pieces. 
 
 For example, if our deck consists of 5 cards, initially ordered as \
 {1,2,3,4,5}, then after splitting we may get two piles, {1,2,3}, {4,5} which, \
-after interleaving, can look like {4,1,2,3,5}. The only requirement that the \
-cards in each pile are still in the same order relative to each other after \
-interleaving. Note that {1,2,3,4,5} is a valid shuffle. Finally, we are only \
-interested in the final ordering of the cards. You can get the same ordering \
+after interleaving, can look like {4,1,2,3,5}. The only requirement is that \
+the cards in each pile must still be in the same order relative to each other \
+after interleaving. Note that {1,2,3,4,5} is also a valid shuffle, since one \
+piece of the cut can contain 0 cards. Finally, we are only interested in the \
+final ordering of the cards. For example, you can get the same ordering \
 {1,2,3,4,5} by using the split {1,2,3},{4,5} or by using the split \
-{1,2}{3,4,5}. We consider these to be the same. 
+{1,2}{3,4,5}. We consider these shuffles to be the same. 
 
 Our problem is \[OpenCurlyDoubleQuote]How many ways can you shuffle a 52-card \
 deck?\[CloseCurlyDoubleQuote]
 
 To attack the problem, let S(n) be the number of ways to shuffle a deck of n \
-cards.\
+cards. We seek S(52).\
 \>", "Text",
  CellChangeTimes->{{3.9490757924214487`*^9, 3.949076032077305*^9}, {
   3.9490778653813887`*^9, 3.949077892942411*^9}, {3.949078042496169*^9, 
   3.949078071292202*^9}, {3.9490793416982727`*^9, 3.949079349565351*^9}, {
   3.949079387455969*^9, 3.9490794283873873`*^9}, {3.949080340980576*^9, 
   3.949080352002489*^9}, {3.949096803654916*^9, 3.9490968630073757`*^9}, {
-  3.9695346158841887`*^9, 
-  3.969534652284696*^9}},ExpressionUUID->"c7bf1d5c-b63a-4578-8d1f-\
+  3.9695346158841887`*^9, 3.969534652284696*^9}, {3.969552616644412*^9, 
+  3.969552616873116*^9}, {3.969552647873588*^9, 3.969552723749689*^9}, {
+  3.969552757792511*^9, 
+  3.969552762916594*^9}},ExpressionUUID->"c7bf1d5c-b63a-4578-8d1f-\
 17e3ea80a160"]
 }, Open  ]],
 
@@ -90,7 +97,8 @@ Cell["\<\
 The first step to solve a problem like this is to write out many small \
 examples by hand. This is possible because our problem is easily \
 parameterized by the size of the deck, n. Generally, if you have a \
-complicated problem, it helps to find simpler cases.
+complicated problem, then it helps to find a parameter like n so that the \
+counting is simple when n is small.
 
 To list out the possibilities by hand, it helps to be organized. This helps \
 to ensure that we don\[CloseCurlyQuote]t miscount. To help organize the \
@@ -125,15 +133,18 @@ by hand.\
   3.949079217571666*^9, 3.9490793327454233`*^9}, {3.949079502677451*^9, 
   3.949079542587819*^9}, {3.9490796145005293`*^9, 3.949079690208392*^9}, {
   3.949079725859853*^9, 3.949079726567099*^9}, {3.9490798136897*^9, 
-  3.9490798544962873`*^9}},ExpressionUUID->"cbbe8cf7-0ffc-4612-bfe1-\
+  3.9490798544962873`*^9}, {3.969552781213559*^9, 3.969552803571731*^9}, {
+  3.969552862869378*^9, 
+  3.969552870047743*^9}},ExpressionUUID->"cbbe8cf7-0ffc-4612-bfe1-\
 5c7e35a65758"]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Step 2: Use the OEIS", "Section",
- CellChangeTimes->{{3.9490798712063417`*^9, 
-  3.949079876760035*^9}},ExpressionUUID->"c73f114f-17dc-4680-91eb-\
+Cell["Step 2: Search the OEIS", "Section",
+ CellChangeTimes->{{3.9490798712063417`*^9, 3.949079876760035*^9}, {
+  3.9695528951757*^9, 
+  3.96955289558877*^9}},ExpressionUUID->"c73f114f-17dc-4680-91eb-\
 7d3063fa5152"],
 
 Cell[TextData[{
@@ -232,10 +243,12 @@ paradigm. Map/Filter/Reduce is a collection of techniques used to manipulate \
 lists. Many useful functions can be found here: \
 https://reference.wolfram.com/language/guide/ListManipulation.html.
 
-One (inefficient) way to solve this problem is to consider every possible \
-permutation (arrangement) of the cards and count only those that are valid \
-shuffles. We can use the built-in function Permutations to get all of the \
-permutations of the cards. We will need to write a function isValid to \
+ One (inefficient) way to solve our main problem is to consider every \
+possible permutation (arrangement) of the cards and count only those that are \
+valid shuffles. 
+ 
+ We can use the built-in function Permutations to get all of the permutations \
+(orderings) of the cards. We will need to write a function isValid to \
 determine if a permutation is a valid shuffle according to our definition. \
 Then we can Select only those permutations that are valid and count them with \
 the Length function.
@@ -267,8 +280,9 @@ The Mathematica code below implements this idea.\
    3.949094988332003*^9, 3.949095034538746*^9}, {3.949095204062323*^9, 
    3.949095218184757*^9}, {3.949095281646859*^9, 3.9490953111412888`*^9}, {
    3.949095368983156*^9, 3.949095401781774*^9}, {3.9490954634476833`*^9, 
-   3.949095752798876*^9}, {3.9490962469673986`*^9, 
-   3.94909631265094*^9}},ExpressionUUID->"4c2ea87f-c5bc-48d3-b239-\
+   3.949095752798876*^9}, {3.9490962469673986`*^9, 3.94909631265094*^9}, {
+   3.9695534965308228`*^9, 
+   3.969553546428967*^9}},ExpressionUUID->"4c2ea87f-c5bc-48d3-b239-\
 f6b74a706b44"],
 
 Cell[CellGroupData[{
@@ -367,15 +381,14 @@ Cell[BoxData[{
      RowBox[{"efficient", ".", " ", "Crashes"}], " ", "for", " ", "values", 
      " ", "9"}], "+"}], "*)"}]}]}], "Input",
  CellChangeTimes->CompressedData["
-1:eJxTTMoPSmViYGAQAWIQbaz+Id4t562j07lFiSBarU43B0SvS1tQBKJvTTl6
+1:eJxTTMoPSmViYGAQBWIQbaz+Id4t562j07lFiSBarU43B0SvS1tQBKJvTTl6
 CUTffsN2DURPXSl3G0THB50B00Ubtra6A2mJsvtdIFrJiHsRiJ6g7LQURPPs
 v78PRL//P/kWiN518M8DEL3DlvE9iFabrvUFRMfGi30H0St9D/4G0WK/tLg8
 gLT4k4viIPpexBJFEL0h3fC3D0h+2wEw/aWzXswXSHsoP1UC0buvzM0G0WaO
 4mUgel5V1lQQvUYjcDqIPtH5ch6IdkrwWwai17KlrwfRew6LbQPR3y4/3Q2i
-2YM+gel7ItvVzHPfOoaL7wHT4tYNOiB6eUYnmAYAcZafRA==
-  "],
- CellLabel->
-  "In[165]:=",ExpressionUUID->"a9171932-9fcf-4a64-8536-108301bc6236"],
+2YM+gel7ItvVzHPfOoaL7wHT4tYNOiB6eUYnmI5ylZ0cNPmtI0cb4xQQDQCc
+IKXd
+  "],ExpressionUUID->"a9171932-9fcf-4a64-8536-108301bc6236"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -386,9 +399,9 @@ Cell[BoxData[
   3.9490957551175528`*^9, {3.949095821769368*^9, 3.949095859890019*^9}, {
    3.9490961802732563`*^9, 3.9490961882747173`*^9}, 3.949096235421279*^9, 
    3.949096375125214*^9, 3.949096420049656*^9, 3.9492269483066072`*^9, 
-   3.94957445723387*^9, 3.9495745036051083`*^9},
+   3.94957445723387*^9, 3.9495745036051083`*^9, 3.9695530530536213`*^9},
  CellLabel->
-  "Out[169]=",ExpressionUUID->"28faee58-4e7f-4c28-8e9a-663e204d6214"]
+  "Out[101]=",ExpressionUUID->"da9c3ef9-ccd4-48e7-ae3a-cf29d5a08a22"]
 }, Open  ]]
 }, Open  ]],
 
@@ -401,11 +414,12 @@ Cell["Step 4: A closed formula and simple explanation.", "Section",
 8bba894b03e5"],
 
 Cell["\<\
-There is a better way to list the valid shuffles. Imagine that we have \
-already split the deck into two piles, a Left pile of smaller cards and a \
-Right pile of larger cards, but we don\[CloseCurlyQuote]t know how many cards \
-are in each pile. Then we create the shuffled deck by choosing cards from \
-each pile one-at-a-time and labeling them \
+There is a better way to count the valid shuffles. 
+
+Imagine that we have already split the deck into two piles, a Left pile of \
+smaller cards and a Right pile of larger cards, but we don\[CloseCurlyQuote]t \
+know how many cards are in each pile. Then we create the shuffled deck by \
+choosing cards from each pile one-at-a-time and labeling them \
 \[OpenCurlyQuote]L\[CloseCurlyQuote] (for Left) and \[OpenCurlyQuote]R\
 \[CloseCurlyQuote] for right. The shuffled deck that we produce can be \
 associated with a string of L\[CloseCurlyQuote]s and R\[CloseCurlyQuote]s. We \
@@ -425,14 +439,15 @@ and LLLLR both map to the sequence 1,2,3,4,5. In fact, this sequence is \
 represented 6 times when it should only be represented once. Also, this \
 fully-sorted sequence is the only sequence that has multiple representations \
 as a sequence of {R,L}. This explains why the correct formula is 2^n-n. (But \
-this explanation is detailed enough to qualify as a proof.)
+this explanation is barely detailed enough to qualify as a proof.)
 
 The explanation also gives a better algorithm to generate the sequence S(n).\
 \>", "Text",
  CellChangeTimes->{{3.949081629858333*^9, 3.9490820626368313`*^9}, {
   3.949082145291534*^9, 3.949082253402151*^9}, {3.9490836709576473`*^9, 
-  3.9490836865677147`*^9}, {3.94909542622017*^9, 
-  3.949095450669448*^9}},ExpressionUUID->"ae859b9c-81fd-46cc-a0f0-\
+  3.9490836865677147`*^9}, {3.94909542622017*^9, 3.949095450669448*^9}, {
+  3.969553175209301*^9, 3.9695532145550117`*^9}, {3.969553344455566*^9, 
+  3.969553470650628*^9}},ExpressionUUID->"ae859b9c-81fd-46cc-a0f0-\
 4cefc1ebb2e5"]
 }, Open  ]],
 
@@ -446,19 +461,22 @@ f8db7e1ae00e"],
 Cell["\<\
 (15 points) Suppose that we want to shuffle a deck of 52 cards. We perform a \
 shuffle that is the same as the valid shuffles described earlier, except that \
-we split the deck into 3 instead of 2 piles before interleaving. How many \
-ways can this occur?
+we split the deck into at most 3 instead of 2 piles before interleaving. In \
+this case, how many shuffles are possible?
 
-Steps:
+Steps to solve:
 1.) Modify the Mathematica Code to generate the first 8 examples.
 2.) Enter these numbers into OEIS. There is only 1 matching entry.
 3.) Find the Mathematica code in this entry, and run it in Mathematica.
-4.) Modify that Mathematica code to tell you the 52nd number in the series.\
+4.) Modify that Mathematica code to display the 52nd number in the series. \
+Beware off-by-one errors.\
 \>", "Text",
  CellChangeTimes->{{3.949096673117134*^9, 3.94909676002943*^9}, {
    3.949096885624848*^9, 3.949097138557122*^9}, 3.949495282654582*^9, {
-   3.949495318891096*^9, 
-   3.949495380981534*^9}},ExpressionUUID->"c32a284f-76bb-4979-902f-\
+   3.949495318891096*^9, 3.949495380981534*^9}, {3.969553229694273*^9, 
+   3.969553253649467*^9}, {3.969553297862962*^9, 3.969553305567239*^9}, {
+   3.969553630754409*^9, 
+   3.969553632011386*^9}},ExpressionUUID->"c32a284f-76bb-4979-902f-\
 8b47b6c2bbec"]
 }, Open  ]]
 }, Open  ]]
@@ -467,7 +485,7 @@ WindowSize->{1440, 701.25},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
 FrontEndVersion->"14.1 for Linux x86 (64-bit) (July 16, 2024)",
 StyleDefinitions->"Default.nb",
-ExpressionUUID->"2c82c138-320e-4ab9-92f8-e6230a1b303c"
+ExpressionUUID->"410c9464-c021-4327-9600-b25d676436f3"
 ]
 (* End of Notebook Content *)
 
@@ -482,38 +500,38 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[576, 22, 230, 4, 96, "Title",ExpressionUUID->"643cb536-cb6a-4b23-9cc8-0e3509f400ff"],
-Cell[809, 28, 477, 10, 99, "Text",ExpressionUUID->"3f0f8b3a-92a2-4aee-be8b-67da6d7d8b2a"],
+Cell[809, 28, 653, 14, 143, "Text",ExpressionUUID->"3f0f8b3a-92a2-4aee-be8b-67da6d7d8b2a"],
 Cell[CellGroupData[{
-Cell[1311, 42, 162, 3, 65, "Section",ExpressionUUID->"d666ed11-d868-4555-9ce2-55218fc0cd40"],
-Cell[1476, 47, 1633, 31, 296, "Text",ExpressionUUID->"c7bf1d5c-b63a-4578-8d1f-17e3ea80a160"]
+Cell[1487, 46, 162, 3, 65, "Section",ExpressionUUID->"d666ed11-d868-4555-9ce2-55218fc0cd40"],
+Cell[1652, 51, 1874, 34, 296, "Text",ExpressionUUID->"c7bf1d5c-b63a-4578-8d1f-17e3ea80a160"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3146, 83, 179, 3, 65, "Section",ExpressionUUID->"6079eebb-e16f-4c1f-84f9-ce6a27be0a9e"],
-Cell[3328, 88, 2353, 40, 339, "Text",ExpressionUUID->"cbbe8cf7-0ffc-4612-bfe1-5c7e35a65758"]
+Cell[3563, 90, 179, 3, 65, "Section",ExpressionUUID->"6079eebb-e16f-4c1f-84f9-ce6a27be0a9e"],
+Cell[3745, 95, 2510, 43, 339, "Text",ExpressionUUID->"cbbe8cf7-0ffc-4612-bfe1-5c7e35a65758"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5718, 133, 167, 3, 65, "Section",ExpressionUUID->"c73f114f-17dc-4680-91eb-7d3063fa5152"],
-Cell[5888, 138, 2443, 51, 164, "Text",ExpressionUUID->"8442e1d1-ecb6-46fd-8555-8346612f021c"],
+Cell[6292, 143, 216, 4, 65, "Section",ExpressionUUID->"c73f114f-17dc-4680-91eb-7d3063fa5152"],
+Cell[6511, 149, 2443, 51, 164, "Text",ExpressionUUID->"8442e1d1-ecb6-46fd-8555-8346612f021c"],
 Cell[CellGroupData[{
-Cell[8356, 193, 310, 7, 29, "Input",ExpressionUUID->"26506ad1-61b0-4d78-bb9c-f37b03fa915e"],
-Cell[8669, 202, 348, 11, 46, "Output",ExpressionUUID->"bec435ef-2dc1-4a22-b804-a65fa67ed39d"]
+Cell[8979, 204, 310, 7, 29, "Input",ExpressionUUID->"26506ad1-61b0-4d78-bb9c-f37b03fa915e"],
+Cell[9292, 213, 348, 11, 46, "Output",ExpressionUUID->"bec435ef-2dc1-4a22-b804-a65fa67ed39d"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9066, 219, 241, 5, 65, "Section",ExpressionUUID->"8320214b-d291-43a1-ae83-2eaf9ef29900"],
-Cell[9310, 226, 2761, 45, 361, "Text",ExpressionUUID->"4c2ea87f-c5bc-48d3-b239-f6b74a706b44"],
+Cell[9689, 230, 241, 5, 65, "Section",ExpressionUUID->"8320214b-d291-43a1-ae83-2eaf9ef29900"],
+Cell[9933, 237, 2834, 48, 383, "Text",ExpressionUUID->"4c2ea87f-c5bc-48d3-b239-f6b74a706b44"],
 Cell[CellGroupData[{
-Cell[12096, 275, 3967, 102, 198, "Input",ExpressionUUID->"a9171932-9fcf-4a64-8536-108301bc6236"],
-Cell[16066, 379, 520, 11, 33, "Output",ExpressionUUID->"28faee58-4e7f-4c28-8e9a-663e204d6214"]
+Cell[12792, 289, 3956, 101, 198, "Input",ExpressionUUID->"a9171932-9fcf-4a64-8536-108301bc6236"],
+Cell[16751, 392, 544, 11, 33, "Output",ExpressionUUID->"da9c3ef9-ccd4-48e7-ae3a-cf29d5a08a22"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[16635, 396, 246, 4, 65, "Section",ExpressionUUID->"6cc24644-2206-4051-9a3a-8bba894b03e5"],
-Cell[16884, 402, 2018, 33, 274, "Text",ExpressionUUID->"ae859b9c-81fd-46cc-a0f0-4cefc1ebb2e5"]
+Cell[17344, 409, 246, 4, 65, "Section",ExpressionUUID->"6cc24644-2206-4051-9a3a-8bba894b03e5"],
+Cell[17593, 415, 2123, 35, 317, "Text",ExpressionUUID->"ae859b9c-81fd-46cc-a0f0-4cefc1ebb2e5"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[18939, 440, 157, 3, 65, "Section",ExpressionUUID->"c504b856-3828-48b2-8036-f8db7e1ae00e"],
-Cell[19099, 445, 816, 16, 186, "Text",ExpressionUUID->"c32a284f-76bb-4979-902f-8b47b6c2bbec"]
+Cell[19753, 455, 157, 3, 65, "Section",ExpressionUUID->"c504b856-3828-48b2-8036-f8db7e1ae00e"],
+Cell[19913, 460, 1022, 19, 186, "Text",ExpressionUUID->"c32a284f-76bb-4979-902f-8b47b6c2bbec"]
 }, Open  ]]
 }, Open  ]]
 }

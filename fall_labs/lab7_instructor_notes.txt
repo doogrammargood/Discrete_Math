@@ -1,4 +1,4 @@
- ~~~These notes are written for the TAs, but students may read them.
+~~~These notes are written for the TAs, but students may read them.
 ~~~There are some suggested answers to the discussion questions, but of course the questions are open-ended and typically have unlimited correct answers.
 ~~~The items marked * are high-priority. The rest of the discussion points are optional. You may come up with your own discussion points.
 Lab 7 notes:
