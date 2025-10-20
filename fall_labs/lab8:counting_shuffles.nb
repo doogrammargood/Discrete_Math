@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[     23220,        532]
-NotebookOptionsPosition[     20963,        483]
-NotebookOutlinePosition[     21355,        499]
-CellTagsIndexPosition[     21312,        496]
+NotebookDataLength[     23579,        537]
+NotebookOptionsPosition[     21322,        488]
+NotebookOutlinePosition[     21714,        504]
+CellTagsIndexPosition[     21671,        501]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -229,23 +229,24 @@ a65fa67ed39d"]
 Cell[CellGroupData[{
 
 Cell["\<\
-Step 3: Use Mathematica to list out many terms programmatically.\
+Step 3: Use Mathematica to count many examples programmatically.\
 \>", "Section",
  CellChangeTimes->{{3.949080027848068*^9, 3.94908004746041*^9}, 
-   3.9490838262954206`*^9},ExpressionUUID->"8320214b-d291-43a1-ae83-\
+   3.9490838262954206`*^9, {3.969915798636195*^9, 
+   3.969915811500925*^9}},ExpressionUUID->"8320214b-d291-43a1-ae83-\
 2eaf9ef29900"],
 
 Cell["\<\
 It was very tedious to list even the first 5 terms of our sequence. Where \
 tedium obstructs, Mathematica triumphs. Here, we show how we can list the \
-first several terms programmatically using the powerful Map/Filter/Reduce \
+first several terms programmatically, by using the powerful Map/Filter/Reduce \
 paradigm. Map/Filter/Reduce is a collection of techniques used to manipulate \
 lists. Many useful functions can be found here: \
 https://reference.wolfram.com/language/guide/ListManipulation.html.
 
  One (inefficient) way to solve our main problem is to consider every \
 possible permutation (arrangement) of the cards and count only those that are \
-valid shuffles. 
+valid shuffles.
  
  We can use the built-in function Permutations to get all of the permutations \
 (orderings) of the cards. We will need to write a function isValid to \
@@ -281,8 +282,9 @@ The Mathematica code below implements this idea.\
    3.949095218184757*^9}, {3.949095281646859*^9, 3.9490953111412888`*^9}, {
    3.949095368983156*^9, 3.949095401781774*^9}, {3.9490954634476833`*^9, 
    3.949095752798876*^9}, {3.9490962469673986`*^9, 3.94909631265094*^9}, {
-   3.9695534965308228`*^9, 
-   3.969553546428967*^9}},ExpressionUUID->"4c2ea87f-c5bc-48d3-b239-\
+   3.9695534965308228`*^9, 3.969553546428967*^9}, {3.969915829481855*^9, 
+   3.969915873255961*^9}, {3.969915908180114*^9, 
+   3.969915909444787*^9}},ExpressionUUID->"4c2ea87f-c5bc-48d3-b239-\
 f6b74a706b44"],
 
 Cell[CellGroupData[{
@@ -381,14 +383,15 @@ Cell[BoxData[{
      RowBox[{"efficient", ".", " ", "Crashes"}], " ", "for", " ", "values", 
      " ", "9"}], "+"}], "*)"}]}]}], "Input",
  CellChangeTimes->CompressedData["
-1:eJxTTMoPSmViYGAQBWIQbaz+Id4t562j07lFiSBarU43B0SvS1tQBKJvTTl6
+1:eJxTTMoPSmViYGAQB2IQbaz+Id4t562j07lFiSBarU43B0SvS1tQBKJvTTl6
 CUTffsN2DURPXSl3G0THB50B00Ubtra6A2mJsvtdIFrJiHsRiJ6g7LQURPPs
 v78PRL//P/kWiN518M8DEL3DlvE9iFabrvUFRMfGi30H0St9D/4G0WK/tLg8
 gLT4k4viIPpexBJFEL0h3fC3D0h+2wEw/aWzXswXSHsoP1UC0buvzM0G0WaO
 4mUgel5V1lQQvUYjcDqIPtH5ch6IdkrwWwai17KlrwfRew6LbQPR3y4/3Q2i
-2YM+gel7ItvVzHPfOoaL7wHT4tYNOiB6eUYnmI5ylZ0cNPmtI0cb4xQQDQCc
-IKXd
-  "],ExpressionUUID->"a9171932-9fcf-4a64-8536-108301bc6236"],
+2YM+gel7ItvVzHPfOoaL7wHT4tYNOiB6eUYnmI5ylZ0cNPmtI0cb4xQQfWO+
+1jzmKW8dA1Y4guk0ieD9IJpfKwJMAwBMG7Pp
+  "],
+ CellLabel->"In[9]:=",ExpressionUUID->"a9171932-9fcf-4a64-8536-108301bc6236"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -399,9 +402,9 @@ Cell[BoxData[
   3.9490957551175528`*^9, {3.949095821769368*^9, 3.949095859890019*^9}, {
    3.9490961802732563`*^9, 3.9490961882747173`*^9}, 3.949096235421279*^9, 
    3.949096375125214*^9, 3.949096420049656*^9, 3.9492269483066072`*^9, 
-   3.94957445723387*^9, 3.9495745036051083`*^9, 3.9695530530536213`*^9},
- CellLabel->
-  "Out[101]=",ExpressionUUID->"da9c3ef9-ccd4-48e7-ae3a-cf29d5a08a22"]
+   3.94957445723387*^9, 3.9495745036051083`*^9, 3.9695530530536213`*^9, 
+   3.969916149616432*^9, 3.969916415272647*^9},
+ CellLabel->"Out[13]=",ExpressionUUID->"99f4afc7-04ff-4c35-bf50-d96cc13fd211"]
 }, Open  ]]
 }, Open  ]],
 
@@ -438,8 +441,7 @@ sequences of {R,L} map to the same sequence of numbers. For example, LLRRR \
 and LLLLR both map to the sequence 1,2,3,4,5. In fact, this sequence is \
 represented 6 times when it should only be represented once. Also, this \
 fully-sorted sequence is the only sequence that has multiple representations \
-as a sequence of {R,L}. This explains why the correct formula is 2^n-n. (But \
-this explanation is barely detailed enough to qualify as a proof.)
+as a sequence of {R,L}. This explains why the correct formula is 2^n-n.
 
 The explanation also gives a better algorithm to generate the sequence S(n).\
 \>", "Text",
@@ -447,7 +449,8 @@ The explanation also gives a better algorithm to generate the sequence S(n).\
   3.949082145291534*^9, 3.949082253402151*^9}, {3.9490836709576473`*^9, 
   3.9490836865677147`*^9}, {3.94909542622017*^9, 3.949095450669448*^9}, {
   3.969553175209301*^9, 3.9695532145550117`*^9}, {3.969553344455566*^9, 
-  3.969553470650628*^9}},ExpressionUUID->"ae859b9c-81fd-46cc-a0f0-\
+  3.969553470650628*^9}, {3.969915976107832*^9, 
+  3.969915976519183*^9}},ExpressionUUID->"ae859b9c-81fd-46cc-a0f0-\
 4cefc1ebb2e5"]
 }, Open  ]],
 
@@ -464,19 +467,21 @@ shuffle that is the same as the valid shuffles described earlier, except that \
 we split the deck into at most 3 instead of 2 piles before interleaving. In \
 this case, how many shuffles are possible?
 
-Steps to solve:
+Steps:
 1.) Modify the Mathematica Code to generate the first 8 examples.
 2.) Enter these numbers into OEIS. There is only 1 matching entry.
 3.) Find the Mathematica code in this entry, and run it in Mathematica.
-4.) Modify that Mathematica code to display the 52nd number in the series. \
-Beware off-by-one errors.\
+4.) Modify that Mathematica code to display the 52nd number in the sequence \
+S(52). Beware off-by-one errors.
+5.) Upload a screenshot to Gradescope.\
 \>", "Text",
  CellChangeTimes->{{3.949096673117134*^9, 3.94909676002943*^9}, {
    3.949096885624848*^9, 3.949097138557122*^9}, 3.949495282654582*^9, {
    3.949495318891096*^9, 3.949495380981534*^9}, {3.969553229694273*^9, 
    3.969553253649467*^9}, {3.969553297862962*^9, 3.969553305567239*^9}, {
-   3.969553630754409*^9, 
-   3.969553632011386*^9}},ExpressionUUID->"c32a284f-76bb-4979-902f-\
+   3.969553630754409*^9, 3.969553632011386*^9}, {3.969916029478486*^9, 
+   3.969916065872109*^9}, {3.9699163690551367`*^9, 
+   3.969916391070383*^9}},ExpressionUUID->"c32a284f-76bb-4979-902f-\
 8b47b6c2bbec"]
 }, Open  ]]
 }, Open  ]]
@@ -518,20 +523,20 @@ Cell[9292, 213, 348, 11, 46, "Output",ExpressionUUID->"bec435ef-2dc1-4a22-b804-a
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[9689, 230, 241, 5, 65, "Section",ExpressionUUID->"8320214b-d291-43a1-ae83-2eaf9ef29900"],
-Cell[9933, 237, 2834, 48, 383, "Text",ExpressionUUID->"4c2ea87f-c5bc-48d3-b239-f6b74a706b44"],
+Cell[9689, 230, 291, 6, 65, "Section",ExpressionUUID->"8320214b-d291-43a1-ae83-2eaf9ef29900"],
+Cell[9983, 238, 2933, 49, 383, "Text",ExpressionUUID->"4c2ea87f-c5bc-48d3-b239-f6b74a706b44"],
 Cell[CellGroupData[{
-Cell[12792, 289, 3956, 101, 198, "Input",ExpressionUUID->"a9171932-9fcf-4a64-8536-108301bc6236"],
-Cell[16751, 392, 544, 11, 33, "Output",ExpressionUUID->"da9c3ef9-ccd4-48e7-ae3a-cf29d5a08a22"]
+Cell[12941, 291, 4011, 102, 198, "Input",ExpressionUUID->"a9171932-9fcf-4a64-8536-108301bc6236"],
+Cell[16955, 395, 588, 11, 33, "Output",ExpressionUUID->"99f4afc7-04ff-4c35-bf50-d96cc13fd211"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[17344, 409, 246, 4, 65, "Section",ExpressionUUID->"6cc24644-2206-4051-9a3a-8bba894b03e5"],
-Cell[17593, 415, 2123, 35, 317, "Text",ExpressionUUID->"ae859b9c-81fd-46cc-a0f0-4cefc1ebb2e5"]
+Cell[17592, 412, 246, 4, 65, "Section",ExpressionUUID->"6cc24644-2206-4051-9a3a-8bba894b03e5"],
+Cell[17841, 418, 2098, 35, 296, "Text",ExpressionUUID->"ae859b9c-81fd-46cc-a0f0-4cefc1ebb2e5"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[19753, 455, 157, 3, 65, "Section",ExpressionUUID->"c504b856-3828-48b2-8036-f8db7e1ae00e"],
-Cell[19913, 460, 1022, 19, 186, "Text",ExpressionUUID->"c32a284f-76bb-4979-902f-8b47b6c2bbec"]
+Cell[19976, 458, 157, 3, 65, "Section",ExpressionUUID->"c504b856-3828-48b2-8036-f8db7e1ae00e"],
+Cell[20136, 463, 1158, 21, 208, "Text",ExpressionUUID->"c32a284f-76bb-4979-902f-8b47b6c2bbec"]
 }, Open  ]]
 }, Open  ]]
 }
